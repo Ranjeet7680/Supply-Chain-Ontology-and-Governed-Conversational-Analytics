@@ -1,0 +1,29 @@
+{
+  "name": "supply-chain-ontology-and-governed-conversational-analytics",
+  "version": "1.0.0",
+  "description": "Enterprise AI Supply Chain Intelligence, Governed Semantic Ontology & Snowpark Machine Learning for Snowflake CoCo Hackathon",
+  "main": "app.py",
+  "scripts": {
+    "test": "node scripts/run_all_tests.js",
+    "test:unit": "python -m unittest discover -s tests -p \"test_*.py\"",
+    "test:ontology": "python .coco/skills/supplychain-ontology-validator/validate_ontology.py --dir data/bridged",
+    "test:personas": "python engine/persona_resolver.py",
+    "test:ml": "python ml/predictor.py",
+    "test:mcp": "python mcp/supplychain_mcp_server.py",
+    "pipeline": "python run_pipeline.py",
+    "start": "streamlit run app.py",
+    "app": "streamlit run app.py"
+  },
+  "keywords": [
+    "snowflake",
+    "cortex-analyst",
+    "coco-cli",
+    "supply-chain",
+    "ontology",
+    "machine-learning",
+    "streamlit",
+    "mcp"
+  ],
+  "author": "Ranjeet",
+  "license": "Apache-2.0"
+}
