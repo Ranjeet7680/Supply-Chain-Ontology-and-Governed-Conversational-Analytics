@@ -1,0 +1,201 @@
+product_id,sku_code,category,unit_base_cost,standard_weight_kg
+P0353,SKU-P0353,Consumer Durables,809.34,33.07
+P0857,SKU-P0857,Chemical & Raw Material,517.4,20.34
+P0300,SKU-P0300,Precision Machinery,403.88,15.35
+P0975,SKU-P0975,Precision Machinery,41.98,43.66
+P0160,SKU-P0160,Consumer Durables,799.31,0.53
+P0116,SKU-P0116,Consumer Durables,176.31,14.04
+P0836,SKU-P0836,Chemical & Raw Material,381.35,13.46
+P0005,SKU-P0005,Precision Machinery,354.89,2.58
+P0840,SKU-P0840,Consumer Durables,327.25,20.8
+P0791,SKU-P0791,Precision Machinery,340.53,44.25
+P0981,SKU-P0981,Automotive Components,63.32,27.54
+P0159,SKU-P0159,Chemical & Raw Material,396.66,1.09
+P0700,SKU-P0700,Automotive Components,821.65,36.47
+P0247,SKU-P0247,Automotive Components,38.17,10.77
+P0030,SKU-P0030,Consumer Durables,388.13,5.93
+P0956,SKU-P0956,Chemical & Raw Material,712.39,8.21
+P0596,SKU-P0596,Automotive Components,238.49,29.98
+P0154,SKU-P0154,Industrial Electronics,375.75,9.75
+P0533,SKU-P0533,Consumer Durables,177.5,43.65
+P0540,SKU-P0540,Industrial Electronics,396.05,18.08
+P0027,SKU-P0027,Consumer Durables,518.27,41.52
+P0530,SKU-P0530,Consumer Durables,62.31,14.98
+P0672,SKU-P0672,Chemical & Raw Material,248.86,37.38
+P0218,SKU-P0218,Industrial Electronics,821.34,27.51
+P0342,SKU-P0342,Chemical & Raw Material,141.26,36.2
+P0294,SKU-P0294,Automotive Components,37.9,19.34
+P0688,SKU-P0688,Automotive Components,188.94,0.75
+P0222,SKU-P0222,Precision Machinery,189.04,32.15
+P0852,SKU-P0852,Precision Machinery,661.3,3.79
+P0062,SKU-P0062,Industrial Electronics,120.59,38.91
+P0517,SKU-P0517,Consumer Durables,297.99,3.33
+P0404,SKU-P0404,Chemical & Raw Material,626.93,28.87
+P0642,SKU-P0642,Precision Machinery,488.03,17.54
+P0372,SKU-P0372,Precision Machinery,652.65,25.48
+P0544,SKU-P0544,Precision Machinery,456.25,19.53
+P0914,SKU-P0914,Industrial Electronics,387.45,9.48
+P0884,SKU-P0884,Automotive Components,284.34,23.13
+P0097,SKU-P0097,Chemical & Raw Material,230.67,18.76
+P0125,SKU-P0125,Precision Machinery,192.53,42.46
+P0139,SKU-P0139,Precision Machinery,598.2,39.68
+P0492,SKU-P0492,Industrial Electronics,691.7,28.69
+P0363,SKU-P0363,Consumer Durables,688.03,8.8
+P0080,SKU-P0080,Precision Machinery,292.58,5.93
+P0589,SKU-P0589,Automotive Components,287.35,5.4
+P0866,SKU-P0866,Automotive Components,559.34,0.52
+P0634,SKU-P0634,Chemical & Raw Material,735.1,0.81
+P0567,SKU-P0567,Precision Machinery,369.36,10.38
+P0021,SKU-P0021,Precision Machinery,247.27,11.36
+P0545,SKU-P0545,Precision Machinery,291.64,23.59
+P0193,SKU-P0193,Automotive Components,358.16,3.39
+P0663,SKU-P0663,Industrial Electronics,819.02,11.7
+P0511,SKU-P0511,Industrial Electronics,612.62,7.09
+P0041,SKU-P0041,Automotive Components,245.09,43.96
+P0998,SKU-P0998,Consumer Durables,67.47,12.9
+P0783,SKU-P0783,Automotive Components,548.34,30.79
+P0422,SKU-P0422,Chemical & Raw Material,428.8,44.36
+P0191,SKU-P0191,Consumer Durables,91.7,16.95
+P0666,SKU-P0666,Automotive Components,625.78,16.87
+P0364,SKU-P0364,Consumer Durables,836.32,18.25
+P0524,SKU-P0524,Automotive Components,149.34,23.11
+P0662,SKU-P0662,Chemical & Raw Material,733.15,15.01
+P0581,SKU-P0581,Consumer Durables,38.68,23.29
+P0449,SKU-P0449,Precision Machinery,312.65,4.78
+P0231,SKU-P0231,Automotive Components,595.02,17.71
+P0429,SKU-P0429,Industrial Electronics,716.11,30.57
+P0620,SKU-P0620,Automotive Components,118.62,41.65
+P0595,SKU-P0595,Industrial Electronics,237.8,29.87
+P0608,SKU-P0608,Industrial Electronics,835.29,23.49
+P0150,SKU-P0150,Automotive Components,224.53,4.64
+P0357,SKU-P0357,Consumer Durables,485.59,39.78
+P0228,SKU-P0228,Automotive Components,255.07,31.67
+P0554,SKU-P0554,Precision Machinery,731.47,18.5
+P0205,SKU-P0205,Automotive Components,554.68,4.24
+P0115,SKU-P0115,Consumer Durables,766.31,27.49
+P0337,SKU-P0337,Precision Machinery,332.13,42.34
+P0911,SKU-P0911,Automotive Components,29.18,7.66
+P0822,SKU-P0822,Industrial Electronics,425.63,20.45
+P0266,SKU-P0266,Chemical & Raw Material,210.02,32.19
+P0790,SKU-P0790,Automotive Components,432.46,8.46
+P0796,SKU-P0796,Precision Machinery,567.53,25.79
+P0297,SKU-P0297,Consumer Durables,444.77,28.82
+P0011,SKU-P0011,Chemical & Raw Material,426.56,40.82
+P0105,SKU-P0105,Precision Machinery,680.72,22.87
+P0195,SKU-P0195,Consumer Durables,576.86,38.96
+P0569,SKU-P0569,Consumer Durables,621.02,12.99
+P0276,SKU-P0276,Precision Machinery,659.06,2.44
+P0188,SKU-P0188,Consumer Durables,800.88,42.95
+P0711,SKU-P0711,Chemical & Raw Material,753.88,33.77
+P0391,SKU-P0391,Chemical & Raw Material,790.86,19.55
+P0673,SKU-P0673,Chemical & Raw Material,497.14,44.12
+P0553,SKU-P0553,Consumer Durables,267.92,17.64
+P0161,SKU-P0161,Automotive Components,286.46,8.04
+P0230,SKU-P0230,Automotive Components,350.62,38.07
+P0821,SKU-P0821,Precision Machinery,495.3,4.82
+P0651,SKU-P0651,Industrial Electronics,234.69,13.64
+P0189,SKU-P0189,Industrial Electronics,636.13,31.52
+P0135,SKU-P0135,Precision Machinery,609.85,25.1
+P0279,SKU-P0279,Industrial Electronics,692.72,36.55
+P0641,SKU-P0641,Automotive Components,529.5,4.13
+P0926,SKU-P0926,Automotive Components,543.01,9.15
+P0568,SKU-P0568,Consumer Durables,756.46,1.73
+P0286,SKU-P0286,Industrial Electronics,102.54,26.23
+P0583,SKU-P0583,Precision Machinery,409.12,24.65
+P0198,SKU-P0198,Chemical & Raw Material,717.12,38.79
+P0254,SKU-P0254,Automotive Components,55.81,37.11
+P0103,SKU-P0103,Precision Machinery,129.82,23.74
+P0152,SKU-P0152,Chemical & Raw Material,249.02,43.45
+P0754,SKU-P0754,Consumer Durables,719.67,9.15
+P0759,SKU-P0759,Precision Machinery,550.88,32.81
+P0763,SKU-P0763,Chemical & Raw Material,824.87,32.3
+P0056,SKU-P0056,Precision Machinery,681.03,12.55
+P0780,SKU-P0780,Consumer Durables,638.84,11.66
+P0084,SKU-P0084,Industrial Electronics,819.18,37.7
+P0465,SKU-P0465,Automotive Components,593.01,3.09
+P0907,SKU-P0907,Industrial Electronics,154.06,11.64
+P0893,SKU-P0893,Automotive Components,569.66,12.96
+P0592,SKU-P0592,Chemical & Raw Material,633.76,25.17
+P0716,SKU-P0716,Chemical & Raw Material,371.17,11.52
+P0837,SKU-P0837,Precision Machinery,650.22,1.14
+P0892,SKU-P0892,Consumer Durables,62.95,2.31
+P0408,SKU-P0408,Consumer Durables,169.65,1.26
+P0213,SKU-P0213,Industrial Electronics,430.58,21.57
+P0693,SKU-P0693,Automotive Components,408.36,29.41
+P0476,SKU-P0476,Industrial Electronics,533.08,28.76
+P0925,SKU-P0925,Industrial Electronics,240.24,1.18
+P0261,SKU-P0261,Precision Machinery,440.09,38.61
+P0746,SKU-P0746,Chemical & Raw Material,589.27,27.91
+P0079,SKU-P0079,Industrial Electronics,46.87,26.57
+P0915,SKU-P0915,Precision Machinery,685.78,30.63
+P0430,SKU-P0430,Precision Machinery,555.71,20.89
+P0316,SKU-P0316,Precision Machinery,702.03,28.35
+P0988,SKU-P0988,Automotive Components,817.98,40.79
+P0674,SKU-P0674,Consumer Durables,251.02,10.05
+P0491,SKU-P0491,Industrial Electronics,57.14,28.01
+P0971,SKU-P0971,Automotive Components,565.97,17.65
+P0487,SKU-P0487,Industrial Electronics,44.2,36.74
+P0918,SKU-P0918,Automotive Components,434.23,31.33
+P0083,SKU-P0083,Industrial Electronics,543.88,39.55
+P0637,SKU-P0637,Consumer Durables,369.81,43.56
+P0371,SKU-P0371,Consumer Durables,171.39,33.9
+P0335,SKU-P0335,Precision Machinery,842.17,18.86
+P0076,SKU-P0076,Industrial Electronics,231.26,26.33
+P0466,SKU-P0466,Chemical & Raw Material,221.84,30.75
+P0904,SKU-P0904,Automotive Components,221.54,17.31
+P0876,SKU-P0876,Automotive Components,441.83,37.28
+P0432,SKU-P0432,Chemical & Raw Material,763.81,17.82
+P0458,SKU-P0458,Consumer Durables,815.8,38.2
+P0202,SKU-P0202,Automotive Components,288.43,42.78
+P0952,SKU-P0952,Consumer Durables,498.09,28.62
+P0069,SKU-P0069,Chemical & Raw Material,100.66,27.31
+P0521,SKU-P0521,Consumer Durables,579.83,33.98
+P0565,SKU-P0565,Automotive Components,118.61,41.93
+P0714,SKU-P0714,Industrial Electronics,72.49,24.95
+P0143,SKU-P0143,Chemical & Raw Material,633.05,24.79
+P0962,SKU-P0962,Precision Machinery,121.58,6.86
+P0470,SKU-P0470,Industrial Electronics,715.5,39.08
+P0708,SKU-P0708,Chemical & Raw Material,208.63,18.15
+P0755,SKU-P0755,Precision Machinery,607.65,4.12
+P0598,SKU-P0598,Chemical & Raw Material,217.41,26.37
+P0909,SKU-P0909,Chemical & Raw Material,330.78,36.67
+P0410,SKU-P0410,Automotive Components,513.31,16.08
+P0927,SKU-P0927,Consumer Durables,93.89,35.08
+P0119,SKU-P0119,Precision Machinery,230.2,15.2
+P0719,SKU-P0719,Precision Machinery,234.29,18.53
+P0332,SKU-P0332,Industrial Electronics,636.3,34.64
+P0834,SKU-P0834,Automotive Components,638.97,30.81
+P0368,SKU-P0368,Consumer Durables,818.79,17.18
+P0102,SKU-P0102,Automotive Components,93.39,24.01
+P0356,SKU-P0356,Chemical & Raw Material,819.66,1.04
+P0319,SKU-P0319,Chemical & Raw Material,60.61,40.16
+P0627,SKU-P0627,Chemical & Raw Material,844.2,3.78
+P0220,SKU-P0220,Precision Machinery,598.71,3.86
+P0088,SKU-P0088,Automotive Components,203.87,13.6
+P0280,SKU-P0280,Automotive Components,542.74,26.5
+P0867,SKU-P0867,Automotive Components,780.08,43.16
+P0176,SKU-P0176,Consumer Durables,113.07,15.44
+P0748,SKU-P0748,Industrial Electronics,180.2,21.13
+P0267,SKU-P0267,Industrial Electronics,214.25,12.33
+P0347,SKU-P0347,Chemical & Raw Material,828.88,44.39
+P0712,SKU-P0712,Automotive Components,255.8,18.8
+P0801,SKU-P0801,Chemical & Raw Material,589.9,7.74
+P0345,SKU-P0345,Precision Machinery,703.59,42.77
+P0070,SKU-P0070,Chemical & Raw Material,531.07,19.11
+P0584,SKU-P0584,Industrial Electronics,480.06,7.84
+P0091,SKU-P0091,Automotive Components,666.52,21.88
+P0994,SKU-P0994,Automotive Components,335.81,33.86
+P0824,SKU-P0824,Automotive Components,825.18,37.97
+P0131,SKU-P0131,Chemical & Raw Material,77.4,2.14
+P0560,SKU-P0560,Automotive Components,36.28,3.85
+P0479,SKU-P0479,Consumer Durables,695.64,44.99
+P0709,SKU-P0709,Precision Machinery,483.23,34.72
+P0913,SKU-P0913,Chemical & Raw Material,649.59,17.31
+P0038,SKU-P0038,Chemical & Raw Material,396.7,6.25
+P0064,SKU-P0064,Precision Machinery,251.65,9.72
+P0022,SKU-P0022,Automotive Components,579.15,28.01
+P0965,SKU-P0965,Consumer Durables,246.65,1.49
+P0109,SKU-P0109,Industrial Electronics,454.25,34.87
+P0809,SKU-P0809,Precision Machinery,278.92,36.83
+P0633,SKU-P0633,Consumer Durables,487.77,39.51
+P0992,SKU-P0992,Automotive Components,511.71,21.86

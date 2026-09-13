@@ -1,0 +1,9 @@
+warehouse_id,warehouse_name,region,state,country,capacity_units,leads_infra_score
+WH_MUMBAI_W,Mumbai West Apex Hub,west,Maharashtra,India,500000,3.61
+WH_NAGPUR_C,Nagpur Central Multi-Modal Hub,central,Madhya Pradesh,India,450000,3.11
+WH_BLR_S,Bengaluru South Tech Hub,south,Karnataka,India,600000,3.65
+WH_DELHI_N,Delhi NCR North Mega Hub,north,Haryana,India,750000,3.52
+WH_KOLKATA_E,Kolkata East Gateway Hub,east,West Bengal,India,400000,3.2
+WH_RIYADH_GCC,Riyadh GCC Logistics Park,gcc,Riyadh,Saudi Arabia,800000,3.9
+WH_DUBAI_GCC,Jebel Ali GCC Freezone Hub,gcc,Dubai,UAE,950000,4.1
+WH_DOHA_GCC,Hamad Port Logistics Zone,gcc,Doha,Qatar,350000,3.85

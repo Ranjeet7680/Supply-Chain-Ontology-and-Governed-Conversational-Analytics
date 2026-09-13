@@ -1,0 +1,181 @@
+name: supplychain_canonical_ontology
+description: >
+  Enterprise Supply Chain Semantic Model and Canonical Ontology for Snowflake Cortex Analyst.
+  Binds fragmented data across ERP, WMS, TMS, and cross-border corridors into governed semantic entities.
+
+tables:
+  - name: canonical_otif_metrics
+    description: Governed On-Time In-Full (OTIF) delivery metrics aggregated by region, warehouse, and carrier partner.
+    base_table:
+      database: SUPPLYCHAIN_IQ_DB
+      schema: GOLD_SEMANTIC
+      table: V_CANONICAL_OTIF
+    dimensions:
+      - name: region
+        description: Geographic operating region (West, Central, South, North, East, GCC).
+        type: VARCHAR
+        expr: region
+        synonyms:
+          - zone
+          - corridor
+          - territory
+      - name: warehouse_name
+        description: Apex regional distribution plant or fulfillment center.
+        type: VARCHAR
+        expr: warehouse_name
+        synonyms:
+          - plant
+          - distribution center
+          - facility
+      - name: carrier_partner
+        description: Logistics service provider responsible for physical freight and parcel transport.
+        type: VARCHAR
+        expr: carrier_partner
+        sample_values:
+          - Delhivery
+          - FedEx
+          - DHL
+          - Blue Dart
+          - Ekart
+          - XpressBees
+        synonyms:
+          - logistics partner
+          - courier
+          - LSP
+          - carrier
+      - name: product_category
+        description: Broad category of commodities or components.
+        type: VARCHAR
+        expr: product_category
+        synonyms:
+          - commodity
+          - part family
+    measures:
+      - name: total_orders
+        description: Total sales orders fulfilled through this corridor.
+        expr: total_orders
+        default_aggregation: sum
+      - name: canonical_otif_pct
+        description: Governed percentage of orders delivered on-or-before promised date and in-full.
+        expr: canonical_otif_percentage
+        default_aggregation: avg
+        synonyms:
+          - OTIF
+          - on time delivery
+          - on time in full
+          - delivery reliability
+      - name: on_time_pct
+        description: Percentage of shipments delivered on or before the committed delivery date.
+        expr: on_time_percentage
+        default_aggregation: avg
+      - name: in_full_pct
+        description: Percentage of shipments where customer received 100% of ordered quantity.
+        expr: in_full_percentage
+        default_aggregation: avg
+      - name: avg_delivery_cost
+        description: Average freight and handling cost per delivery in INR.
+        expr: avg_delivery_cost
+        default_aggregation: avg
+        synonyms:
+          - shipping cost
+          - freight rate
+
+  - name: inventory_health_doi
+    description: Warehouse stock levels, safety stock buffers, and Days of Inventory (DOI).
+    base_table:
+      database: SUPPLYCHAIN_IQ_DB
+      schema: GOLD_SEMANTIC
+      table: V_INVENTORY_HEALTH_DOI
+    dimensions:
+      - name: warehouse_id
+        type: VARCHAR
+        expr: warehouse_id
+      - name: sku_code
+        type: VARCHAR
+        expr: sku_code
+        synonyms:
+          - part number
+          - item code
+      - name: inventory_health_status
+        type: VARCHAR
+        expr: inventory_health_status
+        sample_values:
+          - CRITICAL_STOCKOUT_RISK
+          - LOW_COVERAGE_WARNING
+          - HEALTHY_BUFFER
+          - EXCESS_INVENTORY
+    measures:
+      - name: inventory_on_hand_qty
+        description: Physical inventory units currently available in warehouse stock.
+        expr: inventory_on_hand_qty
+        default_aggregation: sum
+      - name: days_of_inventory
+        description: Days of Inventory (DOI) = Current Stock / 30-day average daily demand.
+        expr: days_of_inventory
+        default_aggregation: avg
+        synonyms:
+          - DOI
+          - days of supply
+          - stock runway
+      - name: stockout_risk_flag
+        description: Binary indicator (1 if on-hand stock is below safety buffer).
+        expr: stockout_risk_flag
+        default_aggregation: sum
+
+  - name: landed_cost_analysis
+    description: Decomposed end-to-end landed cost across purchase, freight, terminal handling, and customs.
+    base_table:
+      database: SUPPLYCHAIN_IQ_DB
+      schema: GOLD_SEMANTIC
+      table: V_LANDED_COST_ANALYSIS
+    dimensions:
+      - name: region
+        type: VARCHAR
+        expr: region
+      - name: product_category
+        type: VARCHAR
+        expr: product_category
+    measures:
+      - name: total_landed_expenditure
+        description: Total cumulative landed expenditure including base, freight, handling, and tariffs.
+        expr: total_landed_expenditure
+        default_aggregation: sum
+      - name: avg_unit_landed_cost
+        description: Average per-unit all-inclusive landed cost.
+        expr: avg_unit_landed_cost
+        default_aggregation: avg
+      - name: freight_cost_share_pct
+        description: Proportion of landed cost attributable to transportation.
+        expr: freight_cost_share_pct
+        default_aggregation: avg
+
+verified_queries:
+  - name: carrier_otif_comparison
+    question: "Which carrier partner has the highest on-time delivery rate?"
+    verified_at: "2026-09-13T12:00:00Z"
+    verified_by: "Supply Chain Director"
+    sql: >
+      SELECT carrier_partner, ROUND(AVG(canonical_otif_percentage), 2) AS avg_otif
+      FROM SUPPLYCHAIN_IQ_DB.GOLD_SEMANTIC.V_CANONICAL_OTIF
+      GROUP BY carrier_partner
+      ORDER BY avg_otif DESC;
+
+  - name: critical_stockout_risks
+    question: "Which SKUs have critical stockout risk with less than 14 days of inventory?"
+    verified_at: "2026-09-13T12:05:00Z"
+    verified_by: "Planning Lead"
+    sql: >
+      SELECT warehouse_name, sku_code, days_of_inventory, inventory_on_hand_qty
+      FROM SUPPLYCHAIN_IQ_DB.GOLD_SEMANTIC.V_INVENTORY_HEALTH_DOI
+      WHERE days_of_inventory < 14
+      ORDER BY days_of_inventory ASC;
+
+  - name: landed_cost_by_region
+    question: "What is the average landed cost and freight share by region?"
+    verified_at: "2026-09-13T12:10:00Z"
+    verified_by: "Procurement Director"
+    sql: >
+      SELECT region, ROUND(AVG(avg_unit_landed_cost), 2) AS avg_unit_cost, ROUND(AVG(freight_cost_share_pct), 2) AS avg_freight_pct
+      FROM SUPPLYCHAIN_IQ_DB.GOLD_SEMANTIC.V_LANDED_COST_ANALYSIS
+      GROUP BY region
+      ORDER BY avg_unit_cost DESC;

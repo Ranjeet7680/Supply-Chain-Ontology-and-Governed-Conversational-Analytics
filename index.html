@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SupplyChain IQ — Ontology & Governed Conversational Analytics</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+      --bg-dark: #070B14;
+      --card-dark: #0D1322;
+      --card-border: #1B253D;
+      --accent-blue: #3B82F6;
+      --accent-cyan: #06B6D4;
+      --accent-indigo: #6366F1;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: #E2E8F0;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090E1A;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    .glow-cyan {
+      box-shadow: 0 0 20px -5px rgba(6, 182, 212, 0.3);
+    }
+    .glow-blue {
+      box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.35);
+    }
+    .glass-card {
+      background: rgba(13, 19, 34, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+    }
+  </style>
+</head>
+<body class="bg-[#070B14] text-slate-200 antialiased min-h-screen flex flex-col selection:bg-cyan-500 selection:text-black">
+
+  <!-- TOP GLOBAL APP BAR -->
+  <header class="h-14 border-b border-slate-800/80 bg-[#090E1A]/90 backdrop-blur-md sticky top-0 z-40 px-4 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-400 p-[1px] flex items-center justify-center shadow-lg shadow-blue-500/20">
+        <div class="w-full h-full bg-[#090E1A] rounded-[7px] flex items-center justify-center">
+          <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="font-extrabold text-sm tracking-wide bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">SupplyChain IQ</span>
+          <span class="px-2 py-0.5 text-[10px] font-semibold bg-cyan-950/80 text-cyan-300 border border-cyan-800/60 rounded-full flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            Ontology v2.4
+          </span>
+          <span class="px-2 py-0.5 text-[10px] font-semibold bg-blue-950/60 text-blue-300 border border-blue-800/50 rounded-full">
+            Snowflake Cortex Governed
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search and Actions -->
+    <div class="flex items-center space-x-3">
+      <div class="relative w-80 hidden md:block">
+        <input type="text" placeholder="Global entity search (SKU, Partner, Country, PO)..." 
+               class="w-full bg-slate-900/90 border border-slate-800 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-300 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors">
+        <svg class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <span class="absolute right-2 top-2 text-[9px] font-mono bg-slate-800 px-1.5 py-0.5 rounded text-slate-400">⌘K</span>
+      </div>
+
+      <div class="flex items-center space-x-2 border-l border-slate-800 pl-3">
+        <div class="flex items-center text-xs text-slate-400 space-x-1 bg-slate-900/60 px-2.5 py-1 rounded-md border border-slate-800">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span class="text-[11px]">Synced: 12 min ago</span>
+        </div>
+        <button onclick="switchScreen('chat')" class="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-medium text-xs px-3 py-1.5 rounded-lg flex items-center space-x-1.5 shadow-sm transition-all">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
+          <span>Ask SupplyChain IQ</span>
+        </button>
+        <div class="w-7 h-7 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-cyan-400">
+          GCC
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="w-60 border-r border-slate-800/80 bg-[#090E1A] flex flex-col shrink-0">
+      <div class="p-3 text-[10px] font-bold uppercase tracking-wider text-slate-500">Analytics & Control</div>
+      <nav class="space-x-0 space-y-1 px-2 flex-1">
+        <button onclick="switchScreen('overview')" id="nav-overview" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg text-xs font-semibold bg-blue-600/15 text-cyan-300 border border-blue-500/30 transition-all">
+          <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          <span>Command Center</span>
+        </button>
+
+        <button onclick="switchScreen('chat')" id="nav-chat" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-900 transition-all">
+          <div class="relative">
+            <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-cyan-400"></span>
+          </div>
+          <span>Conversational AI</span>
+          <span class="ml-auto text-[9px] bg-cyan-950 text-cyan-300 px-1.5 py-0.5 rounded border border-cyan-800/40">Core</span>
+        </button>
+
+        <button onclick="switchScreen('ontology')" id="nav-ontology" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-900 transition-all">
+          <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+          <span>Ontology Explorer</span>
+        </button>
+
+        <button onclick="switchScreen('graph')" id="nav-graph" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-900 transition-all">
+          <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+          <span>Knowledge Graph</span>
+        </button>
+
+        <button onclick="switchScreen('lineage')" id="nav-lineage" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-900 transition-all">
+          <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span>Governance & Lineage</span>
+        </button>
+
+        <div class="pt-4 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">Domains & Operations</div>
+
+        <button onclick="switchScreen('suppliers')" id="nav-suppliers" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-900 transition-all">
+          <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          <span>Suppliers & Partners</span>
+        </button>
+
+        <button onclick="switchScreen('risk')" id="nav-risk" class="w-full flex items-center space-x-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-900 transition-all">
+          <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          <span>Risk & Disruption</span>
+        </button>
+      </nav>
+
+      <!-- Connected Datasets Info Box -->
+      <div class="p-3 m-2 rounded-xl bg-slate-900/80 border border-slate-800 text-[11px]">
+        <div class="text-slate-400 font-semibold mb-1 flex items-center justify-between">
+          <span>Active Datasets</span>
+          <span class="text-emerald-400 text-[10px]">5 Live</span>
+        </div>
+        <div class="space-y-1 text-slate-400">
+          <div class="flex items-center justify-between text-[10px]">
+            <span>India Logistics (25k)</span>
+            <span class="text-slate-400 font-mono">TMS</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px]">
+            <span>Dynamic SC (113k)</span>
+            <span class="text-slate-400 font-mono">ERP</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px]">
+            <span>ADB Asian/GCC IO</span>
+            <span class="text-slate-400 font-mono">Macro</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENT AREA -->
+    <main class="flex-1 overflow-y-auto bg-[#070B14] p-5">
+
+      <!-- ======================================================== -->
+      <!-- SCREEN 1: EXECUTIVE COMMAND CENTER -->
+      <!-- ======================================================== -->
+      <section id="screen-overview" class="space-y-5">
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+              Supply Chain Command Center
+              <span class="text-xs font-normal text-slate-400">| Regional Corridor: India, South Asia & GCC</span>
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">Governed, AI-orchestrated telemetry across 25,000 operational shipments and 113,097 multi-tier supplier nodes.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-xs bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-lg">Last 30 Days</span>
+            <button class="bg-blue-600/20 text-cyan-400 border border-blue-500/40 px-3 py-1 rounded-lg text-xs font-medium hover:bg-blue-600/30">
+              Refresh Telemetry
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+          <!-- Card 1 -->
+          <div class="glass-card rounded-xl p-3.5">
+            <div class="text-[11px] text-slate-400 font-medium">Corridor OTIF</div>
+            <div class="text-xl font-bold text-white mt-1">73.3%</div>
+            <div class="flex items-center text-[10px] text-amber-400 mt-1 gap-1">
+              <span>▼ 2.4% vs benchmark</span>
+            </div>
+            <div class="text-[9px] text-slate-500 mt-0.5">18,331 of 25k delivered</div>
+          </div>
+          <!-- Card 2 -->
+          <div class="glass-card rounded-xl p-3.5">
+            <div class="text-[11px] text-slate-400 font-medium">Avg Lead Time</div>
+            <div class="text-xl font-bold text-white mt-1">5.22 d</div>
+            <div class="flex items-center text-[10px] text-emerald-400 mt-1 gap-1">
+              <span>▲ 0.3d improvement</span>
+            </div>
+            <div class="text-[9px] text-slate-500 mt-0.5">Cross-border Asian avg</div>
+          </div>
+          <!-- Card 3 -->
+          <div class="glass-card rounded-xl p-3.5">
+            <div class="text-[11px] text-slate-400 font-medium">Disruption Risk Score</div>
+            <div class="text-xl font-bold text-red-400 mt-1">0.803</div>
+            <div class="flex items-center text-[10px] text-red-400 mt-1 gap-1">
+              <span>High Exposure (74.6%)</span>
+            </div>
+            <div class="text-[9px] text-slate-500 mt-0.5">84,368 High-Risk Nodes</div>
+          </div>
+          <!-- Card 4 -->
+          <div class="glass-card rounded-xl p-3.5">
+            <div class="text-[11px] text-slate-400 font-medium">Avg Delivery Cost</div>
+            <div class="text-xl font-bold text-white mt-1">₹864.9</div>
+            <div class="flex items-center text-[10px] text-slate-400 mt-1 gap-1">
+              <span>~ $10.42 / package</span>
+            </div>
+            <div class="text-[9px] text-slate-500 mt-0.5">Delhivery lowest @ ₹848</div>
+          </div>
+          <!-- Card 5 -->
+          <div class="glass-card rounded-xl p-3.5">
+            <div class="text-[11px] text-slate-400 font-medium">Active GCC/Asia Nodes</div>
+            <div class="text-xl font-bold text-cyan-400 mt-1">15,550</div>
+            <div class="flex items-center text-[10px] text-cyan-400 mt-1 gap-1">
+              <span>14 Linked Nations</span>
+            </div>
+            <div class="text-[9px] text-slate-500 mt-0.5">VN, BD, IN, SA, PK, NP</div>
+          </div>
+          <!-- Card 6 -->
+          <div class="glass-card rounded-xl p-3.5">
+            <div class="text-[11px] text-slate-400 font-medium">Ontology Coverage</div>
+            <div class="text-xl font-bold text-emerald-400 mt-1">94.8%</div>
+            <div class="flex items-center text-[10px] text-emerald-400 mt-1 gap-1">
+              <span>✓ 100% Policy Bound</span>
+            </div>
+            <div class="text-[9px] text-slate-500 mt-0.5">Snowflake Cortex Ready</div>
+          </div>
+        </div>
+
+        <!-- Middle Section: Visual Chart & AI Insights -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <!-- Left: Logistics Performance by Partner -->
+          <div class="lg:col-span-2 glass-card rounded-xl p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <h3 class="text-sm font-semibold text-white">Logistics Partner Reliability vs Delay Rate</h3>
+                <p class="text-[11px] text-slate-400">Benchmarked on 25,000 multi-partner delivery dispatches</p>
+              </div>
+              <span class="text-[10px] font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded">TMS Real-Time</span>
+            </div>
+
+            <!-- Custom Bar Chart Visualization -->
+            <div class="space-y-2.5 pt-2">
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="font-medium text-slate-300">Delhivery (2,786 shipments)</span>
+                  <span class="text-emerald-400 font-mono text-[11px]">75.2% OTIF | 24.8% Delayed | ₹848.1 avg</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden flex">
+                  <div class="bg-emerald-500 h-full" style="width: 75.2%"></div>
+                  <div class="bg-amber-500 h-full" style="width: 24.8%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="font-medium text-slate-300">FedEx (2,818 shipments)</span>
+                  <span class="text-emerald-400 font-mono text-[11px]">74.8% OTIF | 25.2% Delayed | ₹857.4 avg</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden flex">
+                  <div class="bg-emerald-500 h-full" style="width: 74.8%"></div>
+                  <div class="bg-amber-500 h-full" style="width: 25.2%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="font-medium text-slate-300">DHL Express (2,802 shipments)</span>
+                  <span class="text-emerald-400 font-mono text-[11px]">73.7% OTIF | 26.3% Delayed | ₹872.8 avg</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden flex">
+                  <div class="bg-emerald-500 h-full" style="width: 73.7%"></div>
+                  <div class="bg-amber-500 h-full" style="width: 26.3%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="font-medium text-slate-300">Blue Dart (2,798 shipments)</span>
+                  <span class="text-slate-300 font-mono text-[11px]">73.1% OTIF | 26.9% Delayed | ₹863.0 avg</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden flex">
+                  <div class="bg-blue-500 h-full" style="width: 73.1%"></div>
+                  <div class="bg-amber-500 h-full" style="width: 26.9%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="font-medium text-slate-300">Ekart Logistics (2,801 shipments)</span>
+                  <span class="text-amber-400 font-mono text-[11px]">72.6% OTIF | 27.4% Delayed | ₹870.0 avg</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden flex">
+                  <div class="bg-blue-500 h-full" style="width: 72.6%"></div>
+                  <div class="bg-amber-500 h-full" style="width: 27.4%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="font-medium text-slate-300">XpressBees (2,826 shipments)</span>
+                  <span class="text-red-400 font-mono text-[11px]">71.7% OTIF | 28.3% Delayed | ₹868.2 avg</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden flex">
+                  <div class="bg-blue-500 h-full" style="width: 71.7%"></div>
+                  <div class="bg-red-500 h-full" style="width: 28.3%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-800/80 mt-4 pt-2">
+              <div class="flex items-center gap-3">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Delivered On-Time</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Delayed</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500"></span> Disrupted / SLA Miss</span>
+              </div>
+              <span class="text-cyan-400 cursor-pointer hover:underline" onclick="switchScreen('chat')">Ask AI to optimize routing →</span>
+            </div>
+          </div>
+
+          <!-- Right: Governed AI Actionable Insights -->
+          <div class="glass-card rounded-xl p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                  <h3 class="text-sm font-semibold text-white">Governed AI Alerts</h3>
+                </div>
+                <span class="text-[10px] bg-cyan-950 text-cyan-400 border border-cyan-800/50 px-2 py-0.5 rounded">Real-time</span>
+              </div>
+
+              <div class="space-y-2.5">
+                <div class="p-2.5 rounded-lg bg-red-950/30 border border-red-800/40">
+                  <div class="text-xs font-semibold text-red-300 flex items-center justify-between">
+                    <span>XpressBees Bottleneck</span>
+                    <span class="text-[9px] bg-red-900/60 px-1.5 py-0.5 rounded">High Risk</span>
+                  </div>
+                  <p class="text-[11px] text-slate-300 mt-1 leading-snug">
+                    Delay probability reached 28.3% across 2,826 shipments with 167 failures. Central region impacted most.
+                  </p>
+                  <div class="mt-2 flex items-center justify-between text-[10px]">
+                    <span class="text-slate-400">Source: TMS Log v2</span>
+                    <button onclick="askPreset('Why are XpressBees deliveries delayed?')" class="text-cyan-400 hover:underline">Investigate →</button>
+                  </div>
+                </div>
+
+                <div class="p-2.5 rounded-lg bg-amber-950/30 border border-amber-800/40">
+                  <div class="text-xs font-semibold text-amber-300 flex items-center justify-between">
+                    <span>South Asia Trade Vulnerability</span>
+                    <span class="text-[9px] bg-amber-900/60 px-1.5 py-0.5 rounded">Warning</span>
+                  </div>
+                  <p class="text-[11px] text-slate-300 mt-1 leading-snug">
+                    Nepal (973 suppliers) & Bangladesh (1,416 suppliers) show 0.81 disruption score due to intermediate customs clearance.
+                  </p>
+                  <div class="mt-2 flex items-center justify-between text-[10px]">
+                    <span class="text-slate-400">Source: ADB IO + ERP</span>
+                    <button onclick="askPreset('Analyze South Asia regional trade dependency')" class="text-cyan-400 hover:underline">Inspect Graph →</button>
+                  </div>
+                </div>
+
+                <div class="p-2.5 rounded-lg bg-blue-950/30 border border-blue-800/40">
+                  <div class="text-xs font-semibold text-blue-300 flex items-center justify-between">
+                    <span>GCC Export Optimization</span>
+                    <span class="text-[9px] bg-blue-900/60 px-1.5 py-0.5 rounded">Opportunity</span>
+                  </div>
+                  <p class="text-[11px] text-slate-300 mt-1 leading-snug">
+                    Saudi Arabia (1,082 nodes) and Qatar (872 nodes) show 12% lower shipping costs when rerouted via multimodal sea-air hubs.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="switchScreen('chat')" class="w-full mt-3 py-2 bg-slate-800/90 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg flex items-center justify-center gap-1 border border-slate-700">
+              <span>Open Governed Conversational Hub</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottom: Regional Dispatches & Corridor Matrix -->
+        <div class="glass-card rounded-xl p-4">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-semibold text-white">Indian Regional Dispatch & Status Telemetry</h3>
+            <span class="text-xs text-slate-400">25,000 Transits Mapped to Supply Chain Ontology v2.4</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="text-[10px] uppercase tracking-wider text-slate-400 border-b border-slate-800">
+                <tr>
+                  <th class="pb-2">Region</th>
+                  <th class="pb-2">Total Dispatches</th>
+                  <th class="pb-2">Delivered Clean</th>
+                  <th class="pb-2">Delayed</th>
+                  <th class="pb-2">Failed Delivery</th>
+                  <th class="pb-2">Delay Rate</th>
+                  <th class="pb-2">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 font-mono text-[11px]">
+                <tr class="hover:bg-slate-800/30">
+                  <td class="py-2.5 font-sans font-semibold text-slate-200">West (Mumbai/Pune)</td>
+                  <td class="py-2.5 text-slate-300">5,095</td>
+                  <td class="py-2.5 text-emerald-400">3,722</td>
+                  <td class="py-2.5 text-amber-400">1,373</td>
+                  <td class="py-2.5 text-red-400">287</td>
+                  <td class="py-2.5 text-slate-300">26.9%</td>
+                  <td class="py-2.5"><span class="px-2 py-0.5 rounded text-[10px] bg-amber-950 text-amber-400 border border-amber-800/40">Moderate</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/30">
+                  <td class="py-2.5 font-sans font-semibold text-slate-200">Central (Indore/Nagpur)</td>
+                  <td class="py-2.5 text-slate-300">5,060</td>
+                  <td class="py-2.5 text-emerald-400">3,681</td>
+                  <td class="py-2.5 text-amber-400">1,379</td>
+                  <td class="py-2.5 text-red-400">286</td>
+                  <td class="py-2.5 text-slate-300">27.3%</td>
+                  <td class="py-2.5"><span class="px-2 py-0.5 rounded text-[10px] bg-red-950 text-red-400 border border-red-800/40">Bottleneck</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/30">
+                  <td class="py-2.5 font-sans font-semibold text-slate-200">South (Bengaluru/Chennai)</td>
+                  <td class="py-2.5 text-slate-300">4,977</td>
+                  <td class="py-2.5 text-emerald-400">3,644</td>
+                  <td class="py-2.5 text-amber-400">1,333</td>
+                  <td class="py-2.5 text-red-400">274</td>
+                  <td class="py-2.5 text-slate-300">26.8%</td>
+                  <td class="py-2.5"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800/40">Optimal</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/30">
+                  <td class="py-2.5 font-sans font-semibold text-slate-200">North (Delhi NCR/Punjab)</td>
+                  <td class="py-2.5 text-slate-300">4,949</td>
+                  <td class="py-2.5 text-emerald-400">3,634</td>
+                  <td class="py-2.5 text-amber-400">1,315</td>
+                  <td class="py-2.5 text-red-400">236</td>
+                  <td class="py-2.5 text-slate-300">26.6%</td>
+                  <td class="py-2.5"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800/40">Stable</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/30">
+                  <td class="py-2.5 font-sans font-semibold text-slate-200">East (Kolkata/Guwahati)</td>
+                  <td class="py-2.5 text-slate-300">4,919</td>
+                  <td class="py-2.5 text-emerald-400">3,650</td>
+                  <td class="py-2.5 text-amber-400">1,269</td>
+                  <td class="py-2.5 text-red-400">245</td>
+                  <td class="py-2.5 text-emerald-400">25.8%</td>
+                  <td class="py-2.5"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800/40">Best OTIF</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- SCREEN 2: FLAGSHIP CONVERSATIONAL ANALYTICS -->
+      <!-- ======================================================== -->
+      <section id="screen-chat" class="hidden space-y-4">
+        <!-- Header -->
+        <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+          <div>
+            <h1 class="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+              Governed Conversational Analytics
+              <span class="text-xs px-2 py-0.5 bg-cyan-950 text-cyan-300 border border-cyan-800 rounded font-normal">Snowflake Cortex Engine</span>
+            </h1>
+            <p class="text-xs text-slate-400">Natural language questions strictly resolved through the canonical Supply Chain Ontology, data governance policies, and verified evidence.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] text-slate-400">Access: <strong class="text-slate-200">Supply Chain Director</strong></span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          <!-- Chat conversation left 3 cols -->
+          <div class="lg:col-span-3 glass-card rounded-xl p-4 flex flex-col h-[650px]">
+            <!-- Message stream -->
+            <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 pr-2">
+              
+              <!-- System Welcome -->
+              <div class="flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                  IQ
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 max-w-2xl leading-relaxed">
+                  <p class="font-semibold text-white mb-1">SupplyChain IQ Governance Runtime Active</p>
+                  I am connected to your enterprise knowledge graph, Snowflake semantic layer, and the canonical ontology. All answers are deterministically verified against access policies and source lineage.
+                  <div class="mt-2 text-[11px] text-slate-400">Try one of the governed queries below:</div>
+                </div>
+              </div>
+
+              <!-- Default User Prompt -->
+              <div class="flex items-start justify-end gap-3">
+                <div class="bg-blue-600/20 border border-blue-500/40 rounded-xl p-3 text-xs text-white max-w-xl">
+                  “Which logistics partners caused the highest delivery delays in the South Asia & India corridor?”
+                </div>
+                <div class="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-semibold text-slate-300 shrink-0">
+                  SC
+                </div>
+              </div>
+
+              <!-- AI Governed Response -->
+              <div class="flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-lg shadow-cyan-500/20">
+                  IQ
+                </div>
+                <div class="space-y-3 max-w-3xl flex-1">
+                  <!-- Main Response Card -->
+                  <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 text-xs space-y-3">
+                    <div class="text-slate-200 leading-relaxed">
+                      Across <strong>25,000 verified logistics dispatches</strong> in the operational TMS dataset, 
+                      <strong>6,669 shipments (26.7%)</strong> experienced delays. The highest delay contribution came from 
+                      <strong>XpressBees (28.3%)</strong> and <strong>Ekart Logistics (27.4%)</strong>, while 
+                      <strong>Delhivery</strong> achieved the lowest delay rate (24.8%) and lowest unit delivery cost (₹848.11).
+                    </div>
+
+                    <!-- Micro Data Visualization -->
+                    <div class="bg-[#070B14] p-3 rounded-lg border border-slate-800/80">
+                      <div class="text-[11px] font-semibold text-slate-300 mb-2 flex justify-between">
+                        <span>Top Delay Contributors (Shipment Volume & Delay Rate)</span>
+                        <span class="text-cyan-400 font-mono text-[10px]">TMS_DELIVERY_LOGISTICS</span>
+                      </div>
+                      <div class="space-y-2">
+                        <div>
+                          <div class="flex justify-between text-[11px] mb-1">
+                            <span class="text-slate-300 font-medium">1. XpressBees</span>
+                            <span class="text-red-400 font-mono">799 delayed / 2,826 total (28.3%) | 167 failures</span>
+                          </div>
+                          <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-red-500 h-full" style="width: 28.3%"></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="flex justify-between text-[11px] mb-1">
+                            <span class="text-slate-300 font-medium">2. Ekart Logistics</span>
+                            <span class="text-amber-400 font-mono">768 delayed / 2,801 total (27.4%) | 154 failures</span>
+                          </div>
+                          <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-amber-500 h-full" style="width: 27.4%"></div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="flex justify-between text-[11px] mb-1">
+                            <span class="text-slate-300 font-medium">3. Blue Dart Express</span>
+                            <span class="text-amber-400 font-mono">754 delayed / 2,798 total (26.9%) | 162 failures</span>
+                          </div>
+                          <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-amber-500 h-full" style="width: 26.9%"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Governed Evidence & Attestation Box -->
+                    <div class="bg-slate-950/80 border border-cyan-900/40 rounded-lg p-3 space-y-2">
+                      <div class="flex items-center justify-between text-[11px]">
+                        <span class="font-semibold text-cyan-300 flex items-center gap-1.5">
+                          <svg class="w-3.5 h-3.5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                          Governed Proof & Evidence Chain
+                        </span>
+                        <span class="text-slate-500 font-mono text-[10px]">Execution: 142ms</span>
+                      </div>
+
+                      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px] text-slate-300 pt-1">
+                        <div class="bg-slate-900 p-1.5 rounded border border-slate-800">
+                          <div class="text-slate-500">Ontology Binding</div>
+                          <div class="font-mono text-cyan-400">Carrier.delivery_delay</div>
+                        </div>
+                        <div class="bg-slate-900 p-1.5 rounded border border-slate-800">
+                          <div class="text-slate-500">Access Policy</div>
+                          <div class="font-mono text-emerald-400">SC_MANAGER_ROLE ✓</div>
+                        </div>
+                        <div class="bg-slate-900 p-1.5 rounded border border-slate-800">
+                          <div class="text-slate-500">Source Table</div>
+                          <div class="font-mono text-slate-200">TMS_DELIVERY (Snowflake)</div>
+                        </div>
+                        <div class="bg-slate-900 p-1.5 rounded border border-slate-800">
+                          <div class="text-slate-500">Freshness</div>
+                          <div class="font-mono text-slate-200">12 min ago</div>
+                        </div>
+                      </div>
+
+                      <!-- Action Buttons -->
+                      <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                        <button onclick="toggleModal('sql')" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded flex items-center gap-1">
+                          <span>View Cortex SQL</span>
+                        </button>
+                        <button onclick="switchScreen('lineage')" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded flex items-center gap-1">
+                          <span>Inspect Lineage</span>
+                        </button>
+                        <button onclick="switchScreen('ontology')" class="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded flex items-center gap-1">
+                          <span>Explore Ontology</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Suggested prompts bar -->
+            <div class="pt-3 border-t border-slate-800/80">
+              <div class="text-[10px] text-slate-400 mb-1.5 font-medium">Suggested Governed Queries:</div>
+              <div class="flex flex-wrap gap-1.5">
+                <button onclick="askPreset('Why did delivery performance degrade in Central India?')" class="text-[11px] bg-slate-900 hover:bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-800 transition">
+                  “Why did delivery performance degrade in Central India?”
+                </button>
+                <button onclick="askPreset('Identify high risk suppliers across Vietnam and Saudi Arabia')" class="text-[11px] bg-slate-900 hover:bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-800 transition">
+                  “Identify high risk suppliers in Vietnam & Saudi Arabia”
+                </button>
+                <button onclick="askPreset('Compare lead time volatility between South Asia and GCC')" class="text-[11px] bg-slate-900 hover:bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-800 transition">
+                  “Compare lead time volatility between South Asia & GCC”
+                </button>
+              </div>
+            </div>
+
+            <!-- Input Box -->
+            <div class="mt-3 relative flex items-center">
+              <input id="chat-input" type="text" placeholder="Ask a supply chain question (e.g., 'Which suppliers exceed 6 days lead time?')..." 
+                     class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-4 pr-24 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition"
+                     onkeydown="if(event.key==='Enter') sendChat()">
+              <button onclick="sendChat()" class="absolute right-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-medium text-xs px-3.5 py-1.5 rounded-lg">
+                Query
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Governance Inspector (1 col) -->
+          <div class="glass-card rounded-xl p-4 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                Governance Guardrails
+              </h3>
+              <div class="space-y-3 text-xs mt-3">
+                <div class="p-2 bg-slate-900 rounded-lg border border-slate-800">
+                  <div class="text-[10px] text-slate-500">Query Orchestrator</div>
+                  <div class="text-slate-200 font-medium">Snowflake Cortex LLM</div>
+                  <div class="text-[10px] text-emerald-400">Zero-hallucination mode</div>
+                </div>
+                <div class="p-2 bg-slate-900 rounded-lg border border-slate-800">
+                  <div class="text-[10px] text-slate-500">Active Access Role</div>
+                  <div class="text-slate-200 font-medium">GLOBAL_SC_ANALYST</div>
+                  <div class="text-[10px] text-slate-400">Masking: PII, Unit Costs Redacted</div>
+                </div>
+                <div class="p-2 bg-slate-900 rounded-lg border border-slate-800">
+                  <div class="text-[10px] text-slate-500">Ontology Mapping</div>
+                  <div class="text-cyan-400 font-mono text-[11px]">v2.4 (Enterprise SC)</div>
+                  <div class="text-[10px] text-slate-400">67 Relationships active</div>
+                </div>
+                <div class="p-2 bg-slate-900 rounded-lg border border-slate-800">
+                  <div class="text-[10px] text-slate-500">Audit Trail</div>
+                  <div class="text-slate-300">TX-9842109</div>
+                  <div class="text-[10px] text-emerald-400">Logged to Snowflake AUDIT_LOG</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 text-[11px] text-slate-400">
+              Every query executes against deterministic semantic definitions. No ad-hoc hallucinations.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- SCREEN 3: INTERACTIVE ONTOLOGY EXPLORER -->
+      <!-- ======================================================== -->
+      <section id="screen-ontology" class="hidden space-y-4">
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+              Supply Chain Canonical Ontology
+              <span class="text-xs px-2 py-0.5 bg-blue-950 text-blue-300 border border-blue-800 rounded font-normal">v2.4 Master Schema</span>
+            </h1>
+            <p class="text-xs text-slate-400">Visual semantic graph mapping ERP, WMS, TMS, and Macro-economic data across 23,481 entities and 67 relationship types.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-xs bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-lg">15 Linked Entity Classes</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          <!-- Graph Canvas Container (3 cols) -->
+          <div class="lg:col-span-3 glass-card rounded-xl p-4 relative min-h-[550px] flex flex-col">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2 text-xs">
+                <span class="text-slate-400">Interactive Node Graph: Click any entity to inspect attributes and relationships</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px]">
+                <span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800/60">Core Entity</span>
+                <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60">Logistics Node</span>
+                <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800/60">Risk & Policy</span>
+              </div>
+            </div>
+
+            <!-- SVG Ontology Network Canvas -->
+            <div class="flex-1 bg-[#060A12] rounded-xl border border-slate-800 relative overflow-hidden flex items-center justify-center p-4">
+              <svg id="ontology-svg" class="w-full h-full min-h-[460px]" viewBox="0 0 800 480">
+                <!-- Connectors -->
+                <g stroke="#1E293B" stroke-width="2">
+                  <!-- Central Node to First Ring -->
+                  <line x1="400" y1="240" x2="250" y2="120" stroke="#3B82F6" stroke-dasharray="4" />
+                  <line x1="400" y1="240" x2="400" y2="90" stroke="#3B82F6" />
+                  <line x1="400" y1="240" x2="550" y2="120" stroke="#3B82F6" stroke-dasharray="4" />
+                  <line x1="400" y1="240" x2="230" y2="240" stroke="#06B6D4" />
+                  <line x1="400" y1="240" x2="570" y2="240" stroke="#06B6D4" />
+                  <line x1="400" y1="240" x2="270" y2="360" stroke="#6366F1" />
+                  <line x1="400" y1="240" x2="400" y2="390" stroke="#EF4444" stroke-width="2.5" />
+                  <line x1="400" y1="240" x2="530" y2="360" stroke="#10B981" />
+
+                  <!-- Inter-node Relationships -->
+                  <line x1="250" y1="120" x2="130" y2="120" stroke="#334155" />
+                  <line x1="250" y1="120" x2="230" y2="240" stroke="#334155" />
+                  <line x1="230" y1="240" x2="110" y2="240" stroke="#334155" />
+                  <line x1="570" y1="240" x2="690" y2="240" stroke="#334155" />
+                  <line x1="550" y1="120" x2="670" y2="120" stroke="#334155" />
+                  <line x1="400" y1="390" x2="530" y2="360" stroke="#334155" />
+                </g>
+
+                <!-- CENTER HUB: SUPPLY CHAIN -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Supply Chain Hub')">
+                  <circle cx="400" cy="240" r="42" fill="#0D1A30" stroke="#3B82F6" stroke-width="3" class="hover:stroke-cyan-400 transition" />
+                  <text x="400" y="238" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">SUPPLY CHAIN</text>
+                  <text x="400" y="254" fill="#60A5FA" font-size="9" text-anchor="middle">Canonical Core</text>
+                </g>
+
+                <!-- NODE 1: SUPPLIER -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Supplier')">
+                  <circle cx="250" cy="120" r="32" fill="#0F172A" stroke="#06B6D4" stroke-width="2.5" />
+                  <text x="250" y="122" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">Supplier</text>
+                  <text x="250" y="136" fill="#94A3B8" font-size="8" text-anchor="middle">113,097 nodes</text>
+                </g>
+
+                <!-- NODE 2: PRODUCT & SKU -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Product / SKU')">
+                  <circle cx="400" cy="90" r="30" fill="#0F172A" stroke="#3B82F6" stroke-width="2" />
+                  <text x="400" y="92" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">Product/SKU</text>
+                  <text x="400" y="105" fill="#94A3B8" font-size="8" text-anchor="middle">38,410 items</text>
+                </g>
+
+                <!-- NODE 3: CUSTOMER & SALES ORDER -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Customer & Sales Order')">
+                  <circle cx="550" cy="120" r="32" fill="#0F172A" stroke="#3B82F6" stroke-width="2" />
+                  <text x="550" y="122" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">Sales Order</text>
+                  <text x="550" y="136" fill="#94A3B8" font-size="8" text-anchor="middle">99,441 Olist</text>
+                </g>
+
+                <!-- NODE 4: SHIPMENT & TRANSIT -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Shipment')">
+                  <circle cx="230" cy="240" r="32" fill="#0F172A" stroke="#06B6D4" stroke-width="2.5" />
+                  <text x="230" y="242" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">Shipment</text>
+                  <text x="230" y="256" fill="#94A3B8" font-size="8" text-anchor="middle">25,000 TMS</text>
+                </g>
+
+                <!-- NODE 5: WAREHOUSE & INVENTORY -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Warehouse & Inventory')">
+                  <circle cx="570" cy="240" r="32" fill="#0F172A" stroke="#10B981" stroke-width="2" />
+                  <text x="570" y="242" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">Warehouse</text>
+                  <text x="570" y="256" fill="#94A3B8" font-size="8" text-anchor="middle">84 Hubs</text>
+                </g>
+
+                <!-- NODE 6: CARRIER / LOGISTICS PARTNER -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Carrier Partner')">
+                  <circle cx="110" cy="240" r="28" fill="#0F172A" stroke="#06B6D4" stroke-width="2" />
+                  <text x="110" y="242" fill="#FFFFFF" font-size="10" font-weight="bold" text-anchor="middle">Carrier</text>
+                  <text x="110" y="254" fill="#94A3B8" font-size="8" text-anchor="middle">Delhivery, DHL...</text>
+                </g>
+
+                <!-- NODE 7: PURCHASE ORDER -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Purchase Order')">
+                  <circle cx="130" cy="120" r="28" fill="#0F172A" stroke="#3B82F6" stroke-width="2" />
+                  <text x="130" y="122" fill="#FFFFFF" font-size="10" font-weight="bold" text-anchor="middle">PO Line</text>
+                  <text x="130" y="134" fill="#94A3B8" font-size="8" text-anchor="middle">ERP PO</text>
+                </g>
+
+                <!-- NODE 8: COUNTRY & MACRO REGION -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Country & Regional Corridor')">
+                  <circle cx="270" cy="360" r="30" fill="#0F172A" stroke="#6366F1" stroke-width="2" />
+                  <text x="270" y="362" fill="#FFFFFF" font-size="10" font-weight="bold" text-anchor="middle">Country</text>
+                  <text x="270" y="375" fill="#94A3B8" font-size="8" text-anchor="middle">ADB IO Tables</text>
+                </g>
+
+                <!-- NODE 9: RISK & DISRUPTION -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Risk & Disruption')">
+                  <circle cx="400" cy="390" r="32" fill="#1C1017" stroke="#EF4444" stroke-width="2.5" />
+                  <text x="400" y="392" fill="#FCA5A5" font-size="11" font-weight="bold" text-anchor="middle">Risk Event</text>
+                  <text x="400" y="405" fill="#EF4444" font-size="8" text-anchor="middle">Lead time / SLA</text>
+                </g>
+
+                <!-- NODE 10: GOVERNED METRIC -->
+                <g class="cursor-pointer" onclick="selectOntologyNode('Governed Metric')">
+                  <circle cx="530" cy="360" r="28" fill="#0F172A" stroke="#10B981" stroke-width="2" />
+                  <text x="530" y="362" fill="#FFFFFF" font-size="10" font-weight="bold" text-anchor="middle">Metric</text>
+                  <text x="530" y="374" fill="#34D399" font-size="8" text-anchor="middle">OTIF, LeadTime</text>
+                </g>
+
+                <g class="cursor-pointer" onclick="selectOntologyNode('Customer')">
+                  <circle cx="690" cy="240" r="28" fill="#0F172A" stroke="#3B82F6" stroke-width="2" />
+                  <text x="690" y="242" fill="#FFFFFF" font-size="10" font-weight="bold" text-anchor="middle">Customer</text>
+                  <text x="690" y="254" fill="#94A3B8" font-size="8" text-anchor="middle">Fulfillment</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Node Detail Inspector Panel (1 col) -->
+          <div class="glass-card rounded-xl p-4 flex flex-col justify-between" id="ontology-inspector">
+            <div>
+              <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                <span class="text-[10px] uppercase font-bold text-cyan-400">Entity Details</span>
+                <span class="text-[10px] font-mono bg-slate-800 px-2 py-0.5 rounded text-slate-300">Active Node</span>
+              </div>
+
+              <div class="mt-3">
+                <h3 id="ins-node-title" class="text-base font-bold text-white">Carrier Partner</h3>
+                <p id="ins-node-desc" class="text-xs text-slate-400 mt-1">
+                  Logistics service providers operating long-haul, mid-mile and last-mile delivery routes.
+                </p>
+              </div>
+
+              <!-- Attributes -->
+              <div class="mt-4">
+                <div class="text-[11px] font-semibold text-slate-300 mb-1.5">Governed Attributes</div>
+                <div id="ins-node-attrs" class="space-y-1 font-mono text-[10px]">
+                  <div class="flex justify-between p-1.5 bg-slate-900 rounded border border-slate-800">
+                    <span class="text-slate-400">delivery_partner</span>
+                    <span class="text-slate-200">VARCHAR(50)</span>
+                  </div>
+                  <div class="flex justify-between p-1.5 bg-slate-900 rounded border border-slate-800">
+                    <span class="text-slate-400">delivery_mode</span>
+                    <span class="text-slate-200">Express / SameDay</span>
+                  </div>
+                  <div class="flex justify-between p-1.5 bg-slate-900 rounded border border-slate-800">
+                    <span class="text-slate-400">delivery_cost</span>
+                    <span class="text-cyan-400">NUMERIC(10,2)</span>
+                  </div>
+                  <div class="flex justify-between p-1.5 bg-slate-900 rounded border border-slate-800">
+                    <span class="text-slate-400">delayed_flag</span>
+                    <span class="text-amber-400">BOOLEAN</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Relationships -->
+              <div class="mt-4">
+                <div class="text-[11px] font-semibold text-slate-300 mb-1.5">Ontology Relationships</div>
+                <div id="ins-node-rels" class="space-y-1 text-[11px]">
+                  <div class="p-1.5 bg-slate-900 rounded text-slate-300 border border-slate-800">
+                    <span class="text-cyan-400 font-mono">fulfills →</span> Shipment
+                  </div>
+                  <div class="p-1.5 bg-slate-900 rounded text-slate-300 border border-slate-800">
+                    <span class="text-cyan-400 font-mono">operates_in →</span> Region / Corridor
+                  </div>
+                  <div class="p-1.5 bg-slate-900 rounded text-slate-300 border border-slate-800">
+                    <span class="text-cyan-400 font-mono">triggers →</span> Risk / SLA Breach
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 mt-4 text-[10px] text-slate-400 flex items-center justify-between">
+              <span>Source: TMS + ERP</span>
+              <button onclick="askPreset('Explain relationships for selected entity')" class="text-cyan-400 hover:underline">Query Node →</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- SCREEN 4: KNOWLEDGE GRAPH INVESTIGATION WORKSPACE -->
+      <!-- ======================================================== -->
+      <section id="screen-graph" class="hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+              Multi-Hop Knowledge Graph
+              <span class="text-xs px-2 py-0.5 bg-cyan-950 text-cyan-300 border border-cyan-800 rounded font-normal">Graph Traversal</span>
+            </h1>
+            <p class="text-xs text-slate-400">Trace causality across upstream suppliers, purchase orders, shipments, cross-border customs, and customer deliveries.</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <input type="text" placeholder="Traverse entity: P0353_S1..." class="bg-slate-900 border border-slate-800 rounded-lg px-3 py-1 text-xs text-slate-200">
+            <button class="bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-semibold">Traverse</button>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-xl p-5">
+          <div class="text-xs font-semibold text-slate-300 mb-3 flex justify-between items-center">
+            <span>Graph Path Investigation: Vietnam Tier-1 Supplier to Central India Warehouse Delivery</span>
+            <span class="text-[10px] font-mono text-emerald-400">Confidence: 99.4% Verified</span>
+          </div>
+
+          <!-- Linear Horizontal Graph Visualization -->
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-3 relative py-4">
+            <!-- Node 1 -->
+            <div class="bg-slate-900 border border-cyan-500/50 rounded-xl p-3 relative">
+              <div class="text-[9px] uppercase font-bold text-cyan-400">Tier-1 Supplier</div>
+              <div class="font-bold text-white text-xs mt-1">P0353_S1</div>
+              <div class="text-[10px] text-slate-400 mt-1">Country: Vietnam</div>
+              <div class="text-[10px] text-amber-400 mt-0.5">Reliability: 0.986</div>
+              <div class="mt-2 pt-2 border-t border-slate-800 text-[9px] text-slate-500 font-mono">ERP_SUPPLIER_MASTER</div>
+            </div>
+
+            <!-- Node 2 -->
+            <div class="bg-slate-900 border border-blue-500/40 rounded-xl p-3 relative">
+              <div class="text-[9px] uppercase font-bold text-blue-400">Purchase Order</div>
+              <div class="font-bold text-white text-xs mt-1">PO-2024-8841</div>
+              <div class="text-[10px] text-slate-400 mt-1">Product: P0353</div>
+              <div class="text-[10px] text-slate-300 mt-0.5">Lead Time: 2.13 days</div>
+              <div class="mt-2 pt-2 border-t border-slate-800 text-[9px] text-slate-500 font-mono">SAP_PO_HEADERS</div>
+            </div>
+
+            <!-- Node 3 -->
+            <div class="bg-slate-900 border border-indigo-500/40 rounded-xl p-3 relative">
+              <div class="text-[9px] uppercase font-bold text-indigo-400">Corridor Transit</div>
+              <div class="font-bold text-white text-xs mt-1">SHP-VN-IND-409</div>
+              <div class="text-[10px] text-slate-400 mt-1">Mode: Ocean + Road</div>
+              <div class="text-[10px] text-red-400 mt-0.5">Disruption: 0.506</div>
+              <div class="mt-2 pt-2 border-t border-slate-800 text-[9px] text-slate-500 font-mono">TMS_DYNAMIC_LOGISTICS</div>
+            </div>
+
+            <!-- Node 4 -->
+            <div class="bg-slate-900 border border-emerald-500/40 rounded-xl p-3 relative">
+              <div class="text-[9px] uppercase font-bold text-emerald-400">Domestic Delivery</div>
+              <div class="font-bold text-white text-xs mt-1">DEL-IND-25099</div>
+              <div class="text-[10px] text-slate-400 mt-1">Carrier: Delhivery</div>
+              <div class="text-[10px] text-emerald-400 mt-0.5">Cost: ₹848 | On-Time</div>
+              <div class="mt-2 pt-2 border-t border-slate-800 text-[9px] text-slate-500 font-mono">DELIVERY_LOGISTICS_IND</div>
+            </div>
+
+            <!-- Node 5 -->
+            <div class="bg-slate-900 border border-purple-500/40 rounded-xl p-3 relative">
+              <div class="text-[9px] uppercase font-bold text-purple-400">Destination Hub</div>
+              <div class="font-bold text-white text-xs mt-1">WH-WEST-MUMBAI</div>
+              <div class="text-[10px] text-slate-400 mt-1">Inv Level: 985.7 units</div>
+              <div class="text-[10px] text-emerald-400 mt-0.5">Fulfillment: 76.1%</div>
+              <div class="mt-2 pt-2 border-t border-slate-800 text-[9px] text-slate-500 font-mono">WMS_STOCK_TELEMETRY</div>
+            </div>
+          </div>
+
+          <!-- Bottom Causality Explanation Box -->
+          <div class="mt-4 p-3 bg-[#070B14] rounded-lg border border-slate-800 flex items-start justify-between">
+            <div>
+              <span class="text-xs font-semibold text-cyan-300">Automated Causality Synthesis:</span>
+              <p class="text-xs text-slate-400 mt-1">
+                Upstream supplier P0353_S1 maintains high reliability (0.986) with lead time of 2.13 days. The primary delivery delay risk occurs during domestic handoff at the Central transit hub where equipment handling availability dropped to 0.481.
+              </p>
+            </div>
+            <button onclick="askPreset('What is the root cause of delay for PO-2024-8841?')" class="shrink-0 ml-4 px-3 py-1.5 bg-blue-600/20 text-cyan-300 border border-blue-500/30 rounded-lg text-xs font-semibold hover:bg-blue-600/30">
+              Ask AI to Mitigate
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- SCREEN 5: DATA GOVERNANCE, LINEAGE & AUDIT LOGS -->
+      <!-- ======================================================== -->
+      <section id="screen-lineage" class="hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+              Data Lineage & Governance Integrity
+              <span class="text-xs px-2 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded font-normal">Audited End-to-End</span>
+            </h1>
+            <p class="text-xs text-slate-400">Strict pipeline transparency from raw ERP/TMS ingestion to Snowflake Semantic Layer, Canonical Ontology, and AI Generation.</p>
+          </div>
+          <span class="text-xs font-mono bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg text-emerald-400">
+            Governance Score: 98.6%
+          </span>
+        </div>
+
+        <!-- Pipeline Flow -->
+        <div class="glass-card rounded-xl p-4">
+          <div class="text-xs font-semibold text-slate-300 mb-3">Enterprise Data Flow Architecture</div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-6 gap-2 text-center text-xs">
+            <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
+              <div class="text-[10px] text-slate-500 font-mono">1. Source Systems</div>
+              <div class="font-bold text-white mt-1">ERP, WMS, TMS</div>
+              <div class="text-[10px] text-slate-400 mt-1">India CSVs + ADB</div>
+            </div>
+
+            <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
+              <div class="text-[10px] text-slate-500 font-mono">2. Snowflake Lakehouse</div>
+              <div class="font-bold text-cyan-400 mt-1">Bronze & Silver</div>
+              <div class="text-[10px] text-slate-400 mt-1">Ingested & Cleaned</div>
+            </div>
+
+            <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
+              <div class="text-[10px] text-slate-500 font-mono">3. Semantic Layer</div>
+              <div class="font-bold text-blue-400 mt-1">Metric Definitions</div>
+              <div class="text-[10px] text-slate-400 mt-1">OTIF, LeadTime, Risk</div>
+            </div>
+
+            <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
+              <div class="text-[10px] text-slate-500 font-mono">4. Canonical Ontology</div>
+              <div class="font-bold text-indigo-400 mt-1">Ontology v2.4</div>
+              <div class="text-[10px] text-slate-400 mt-1">67 Relationships</div>
+            </div>
+
+            <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
+              <div class="text-[10px] text-slate-500 font-mono">5. Snowflake Cortex</div>
+              <div class="font-bold text-emerald-400 mt-1">Governed LLM</div>
+              <div class="text-[10px] text-slate-400 mt-1">Deterministic SQL</div>
+            </div>
+
+            <div class="p-3 bg-slate-900 rounded-lg border border-cyan-500/50 bg-cyan-950/20">
+              <div class="text-[10px] text-cyan-400 font-mono">6. Evidence & UI</div>
+              <div class="font-bold text-white mt-1">AI Verified Insight</div>
+              <div class="text-[10px] text-cyan-300 mt-1">Proof Chain Attached</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audit Logs Table -->
+        <div class="glass-card rounded-xl p-4">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-semibold text-white">Immutable AI & Data Audit Log</h3>
+            <span class="text-[11px] text-slate-400">All queries cryptographically attested in Snowflake</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="text-[10px] uppercase tracking-wider text-slate-400 border-b border-slate-800">
+                <tr>
+                  <th class="pb-2">Timestamp</th>
+                  <th class="pb-2">User / Role</th>
+                  <th class="pb-2">Governed Question</th>
+                  <th class="pb-2">Dataset Target</th>
+                  <th class="pb-2">Policy Executed</th>
+                  <th class="pb-2">Result</th>
+                  <th class="pb-2">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 font-mono text-[11px]">
+                <tr class="hover:bg-slate-800/30">
+                  <td class="py-2 text-slate-400">19:14:02</td>
+                  <td class="py-2 font-sans text-slate-200">SC_DIRECTOR</td>
+                  <td class="py-2 font-sans text-slate-300">“Show delivery delays by partner”</td>
+                  <td class="py-2 text-cyan-400">TMS_DELIVERY (25k)</td>
+                  <td class="py-2 text-slate-400">MASK_FINANCIALS</td>
+                  <td class="py-2 text-slate-300">9 records</td>
+                  <td class="py-2"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800/40">Allowed ✓</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/30">
+                  <td class="py-2 text-slate-400">18:49:15</td>
+                  <td class="py-2 font-sans text-slate-200">PROCUREMENT_LEAD</td>
+                  <td class="py-2 font-sans text-slate-300">“High risk suppliers in Vietnam”</td>
+                  <td class="py-2 text-cyan-400">DYNAMIC_SC (113k)</td>
+                  <td class="py-2 text-slate-400">TIER_1_ACCESS</td>
+                  <td class="py-2 text-slate-300">1,896 records</td>
+                  <td class="py-2"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800/40">Allowed ✓</span></td>
+                </tr>
+                <tr class="hover:bg-slate-800/30">
+                  <td class="py-2 text-slate-400">18:12:30</td>
+                  <td class="py-2 font-sans text-slate-200">EXTERNAL_AUDITOR</td>
+                  <td class="py-2 font-sans text-slate-300">“Export unmasked contract margins”</td>
+                  <td class="py-2 text-red-400">ERP_COST_TABLE</td>
+                  <td class="py-2 text-red-400">ROW_LEVEL_SEC</td>
+                  <td class="py-2 text-red-400">Access Denied</td>
+                  <td class="py-2"><span class="px-2 py-0.5 rounded text-[10px] bg-red-950 text-red-400 border border-red-800/40">Blocked ✕</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- SCREEN 6: SUPPLIERS & PARTNERS -->
+      <!-- ======================================================== -->
+      <section id="screen-suppliers" class="hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-xl font-bold text-white tracking-tight">Supplier Intelligence & Partner Scorecards</h1>
+            <p class="text-xs text-slate-400">Multi-tier evaluation across Indian logistics partners and global suppliers.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Card 1 -->
+          <div class="glass-card rounded-xl p-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-bold text-white text-sm">Delhivery</h3>
+                <span class="text-[10px] text-slate-400">India Domestic Carrier</span>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800">Top Performer</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-3 text-xs">
+              <div class="bg-slate-900 p-2 rounded">
+                <div class="text-slate-500 text-[10px]">OTIF Benchmark</div>
+                <div class="text-emerald-400 font-bold font-mono">75.2%</div>
+              </div>
+              <div class="bg-slate-900 p-2 rounded">
+                <div class="text-slate-500 text-[10px]">Avg Cost</div>
+                <div class="text-white font-bold font-mono">₹848.11</div>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-2">Lowest unit dispatch cost with lowest failure count (139 out of 2,786).</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass-card rounded-xl p-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-bold text-white text-sm">FedEx Express</h3>
+                <span class="text-[10px] text-slate-400">Cross-Border & Air Express</span>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800">High Reliability</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-3 text-xs">
+              <div class="bg-slate-900 p-2 rounded">
+                <div class="text-slate-500 text-[10px]">OTIF Benchmark</div>
+                <div class="text-emerald-400 font-bold font-mono">74.8%</div>
+              </div>
+              <div class="bg-slate-900 p-2 rounded">
+                <div class="text-slate-500 text-[10px]">Avg Cost</div>
+                <div class="text-white font-bold font-mono">₹857.36</div>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-2">Best air cargo handling integrity with 25.2% delay rate across 2,818 shipments.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass-card rounded-xl p-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-bold text-white text-sm">XpressBees</h3>
+                <span class="text-[10px] text-slate-400">Ground Parcel Network</span>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] bg-red-950 text-red-400 border border-red-800">SLA At Risk</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-3 text-xs">
+              <div class="bg-slate-900 p-2 rounded">
+                <div class="text-slate-500 text-[10px]">Delay Rate</div>
+                <div class="text-red-400 font-bold font-mono">28.3%</div>
+              </div>
+              <div class="bg-slate-900 p-2 rounded">
+                <div class="text-slate-500 text-[10px]">Failed Deliveries</div>
+                <div class="text-red-400 font-bold font-mono">167 shipments</div>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-2">Severe regional delays in Central & Western sectors during severe weather events.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- SCREEN 7: RISK & DISRUPTION -->
+      <!-- ======================================================== -->
+      <section id="screen-risk" class="hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-xl font-bold text-white tracking-tight">Supply Chain Risk Center</h1>
+            <p class="text-xs text-slate-400">Predictive risk scoring across 113,097 global & regional supplier nodes.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="glass-card rounded-xl p-4 border-l-4 border-red-500">
+            <div class="text-xs text-slate-400">High Risk Classification</div>
+            <div class="text-2xl font-bold text-red-400 mt-1">84,368 Nodes</div>
+            <div class="text-[11px] text-slate-300 mt-2">74.6% of mapped suppliers show disruption likelihood > 0.75.</div>
+          </div>
+          <div class="glass-card rounded-xl p-4 border-l-4 border-amber-500">
+            <div class="text-xs text-slate-400">Moderate Risk</div>
+            <div class="text-2xl font-bold text-amber-400 mt-1">17,783 Nodes</div>
+            <div class="text-[11px] text-slate-300 mt-2">Suppliers with lead time deviation between 2 and 5 days.</div>
+          </div>
+          <div class="glass-card rounded-xl p-4 border-l-4 border-emerald-500">
+            <div class="text-xs text-slate-400">Low Risk Resilient</div>
+            <div class="text-2xl font-bold text-emerald-400 mt-1">10,946 Nodes</div>
+            <div class="text-[11px] text-slate-300 mt-2">Suppliers with verified reliability score > 0.90.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL: SNOWFLAKE CORTEX SQL INSPECTOR -->
+  <div id="modal-sql" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#090E1A] border border-slate-700 rounded-2xl max-w-2xl w-full p-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+          <h3 class="text-sm font-bold text-white">Governed Snowflake Cortex SQL Query</h3>
+        </div>
+        <button onclick="toggleModal('sql')" class="text-slate-400 hover:text-white text-sm">✕</button>
+      </div>
+
+      <div class="mt-4">
+        <div class="text-[11px] text-slate-400 mb-1">Generated by Snowflake Cortex Semantic Compiler v2.4:</div>
+        <pre class="bg-black/90 text-cyan-300 font-mono text-xs p-3.5 rounded-xl overflow-x-auto border border-slate-800">
+SELECT 
+    delivery_partner,
+    COUNT(delivery_id) AS total_shipments,
+    SUM(CASE WHEN delayed = 'yes' THEN 1 ELSE 0 END) AS delayed_shipments,
+    ROUND(SUM(CASE WHEN delayed = 'yes' THEN 1 ELSE 0 END) * 100.0 / COUNT(delivery_id), 1) AS delay_percentage,
+    ROUND(AVG(delivery_cost), 2) AS avg_cost_inr
+FROM 
+    SNOWFLAKE_SC_DB.SEMANTIC.TMS_DELIVERY_LOGISTICS
+WHERE 
+    region IN ('west', 'central', 'south', 'north', 'east')
+GROUP BY 
+    delivery_partner
+ORDER BY 
+    delay_percentage DESC;
+        </pre>
+      </div>
+
+      <div class="mt-4 flex items-center justify-between text-xs">
+        <span class="text-slate-400">Audited Execution Time: <strong>142 ms</strong> on Warehouse COMPUTE_WH</span>
+        <button onclick="toggleModal('sql')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-1.5 rounded-lg">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Navigation Screen Switcher
+    function switchScreen(screenId) {
+      const screens = ['overview', 'chat', 'ontology', 'graph', 'lineage', 'suppliers', 'risk'];
+      screens.forEach(s => {
+        const el = document.getElementById('screen-' + s);
+        const nav = document.getElementById('nav-' + s);
+        if (el) el.classList.add('hidden');
+        if (nav) {
+          nav.classList.remove('bg-blue-600/15', 'text-cyan-300', 'border', 'border-blue-500/30', 'font-semibold');
+          nav.classList.add('text-slate-400', 'font-medium');
+        }
+      });
+
+      const activeScreen = document.getElementById('screen-' + screenId);
+      const activeNav = document.getElementById('nav-' + screenId);
+      if (activeScreen) activeScreen.classList.remove('hidden');
+      if (activeNav) {
+        activeNav.classList.remove('text-slate-400', 'font-medium');
+        activeNav.classList.add('bg-blue-600/15', 'text-cyan-300', 'border', 'border-blue-500/30', 'font-semibold');
+      }
+    }
+
+    // Interactive Ontology Inspector
+    const ontologyMetadata = {
+      'Supply Chain Hub': {
+        title: 'Supply Chain Core Hub',
+        desc: 'Central ontological nexus binding upstream suppliers, transit networks, and fulfillment nodes.',
+        attrs: [
+          { name: 'enterprise_tenant_id', type: 'VARCHAR(64)' },
+          { name: 'ontology_version', type: 'v2.4' },
+          { name: 'active_entities', type: '23,481 Nodes' },
+          { name: 'last_sync', type: '12 min ago' }
+        ],
+        rels: ['contains → Supplier', 'contains → Product', 'contains → Shipment', 'contains → Warehouse']
+      },
+      'Supplier': {
+        title: 'Tier-1 & Tier-2 Supplier',
+        desc: 'Direct manufacturers and vendors across 90+ countries with lead time and reliability scoring.',
+        attrs: [
+          { name: 'supplier_id', type: 'VARCHAR(32)' },
+          { name: 'supplier_country', type: 'VARCHAR(64)' },
+          { name: 'supplier_reliability_score', type: 'FLOAT (0.0 - 1.0)' },
+          { name: 'lead_time_days', type: 'FLOAT' }
+        ],
+        rels: ['supplies → Product', 'issues → Purchase Order', 'located_in → Country', 'associates_with → Risk Event']
+      },
+      'Carrier Partner': {
+        title: 'Logistics Carrier Partner',
+        desc: 'Courier & freight transport companies: Delhivery, FedEx, DHL, Ekart, Blue Dart, XpressBees.',
+        attrs: [
+          { name: 'delivery_partner', type: 'VARCHAR(50)' },
+          { name: 'delivery_mode', type: 'Express / Regular' },
+          { name: 'vehicle_type', type: 'Van / Bike / Truck' },
+          { name: 'avg_delivery_cost', type: 'NUMERIC(10,2)' }
+        ],
+        rels: ['fulfills → Shipment', 'operates_in → Region / Corridor', 'triggers → SLA Breach']
+      },
+      'Shipment': {
+        title: 'Shipment & Consignment Transit',
+        desc: 'Operational dispatch records tracked across 25,000 routes with weather and distance parameters.',
+        attrs: [
+          { name: 'delivery_id', type: 'VARCHAR(32)' },
+          { name: 'distance_km', type: 'FLOAT' },
+          { name: 'weather_condition', type: 'Clear / Rainy / Storm' },
+          { name: 'delivery_status', type: 'Delivered / Delayed / Failed' }
+        ],
+        rels: ['originates_at → Supplier / WH', 'destined_for → Customer / WH', 'carried_by → Carrier']
+      },
+      'Risk & Disruption': {
+        title: 'Risk & Disruption Classification',
+        desc: 'AI-calculated vulnerability indices: High Risk (84.3k nodes), Moderate Risk (17.7k nodes).',
+        attrs: [
+          { name: 'disruption_likelihood_score', type: 'FLOAT (0.0 - 1.0)' },
+          { name: 'delay_probability', type: 'FLOAT' },
+          { name: 'risk_classification', type: 'High / Moderate / Low' },
+          { name: 'delivery_time_deviation', type: 'FLOAT (Days)' }
+        ],
+        rels: ['impacts → Purchase Order', 'flags → Supplier', 'triggers → AI Warning']
+      }
+    };
+
+    function selectOntologyNode(nodeName) {
+      const meta = ontologyMetadata[nodeName] || ontologyMetadata['Carrier Partner'];
+      document.getElementById('ins-node-title').innerText = meta.title;
+      document.getElementById('ins-node-desc').innerText = meta.desc;
+
+      const attrsHtml = meta.attrs.map(a => `
+        <div class="flex justify-between p-1.5 bg-slate-900 rounded border border-slate-800">
+          <span class="text-slate-400">${a.name}</span>
+          <span class="text-slate-200">${a.type}</span>
+        </div>
+      `).join('');
+      document.getElementById('ins-node-attrs').innerHTML = attrsHtml;
+
+      const relsHtml = meta.rels.map(r => `
+        <div class="p-1.5 bg-slate-900 rounded text-slate-300 border border-slate-800">
+          <span class="text-cyan-400 font-mono">${r.split(' ')[0]}</span> ${r.split(' ').slice(1).join(' ')}
+        </div>
+      `).join('');
+      document.getElementById('ins-node-rels').innerHTML = relsHtml;
+    }
+
+    // Conversational AI Interactions
+    function askPreset(queryText) {
+      switchScreen('chat');
+      document.getElementById('chat-input').value = queryText;
+      sendChat();
+    }
+
+    function sendChat() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('chat-messages');
+
+      // Add user message
+      const userHtml = `
+        <div class="flex items-start justify-end gap-3">
+          <div class="bg-blue-600/20 border border-blue-500/40 rounded-xl p-3 text-xs text-white max-w-xl">
+            ${escapeHtml(text)}
+          </div>
+          <div class="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-semibold text-slate-300 shrink-0">
+            SC
+          </div>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', userHtml);
+      input.value = '';
+
+      // Generate governed AI answer
+      setTimeout(() => {
+        let aiHtml = '';
+        if (text.toLowerCase().includes('xpressbees') || text.toLowerCase().includes('central')) {
+          aiHtml = `
+            <div class="flex items-start gap-3">
+              <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                IQ
+              </div>
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-xs space-y-2 max-w-3xl flex-1">
+                <div class="text-slate-200 leading-relaxed">
+                  <strong>Root-Cause Analysis (Central India):</strong> Analysis of 5,060 Central region deliveries shows 
+                  a <strong>27.3% delay rate</strong> (1,379 delayed, 286 failed). Heavy monsoon weather events in Nagpur/Bhopal 
+                  increased transit times by 3.8 hours for two-wheeler delivery fleets.
+                </div>
+                <div class="bg-slate-950 p-2 rounded text-[11px] font-mono text-cyan-400 border border-slate-800">
+                  ✓ Governed by: Ontology v2.4 (Route.weather_severity) | Policy: SC_OPS_VIEW
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          aiHtml = `
+            <div class="flex items-start gap-3">
+              <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                IQ
+              </div>
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-xs space-y-2 max-w-3xl flex-1">
+                <div class="text-slate-200 leading-relaxed">
+                  <strong>Governed Multi-Corridor Query Synthesized:</strong> Scanned 113,097 supply chain nodes. 
+                  In the Asian & GCC corridor (15,550 entities), average lead time is <strong>5.22 days</strong> with 
+                  high disruption risk concentrated in sea-air transshipment hubs.
+                </div>
+                <div class="bg-slate-950 p-2.5 rounded text-[11px] text-slate-300 border border-slate-800 flex justify-between items-center">
+                  <span>Sources: dynamic_supply_chain + ADB Masterdata</span>
+                  <span class="text-emerald-400 font-mono text-[10px]">Attestation: VALIDATED ✓</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+        container.insertAdjacentHTML('beforeend', aiHtml);
+        container.scrollTop = container.scrollHeight;
+      }, 500);
+
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function toggleModal(id) {
+      const m = document.getElementById('modal-' + id);
+      if (m) m.classList.toggle('hidden');
+    }
+
+    function escapeHtml(string) {
+      return String(string).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
