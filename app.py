@@ -14,7 +14,7 @@ from ml.predictor import SupplyChainMLPredictor
 # Page Config
 st.set_page_config(
     page_title="SupplyChain IQ — Governed Analytics & ML",
-    page_icon="⚡",
+    page_icon="assets/favicon.png",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -89,7 +89,9 @@ def load_core_data():
 df_sales, df_shipment, df_inv, df_landed, df_wh = load_core_data()
 
 # SIDEBAR CONTROLS
-st.sidebar.title("⚡ SupplyChain IQ")
+if os.path.exists("assets/logo.png"):
+    st.sidebar.image("assets/logo.png", use_container_width=True)
+st.sidebar.markdown("## SupplyChain IQ")
 st.sidebar.markdown("<span class='badge-cyan'>Snowflake Cortex</span> <span class='badge-green'>Ontology v2.4</span> <span class='badge-purple'>Snowpark ML</span>", unsafe_allow_html=True)
 st.sidebar.markdown("---")
 

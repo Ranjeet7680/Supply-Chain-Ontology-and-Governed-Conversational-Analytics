@@ -1,4 +1,8 @@
-# Supply-Chain-Ontology-and-Governed-Conversational-Analytics
+<div align="center">
+  <img src="assets/logo.png" width="240" alt="SupplyChain IQ Logo" style="border-radius: 16px; margin-bottom: 12px;"/>
+  <h1>SupplyChain IQ</h1>
+  <p><strong>Ontology & Governed Conversational Analytics</strong></p>
+</div>
 
 [![Snowflake](https://img.shields.io/badge/Snowflake-Cortex%20Analyst-29B5E8?logo=snowflake&logoColor=white)](https://www.snowflake.com/)
 [![Snowpark ML](https://img.shields.io/badge/Snowpark%20ML-89.6%25%20Accuracy%20%7C%200.966%20ROC--AUC-8B5CF6)](https://www.snowflake.com/)
