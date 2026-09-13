@@ -1,0 +1,50 @@
+{
+  "model_name": "Delivery Delay Risk Classifier (RandomForest)",
+  "accuracy": 0.8958,
+  "roc_auc": 0.9664,
+  "f1_score": 0.8075,
+  "training_samples": 20000,
+  "test_samples": 5000,
+  "top_feature_importances": [
+    {
+      "feature": "delivery_mode_express",
+      "importance": 0.3624
+    },
+    {
+      "feature": "delivery_mode_two day",
+      "importance": 0.122
+    },
+    {
+      "feature": "delivery_mode_standard",
+      "importance": 0.115
+    },
+    {
+      "feature": "delivery_cost",
+      "importance": 0.0789
+    },
+    {
+      "feature": "delivery_mode_same day",
+      "importance": 0.0668
+    },
+    {
+      "feature": "distance_km",
+      "importance": 0.0617
+    },
+    {
+      "feature": "weather_condition_stormy",
+      "importance": 0.0338
+    },
+    {
+      "feature": "package_weight_kg",
+      "importance": 0.0269
+    },
+    {
+      "feature": "weather_condition_rainy",
+      "importance": 0.0213
+    },
+    {
+      "feature": "weather_condition_cold",
+      "importance": 0.0168
+    }
+  ]
+}

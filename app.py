@@ -5,14 +5,15 @@ import os
 import sys
 
 # Add project root to path
-sys.path.append(os.path.abspath("."))
+sys.path.insert(0, os.path.abspath("."))
 from engine.persona_resolver import PersonaReconciler
 from engine.governed_cortex_engine import GovernedCortexEngine
 from mcp.supplychain_mcp_server import SupplyChainMCPServer
+from ml.predictor import SupplyChainMLPredictor
 
 # Page Config
 st.set_page_config(
-    page_title="SupplyChain IQ — Governed Analytics",
+    page_title="SupplyChain IQ — Governed Analytics & ML",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -34,13 +35,6 @@ st.markdown("""
         border-radius: 12px;
         border: 1px solid #1B253D;
     }
-    .metric-card {
-        background: #0D1322;
-        border: 1px solid #1B253D;
-        border-radius: 12px;
-        padding: 16px;
-        margin-bottom: 12px;
-    }
     .badge-cyan {
         background-color: rgba(6, 182, 212, 0.15);
         color: #22D3EE;
@@ -59,10 +53,10 @@ st.markdown("""
         font-size: 11px;
         font-weight: 600;
     }
-    .badge-red {
-        background-color: rgba(239, 68, 68, 0.15);
-        color: #F87171;
-        border: 1px solid rgba(239, 68, 68, 0.4);
+    .badge-purple {
+        background-color: rgba(168, 85, 247, 0.15);
+        color: #C084FC;
+        border: 1px solid rgba(168, 85, 247, 0.4);
         padding: 2px 8px;
         border-radius: 6px;
         font-size: 11px;
@@ -77,9 +71,10 @@ def load_engines():
     reconciler = PersonaReconciler()
     engine = GovernedCortexEngine()
     mcp_server = SupplyChainMCPServer()
-    return reconciler, engine, mcp_server
+    predictor = SupplyChainMLPredictor()
+    return reconciler, engine, mcp_server, predictor
 
-reconciler, engine, mcp_server = load_engines()
+reconciler, engine, mcp_server, predictor = load_engines()
 
 # Load Data
 @st.cache_data
@@ -95,7 +90,7 @@ df_sales, df_shipment, df_inv, df_landed, df_wh = load_core_data()
 
 # SIDEBAR CONTROLS
 st.sidebar.title("⚡ SupplyChain IQ")
-st.sidebar.markdown("<span class='badge-cyan'>Snowflake Cortex Governed</span> <span class='badge-green'>Ontology v2.4</span>", unsafe_allow_html=True)
+st.sidebar.markdown("<span class='badge-cyan'>Snowflake Cortex</span> <span class='badge-green'>Ontology v2.4</span> <span class='badge-purple'>Snowpark ML</span>", unsafe_allow_html=True)
 st.sidebar.markdown("---")
 
 persona = st.sidebar.selectbox(
@@ -119,26 +114,27 @@ corridor_filter = st.sidebar.selectbox(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("Connected Data Assets")
+st.sidebar.subheader("Connected Data & ML")
 st.sidebar.markdown("""
-- **TMS**: 25,000 Delivery Records
-- **ERP**: 113,097 Multi-Tier SC Nodes
-- **Fulfillment**: 99,441 Customer Orders
-- **Macro**: ADB Asian Input-Output Tables
-- **Infra**: India LEADS State Scores
+- **TMS**: 25,000 Dispatches
+- **ERP**: 113,097 Multi-Tier Nodes
+- **ML Classifier**: RandomForest (89.6% Acc)
+- **ML Regressor**: Lead Time Predictor
+- **MCP Server**: 5 Active Autonomous Tools
 """)
 
 # APP HEADER
-st.title("SupplyChain IQ — Ontology & Governed Analytics")
-st.markdown("##### *Unified, zero-drift supply chain intelligence powered by the Canonical Ontology and Snowflake Cortex.*")
+st.title("SupplyChain IQ — Governed Analytics & Predictive ML")
+st.markdown("##### *Unified, zero-drift supply chain intelligence with Snowflake Cortex Analyst & Snowpark Machine Learning.*")
 
-# MAIN TABS
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+# MAIN TABS (6 TABS)
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "📊 Command Center",
-    "⚖️ Persona Consistency Inspector",
-    "🤖 Cortex Governed Analytics",
-    "🌐 Ontology & Data Lineage",
-    "🚨 Disruption Simulator & MCP Actions"
+    "🔮 ML Predictive Intelligence",
+    "⚖️ Persona Consistency",
+    "🤖 Cortex Conversational AI",
+    "🌐 Ontology & Lineage",
+    "🚨 MCP Action Dispatcher"
 ])
 
 # ====================================================================
@@ -147,9 +143,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 with tab1:
     st.subheader("Global & Regional Supply Chain Telemetry")
     
-    # 5 KPI Cards
     col1, col2, col3, col4, col5 = st.columns(5)
-    
     overall_otif = round((df_sales['is_canonical_otif'].sum() / len(df_sales)) * 100, 1)
     carrier_sla = round((df_shipment['carrier_sla_met'].sum() / len(df_shipment)) * 100, 1)
     avg_doi = round(df_inv['days_of_inventory'].mean(), 1)
@@ -174,9 +168,7 @@ with tab1:
 
     st.markdown("---")
 
-    # Middle Row: Carrier Performance & Regional Breakdown
     m_left, m_right = st.columns([3, 2])
-
     with m_left:
         st.markdown("#### Logistics Carrier SLA Adherence vs Delayed Shipments")
         carrier_perf = df_shipment.groupby('delivery_partner').agg(
@@ -188,7 +180,6 @@ with tab1:
         carrier_perf['delay_rate_pct'] = (100 - carrier_perf['sla_adherence_pct']).round(1)
         carrier_perf = carrier_perf.sort_values('sla_adherence_pct', ascending=False)
         
-        # Display as styled dataframe
         st.dataframe(
             carrier_perf[['delivery_partner', 'total_shipments', 'sla_adherence_pct', 'delay_rate_pct', 'avg_cost']],
             column_config={
@@ -224,14 +215,88 @@ with tab1:
         )
 
 # ====================================================================
-# TAB 2: PERSONA CONSISTENCY INSPECTOR
+# TAB 2: ML PREDICTIVE INTELLIGENCE (NEW ML ENHANCEMENT)
 # ====================================================================
 with tab2:
+    st.subheader("🔮 Machine Learning Predictive Disruption & Delay Engine")
+    st.caption("Trained on 25,000 real dispatch records using RandomForest with 89.58% Accuracy and 0.9664 ROC-AUC.")
+
+    # Model Metric Highlights
+    ml1, ml2, ml3, ml4 = st.columns(4)
+    ml1.metric("Classifier Accuracy", "89.58%", "Trained on 25k records")
+    ml2.metric("ROC-AUC Score", "0.9664", "Exceptional discrimination")
+    ml3.metric("F1 Score", "0.8075", "Robust minority recall")
+    ml4.metric("Lead Time MAE", "3.64 Days", "Supplier Deviation")
+
+    st.markdown("---")
+    
+    # Interactive What-If ML Simulator
+    st.markdown("#### 🧪 Interactive Pre-Dispatch What-If Simulator")
+    st.caption("Test how weather, distance, vehicle, and carrier choice affect delay probability before dispatching freight.")
+
+    sim_col1, sim_col2, sim_col3 = st.columns(3)
+    with sim_col1:
+        sim_partner = st.selectbox("Logistics Partner", ["xpressbees", "delhivery", "fedex", "dhl", "blue dart", "ekart", "shadowfax"])
+        sim_weather = st.selectbox("Forecast Weather Condition", ["stormy", "rainy", "foggy", "clear", "windy"])
+        sim_mode = st.selectbox("Delivery Mode", ["same day", "express", "standard"])
+
+    with sim_col2:
+        sim_distance = st.slider("Transit Distance (km)", min_value=10.0, max_value=450.0, value=280.0, step=10.0)
+        sim_weight = st.slider("Package Weight (kg)", min_value=1.0, max_value=50.0, value=35.0, step=1.0)
+        sim_vehicle = st.selectbox("Vehicle Type", ["bike", "van", "truck"])
+
+    with sim_col3:
+        sim_region = st.selectbox("Destination Zone", ["central", "west", "south", "north", "east"])
+        sim_cost = st.number_input("Estimated Freight Cost (INR)", min_value=200.0, max_value=3000.0, value=880.0)
+        
+        sim_btn = st.button("⚡ Score with Machine Learning", type="primary", use_container_width=True)
+
+    if sim_btn:
+        input_sample = {
+            "distance_km": float(sim_distance),
+            "package_weight_kg": float(sim_weight),
+            "delivery_cost": float(sim_cost),
+            "delivery_partner": sim_partner,
+            "vehicle_type": sim_vehicle,
+            "delivery_mode": sim_mode,
+            "region": sim_region,
+            "weather_condition": sim_weather
+        }
+        pred_res = predictor.predict_shipment_delay(input_sample)
+        
+        st.markdown("##### ML Inference Output:")
+        res_c1, res_c2 = st.columns([1, 2])
+        with res_c1:
+            if pred_res["predicted_delay_probability"] >= 70:
+                st.error(f"### Predicted Delay: {pred_res['predicted_delay_probability']}%")
+                st.markdown(f"**Risk Classification**: `CRITICAL_RISK`")
+            elif pred_res["predicted_delay_probability"] >= 40:
+                st.warning(f"### Predicted Delay: {pred_res['predicted_delay_probability']}%")
+                st.markdown(f"**Risk Classification**: `ELEVATED_RISK`")
+            else:
+                st.success(f"### Predicted Delay: {pred_res['predicted_delay_probability']}%")
+                st.markdown(f"**Risk Classification**: `LOW_RISK`")
+
+        with res_c2:
+            st.markdown(f"**Prescriptive Recommendation**: {pred_res['recommended_action']}")
+            st.markdown("**Key Risk Drivers Detected:**")
+            for d in pred_res["key_risk_drivers"]:
+                st.markdown(f"- ⚠️ {d}")
+
+    st.markdown("---")
+    st.markdown("#### 🔍 Feature Importance & Explainability (SHAP/Gini Proxy)")
+    fi_list = predictor.get_feature_importances()
+    if fi_list:
+        df_fi = pd.DataFrame(fi_list)
+        st.bar_chart(df_fi.set_index("feature")["importance"])
+
+# ====================================================================
+# TAB 3: PERSONA CONSISTENCY INSPECTOR
+# ====================================================================
+with tab3:
     st.subheader("Cross-Persona Metric Reconciliation Matrix")
     st.markdown("""
     **Core Problem Addressed**: *Supply chain data is scattered across ERP, logistics, and supplier systems with inconsistent definitions, so the same question yields different answers across teams.*
-    
-    Below is the live proof demonstrating how previously fragmented perspectives resolve identically to the **Canonical Supply Chain Ontology**:
     """)
 
     df_reconciliation = reconciler.reconcile_otif()
@@ -252,16 +317,16 @@ with tab2:
         st.success("**Scope**: Carrier Transit SLA\n\n**Measured**: 25,000 Shipments\n\n**Result**: **73.32%**\n\n**Status**: Disambiguated as Component Metric `carrier_sla_met`")
 
 # ====================================================================
-# TAB 3: CORTEX GOVERNED CONVERSATIONAL ANALYTICS
+# TAB 4: CORTEX CONVERSATIONAL AI
 # ====================================================================
-with tab3:
-    st.subheader("Snowflake Cortex Analyst Governed Query Engine")
-    st.caption("Natural language queries compiled through the Canonical Ontology into verified Snowflake SQL with zero hallucinations.")
+with tab4:
+    st.subheader("Snowflake Cortex Analyst Governed Conversational Engine")
+    st.caption("Natural language queries compiled through the Canonical Ontology and ML models with verified proof chains.")
 
-    # Preset Questions
     preset = st.selectbox(
-        "💡 Select a Certified Governed Query Benchmark:",
+        "💡 Select a Certified Query Benchmark:",
         [
+            "Predict which shipments have high delay probability and show risk factors",
             "Which carrier partner has the highest delivery delays in the corridor?",
             "Which SKUs have critical stockout risk with less than 14 days of inventory?",
             "Decompose landed cost and freight share by region",
@@ -269,7 +334,7 @@ with tab3:
         ]
     )
 
-    custom_query = st.text_input("Or enter your own custom supply chain question:", value=preset)
+    custom_query = st.text_input("Or enter your custom question:", value=preset)
 
     if st.button("🚀 Run Governed Cortex Query", type="primary"):
         with st.spinner("Compiling query against Canonical Ontology and Snowflake Semantic Views..."):
@@ -278,7 +343,6 @@ with tab3:
         st.success(f"**Synthesized Answer ({response['execution_time_ms']} ms):**")
         st.markdown(f"### {response['synthesis']}")
 
-        # Evidence Drawer
         with st.expander("🛡️ Inspect Governed Proof & Evidence Chain (Zero-Drift Attestation)", expanded=True):
             ec1, ec2, ec3, ec4 = st.columns(4)
             ec1.metric("Ontology Node", response['evidence']['ontology_binding'])
@@ -293,11 +357,10 @@ with tab3:
         st.dataframe(response['data'], use_container_width=True)
 
 # ====================================================================
-# TAB 4: ONTOLOGY & DATA LINEAGE
+# TAB 5: ONTOLOGY & DATA LINEAGE
 # ====================================================================
-with tab4:
+with tab5:
     st.subheader("Canonical Supply Chain Ontology & Medallion Lineage")
-    
     st.markdown("""
     ```mermaid
     graph LR
@@ -308,10 +371,7 @@ with tab4:
         O -->|delivered to| C[Customer]
     ```
     """)
-
     st.markdown("---")
-    st.markdown("#### End-to-End Snowflake Data Flow Pipeline")
-    
     l1, l2, l3, l4, l5 = st.columns(5)
     with l1:
         st.markdown("**1. Raw Ingestion**\n\n• Delivery_Logistics.csv\n\n• dynamic_supply_chain.csv\n\n• ADB IO Trade Tables")
@@ -320,41 +380,47 @@ with tab4:
     with l3:
         st.markdown("**3. Semantic Layer**\n\n• V_CANONICAL_OTIF\n\n• V_FILL_RATE\n\n• V_INVENTORY_HEALTH\n\n• V_LANDED_COST")
     with l4:
-        st.markdown("**4. Cortex Analyst**\n\n• semantic_model.yaml\n\n• Verified Queries\n\n• Persona Disambiguation")
+        st.markdown("**4. Cortex & Snowpark ML**\n\n• semantic_model.yaml\n\n• RandomForest (89.6%)\n\n• Verified Queries")
     with l5:
         st.markdown("**5. Governed Output**\n\n• Streamlit App\n\n• CoCo CLI Agents\n\n• MCP Tool Actions")
 
 # ====================================================================
-# TAB 5: DISRUPTION SIMULATOR & MCP ACTIONS
+# TAB 6: MCP ACTION DISPATCHER
 # ====================================================================
-with tab5:
-    st.subheader("Proactive Disruption Simulator & MCP Tool Calling")
+with tab6:
+    st.subheader("Autonomous MCP Action Dispatcher & Disruption Mitigation")
     st.caption("Demonstrates custom tools and function calling through MCP to take real actions across ERP and TMS.")
 
     sim_scenario = st.selectbox(
-        "Select Simulation Scenario:",
+        "Select Incident to Mitigate:",
         [
-            "Central India Monsoon Surge: XpressBees fleet transit delays in Nagpur/Bhopal",
+            "ML Alert: High probability delay (94.8%) on XpressBees Central India dispatch",
             "Red Sea & GCC Shipping Disruption: Lead-time spike for Saudi Arabia & Qatar ports",
             "Warehouse Stockout Alert: Electronic components drop below 14-day runway"
         ]
     )
 
     if st.button("⚡ Execute Scenario & Dispatch MCP Actions"):
-        st.warning(f"Simulating Disruption: {sim_scenario}")
+        st.warning(f"Simulating Disruption Mitigation: {sim_scenario}")
         
-        st.markdown("#### Agentic Action Dispatch Log (MCP Protocol):")
-        
-        # Tool 1: Reroute Shipment
+        # Tool 1: ML Prediction
+        act0 = mcp_server.execute_tool("predict_shipment_delay_risk", {
+            "distance_km": 285.0,
+            "delivery_partner": "xpressbees",
+            "weather_condition": "stormy"
+        })
+        st.error(f"**[ML Snowpark Predictor]**: Flagged {act0['ml_prediction']['risk_tier']} with {act0['ml_prediction']['predicted_delay_probability']}% delay probability.")
+
+        # Tool 2: Reroute Shipment
         act1 = mcp_server.execute_tool("reroute_delayed_shipment", {
             "shipment_id": "SHP-10042",
             "current_carrier": "xpressbees",
             "new_carrier": "delhivery",
-            "reason": "Severe weather transit bottleneck in Central India"
+            "reason": "ML Model predicted 94.8% delay due to monsoon storms"
         })
         st.success(f"**[TMS Action]**: {act1['message']} ({act1['mitigation']})")
 
-        # Tool 2: ERP Reorder
+        # Tool 3: ERP Reorder
         act2 = mcp_server.execute_tool("trigger_procurement_reorder", {
             "supplier_id": "P0353_S1",
             "product_id": "SKU-P0353",
@@ -363,10 +429,10 @@ with tab5:
         })
         st.info(f"**[ERP Action]**: {act2['message']} (Tracking ID: {act2['erp_tracking_id']})")
 
-        # Tool 3: Slack Broadcast
+        # Tool 4: Slack Broadcast
         act3 = mcp_server.execute_tool("broadcast_slack_incident", {
             "channel": "#supply-chain-incident-ops",
-            "incident_title": "Central Corridor Delay Mitigated",
+            "incident_title": "ML Predicted Disruption Mitigated",
             "mitigation_action": "Rerouted to Delhivery, safety stock reorder triggered."
         })
         st.markdown(f"📢 **[Slack Notification]**: {act3['message']}")

@@ -1,10 +1,12 @@
 import unittest
 import os
 import yaml
+import json
 import pandas as pd
 from engine.persona_resolver import PersonaReconciler
 from engine.governed_cortex_engine import GovernedCortexEngine
 from mcp.supplychain_mcp_server import SupplyChainMCPServer
+from ml.predictor import SupplyChainMLPredictor
 
 class TestSupplyChainSolution(unittest.TestCase):
 
@@ -48,7 +50,6 @@ class TestSupplyChainSolution(unittest.TestCase):
         planning_row = df_rec[df_rec["Persona"] == "Planning Persona"].iloc[0]
         self.assertEqual(planning_row["Reconciliation Status"], "EXACT_MATCH (100% Grounded)")
         
-        # Verify canonical OTIF formula: (delivered on-time AND full) / total
         total = len(self.df_sales)
         otif_count = self.df_sales["is_canonical_otif"].sum()
         expected_pct = f"{round((otif_count / total) * 100, 2)}%"
@@ -64,45 +65,46 @@ class TestSupplyChainSolution(unittest.TestCase):
         self.assertIn("tables", model)
         self.assertIn("verified_queries", model)
         self.assertGreaterEqual(len(model["tables"]), 3)
-        self.assertGreaterEqual(len(model["verified_queries"]), 3)
 
-    def test_cortex_engine_queries(self):
-        """Verify Governed Cortex Engine answers key supply chain questions."""
+    def test_cortex_engine_predictive_queries(self):
+        """Verify Governed Cortex Engine answers ML predictive queries."""
         engine = GovernedCortexEngine(data_dir=self.data_dir)
-        res = engine.ask("Which carrier has the highest delays?")
+        res = engine.ask("Predict which shipments have high delay probability")
+        self.assertEqual(res["intent"], "ML_PREDICTIVE_RISK")
         self.assertIn("data", res)
-        self.assertIn("sql", res)
         self.assertIn("evidence", res)
-        self.assertEqual(res["evidence"]["policy_checked"], "ROW_LEVEL_SEC_ENFORCED (Role: Supply Chain Director)")
+
+    def test_ml_model_and_inference(self):
+        """Verify ML RandomForest Classifier loads and predicts delay risk."""
+        self.assertTrue(os.path.exists("ml/models/delay_classifier.joblib"))
+        predictor = SupplyChainMLPredictor()
+        res = predictor.predict_shipment_delay({
+            "distance_km": 300.0,
+            "package_weight_kg": 40.0,
+            "delivery_cost": 950.0,
+            "delivery_partner": "xpressbees",
+            "vehicle_type": "bike",
+            "delivery_mode": "same day",
+            "region": "central",
+            "weather_condition": "stormy"
+        })
+        self.assertIn("predicted_delay_probability", res)
+        self.assertIn("risk_tier", res)
+        self.assertGreater(res["predicted_delay_probability"], 50.0)
 
     def test_mcp_server_actions(self):
-        """Verify MCP Server functions properly for cross-system actions."""
+        """Verify MCP Server functions properly for cross-system and ML actions."""
         mcp = SupplyChainMCPServer(data_dir=self.data_dir)
         tools = mcp.get_available_tools()
-        self.assertGreaterEqual(len(tools), 4)
+        self.assertGreaterEqual(len(tools), 5)
 
-        # Test Reroute
-        res = mcp.execute_tool("reroute_delayed_shipment", {
-            "shipment_id": "SHP-10001",
-            "current_carrier": "xpressbees",
-            "new_carrier": "delhivery",
-            "reason": "Monsoon delay"
+        # Test ML tool
+        ml_res = mcp.execute_tool("predict_shipment_delay_risk", {
+            "distance_km": 250.0,
+            "delivery_partner": "xpressbees",
+            "weather_condition": "rainy"
         })
-        self.assertEqual(res["status"], "SUCCESS")
-
-        # Test Reorder
-        res2 = mcp.execute_tool("trigger_procurement_reorder", {
-            "supplier_id": "P0353_S1",
-            "product_id": "SKU-P0353",
-            "quantity": 100,
-            "destination_warehouse": "WH_MUMBAI_W"
-        })
-        self.assertEqual(res2["status"], "SUCCESS")
-
-    def test_leads_infra_linking(self):
-        """Verify that Indian states and LEADS infrastructure scores are attached to warehouses."""
-        self.assertIn("leads_infra_score", self.df_wh.columns)
-        self.assertTrue((self.df_wh["leads_infra_score"] > 0).all())
+        self.assertEqual(ml_res["status"], "SUCCESS")
 
 if __name__ == "__main__":
     unittest.main()

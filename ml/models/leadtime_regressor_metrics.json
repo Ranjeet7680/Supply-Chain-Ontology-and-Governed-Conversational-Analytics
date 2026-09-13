@@ -1,0 +1,35 @@
+{
+  "model_name": "Supplier Lead Time Deviation Regressor (RandomForest)",
+  "mae_days": 3.6374,
+  "r2_score": 0.0405,
+  "features": [
+    {
+      "feature": "supplier_reliability_score",
+      "importance": 0.1688
+    },
+    {
+      "feature": "customs_clearance_time",
+      "importance": 0.1529
+    },
+    {
+      "feature": "delay_probability",
+      "importance": 0.1397
+    },
+    {
+      "feature": "weather_condition_severity",
+      "importance": 0.1393
+    },
+    {
+      "feature": "handling_equipment_availability",
+      "importance": 0.1385
+    },
+    {
+      "feature": "route_risk_level",
+      "importance": 0.136
+    },
+    {
+      "feature": "disruption_likelihood_score",
+      "importance": 0.1249
+    }
+  ]
+}

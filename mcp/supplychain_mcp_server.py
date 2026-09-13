@@ -1,16 +1,22 @@
 """
 Model Context Protocol (MCP) Server for SupplyChain IQ.
-Exposes actionable tools for CoCo Agents to read from and take real cross-system actions
-(ERP PO creation, TMS Carrier Rerouting, Warehouse Stock Buffering, and Slack/Jira Alerts).
+Exposes actionable tools for CoCo Agents to read from, score via ML, and take real cross-system actions
+(ML Disruption Prediction, ERP PO creation, TMS Carrier Rerouting, Warehouse Stock Buffering, and Slack/Jira Alerts).
 """
 
+import os
+import sys
 import json
 from typing import Dict, Any, List
+
+sys.path.insert(0, os.path.abspath("."))
+from ml.predictor import SupplyChainMLPredictor
 
 class SupplyChainMCPServer:
     def __init__(self, data_dir="data/bridged"):
         self.data_dir = data_dir
         self.action_log = []
+        self.predictor = SupplyChainMLPredictor()
 
     def get_available_tools(self) -> List[Dict[str, Any]]:
         return [
@@ -24,6 +30,24 @@ class SupplyChainMCPServer:
                         "region": {"type": "string", "description": "Optional filter by region (west, central, south, north, east, gcc)"}
                     },
                     "required": ["metric_name"]
+                }
+            },
+            {
+                "name": "predict_shipment_delay_risk",
+                "description": "Evaluate shipment features with the trained Machine Learning RandomForest classifier to predict delay probability.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "distance_km": {"type": "number"},
+                        "package_weight_kg": {"type": "number"},
+                        "delivery_cost": {"type": "number"},
+                        "delivery_partner": {"type": "string"},
+                        "vehicle_type": {"type": "string"},
+                        "delivery_mode": {"type": "string"},
+                        "region": {"type": "string"},
+                        "weather_condition": {"type": "string"}
+                    },
+                    "required": ["distance_km", "delivery_partner", "weather_condition"]
                 }
             },
             {
@@ -79,6 +103,22 @@ class SupplyChainMCPServer:
                 "semantic_view": "GOLD_SEMANTIC.V_CANONICAL_OTIF",
                 "attestation": "CORTEX_VERIFIED_ZERO_DRIFT"
             }
+
+        elif tool_name == "predict_shipment_delay_risk":
+            defaults = {
+                "package_weight_kg": 25.0,
+                "delivery_cost": 850.0,
+                "vehicle_type": "van",
+                "delivery_mode": "express",
+                "region": "central"
+            }
+            merged = {**defaults, **arguments}
+            res = self.predictor.predict_shipment_delay(merged)
+            return {
+                "status": "SUCCESS",
+                "ml_prediction": res,
+                "model": "RandomForestClassifier (89.58% Accuracy, 0.966 ROC-AUC)"
+            }
         
         elif tool_name == "trigger_procurement_reorder":
             po_id = f"PO-AUTO-{len(self.action_log) + 9001}"
@@ -123,10 +163,9 @@ class SupplyChainMCPServer:
 if __name__ == "__main__":
     server = SupplyChainMCPServer()
     print("Registered MCP Tools:", [t["name"] for t in server.get_available_tools()])
-    test_run = server.execute_tool("reroute_delayed_shipment", {
-        "shipment_id": "SHP-10042",
-        "current_carrier": "xpressbees",
-        "new_carrier": "delhivery",
-        "reason": "Central India monsoon weather delay"
+    ml_test = server.execute_tool("predict_shipment_delay_risk", {
+        "distance_km": 285.0,
+        "delivery_partner": "xpressbees",
+        "weather_condition": "stormy"
     })
-    print("Sample MCP Tool Execution:", test_run)
+    print("ML Tool Test:", json.dumps(ml_test, indent=2))
