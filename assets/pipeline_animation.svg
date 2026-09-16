@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pipeBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070D1E" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <filter id="neonBlur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="subtleNeon" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .node-text { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; font-weight: 700; fill: #FFFFFF; }
+    .node-sub { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 10px; fill: #94A3B8; }
+    .step-badge { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 9px; font-weight: 800; letter-spacing: 1px; }
+
+    @keyframes flowPacket {
+      0% { offset-distance: 0%; opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+
+    .pulse-dot {
+      animation: pulse 1.8s infinite alternate;
+    }
+    @keyframes pulse {
+      from { transform: scale(0.9); opacity: 0.7; }
+      to { transform: scale(1.1); opacity: 1; }
+    }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="1100" height="240" rx="16" fill="url(#pipeBg)" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- Connecting Pipeline Wires -->
+  <g stroke="#334155" stroke-width="3" fill="none">
+    <path d="M 180 120 L 250 120" />
+    <path d="M 430 120 L 500 120" />
+    <path d="M 680 120 L 750 120" />
+    <path d="M 930 120 L 1000 120" />
+  </g>
+
+  <!-- Glowing Animated Data Packets -->
+  <g fill="none" stroke-linecap="round">
+    <!-- Packet 1 -->
+    <path d="M 180 120 L 250 120" stroke="#00F2FE" stroke-width="3" stroke-dasharray="12, 50" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" from="62" to="0" dur="1.2s" repeatCount="indefinite" />
+    </path>
+    <!-- Packet 2 -->
+    <path d="M 430 120 L 500 120" stroke="#8B5CF6" stroke-width="3" stroke-dasharray="12, 50" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" from="62" to="0" dur="1.2s" repeatCount="indefinite" />
+    </path>
+    <!-- Packet 3 -->
+    <path d="M 680 120 L 750 120" stroke="#10B981" stroke-width="3" stroke-dasharray="12, 50" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" from="62" to="0" dur="1.2s" repeatCount="indefinite" />
+    </path>
+    <!-- Packet 4 -->
+    <path d="M 930 120 L 1000 120" stroke="#F59E0B" stroke-width="3" stroke-dasharray="12, 50" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" from="62" to="0" dur="1.2s" repeatCount="indefinite" />
+    </path>
+  </g>
+
+  <!-- STAGE 1: Multimodal Ingestion -->
+  <g transform="translate(30, 45)">
+    <rect width="150" height="150" rx="12" fill="url(#cardGrad1)" stroke="#38BDF8" stroke-width="1.5" filter="url(#subtleNeon)"/>
+    <rect x="12" y="14" width="40" height="18" rx="4" fill="#0369A1" />
+    <text x="18" y="27" class="step-badge" fill="#BAE6FD">INGEST</text>
+    <circle cx="126" cy="23" r="4" fill="#38BDF8">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <text x="14" y="62" class="node-text">Multimodal Data</text>
+    <text x="14" y="82" class="node-sub">25,000 Shipments</text>
+    <text x="14" y="98" class="node-sub">113k Graph Nodes</text>
+    <text x="14" y="114" class="node-sub">GPS &amp; Weather Feed</text>
+    <text x="14" y="130" class="node-sub">Indian LEADS Index</text>
+  </g>
+
+  <!-- STAGE 2: Snowflake Medallion Layer -->
+  <g transform="translate(250, 45)">
+    <rect width="180" height="150" rx="12" fill="url(#cardGrad1)" stroke="#29B5E8" stroke-width="1.8" filter="url(#subtleNeon)"/>
+    <rect x="12" y="14" width="70" height="18" rx="4" fill="#075985" />
+    <text x="18" y="27" class="step-badge" fill="#7DD3FC">SNOWFLAKE</text>
+    <circle cx="156" cy="23" r="4" fill="#29B5E8">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+    </circle>
+    <text x="14" y="62" class="node-text">Governed Lakehouse</text>
+    <text x="14" y="82" class="node-sub">Bronze Raw Staging</text>
+    <text x="14" y="98" class="node-sub">Silver Clean Dimensions</text>
+    <text x="14" y="114" class="node-sub">Gold Semantic Views</text>
+    <text x="14" y="130" class="node-sub">Zero-Drift Grounding</text>
+  </g>
+
+  <!-- STAGE 3: Advanced AI / ML & Graph -->
+  <g transform="translate(500, 45)">
+    <rect width="180" height="150" rx="12" fill="url(#cardGrad1)" stroke="#8B5CF6" stroke-width="1.8" filter="url(#subtleNeon)"/>
+    <rect x="12" y="14" width="60" height="18" rx="4" fill="#5B21B6" />
+    <text x="18" y="27" class="step-badge" fill="#DDD6FE">AI &amp; GNN</text>
+    <circle cx="156" cy="23" r="4" fill="#8B5CF6">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" begin="0.6s"/>
+    </circle>
+    <text x="14" y="62" class="node-text">Predictive &amp; RL Core</text>
+    <text x="14" y="82" class="node-sub">PyTorch Spatial GNN</text>
+    <text x="14" y="98" class="node-sub">DeepRisk Attention Net</text>
+    <text x="14" y="114" class="node-sub">Q-Learning Rerouter</text>
+    <text x="14" y="130" class="node-sub">SHAP/XAI Attribution</text>
+  </g>
+
+  <!-- STAGE 4: Protocol & API Gateway -->
+  <g transform="translate(750, 45)">
+    <rect width="180" height="150" rx="12" fill="url(#cardGrad1)" stroke="#10B981" stroke-width="1.8" filter="url(#subtleNeon)"/>
+    <rect x="12" y="14" width="68" height="18" rx="4" fill="#065F46" />
+    <text x="18" y="27" class="step-badge" fill="#A7F3D0">PROTOCOL</text>
+    <circle cx="156" cy="23" r="4" fill="#10B981">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" begin="0.9s"/>
+    </circle>
+    <text x="14" y="62" class="node-text">MCP &amp; FastAPI</text>
+    <text x="14" y="82" class="node-sub">Model Context Protocol</text>
+    <text x="14" y="98" class="node-sub">Semantic Cache (&lt;2ms)</text>
+    <text x="14" y="114" class="node-sub">Drift PSI Monitor</text>
+    <text x="14" y="130" class="node-sub">Autonomous Interventions</text>
+  </g>
+
+  <!-- STAGE 5: 3D Twin & Voice AI -->
+  <g transform="translate(1000, 45)">
+    <rect width="80" height="150" rx="12" fill="url(#cardGrad1)" stroke="#F59E0B" stroke-width="1.8" filter="url(#subtleNeon)"/>
+    <rect x="8" y="14" width="48" height="18" rx="4" fill="#78350F" />
+    <text x="12" y="27" class="step-badge" fill="#FDE68A">UI/VOX</text>
+    <circle cx="68" cy="23" r="4" fill="#F59E0B">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" begin="1.2s"/>
+    </circle>
+    <text x="8" y="62" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">3D Twin</text>
+    <text x="8" y="80" class="node-sub">Three.js</text>
+    <text x="8" y="96" class="node-sub">Audio FX</text>
+    <text x="8" y="112" class="node-sub">5 Indian</text>
+    <text x="8" y="128" class="node-sub">Langs AI</text>
+  </g>
+</svg>

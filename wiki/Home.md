@@ -29,3 +29,9 @@
    - Quantified business outcomes: +28.4% OTIF lift, -$12,400 penalty avoidance, <2ms semantic latency, 89.58% ML accuracy
    - Enterprise scalability across millions of shipment events
    - Production roadmap beyond the hackathon
+4. **[[4. Data Analysis|4.-Data-Analysis]]** *(Bonus / Deep-Dive Analysis)*
+   - Empirical telemetry analysis of 25,000 TMS shipments & 113,097 multi-tier nodes
+   - India-GCC maritime & air trade corridor reliability rankings
+   - Total landed cost & demurrage penalty leakage quantification
+   - ML/XAI SHAP feature importances, GNN centrality, and RL policy payoff matrix
+
