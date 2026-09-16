@@ -8,12 +8,20 @@
 [![Snowpark ML](https://img.shields.io/badge/Snowpark%20ML-89.6%25%20Accuracy%20%7C%200.966%20ROC--AUC-8B5CF6)](https://www.snowflake.com/)
 [![CoCo CLI](https://img.shields.io/badge/CoCo-Full%20Lifecycle%20Ready-3B82F6)](https://github.com/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Native%20App-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![Ontology Compliance](https://img.shields.io/badge/Ontology-100%25%20Certified-10B981)](#-ontology-validation-coco-skill)
+[![Python CI](https://github.com/Ranjeet7680/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/actions/workflows/python-ci.yml/badge.svg)](https://github.com/Ranjeet7680/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/actions/workflows/python-ci.yml)
+[![Pages Deployment](https://github.com/Ranjeet7680/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/actions/workflows/deploy-pages.yml/badge.svg)](https://ranjeet7680.github.io/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/)
+[![Docker Ready](https://img.shields.io/badge/Docker-Multi--Container%20Compose-2496ED?logo=docker&logoColor=white)](docker-compose.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 > **Snowflake CoCo CLI Hackathon — GCC Edition**  
 > **Challenge**: Supply Chain Ontology and Governed Conversational Analytics  
-> **Platform**: Enterprise AI Supply Chain Intelligence, Governed Semantic Ontology & Snowpark Machine Learning
+> **Platform**: Enterprise AI Supply Chain Intelligence, Governed Semantic Ontology & Snowpark Machine Learning  
+> **Team Name**: **Nexora**  
+> **Team Members**:  
+> - **Ranjeet Kumar (Leader)** — `rajranjeet7680@gmail.com`  
+> - **Hitali Khachane** — `hitalik@amdocs.com`  
+> - **Rahul Sangral** — `rishumvis007@gmail.com`  
+> - **Syed Saaduddin** — `saadsyed837@gmail.com`  
 
 ---
 

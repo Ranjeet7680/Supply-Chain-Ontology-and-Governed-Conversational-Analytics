@@ -1,0 +1,36 @@
+name: Python CI & ML/DL Test Suite
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Build, Lint & Test Suite
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Verify Python Code Syntax
+      run: |
+        python -m py_compile app.py run_pipeline.py backend/main.py ml/*.py engine/*.py
+
+    - name: Run Full Unit & Integration Test Suite (24 Tests)
+      run: |
+        python -m unittest discover -s tests -p "test_*.py" -v

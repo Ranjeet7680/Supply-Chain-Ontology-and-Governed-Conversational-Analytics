@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # FastAPI Enterprise Backend (Port 8000)
+  backend:
+    build: .
+    container_name: supplychain_iq_backend
+    restart: always
+    ports:
+      - "8000:8000"
+    command: python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+
+  # Streamlit Command Center Dashboard (Port 8501)
+  dashboard:
+    build: .
+    container_name: supplychain_iq_dashboard
+    restart: always
+    ports:
+      - "8501:8501"
+    command: streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  # Static 3D Web Dashboard (Port 3000)
+  web_app:
+    image: nginx:alpine
+    container_name: supplychain_iq_web
+    restart: always
+    ports:
+      - "3000:80"
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./assets:/usr/share/nginx/html/assets:ro
+    depends_on:
+      - backend

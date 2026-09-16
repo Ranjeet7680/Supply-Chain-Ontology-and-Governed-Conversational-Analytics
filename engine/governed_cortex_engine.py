@@ -5,12 +5,13 @@ import yaml
 import time
 import os
 import pandas as pd
-import numpy as np
 from ml.predictor import SupplyChainMLPredictor
+from engine.multilingual_engine import MultilingualVoiceAIEngine
 
 class GovernedCortexEngine:
     """
-    Simulates Snowflake Cortex Analyst Governed Conversational Engine with ML Predictive Intelligence.
+    Simulates Snowflake Cortex Analyst Governed Conversational Engine with ML Predictive Intelligence
+    and Multilingual Indian Regional Language + Voice Synthesis.
     Translates natural language questions through the Canonical Supply Chain Ontology
     into deterministic Snowflake SQL queries and ML inference with evidence attestation.
     """
@@ -26,16 +27,23 @@ class GovernedCortexEngine:
         self.df_wh = pd.read_csv(f'{data_dir}/dim_plant_warehouse.csv')
         self.df_parts = pd.read_csv(f'{data_dir}/dim_part.csv')
         
-        # Load ML Predictor
+        # Load ML Predictor & Multilingual Engine
         self.predictor = SupplyChainMLPredictor()
+        self.multilingual = MultilingualVoiceAIEngine()
 
-    def ask(self, question: str, user_persona: str = 'Supply Chain Director'):
+    def ask(self, question: str, user_persona: str = 'Supply Chain Director', lang: str = None):
         start_time = time.time()
+        
+        # Detect or set language
+        if not lang or lang == 'auto':
+            lang = self.multilingual.detect_language(question)
+            
+        # Detect Intent via Multilingual Ontology Lexicon
+        intent = self.multilingual.normalize_intent(question)
         q_lower = question.lower()
 
         # Check for ML Predictive questions
-        if any(k in q_lower for k in ['predict', 'machine learning', 'probability', 'forecast delay', 'at risk', 'feature']):
-            intent = 'ML_PREDICTIVE_RISK'
+        if intent == 'ML_PREDICTIVE_RISK':
             sql = """SELECT shipment_id, delivery_partner, region, weather_condition, 
        predicted_delay_probability_pct, ml_risk_classification, recommended_prescriptive_action
 FROM SUPPLYCHAIN_IQ_DB.GOLD_SEMANTIC.V_PREDICTIVE_INTERVENTIONS
@@ -60,8 +68,7 @@ LIMIT 10;"""
             ontology_node = "ML_Inference.predicted_delay_probability"
             source_table = "GOLD_SEMANTIC.V_PREDICTIVE_SHIPMENT_RISK (Snowpark ML)"
 
-        elif any(k in q_lower for k in ['carrier', 'partner', 'logistics', 'delay', 'transit', 'sla']):
-            intent = 'CARRIER_PERFORMANCE'
+        elif intent == 'CARRIER_PERFORMANCE':
             sql = """SELECT delivery_partner, 
        COUNT(shipment_id) AS total_shipments,
        SUM(carrier_sla_met) AS on_time_deliveries,
@@ -93,8 +100,7 @@ ORDER BY carrier_sla_pct DESC;"""
             ontology_node = "Carrier.delivery_delay & Shipment.status"
             source_table = "SILVER_CLEAN.FACT_SHIPMENT (TMS Ingest)"
 
-        elif any(k in q_lower for k in ['stockout', 'doi', 'inventory', 'days of supply', 'sku', 'runway']):
-            intent = 'INVENTORY_HEALTH'
+        elif intent == 'INVENTORY_HEALTH':
             sql = """SELECT w.warehouse_name, i.days_of_inventory, COUNT(i.product_id) AS sku_count
 FROM SUPPLYCHAIN_IQ_DB.GOLD_SEMANTIC.V_INVENTORY_HEALTH_DOI i
 JOIN SUPPLYCHAIN_IQ_DB.SILVER_CLEAN.DIM_PLANT_WAREHOUSE w ON i.warehouse_id = w.warehouse_id
@@ -114,8 +120,7 @@ ORDER BY i.days_of_inventory ASC;"""
             ontology_node = "Inventory.days_of_inventory (DOI)"
             source_table = "GOLD_SEMANTIC.V_INVENTORY_HEALTH_DOI"
 
-        elif any(k in q_lower for k in ['landed cost', 'tariff', 'freight share', 'customs', 'expenditure']):
-            intent = 'LANDED_COST'
+        elif intent == 'LANDED_COST':
             sql = """SELECT warehouse_id, 
        ROUND(AVG(unit_landed_cost), 2) AS avg_unit_cost,
        ROUND(SUM(freight_cost) * 100.0 / SUM(total_landed_cost), 1) AS freight_share_pct,
@@ -171,11 +176,21 @@ ORDER BY canonical_otif_pct DESC;"""
 
         elapsed_ms = int((time.time() - start_time) * 1000) + 142
 
+        # Localized synthesis in target Indian language + English
+        loc_res = self.multilingual.synthesize_localized_response(intent, {'synthesis': synthesis}, lang)
+        
+        # Audio voice response (base64 data URI)
+        audio_info = self.multilingual.generate_voice_audio(loc_res['native_script'], lang_code=lang)
+
         return {
             'intent': intent,
             'question': question,
             'persona': user_persona,
-            'synthesis': synthesis,
+            'language': lang,
+            'language_name': loc_res['language_name'],
+            'synthesis': loc_res['native_script'],
+            'english_synthesis': synthesis,
+            'audio': audio_info,
             'sql': sql,
             'data': result_df,
             'confidence': 0.994,
@@ -189,9 +204,16 @@ ORDER BY canonical_otif_pct DESC;"""
         }
 
 if __name__ == '__main__':
+    import sys
+    if sys.platform == "win32":
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+        except Exception:
+            pass
     engine = GovernedCortexEngine()
-    res = engine.ask("Predict which shipments have high delay probability and show risk factors")
+    res = engine.ask("कौन सा कैरियर सबसे ज्यादा लेट कर रहा है?", lang="hi")
     print("--- PREDICTIVE CORTEX ANALYST RESULT ---")
-    print("Synthesis:", res['synthesis'])
-    print("SQL Query:\n", res['sql'])
-    print("Data Preview:\n", res['data'].head(3))
+    print("Language:", res['language_name'])
+    print("Native Synthesis:", res['synthesis'])
+    print("English Synthesis:", res['english_synthesis'])
+    print("Audio Available:", res['audio'].get('audio_available'))
