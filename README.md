@@ -87,7 +87,42 @@ flowchart LR
     S1 --> S2 --> S3 --> S4 --> S5
 ```
 
+### 🎬 Animated Architecture & Telemetry Visual Gallery
+
+<details open>
+<summary><strong>📡 1. Problem Brief: Telemetry Broadcasting &amp; Cross-Persona Reconciliation</strong></summary>
+<br/>
+<div align="center">
+  <img src="assets/problem_brief_wifi_animation.svg" width="100%" alt="Wi-Fi Telemetry &amp; Reconciliation" style="background:#FFFFFF; border-radius:12px; border:1px solid #E2E8F0;"/>
+</div>
+</details>
+
+<details open>
+<summary><strong>⚡ 2. System Architecture: Circuit Dataflow &amp; CoCo Skill Loop</strong></summary>
+<br/>
+<div align="center">
+  <img src="assets/architecture_animated_circuit.svg" width="100%" alt="Circuit Architecture Dataflow" style="border-radius:12px;"/>
+</div>
+</details>
+
+<details open>
+<summary><strong>📊 3. Quantified Impact: +28.4% OTIF, -$12,400 Penalties &amp; &lt;1.8ms Latency</strong></summary>
+<br/>
+<div align="center">
+  <img src="assets/impact_metrics_animated.svg" width="100%" alt="Impact &amp; Accuracy Matrix" style="border-radius:12px;"/>
+</div>
+</details>
+
+<details open>
+<summary><strong>🚢 4. Trade Corridor Intelligence: India ⇄ GCC Geodesic Radar</strong></summary>
+<br/>
+<div align="center">
+  <img src="assets/trade_corridor_radar_animated.svg" width="100%" alt="Trade Corridor Radar" style="border-radius:12px;"/>
+</div>
+</details>
+
 ---
+
 
 ## ⚡ The Challenge: Eliminating Supply Chain "Metric Chaos"
 

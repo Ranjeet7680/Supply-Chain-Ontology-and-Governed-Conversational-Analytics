@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="radarBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050A18"/>
+      <stop offset="60%" stop-color="#081426"/>
+      <stop offset="100%" stop-color="#020409"/>
+    </linearGradient>
+
+    <!-- Radar Sweep Gradient -->
+    <radialGradient id="sweepGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00F2FE" stop-opacity="0.4"/>
+      <stop offset="40%" stop-color="#0284C7" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#081426" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="glowBlue" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="neonDot" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <style>
+    .radar-header { font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 800; font-size: 22px; fill: #FFFFFF; }
+    .radar-sub { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; fill: #94A3B8; }
+    .hub-label { font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; font-size: 11px; fill: #E2E8F0; }
+    .metric-sub { font-family: 'Courier New', monospace; font-size: 10px; fill: #38BDF8; }
+
+    @keyframes rotateSweep {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulseHub {
+      0% { r: 5px; opacity: 0.9; }
+      50% { r: 14px; opacity: 0.2; }
+      100% { r: 5px; opacity: 0.9; }
+    }
+    @keyframes shipTravel {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -120; }
+    }
+    @keyframes blinkLed {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .radar-beam {
+      transform-origin: 340px 240px;
+      animation: rotateSweep 6s linear infinite;
+    }
+    .beacon-pulse {
+      animation: pulseHub 2.2s ease-in-out infinite;
+    }
+    .beacon-pulse-alt {
+      animation: pulseHub 2.8s ease-in-out infinite 0.6s;
+    }
+    .ship-route {
+      stroke-dasharray: 6, 8;
+      animation: shipTravel 2.4s linear infinite;
+    }
+  </style>
+
+  <!-- Background Box -->
+  <rect width="1100" height="450" rx="16" fill="url(#radarBg)" stroke="#1E293B" stroke-width="1.8"/>
+
+  <!-- Top Title -->
+  <g transform="translate(45, 36)">
+    <rect x="0" y="0" width="310" height="22" rx="11" fill="#1E293B" stroke="#334155"/>
+    <circle cx="12" cy="11" r="4" fill="#00F2FE" style="animation: blinkLed 1.4s infinite;"/>
+    <text x="24" y="15" font-family="'Segoe UI', sans-serif" font-weight="800" font-size="10px" fill="#38BDF8" letter-spacing="1.2">SECTION 4 · TRADE CORRIDOR RADAR</text>
+
+    <text x="0" y="52" class="radar-header">India ⇄ GCC Maritime &amp; Air Corridors Analytics</text>
+    <text x="0" y="72" class="radar-sub">Real-time geospatial tracking, delay variance analysis, and port demurrage risk monitoring.</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- LEFT: ROTATING RADAR DISPLAY                                  -->
+  <!-- ============================================================== -->
+  <g transform="translate(40, 110)">
+    <!-- Radar Rings -->
+    <circle cx="300" cy="150" r="140" fill="#030712" stroke="#1E293B" stroke-width="1.5"/>
+    <circle cx="300" cy="150" r="105" fill="none" stroke="#0E7490" stroke-width="0.8" stroke-dasharray="3, 3" opacity="0.6"/>
+    <circle cx="300" cy="150" r="70" fill="none" stroke="#0284C7" stroke-width="1" opacity="0.7"/>
+    <circle cx="300" cy="150" r="35" fill="none" stroke="#00F2FE" stroke-width="1" opacity="0.8"/>
+
+    <!-- Crosshairs -->
+    <line x1="160" y1="150" x2="440" y2="150" stroke="#0E7490" stroke-width="0.8" opacity="0.5"/>
+    <line x1="300" y1="10" x2="300" y2="290" stroke="#0E7490" stroke-width="0.8" opacity="0.5"/>
+
+    <!-- Rotating Radar Beam Sweep (Centered at 300, 150) -->
+    <g class="radar-beam" style="transform-origin: 300px 150px;">
+      <path d="M 300 150 L 440 150 A 140 140 0 0 0 398 52 Z" fill="url(#sweepGrad)"/>
+      <line x1="300" y1="150" x2="440" y2="150" stroke="#00F2FE" stroke-width="1.5" filter="url(#glowBlue)"/>
+    </g>
+
+    <!-- Geographic Nodes / Ports on Radar -->
+    <!-- JNPT / Mumbai (India) -->
+    <circle cx="380" cy="180" r="6" fill="#00F2FE" filter="url(#neonDot)"/>
+    <circle cx="380" cy="180" r="15" fill="none" stroke="#00F2FE" stroke-width="1.2" class="beacon-pulse"/>
+    <text x="395" y="184" class="hub-label">JNPT (Mumbai)</text>
+
+    <!-- Mundra Port (Gujarat) -->
+    <circle cx="360" cy="120" r="6" fill="#10B981" filter="url(#neonDot)"/>
+    <circle cx="360" cy="120" r="15" fill="none" stroke="#10B981" stroke-width="1.2" class="beacon-pulse-alt"/>
+    <text x="375" y="124" class="hub-label">Mundra Hub</text>
+
+    <!-- Jebel Ali / Dubai (UAE) -->
+    <circle cx="230" cy="130" r="7" fill="#A855F7" filter="url(#neonDot)"/>
+    <circle cx="230" cy="130" r="16" fill="none" stroke="#A855F7" stroke-width="1.2" class="beacon-pulse"/>
+    <text x="145" y="125" class="hub-label">Jebel Ali (DXB)</text>
+
+    <!-- Dammam / King Abdulaziz (Saudi) -->
+    <circle cx="205" cy="180" r="6" fill="#F59E0B" filter="url(#neonDot)"/>
+    <circle cx="205" cy="180" r="14" fill="none" stroke="#F59E0B" stroke-width="1.2" class="beacon-pulse-alt"/>
+    <text x="125" y="184" class="hub-label">Dammam (KSA)</text>
+
+    <!-- Doha Port (Qatar) -->
+    <circle cx="225" cy="205" r="5" fill="#38BDF8" filter="url(#neonDot)"/>
+    <text x="155" y="218" class="hub-label">Hamad (Doha)</text>
+
+    <!-- Connecting Geodesic Corridors -->
+    <!-- JNPT to Jebel Ali (Ocean) -->
+    <path d="M 380 180 Q 300 135 230 130" fill="none" stroke="#00F2FE" stroke-width="2.5" class="ship-route"/>
+
+    <!-- Mundra to Dammam (Ocean) -->
+    <path d="M 360 120 Q 280 170 205 180" fill="none" stroke="#10B981" stroke-width="2" class="ship-route"/>
+
+    <!-- Air Corridors (Dashed Light Arc) -->
+    <path d="M 380 180 Q 290 80 230 130" fill="none" stroke="#A855F7" stroke-width="1.5" stroke-dasharray="3, 3"/>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- RIGHT: CORRIDOR ANALYTICS DATA CARDS                          -->
+  <!-- ============================================================== -->
+  <g transform="translate(560, 115)">
+    <!-- Corridor 1: JNPT to Jebel Ali -->
+    <g transform="translate(0, 0)">
+      <rect width="500" height="68" rx="10" fill="#0F172A" stroke="#00F2FE" stroke-width="1.2"/>
+      <rect x="12" y="12" width="6" height="44" rx="3" fill="#00F2FE"/>
+      <text x="28" y="28" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="13px" fill="#FFFFFF">CORR-IND-UAE-SEA (JNPT ⇄ Jebel Ali Port)</text>
+      <text x="28" y="48" class="metric-sub">Avg: 4.8 ± 0.9 Days · Delay Risk: 14.2% · Demurrage: Low ($420/TEU) · Vol: 58.4%</text>
+      <rect x="420" y="20" width="65" height="22" rx="4" fill="#0369A1"/>
+      <text x="452" y="35" font-family="'Segoe UI', sans-serif" font-size="10px" font-weight="700" fill="#E0F2FE" text-anchor="middle">RELIABLE</text>
+    </g>
+
+    <!-- Corridor 2: Mundra to Dammam -->
+    <g transform="translate(0, 78)">
+      <rect width="500" height="68" rx="10" fill="#0F172A" stroke="#F59E0B" stroke-width="1.2"/>
+      <rect x="12" y="12" width="6" height="44" rx="3" fill="#F59E0B"/>
+      <text x="28" y="28" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="13px" fill="#FFFFFF">CORR-IND-KSA-SEA (Mundra ⇄ King Abdulaziz Port)</text>
+      <text x="28" y="48" class="metric-sub">Avg: 6.2 ± 1.4 Days · Delay Risk: 22.8% · Demurrage: Med ($850/TEU) · Clearance Var</text>
+      <rect x="420" y="20" width="65" height="22" rx="4" fill="#78350F"/>
+      <text x="452" y="35" font-family="'Segoe UI', sans-serif" font-size="10px" font-weight="700" fill="#FEF3C7" text-anchor="middle">BOTTLENECK</text>
+    </g>
+
+    <!-- Corridor 3: Hazira to Hamad / Doha -->
+    <g transform="translate(0, 156)">
+      <rect width="500" height="68" rx="10" fill="#0F172A" stroke="#10B981" stroke-width="1.2"/>
+      <rect x="12" y="12" width="6" height="44" rx="3" fill="#10B981"/>
+      <text x="28" y="28" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="13px" fill="#FFFFFF">CORR-IND-QAT-SEA (Hazira ⇄ Hamad Port)</text>
+      <text x="28" y="48" class="metric-sub">Avg: 5.5 ± 1.1 Days · Delay Risk: 18.6% · Demurrage: Low ($510/TEU) · Cold-Chain</text>
+      <rect x="420" y="20" width="65" height="22" rx="4" fill="#065F46"/>
+      <text x="452" y="35" font-family="'Segoe UI', sans-serif" font-size="10px" font-weight="700" fill="#D1FAE5" text-anchor="middle">STABLE</text>
+    </g>
+
+    <!-- Corridor 4: Air Freight BOM/DEL to DXB/RUH -->
+    <g transform="translate(0, 234)">
+      <rect width="500" height="68" rx="10" fill="#0F172A" stroke="#A855F7" stroke-width="1.2"/>
+      <rect x="12" y="12" width="6" height="44" rx="3" fill="#A855F7"/>
+      <text x="28" y="28" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="13px" fill="#FFFFFF">CORR-IND-GCC-AIR (BOM/DEL ⇄ DXB/RUH Cargo)</text>
+      <text x="28" y="48" class="metric-sub">Avg: 0.8 - 1.1 Days · Delay Risk: &lt; 7.0% · Critical Spare Parts &amp; Pharma Failover</text>
+      <rect x="420" y="20" width="65" height="22" rx="4" fill="#581C87"/>
+      <text x="452" y="35" font-family="'Segoe UI', sans-serif" font-size="10px" font-weight="700" fill="#F3E8FF" text-anchor="middle">EXPRESS</text>
+    </g>
+  </g>
+</svg>

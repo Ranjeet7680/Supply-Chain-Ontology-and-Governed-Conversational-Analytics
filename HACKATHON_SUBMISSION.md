@@ -60,6 +60,10 @@ SupplyChain IQ is engineered specifically for the high-volume, cross-border **In
 
 ## 2. Architecture Diagram & Technical Design
 
+<div align="center">
+  <img src="assets/architecture_animated_circuit.svg" width="100%" alt="Architecture Circuit Dataflow Diagram" style="border-radius: 12px; margin-bottom: 20px;"/>
+</div>
+
 ### A. End-to-End System Design & Data Flow
 ```mermaid
 graph TD
@@ -139,6 +143,10 @@ The project integrates the custom **`supplychain-ontology-validator`** CoCo CLI 
 
 ## 3. Impact Statement
 
+<div align="center">
+  <img src="assets/impact_metrics_animated.svg" width="100%" alt="Quantified Enterprise Impact & Accuracy Matrix" style="border-radius: 12px; margin-bottom: 20px;"/>
+</div>
+
 ### A. Measurable Business Outcomes
 - **+28.4% On-Time Delivery Lift**: Over 14-day simulated trajectories, the Reinforcement Learning agent prevented stockouts, achieving **84.6% OTIF** vs **65.8% for naive heuristics**.
 - **-$12,400 SLA Penalty Avoidance**: Automated carrier reassignment prevented contract breach penalties on disrupted corridors.
@@ -161,6 +169,10 @@ The project integrates the custom **`supplychain-ontology-validator`** CoCo CLI 
 ---
 
 ## 4. Data Analysis & Corridor Intelligence (Optional Wiki Add)
+
+<div align="center">
+  <img src="assets/trade_corridor_radar_animated.svg" width="100%" alt="India-GCC Trade Corridor Radar Analysis" style="border-radius: 12px; margin-bottom: 20px;"/>
+</div>
 
 ### A. Empirical Telemetry Breakdown (25k Shipments & 113k Nodes)
 - **Primary Corridors**:
