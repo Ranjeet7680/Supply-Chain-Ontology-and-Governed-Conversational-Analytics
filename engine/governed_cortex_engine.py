@@ -7,6 +7,7 @@ import os
 import pandas as pd
 from ml.predictor import SupplyChainMLPredictor
 from engine.multilingual_engine import MultilingualVoiceAIEngine
+from engine.general_ai_assistant import GeneralAIAssistant
 
 class GovernedCortexEngine:
     """
@@ -30,6 +31,7 @@ class GovernedCortexEngine:
         # Load ML Predictor & Multilingual Engine
         self.predictor = SupplyChainMLPredictor()
         self.multilingual = MultilingualVoiceAIEngine()
+        self.general_assistant = GeneralAIAssistant()
 
     def ask(self, question: str, user_persona: str = 'Supply Chain Director', lang: str = None):
         start_time = time.time()
@@ -42,8 +44,23 @@ class GovernedCortexEngine:
         intent = self.multilingual.normalize_intent(question)
         q_lower = question.lower()
 
+        # Check for General Conversational / Assistant inquiries
+        gen_match = self.general_assistant.match_general_query(question)
+        if gen_match:
+            intent = gen_match.get("intent", "GENERAL_CONVERSATION")
+            sql = f"-- Conversational AI Reasoning: {gen_match['title']}\nSELECT 'AI_COGNITIVE_REASONING' AS execution_mode, '{gen_match['category']}' AS domain;"
+            result_df = pd.DataFrame([{
+                "domain": gen_match["category"],
+                "topic": gen_match["title"],
+                "status": "COMPLETED",
+                "preview": gen_match["response"][:120] + "..."
+            }])
+            synthesis = gen_match["response"]
+            ontology_node = f"EnterpriseAI.{gen_match['category']}"
+            source_table = "ENTERPRISE_AI_CORE.GENERAL_ASSISTANT"
+
         # Check for ML Predictive questions
-        if intent == 'ML_PREDICTIVE_RISK':
+        elif intent == 'ML_PREDICTIVE_RISK':
             sql = """SELECT shipment_id, delivery_partner, region, weather_condition, 
        predicted_delay_probability_pct, ml_risk_classification, recommended_prescriptive_action
 FROM SUPPLYCHAIN_IQ_DB.GOLD_SEMANTIC.V_PREDICTIVE_INTERVENTIONS
