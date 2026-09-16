@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 480" width="100%" height="100%">
+  <defs>
+    <!-- Crisp White/Light Gradients for Light Theme Backgrounds -->
+    <linearGradient id="bgLightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="50%" stop-color="#F8FAFC" />
+      <stop offset="100%" stop-color="#F1F5F9" />
+    </linearGradient>
+
+    <!-- Snowflake Sky Blue Gradient -->
+    <linearGradient id="blueSignalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0EA5E9" />
+    </linearGradient>
+
+    <!-- Emerald Success Gradient -->
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+
+    <!-- Purple/Indigo Accent Gradient -->
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+
+    <!-- Card Shadow Filter for White BG -->
+    <filter id="softShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0F172A" flood-opacity="0.08" />
+    </filter>
+
+    <filter id="glowBlue" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title-dark { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-weight: 800; font-size: 22px; fill: #0F172A; }
+    .subtitle-dark { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; fill: #475569; }
+    .card-title { font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; font-size: 13px; fill: #0F172A; }
+    .metric-val { font-family: 'Courier New', monospace; font-weight: 800; font-size: 20px; }
+    .label-caps { font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 800; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* Concentric Wi-Fi Radar & Wave Animations */
+    @keyframes wifiWave1 {
+      0% { opacity: 0.1; transform: scale(0.8); }
+      50% { opacity: 0.9; transform: scale(1.0); }
+      100% { opacity: 0.1; transform: scale(0.8); }
+    }
+    @keyframes wifiWave2 {
+      0% { opacity: 0.1; transform: scale(0.85); }
+      50% { opacity: 0.85; transform: scale(1.05); }
+      100% { opacity: 0.1; transform: scale(0.85); }
+    }
+    @keyframes wifiWave3 {
+      0% { opacity: 0.1; transform: scale(0.9); }
+      50% { opacity: 0.8; transform: scale(1.1); }
+      100% { opacity: 0.1; transform: scale(0.9); }
+    }
+    @keyframes pulseEmitter {
+      0% { r: 8px; opacity: 0.9; }
+      50% { r: 15px; opacity: 0.3; }
+      100% { r: 8px; opacity: 0.9; }
+    }
+    @keyframes transmitFlow {
+      to { stroke-dashoffset: -40; }
+    }
+
+    .wifi-arc-1 {
+      animation: wifiWave1 2.2s infinite ease-in-out;
+      transform-origin: 190px 240px;
+    }
+    .wifi-arc-2 {
+      animation: wifiWave2 2.2s infinite ease-in-out 0.4s;
+      transform-origin: 190px 240px;
+    }
+    .wifi-arc-3 {
+      animation: wifiWave3 2.2s infinite ease-in-out 0.8s;
+      transform-origin: 190px 240px;
+    }
+    .pulse-core {
+      animation: pulseEmitter 2s infinite ease-in-out;
+    }
+    .packet-stream {
+      stroke-dasharray: 6, 8;
+      animation: transmitFlow 1.8s linear infinite;
+    }
+  </style>
+
+  <!-- Clean High-Contrast White/Light Background Frame -->
+  <rect width="1100" height="480" rx="16" fill="url(#bgLightGrad)" stroke="#CBD5E1" stroke-width="1.5"/>
+
+  <!-- Subtle Blueprint Grid Lines for Tech Aesthetic -->
+  <g opacity="0.3" stroke="#E2E8F0" stroke-width="0.8">
+    <line x1="0" y1="60" x2="1100" y2="60"/>
+    <line x1="0" y1="120" x2="1100" y2="120"/>
+    <line x1="0" y1="180" x2="1100" y2="180"/>
+    <line x1="0" y1="240" x2="1100" y2="240"/>
+    <line x1="0" y1="300" x2="1100" y2="300"/>
+    <line x1="0" y1="360" x2="1100" y2="360"/>
+    <line x1="0" y1="420" x2="1100" y2="420"/>
+    <line x1="150" y1="0" x2="150" y2="480"/>
+    <line x1="380" y1="0" x2="380" y2="480"/>
+    <line x1="720" y1="0" x2="720" y2="480"/>
+    <line x1="900" y1="0" x2="900" y2="480"/>
+  </g>
+
+  <!-- TOP HEADER -->
+  <g transform="translate(45, 38)">
+    <rect x="0" y="0" width="310" height="22" rx="11" fill="#E0F2FE" stroke="#BAE6FD" stroke-width="1" />
+    <circle cx="12" cy="11" r="4" fill="#0284C7" />
+    <text x="24" y="15" class="label-caps" fill="#0369A1">PROBLEM BRIEF: THE TWO-TRUTHS COLLISION</text>
+    
+    <text x="0" y="52" class="title-dark">Multi-Echelon Metric Divergence vs Canonical Grounding</text>
+    <text x="0" y="74" class="subtitle-dark">Real-time IoT, TMS &amp; ERP telemetry broadcasting conflicting definitions until reconciled by Snowflake Cortex.</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- LEFT PANEL: TELEMETRY TRANSMITTER WITH ANIMATED WI-FI WAVES   -->
+  <!-- ============================================================== -->
+  <g transform="translate(45, 145)">
+    <!-- Base Card -->
+    <rect width="260" height="295" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" filter="url(#softShadow)"/>
+    
+    <!-- Transmitter Header Pill -->
+    <rect x="16" y="16" width="130" height="20" rx="10" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="26" y="30" class="label-caps" fill="#475569">TELEMETRY EMITTER</text>
+
+    <!-- Signal Tower / Transceiver Hub -->
+    <circle cx="130" cy="120" r="28" fill="#F0F9FF" stroke="#0EA5E9" stroke-width="2"/>
+    <circle cx="130" cy="120" r="12" fill="#0284C7"/>
+    <circle cx="130" cy="120" r="20" fill="none" stroke="#0284C7" stroke-width="2" class="pulse-core"/>
+
+    <!-- Concentric Animated Wi-Fi Waves Radiating Rightwards -->
+    <!-- Arc 1 (Inner) -->
+    <path d="M 160 90 A 45 45 0 0 1 160 150" fill="none" stroke="#0284C7" stroke-width="3.5" stroke-linecap="round" class="wifi-arc-1"/>
+    <!-- Arc 2 (Middle) -->
+    <path d="M 180 75 A 70 70 0 0 1 180 165" fill="none" stroke="#0EA5E9" stroke-width="3" stroke-linecap="round" class="wifi-arc-2"/>
+    <!-- Arc 3 (Outer) -->
+    <path d="M 200 60 A 95 95 0 0 1 200 180" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" class="wifi-arc-3"/>
+
+    <!-- Transmitter Title -->
+    <text x="130" y="185" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="14px" fill="#0F172A" text-anchor="middle">India-GCC Corridors</text>
+    <text x="130" y="202" font-family="'Segoe UI', sans-serif" font-size="11px" fill="#64748B" text-anchor="middle">JNPT · Mundra · Jebel Ali · Dammam</text>
+
+    <!-- Source Chips -->
+    <g transform="translate(16, 220)">
+      <rect x="0" y="0" width="110" height="24" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <text x="8" y="16" font-family="monospace" font-size="10px" fill="#334155">📡 GPS Pings</text>
+
+      <rect x="118" y="0" width="110" height="24" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <text x="126" y="16" font-family="monospace" font-size="10px" fill="#334155">📦 25k TMS Logs</text>
+
+      <rect x="0" y="32" width="110" height="24" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <text x="8" y="48" font-family="monospace" font-size="10px" fill="#334155">🏢 SAP ERP POs</text>
+
+      <rect x="118" y="32" width="110" height="24" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <text x="126" y="48" font-family="monospace" font-size="10px" fill="#334155">❄️ Cold-Chain IoT</text>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- CENTER: SNOWFLAKE SEMANTIC RECONCILIATION ENGINE               -->
+  <!-- ============================================================== -->
+  <g transform="translate(345, 145)">
+    <!-- Central Cylinder / Medallion Hub -->
+    <rect width="320" height="295" rx="14" fill="#FFFFFF" stroke="#0284C7" stroke-width="2" filter="url(#softShadow)"/>
+    
+    <!-- Snowflake Badge -->
+    <rect x="16" y="16" width="180" height="20" rx="10" fill="#E0F2FE" stroke="#0284C7" stroke-width="1"/>
+    <text x="26" y="30" class="label-caps" fill="#0369A1">SNOWFLAKE CORTEX ANALYST</text>
+
+    <!-- Connecting Input Channel -->
+    <path d="M -40 147 L 0 147" stroke="#0284C7" stroke-width="3" class="packet-stream"/>
+
+    <!-- Central Node Visual -->
+    <circle cx="160" cy="105" r="36" fill="#F0F9FF" stroke="#0284C7" stroke-width="2.5"/>
+    <text x="160" y="112" font-family="'Segoe UI', sans-serif" font-weight="900" font-size="20px" fill="#0284C7" text-anchor="middle">❄️</text>
+
+    <text x="160" y="160" class="card-title" text-anchor="middle">Canonical Supply Chain Ontology</text>
+    <text x="160" y="178" font-family="'Segoe UI', sans-serif" font-size="11px" fill="#64748B" text-anchor="middle">SCOR v14.0 &amp; GS1 Standardized</text>
+
+    <!-- Mathematical Formula Box -->
+    <rect x="20" y="196" width="280" height="52" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+    <text x="32" y="215" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="10px" fill="#475569">CANONICAL GROUNDING FORMULA:</text>
+    <text x="32" y="234" font-family="'Courier New', monospace" font-weight="700" font-size="11px" fill="#0369A1">OTIF = [On-Time POD ∧ Qty ≥ Ordered] / Total</text>
+
+    <!-- Consensus Lift Badge -->
+    <rect x="20" y="256" width="280" height="26" rx="6" fill="#ECFDF5" stroke="#10B981" stroke-width="1.2"/>
+    <text x="160" y="273" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="11px" fill="#065F46" text-anchor="middle">Consensus Lift: +28.4% On-Time Delivery</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- RIGHT PANEL: 3 SILOED PERSONAS WITH LOCAL METRICS             -->
+  <!-- ============================================================== -->
+  <g transform="translate(705, 145)">
+    <!-- Connecting Signal Streams from Center to 3 Personas -->
+    <path d="M -40 147 Q -15 50 15 50" fill="none" stroke="#F59E0B" stroke-width="2.5" class="packet-stream"/>
+    <path d="M -40 147 L 15 147" fill="none" stroke="#6366F1" stroke-width="2.5" class="packet-stream"/>
+    <path d="M -40 147 Q -15 240 15 240" fill="none" stroke="#10B981" stroke-width="2.5" class="packet-stream"/>
+
+    <!-- PERSONA 1: Planning (Red/Amber) -->
+    <g transform="translate(15, 0)">
+      <rect width="335" height="88" rx="10" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5" filter="url(#softShadow)"/>
+      <rect x="12" y="10" width="70" height="16" rx="8" fill="#FEF3C7"/>
+      <text x="18" y="22" font-family="'Segoe UI', sans-serif" font-weight="800" font-size="9px" fill="#B45309">PLANNING</text>
+      
+      <text x="90" y="22" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="12px" fill="#0F172A">Customer POD Perspective</text>
+      <text x="14" y="46" class="metric-val" fill="#D97706">22.91% OTIF</text>
+      <text x="14" y="64" font-family="'Segoe UI', sans-serif" font-size="10px" fill="#64748B">SLA: Sales Commit Date to Customer POD in full</text>
+      <rect x="250" y="26" width="72" height="22" rx="4" fill="#F1F5F9"/>
+      <text x="286" y="41" font-family="'Segoe UI', sans-serif" font-size="9px" font-weight="700" fill="#475569" text-anchor="middle">GROUNDED ✓</text>
+    </g>
+
+    <!-- PERSONA 2: Procurement (Indigo) -->
+    <g transform="translate(15, 103)">
+      <rect width="335" height="88" rx="10" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.5" filter="url(#softShadow)"/>
+      <rect x="12" y="10" width="92" height="16" rx="8" fill="#EEF2FF"/>
+      <text x="18" y="22" font-family="'Segoe UI', sans-serif" font-weight="800" font-size="9px" fill="#4338CA">PROCUREMENT</text>
+      
+      <text x="110" y="22" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="12px" fill="#0F172A">Supplier Receiving Dock SLA</text>
+      <text x="14" y="46" class="metric-val" fill="#4F46E5">50.36% Dock OTIF</text>
+      <text x="14" y="64" font-family="'Segoe UI', sans-serif" font-size="10px" fill="#64748B">SLA: Purchase Order Promised Date vs Receiving</text>
+      <rect x="250" y="26" width="72" height="22" rx="4" fill="#F1F5F9"/>
+      <text x="286" y="41" font-family="'Segoe UI', sans-serif" font-size="9px" font-weight="700" fill="#475569" text-anchor="middle">DISAMBIG ✓</text>
+    </g>
+
+    <!-- PERSONA 3: Logistics (Green) -->
+    <g transform="translate(15, 206)">
+      <rect width="335" height="88" rx="10" fill="#FFFFFF" stroke="#10B981" stroke-width="1.5" filter="url(#softShadow)"/>
+      <rect x="12" y="10" width="75" height="16" rx="8" fill="#ECFDF5"/>
+      <text x="18" y="22" font-family="'Segoe UI', sans-serif" font-weight="800" font-size="9px" fill="#047857">LOGISTICS</text>
+      
+      <text x="94" y="22" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="12px" fill="#0F172A">Carrier Transit SLA Rate</text>
+      <text x="14" y="46" class="metric-val" fill="#059669">73.32% Transit SLA</text>
+      <text x="14" y="64" font-family="'Segoe UI', sans-serif" font-size="10px" fill="#64748B">SLA: Carrier Dispatch Timestamp to Drop-off</text>
+      <rect x="250" y="26" width="72" height="22" rx="4" fill="#F1F5F9"/>
+      <text x="286" y="41" font-family="'Segoe UI', sans-serif" font-size="9px" font-weight="700" fill="#475569" text-anchor="middle">DISAMBIG ✓</text>
+    </g>
+  </g>
+</svg>
