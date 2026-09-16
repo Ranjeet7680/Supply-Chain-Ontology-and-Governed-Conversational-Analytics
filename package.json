@@ -2,7 +2,7 @@
   "name": "supply-chain-ontology-and-governed-conversational-analytics",
   "version": "1.0.0",
   "description": "Enterprise AI Supply Chain Intelligence, Governed Semantic Ontology & Snowpark Machine Learning for Snowflake CoCo Hackathon",
-  "main": "app.py",
+  "main": "index.html",
   "scripts": {
     "build": "echo 'Static build complete'",
     "test": "node scripts/run_all_tests.js",

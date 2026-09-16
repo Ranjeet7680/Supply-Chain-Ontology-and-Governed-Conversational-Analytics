@@ -1,8 +1,21 @@
+# Vercel Deployment Ignore
+app.py
+requirements.txt
+backend/
+ml/
+snowflake/
+cortex/
+engine/
+mcp/
+tests/
+scratch/
+scratch_wiki/
+Dataset/
+data/
+Dockerfile
+docker-compose.yml
+run_pipeline.py
 .git
 .github
 .pytest_cache
 __pycache__
-scratch/
-scratch_wiki/
-Dataset/
-tests/

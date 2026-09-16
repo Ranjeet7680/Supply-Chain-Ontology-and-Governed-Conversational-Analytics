@@ -152,7 +152,11 @@ df_sales, df_shipment, df_inv, df_landed, df_wh = load_core_data()
 
 # SIDEBAR CONTROLS
 if os.path.exists("assets/logo.png"):
-    st.sidebar.image("assets/logo.png", use_container_width=True)
+    try:
+        st.sidebar.image("assets/logo.png", use_container_width=True)
+    except Exception:
+        st.sidebar.image("assets/logo.png", use_column_width=True)
+
 st.sidebar.markdown("## SupplyChain IQ")
 st.sidebar.markdown("<span class='badge-cyan'>Snowflake Cortex</span> <span class='badge-purple'>PyTorch DL</span> <span class='badge-amber'>RL DQN</span>", unsafe_allow_html=True)
 st.sidebar.markdown("---")
