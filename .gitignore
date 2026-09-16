@@ -18,3 +18,7 @@ Dataset/*(1)*
 Thumbs.db
 .vscode/
 .idea/
+.vercel/
+.vercel_python_packages/
+scratch/
+scratch_wiki/
