@@ -17,8 +17,9 @@
 [![Python CI](https://github.com/Ranjeet7680/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/actions/workflows/python-ci.yml/badge.svg?style=for-the-badge)](https://github.com/Ranjeet7680/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/actions/workflows/python-ci.yml)
 [![Pages Deployment](https://github.com/Ranjeet7680/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/actions/workflows/deploy-pages.yml/badge.svg?style=for-the-badge)](https://ranjeet7680.github.io/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/)
 [![Docker Compose](https://img.shields.io/badge/Docker-Multi--Container%20Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](docker-compose.yml)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Live%20Deployment-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://supplychain-git-main-ranjeet7680s-projects.vercel.app/)
 
-[🚀 Live 3D Web App](https://ranjeet7680.github.io/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/) • [📖 Official GitHub Wiki](https://github.com/Ranjeet7680/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/wiki) • [📊 Data Analysis](https://github.com/Ranjeet7680/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/wiki/4.-Data-Analysis) • [📑 Submission Brief](HACKATHON_SUBMISSION.md) • [⚡ Swagger Docs](http://127.0.0.1:8000/docs)
+[🚀 GitHub Pages App](https://ranjeet7680.github.io/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/) • [▲ Vercel Live App](https://supplychain-git-main-ranjeet7680s-projects.vercel.app/) • [📖 Official GitHub Wiki](https://github.com/Ranjeet7680/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/wiki) • [📊 Data Analysis](https://github.com/Ranjeet7680/Supply-Chain-Ontology-and-Governed-Conversational-Analytics/wiki/4.-Data-Analysis) • [📑 Submission Brief](HACKATHON_SUBMISSION.md) • [⚡ Swagger Docs](http://127.0.0.1:8000/docs)
 
 </div>
 

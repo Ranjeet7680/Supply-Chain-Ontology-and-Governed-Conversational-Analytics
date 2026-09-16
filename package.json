@@ -4,6 +4,7 @@
   "description": "Enterprise AI Supply Chain Intelligence, Governed Semantic Ontology & Snowpark Machine Learning for Snowflake CoCo Hackathon",
   "main": "app.py",
   "scripts": {
+    "build": "echo 'Static build complete'",
     "test": "node scripts/run_all_tests.js",
     "test:unit": "python -m unittest discover -s tests -p \"test_*.py\"",
     "test:ontology": "python .coco/skills/supplychain-ontology-validator/validate_ontology.py --dir data/bridged",
