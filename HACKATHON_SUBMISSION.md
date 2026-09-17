@@ -16,7 +16,7 @@
 ## 1. Problem Brief
 
 <div align="center">
-  <img src="assets/problem_brief_wifi_animation.svg" width="100%" alt="Problem Brief Wi-Fi Animation Diagram" style="background: #FFFFFF; border-radius: 12px; border: 1px solid #E2E8F0; margin-bottom: 20px;"/>
+  <img src="assets/problem_brief_wifi_animation.svg" width="100%" alt="Problem Brief Wi-Fi Animation Diagram" style="border-radius: 12px; margin-bottom: 20px;"/>
 </div>
 
 ### A. What Real Business Problem Does This Solve?

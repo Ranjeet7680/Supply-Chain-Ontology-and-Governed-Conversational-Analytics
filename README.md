@@ -93,7 +93,7 @@ flowchart LR
 <summary><strong>📡 1. Problem Brief: Telemetry Broadcasting &amp; Cross-Persona Reconciliation</strong></summary>
 <br/>
 <div align="center">
-  <img src="assets/problem_brief_wifi_animation.svg" width="100%" alt="Wi-Fi Telemetry &amp; Reconciliation" style="background:#FFFFFF; border-radius:12px; border:1px solid #E2E8F0;"/>
+  <img src="assets/problem_brief_wifi_animation.svg" width="100%" alt="Wi-Fi Telemetry &amp; Reconciliation" style="border-radius:12px;"/>
 </div>
 </details>
 
