@@ -387,56 +387,60 @@
   <div id="view-welcome" class="hidden min-h-screen bg-background text-on-surface flex flex-col selection:bg-secondary selection:text-surface-dim">
     
     <!-- STICKY TOP NAVBAR -->
-    <nav class="sticky top-0 z-40 h-16 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 px-6 lg:px-12 flex items-center justify-between">
+    <nav class="sticky top-0 z-40 h-16 bg-[#040E1C]/95 backdrop-blur-2xl border-b border-cyan-900/40 px-4 sm:px-6 lg:px-12 flex items-center justify-between shadow-[0_4px_30px_rgba(0,0,0,0.4)]">
       <div class="flex items-center gap-4">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="showView('welcome')">
-          <img src="assets/favicon.png" alt="SupplyChain IQ Logo" class="h-9 w-auto object-contain rounded-lg shadow-[0_0_12px_rgba(76,215,246,0.4)] border border-secondary/30"/>
-          <div>
+        <div class="flex items-center gap-3 cursor-pointer group" onclick="showView('welcome')">
+          <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/10 border border-cyan-400/40 flex items-center justify-center shadow-[0_0_15px_rgba(76,215,246,0.3)] transition-all group-hover:border-cyan-400 group-hover:scale-105">
+            <img src="assets/favicon.png" alt="SupplyChain IQ Logo" class="h-6 w-6 object-contain filter drop-shadow-[0_0_6px_rgba(76,215,246,0.6)]"/>
+          </div>
+          <div class="whitespace-nowrap">
             <div class="flex items-center gap-2">
-              <span class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">SupplyChain IQ</span>
-              <span class="font-label-micro text-label-micro px-1.5 py-0.5 rounded bg-surface-container-highest text-secondary font-code-metric">v2.4</span>
+              <span class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-sky-300 bg-clip-text text-transparent">SupplyChain IQ</span>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-cyan-500/15 border border-cyan-400/40 text-cyan-300 shadow-[0_0_8px_rgba(76,215,246,0.25)]">v2.4</span>
             </div>
-            <span class="font-label-micro text-[10px] text-outline">Snowflake GCC Edition</span>
+            <span class="font-mono text-[10px] text-sky-400/70 tracking-wider block">Snowflake GCC Edition</span>
           </div>
         </div>
 
         <!-- Desktop Nav Links -->
-        <div class="hidden xl:flex items-center gap-6 ml-8 text-xs font-medium text-on-surface-variant">
-          <a href="#section-hero" class="hover:text-secondary transition-colors">Overview</a>
-          <a href="#section-silo" class="hover:text-secondary transition-colors">The Silo Dilemma</a>
-          <a href="#section-pillars" class="hover:text-secondary transition-colors">Core Pillars</a>
-          <a href="#section-architecture" class="hover:text-secondary transition-colors">Medallion Architecture</a>
-          <a href="#section-personas" class="hover:text-secondary transition-colors">Live Personas</a>
-          <a href="#section-security" class="hover:text-secondary transition-colors">Governance</a>
+        <div class="hidden xl:flex items-center gap-5 ml-6 text-xs font-medium text-slate-300">
+          <a href="#section-hero" class="hover:text-cyan-300 transition-colors">Overview</a>
+          <a href="#section-silo" class="hover:text-cyan-300 transition-colors">The Silo Dilemma</a>
+          <a href="#section-pillars" class="hover:text-cyan-300 transition-colors">Core Pillars</a>
+          <a href="#section-architecture" class="hover:text-cyan-300 transition-colors">Medallion Architecture</a>
+          <a href="#section-personas" class="hover:text-cyan-300 transition-colors">Live Personas</a>
+          <a href="#section-security" class="hover:text-cyan-300 transition-colors">Governance</a>
         </div>
       </div>
 
       <!-- Action Cluster -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
         <!-- Team Nexora Badge Button -->
-        <button onclick="openModal('team')" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-secondary/15 to-tertiary/15 border border-secondary/40 text-secondary hover:text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(76,215,246,0.25)] hover:scale-105">
+        <button onclick="openModal('team')" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#081E3B] border border-cyan-400/40 text-cyan-300 hover:text-white hover:border-cyan-400 text-xs font-bold transition-all shadow-[0_0_12px_rgba(76,215,246,0.2)] hover:shadow-[0_0_20px_rgba(76,215,246,0.4)] hover:scale-105 whitespace-nowrap">
           <span>🏆</span>
           <span>Team Nexora</span>
         </button>
+
         <!-- Indian Regional Language Selector -->
-        <div class="relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high border border-secondary/30 text-xs shadow-sm">
-          <span class="text-secondary font-bold text-sm">🇮🇳</span>
-          <select id="global-lang-select" onchange="changeGlobalLanguage(this.value)" class="bg-transparent text-on-surface font-semibold text-xs border-none outline-none cursor-pointer">
-            <option value="en" class="bg-surface-container-highest text-on-surface">English (Business)</option>
-            <option value="hi" class="bg-surface-container-highest text-on-surface">हिन्दी (Hindi)</option>
-            <option value="ta" class="bg-surface-container-highest text-on-surface">தமிழ் (Tamil)</option>
-            <option value="te" class="bg-surface-container-highest text-on-surface">తెలుగు (Telugu)</option>
-            <option value="gu" class="bg-surface-container-highest text-on-surface">ગુજરાતી (Gujarati)</option>
-            <option value="mr" class="bg-surface-container-highest text-on-surface">मराठी (Marathi)</option>
-            <option value="bn" class="bg-surface-container-highest text-on-surface">বাংলা (Bengali)</option>
+        <div class="relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#061426] border border-cyan-500/35 text-xs shadow-inner">
+          <span class="text-sm">🇮🇳</span>
+          <select id="global-lang-select" onchange="changeGlobalLanguage(this.value)" class="bg-transparent text-slate-200 font-semibold text-xs border-none outline-none cursor-pointer pr-1">
+            <option value="en" class="bg-[#040E1C] text-slate-200">English (Business)</option>
+            <option value="hi" class="bg-[#040E1C] text-slate-200">हिन्दी (Hindi)</option>
+            <option value="ta" class="bg-[#040E1C] text-slate-200">தமிழ் (Tamil)</option>
+            <option value="te" class="bg-[#040E1C] text-slate-200">తెలుగు (Telugu)</option>
+            <option value="gu" class="bg-[#040E1C] text-slate-200">ગુજરાતી (Gujarati)</option>
+            <option value="mr" class="bg-[#040E1C] text-slate-200">मराठी (Marathi)</option>
+            <option value="bn" class="bg-[#040E1C] text-slate-200">বাংলা (Bengali)</option>
           </select>
         </div>
 
-        <button onclick="showView('auth')" class="px-4 py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface border border-outline-variant/60 font-body-sm text-xs font-semibold flex items-center gap-1.5 transition-all">
-          <span class="material-symbols-outlined text-[16px] text-secondary">lock</span>
+        <button onclick="showView('auth')" class="px-3.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 border border-slate-700 font-medium text-xs flex items-center gap-1.5 transition-all hover:border-cyan-400/40 whitespace-nowrap">
+          <span class="material-symbols-outlined text-[15px] text-cyan-400">lock</span>
           <span>Sign In / SSO</span>
         </button>
-        <button onclick="showView('dashboard')" class="px-4 py-2 rounded-lg bg-gradient-to-r from-secondary-container to-primary-container hover:opacity-95 text-on-primary-container font-body-sm text-xs font-bold flex items-center gap-2 shadow-[0_0_16px_rgba(76,215,246,0.35)] transition-all">
+
+        <button onclick="showView('dashboard')" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-[0_0_20px_rgba(56,189,248,0.45)] hover:shadow-[0_0_30px_rgba(56,189,248,0.7)] transition-all whitespace-nowrap">
           <span class="material-symbols-outlined text-[16px]">rocket_launch</span>
           <span>Launch Command Center</span>
         </button>
@@ -444,54 +448,81 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <header id="section-hero" class="relative pt-16 pb-20 px-6 lg:px-12 max-w-7xl mx-auto flex flex-col items-center text-center overflow-hidden">
-      <!-- Ambient Glows -->
-      <div class="absolute w-[650px] h-[350px] bg-secondary/15 rounded-full blur-[140px] pointer-events-none top-10"></div>
-      <div class="absolute w-[500px] h-[300px] bg-primary-container/15 rounded-full blur-[120px] pointer-events-none top-32"></div>
+    <header id="section-hero" class="relative pt-12 sm:pt-16 pb-20 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto flex flex-col items-center text-center overflow-hidden">
+      <!-- Ambient High-Tech Glows -->
+      <div class="absolute w-[750px] h-[400px] bg-cyan-500/12 rounded-full blur-[150px] pointer-events-none top-4 animate-pulse"></div>
+      <div class="absolute w-[550px] h-[350px] bg-blue-600/12 rounded-full blur-[130px] pointer-events-none top-24"></div>
 
       <!-- Pill Badge -->
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-high/90 border border-secondary/40 mb-6 shadow-[0_0_20px_rgba(76,215,246,0.15)] relative z-10 animate-pulse">
-        <span class="w-2 h-2 rounded-full bg-tertiary"></span>
-        <span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider font-semibold">
-          ✦ Snowflake CoCo CLI Hackathon GCC Edition • Team Nexora
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#081E3B]/90 border border-cyan-400/40 mb-6 shadow-[0_0_25px_rgba(76,215,246,0.25)] relative z-10 backdrop-blur-xl">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="font-mono text-xs text-cyan-300 uppercase tracking-wider font-bold">
+          ✦ Snowflake CoCo CLI Hackathon GCC Edition
         </span>
+        <span class="text-xs text-slate-500">•</span>
+        <span class="text-xs font-bold text-emerald-400">Team Nexora</span>
       </div>
 
-      <!-- Title -->
-      <h1 class="font-display-lg text-[36px] sm:text-[46px] lg:text-[56px] font-extrabold tracking-tight leading-[1.15] max-w-5xl mb-6 relative z-10 bg-gradient-to-b from-white via-on-surface to-outline-variant bg-clip-text text-transparent">
-        Governed Supply Chain Intelligence Built on Industry Ontology &amp; Snowflake Cortex AI
+      <!-- High-Contrast Multi-Tier Title -->
+      <h1 class="font-extrabold tracking-tight leading-[1.12] max-w-5xl mb-6 relative z-10">
+        <span class="block text-[32px] sm:text-[44px] lg:text-[54px] bg-gradient-to-b from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+          Governed Supply Chain Intelligence
+        </span>
+        <span class="block text-[22px] sm:text-[30px] lg:text-[38px] font-semibold bg-gradient-to-r from-sky-200 via-cyan-200 to-sky-300 bg-clip-text text-transparent mt-1">
+          Built on Industry Ontology &amp; Canonical Semantics
+        </span>
+        <span class="block text-[30px] sm:text-[42px] lg:text-[52px] font-black bg-gradient-to-r from-[#00F2FE] via-[#38BDF8] to-[#34D399] bg-clip-text text-transparent mt-2 drop-shadow-[0_0_35px_rgba(0,242,254,0.5)]">
+          Powered by Snowflake Cortex AI
+        </span>
       </h1>
 
       <!-- Subtitle -->
-      <p class="font-body-md text-base sm:text-lg lg:text-xl text-on-surface-variant max-w-3xl leading-relaxed mb-8 relative z-10">
-        Supply chain data is scattered across ERP, WMS, TMS, and IoT systems with inconsistent definitions. 
-        <strong class="text-secondary font-semibold">SupplyChain IQ</strong> encodes a canonical business ontology into Snowflake Semantic Views, 
-        empowering any persona to query in natural language (including <strong class="text-tertiary">Hindi, Tamil, Telugu, Gujarati</strong>) with voice synthesis and zero metric drift.
+      <p class="font-body-md text-sm sm:text-base lg:text-lg text-slate-300/90 max-w-3xl leading-relaxed mb-6 relative z-10">
+        Multi-echelon supply chain telemetry (TMS, SAP ERP, WMS &amp; IoT sensors) reconciled into a single canonical ground truth with <strong class="text-cyan-300 font-semibold">zero metric drift</strong> — queryable via natural language and voice synthesis across <strong class="text-emerald-400 font-semibold">7 Indian regional languages</strong>.
       </p>
 
-            <!-- Team Nexora Attribution Banner -->
-      <div class="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-surface-container-lowest/80 border border-secondary/30 backdrop-blur-md mb-6 relative z-10 shadow-lg">
-        <span class="text-xs font-bold text-secondary font-mono uppercase tracking-wider">Engineered by Team Nexora:</span>
-        <span class="text-xs text-on-surface font-medium">Ranjeet Kumar (Leader) • Hitali Khachane • Rahul Sangral • Syed Saaduddin</span>
-        <button onclick="openModal('team')" class="text-[11px] text-secondary hover:underline font-bold font-mono">View Team Profile &rarr;</button>
+      <!-- Team Nexora Attribution Banner -->
+      <div class="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-2 rounded-2xl bg-[#061426]/90 border border-cyan-500/35 backdrop-blur-xl mb-7 relative z-10 shadow-[0_8px_30px_rgba(0,0,0,0.5)] text-xs">
+        <span class="font-bold text-cyan-300 font-mono uppercase tracking-wider">Engineered by Team Nexora:</span>
+        <span class="text-slate-200 font-medium">Ranjeet Kumar (Lead) • Hitali Khachane • Rahul Sangral • Syed Saaduddin</span>
+        <button onclick="openModal('team')" class="ml-1 text-cyan-400 hover:text-white font-bold font-mono underline underline-offset-4 flex items-center gap-1 transition-colors">
+          <span>View Team Profile</span>
+          <span>&rarr;</span>
+        </button>
       </div>
 
       <!-- Primary CTAs -->
-      <div class="flex flex-wrap items-center justify-center gap-4 mb-8 relative z-10">
-        <button onclick="showView('dashboard'); switchTab('overview');" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-secondary-container via-secondary to-primary-container hover:opacity-95 text-on-primary-container font-body-sm text-sm font-bold flex items-center gap-2.5 shadow-[0_0_25px_rgba(76,215,246,0.4)] transition-all transform hover:scale-[1.02]">
+      <div class="flex flex-wrap items-center justify-center gap-3.5 mb-8 relative z-10">
+        <button onclick="showView('dashboard'); switchTab('overview');" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-extrabold text-sm flex items-center gap-2 shadow-[0_0_30px_rgba(56,189,248,0.5)] transition-all transform hover:scale-[1.03]">
           <span class="material-symbols-outlined text-[20px]">grid_view</span>
           <span>Launch Command Center</span>
         </button>
 
-        <button onclick="showView('dashboard'); switchTab('chat');" class="px-6 py-3.5 rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface border border-secondary/40 font-body-sm text-sm font-semibold flex items-center gap-2.5 transition-all shadow-[inset_0_1px_0_0_rgba(76,215,246,0.3)]">
-          <span class="material-symbols-outlined text-[20px] text-secondary">mic</span>
+        <button onclick="showView('dashboard'); switchTab('chat');" class="px-6 py-3 rounded-xl bg-[#081E3B]/90 hover:bg-[#0B254A] text-slate-100 border border-cyan-400/40 font-bold text-sm flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(76,215,246,0.2)] hover:border-cyan-400">
+          <span class="material-symbols-outlined text-[20px] text-cyan-300 animate-pulse">mic</span>
           <span>Voice &amp; Regional AI</span>
         </button>
 
-        <button onclick="showView('dashboard'); switchTab('ontology');" class="px-6 py-3.5 rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface border border-outline-variant/60 font-body-sm text-sm font-semibold flex items-center gap-2.5 transition-all">
-          <span class="material-symbols-outlined text-[20px] text-tertiary">account_tree</span>
+        <button onclick="showView('dashboard'); switchTab('ontology');" class="px-6 py-3 rounded-xl bg-[#061426]/90 hover:bg-[#091D38] text-slate-200 border border-slate-700/80 font-bold text-sm flex items-center gap-2 transition-all hover:border-emerald-400/50">
+          <span class="material-symbols-outlined text-[20px] text-emerald-400">account_tree</span>
           <span>Explore Ontology Graph</span>
         </button>
+      </div>
+
+      <!-- Quick Feature Pill Bar -->
+      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-8 relative z-10 text-[11px] font-mono text-slate-300">
+        <span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700/60 shadow-sm">
+          <span class="text-cyan-400">⚡</span> &lt;1.8ms Query Latency
+        </span>
+        <span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700/60 shadow-sm">
+          <span class="text-emerald-400">🎯</span> +28.4% OTIF Consensus Lift
+        </span>
+        <span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700/60 shadow-sm">
+          <span class="text-amber-400">🗣️</span> 7 Indian Regional Languages
+        </span>
+        <span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700/60 shadow-sm">
+          <span class="text-purple-400">🛡️</span> 100% Zero Semantic Drift
+        </span>
       </div>
 
       <!-- 3D INTERACTIVE CYBERNETIC GLOBE DIGITAL TWIN -->
