@@ -249,44 +249,102 @@
 <body class="bg-background font-body-md text-on-surface antialiased selection:bg-secondary selection:text-surface-dim">
 
   <!-- ================= VIEW 1: WELCOME LOADING SCREEN ================= -->
+  <style>
+    /* Multilingual Welcome Text Crossfade Animation */
+    @keyframes welcomeFadeIn {
+      0% { opacity: 0; transform: translateY(12px) scale(0.96); filter: blur(4px); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    @keyframes welcomeFadeOut {
+      0% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+      100% { opacity: 0; transform: translateY(-12px) scale(0.96); filter: blur(4px); }
+    }
+    @keyframes logoFadeOut {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.7); }
+    }
+    @keyframes welcomeZoneIn {
+      0% { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes glowRipple {
+      0% { box-shadow: 0 0 0 0 rgba(76,215,246,0.4); }
+      70% { box-shadow: 0 0 0 20px rgba(76,215,246,0); }
+      100% { box-shadow: 0 0 0 0 rgba(76,215,246,0); }
+    }
+    .welcome-text-active {
+      animation: welcomeFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .welcome-text-exit {
+      animation: welcomeFadeOut 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+    }
+    .logo-fade-out {
+      animation: logoFadeOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .welcome-zone-enter {
+      animation: welcomeZoneIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .glow-ripple {
+      animation: glowRipple 2s ease-out infinite;
+    }
+    #welcome-lang-label {
+      transition: opacity 0.3s ease;
+    }
+  </style>
   <div id="view-loading" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#030c17] text-on-surface px-4 overflow-hidden">
     <!-- Ambient glowing backgrounds -->
-    <div class="absolute w-[600px] h-[600px] bg-secondary/10 rounded-full blur-[140px] pointer-events-none -top-40 -left-40 animate-pulse"></div>
-    <div class="absolute w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -bottom-32 -right-32"></div>
+    <div class="absolute w-[700px] h-[700px] bg-secondary/8 rounded-full blur-[180px] pointer-events-none -top-48 -left-48 animate-pulse"></div>
+    <div class="absolute w-[500px] h-[500px] bg-primary/8 rounded-full blur-[140px] pointer-events-none -bottom-40 -right-40"></div>
+    <div class="absolute w-[300px] h-[300px] bg-tertiary/6 rounded-full blur-[100px] pointer-events-none top-1/3 left-1/2 -translate-x-1/2"></div>
     
     <!-- Cybernetic radar / orbital emblem -->
-    <div class="relative flex items-center justify-center mb-8">
-      <!-- Outer rotating orbital ring with tick marks -->
-      <div class="w-48 h-48 rounded-full border border-secondary/20 border-dashed animate-orbit flex items-center justify-center"></div>
+    <div class="relative flex items-center justify-center mb-6" style="width: 220px; height: 220px;">
+      <!-- Outer rotating orbital ring -->
+      <div class="absolute w-[220px] h-[220px] rounded-full border border-secondary/15 border-dashed animate-orbit"></div>
+      
+      <!-- Middle rotating ring -->
+      <div class="absolute w-[180px] h-[180px] rounded-full border border-secondary/10 animate-orbit" style="animation-duration: 24s;"></div>
       
       <!-- Inner counter-rotating ring -->
-      <div class="absolute w-36 h-36 rounded-full border-2 border-t-secondary border-r-transparent border-b-primary-container border-l-transparent animate-orbit-reverse"></div>
+      <div class="absolute w-[150px] h-[150px] rounded-full border-2 border-t-secondary border-r-transparent border-b-primary-container border-l-transparent animate-orbit-reverse"></div>
       
       <!-- Radar sweep circle -->
-      <div class="absolute w-28 h-28 rounded-full bg-gradient-to-tr from-secondary/10 via-transparent to-transparent animate-radar pointer-events-none"></div>
+      <div class="absolute w-[120px] h-[120px] rounded-full bg-gradient-to-tr from-secondary/10 via-transparent to-transparent animate-radar pointer-events-none"></div>
 
-      <!-- Core Logo Emblem -->
-      <div class="absolute w-20 h-20 rounded-2xl bg-surface-container-high border border-secondary/40 flex items-center justify-center shadow-[0_0_35px_rgba(76,215,246,0.35)] backdrop-blur-md">
-        <img src="assets/favicon.png" alt="SupplyChain IQ" class="w-12 h-12 object-contain filter drop-shadow-[0_0_8px_rgba(76,215,246,0.6)]"/>
+      <!-- Core Logo Emblem (will fade out after 2s) -->
+      <div id="splash-logo-container" class="absolute w-24 h-24 rounded-2xl bg-surface-container-high/90 border border-secondary/40 flex items-center justify-center shadow-[0_0_45px_rgba(76,215,246,0.4)] backdrop-blur-xl">
+        <img src="assets/favicon.png" alt="SupplyChain IQ" class="w-14 h-14 object-contain filter drop-shadow-[0_0_10px_rgba(76,215,246,0.7)]"/>
+      </div>
+
+      <!-- Multilingual Welcome Zone (hidden initially, shown after 2s) -->
+      <div id="welcome-multilingual-zone" class="absolute hidden flex-col items-center justify-center">
+        <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-secondary/20 via-primary-container/15 to-tertiary/10 border border-secondary/50 flex flex-col items-center justify-center shadow-[0_0_50px_rgba(76,215,246,0.45)] backdrop-blur-xl glow-ripple">
+          <span id="welcome-lang-text" class="text-[15px] font-bold text-center leading-tight px-1" style="white-space: pre-line; background: linear-gradient(135deg, #FFFFFF, #4CD7F6, #7DD3FC); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></span>
+        </div>
+        <span id="welcome-lang-label" class="mt-2 text-[10px] font-bold text-secondary/60 uppercase tracking-[2px]"></span>
       </div>
     </div>
 
     <!-- Product Title & Badges -->
-    <div class="text-center max-w-lg mb-8 relative z-10">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high/80 border border-secondary/30 mb-3 shadow-[0_0_15px_rgba(76,215,246,0.15)]">
+    <div class="text-center max-w-lg mb-6 relative z-10">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high/80 border border-secondary/30 mb-4 shadow-[0_0_20px_rgba(76,215,246,0.15)]">
         <span class="w-2 h-2 rounded-full bg-tertiary animate-ping"></span>
         <span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">Snowflake Cortex AI • Canonical Ontology v2.4</span>
       </div>
-      <h1 class="font-display-lg text-[32px] md:text-[38px] font-bold tracking-tight bg-gradient-to-r from-white via-secondary to-primary-container bg-clip-text text-transparent mb-2">
+      <h1 class="font-display-lg text-[34px] md:text-[42px] font-bold tracking-tight bg-gradient-to-r from-white via-secondary to-primary-container bg-clip-text text-transparent mb-2 drop-shadow-[0_0_30px_rgba(76,215,246,0.2)]">
         SupplyChain IQ
       </h1>
       <p class="font-body-md text-on-surface-variant text-sm md:text-base leading-relaxed">
         Governed Supply Chain Intelligence &amp; Conversational Analytics
       </p>
+      <!-- Multilingual Welcome Banner (appears after logo swap) -->
+      <div id="welcome-banner-text" class="hidden mt-3">
+        <p id="welcome-banner-display" class="text-secondary/80 text-sm font-semibold tracking-wide" style="min-height: 24px;"></p>
+      </div>
     </div>
 
     <!-- Live Telemetry Progress Bar -->
-    <div class="w-full max-w-md bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4 shadow-2xl relative z-10 backdrop-blur-xl">
+    <div class="w-full max-w-md bg-surface-container-lowest/95 border border-outline-variant/40 rounded-xl p-4 shadow-2xl relative z-10 backdrop-blur-xl">
       <div class="flex items-center justify-between mb-2">
         <div class="flex items-center gap-2">
           <span class="material-symbols-outlined text-[16px] text-secondary animate-spin">sync</span>
@@ -298,7 +356,7 @@
       </div>
 
       <!-- Bar container -->
-      <div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden p-0.5 border border-outline-variant/30">
+      <div class="w-full h-2.5 rounded-full bg-surface-container-high overflow-hidden p-0.5 border border-outline-variant/30">
         <div id="loading-bar-fill" class="h-full rounded-full bg-gradient-to-r from-secondary via-primary-container to-tertiary transition-all duration-300 shadow-[0_0_12px_rgba(76,215,246,0.8)]" style="width: 5%;"></div>
       </div>
 
@@ -313,12 +371,12 @@
     </div>
 
     <!-- Quick Action / Skip Controls -->
-    <div class="mt-8 flex items-center gap-3 relative z-10">
-      <button onclick="showView('welcome')" class="px-5 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface border border-outline-variant/60 font-body-sm text-xs font-semibold flex items-center gap-2 transition-all hover:border-secondary/40 shadow-sm">
+    <div class="mt-6 flex items-center gap-3 relative z-10">
+      <button onclick="showView('welcome')" class="px-5 py-2.5 rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface border border-outline-variant/60 font-body-sm text-xs font-semibold flex items-center gap-2 transition-all hover:border-secondary/40 hover:shadow-[0_0_15px_rgba(76,215,246,0.2)] shadow-sm">
         <span class="material-symbols-outlined text-[16px] text-secondary">explore</span>
         <span>Explore Product Showcase</span>
       </button>
-      <button onclick="showView('dashboard')" class="px-5 py-2.5 rounded-lg bg-gradient-to-r from-secondary-container to-primary-container hover:opacity-95 text-on-primary-container font-body-sm text-xs font-bold flex items-center gap-2 shadow-[0_0_20px_rgba(76,215,246,0.3)] transition-all">
+      <button onclick="showView('dashboard')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-secondary-container to-primary-container hover:opacity-95 text-on-primary-container font-body-sm text-xs font-bold flex items-center gap-2 shadow-[0_0_20px_rgba(76,215,246,0.3)] transition-all hover:shadow-[0_0_30px_rgba(76,215,246,0.45)]">
         <span class="material-symbols-outlined text-[16px]">bolt</span>
         <span>Fast Launch Dashboard</span>
       </button>
@@ -5979,7 +6037,7 @@
       }
     }
 
-    // Loading Screen Progress Animation
+    // Loading Screen Progress Animation with Multilingual Welcome
     function initLoadingScreen() {
       let progress = 5;
       const barFill = document.getElementById('loading-bar-fill');
@@ -6027,6 +6085,91 @@
           }, 800);
         }
       }, 120);
+
+      // ======= MULTILINGUAL WELCOME CYCLING (after 2 seconds) =======
+      const welcomeMessages = [
+        { text: "Welcome to\nSupplyChain IQ", lang: "English", banner: "Welcome to SupplyChain IQ" },
+        { text: "स्वागत है\nSupplyChain IQ", lang: "हिन्दी", banner: "SupplyChain IQ में आपका स्वागत है" },
+        { text: "வரவேற்கிறோம்\nSupplyChain IQ", lang: "தமிழ்", banner: "SupplyChain IQ க்கு வரவேற்கிறோம்" },
+        { text: "స్వాగతం\nSupplyChain IQ", lang: "తెలుగు", banner: "SupplyChain IQ కి స్వాగతం" },
+        { text: "સ્વાગત છે\nSupplyChain IQ", lang: "ગુજરાતી", banner: "SupplyChain IQ માં સ્વાગત છે" },
+        { text: "स्वागत आहे\nSupplyChain IQ", lang: "मराठी", banner: "SupplyChain IQ मध्ये स्वागत आहे" },
+        { text: "স্বাগতম\nSupplyChain IQ", lang: "বাংলা", banner: "SupplyChain IQ তে স্বাগতম" }
+      ];
+
+      let welcomeIdx = 0;
+      let welcomeCycleInterval = null;
+
+      function showWelcomeText(idx) {
+        const textEl = document.getElementById('welcome-lang-text');
+        const labelEl2 = document.getElementById('welcome-lang-label');
+        const bannerEl = document.getElementById('welcome-banner-display');
+        if (!textEl) return;
+
+        // Exit current text
+        textEl.classList.remove('welcome-text-active');
+        textEl.classList.add('welcome-text-exit');
+
+        setTimeout(() => {
+          const msg = welcomeMessages[idx];
+          textEl.textContent = msg.text;
+          if (labelEl2) labelEl2.textContent = msg.lang;
+          if (bannerEl) bannerEl.textContent = msg.banner;
+          
+          textEl.classList.remove('welcome-text-exit');
+          textEl.classList.add('welcome-text-active');
+        }, 400);
+      }
+
+      // After 2 seconds: fade out logo, show multilingual welcome cycling
+      setTimeout(() => {
+        const logoContainer = document.getElementById('splash-logo-container');
+        const welcomeZone = document.getElementById('welcome-multilingual-zone');
+        const bannerText = document.getElementById('welcome-banner-text');
+
+        // Fade out logo
+        if (logoContainer) {
+          logoContainer.classList.add('logo-fade-out');
+          setTimeout(() => {
+            logoContainer.style.display = 'none';
+          }, 500);
+        }
+
+        // Show multilingual welcome zone
+        setTimeout(() => {
+          if (welcomeZone) {
+            welcomeZone.classList.remove('hidden');
+            welcomeZone.classList.add('flex', 'welcome-zone-enter');
+          }
+          if (bannerText) {
+            bannerText.classList.remove('hidden');
+          }
+
+          // Show first welcome message
+          showWelcomeText(0);
+
+          // Cycle through languages every 1.8 seconds
+          welcomeCycleInterval = setInterval(() => {
+            welcomeIdx = (welcomeIdx + 1) % welcomeMessages.length;
+            showWelcomeText(welcomeIdx);
+          }, 1800);
+        }, 550);
+      }, 2000);
+
+      // Clean up interval when leaving loading screen
+      const origShowView = window._origShowView || showView;
+      if (!window._origShowView) {
+        window._origShowView = showView;
+        window.showView = function(viewId) {
+          if (welcomeCycleInterval) {
+            clearInterval(welcomeCycleInterval);
+            welcomeCycleInterval = null;
+          }
+          origShowView(viewId);
+        };
+        // Also update button onclick handlers
+        showView = window.showView;
+      }
     }
 
     // Keyboard Shortcuts
