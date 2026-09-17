@@ -1578,31 +1578,31 @@
           <!-- Section 3 -->
           <nav class="space-y-space-xs">
             <div class="px-space-sm py-1 font-label-caps text-label-caps text-outline uppercase tracking-wider">Supply Chain Operations</div>
-            <a href="javascript:void(0)" onclick="switchTab('overview'); highlightSection('supplier-matrix');" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-suppliers" href="javascript:void(0)" onclick="switchTab('suppliers')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">domain</span>
                 <span class="font-body-sm text-body-sm">Suppliers</span>
               </div>
             </a>
-            <a href="javascript:void(0)" onclick="switchTab('overview')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-inventory" href="javascript:void(0)" onclick="switchTab('inventory')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">inventory_2</span>
                 <span class="font-body-sm text-body-sm">Inventory</span>
               </div>
             </a>
-            <a href="javascript:void(0)" onclick="switchTab('overview')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-orders" href="javascript:void(0)" onclick="switchTab('orders')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
                 <span class="font-body-sm text-body-sm">Orders</span>
               </div>
             </a>
-            <a href="javascript:void(0)" onclick="switchTab('overview'); highlightSection('disruptions-table');" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-shipments" href="javascript:void(0)" onclick="switchTab('shipments')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">local_shipping</span>
                 <span class="font-body-sm text-body-sm">Shipments</span>
               </div>
             </a>
-            <a href="javascript:void(0)" onclick="switchTab('overview')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-warehouses" href="javascript:void(0)" onclick="switchTab('warehouses')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">warehouse</span>
                 <span class="font-body-sm text-body-sm">Warehouses</span>
@@ -1613,26 +1613,26 @@
           <!-- Section 4 -->
           <nav class="space-y-space-xs">
             <div class="px-space-sm py-1 font-label-caps text-label-caps text-outline uppercase tracking-wider">Risk &amp; Governance</div>
-            <a href="javascript:void(0)" onclick="switchTab('overview'); highlightSection('disruptions-table');" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-risk" href="javascript:void(0)" onclick="switchTab('risk')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px] text-error">warning</span>
                 <span class="font-body-sm text-body-sm">Risk &amp; Alerts</span>
               </div>
               <span class="font-label-micro text-label-micro px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-semibold">4 Critical</span>
             </a>
-            <a href="javascript:void(0)" onclick="openModal('governance')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-governance" href="javascript:void(0)" onclick="switchTab('governance')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px] text-tertiary">verified_user</span>
                 <span class="font-body-sm text-body-sm">Data Governance</span>
               </div>
             </a>
-            <a href="javascript:void(0)" onclick="openModal('governance')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-lineage" href="javascript:void(0)" onclick="switchTab('lineage')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">alt_route</span>
                 <span class="font-body-sm text-body-sm">Data Lineage</span>
               </div>
             </a>
-            <a href="javascript:void(0)" onclick="openModal('governance')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-audit" href="javascript:void(0)" onclick="switchTab('audit')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">description</span>
                 <span class="font-body-sm text-body-sm">Audit Logs</span>
@@ -6145,6 +6145,534 @@
           </div>
         </div>
       </div>
+    <!-- TAB: SUPPLIERS VIEW -->
+    <div id="tab-suppliers" class="tab-pane hidden p-gutter space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span class="font-mono text-xs text-cyan-300 font-bold uppercase tracking-wider">Tier-1 &amp; Tier-2 Directory</span>
+          </div>
+          <h2 class="text-2xl font-black text-white">Global Suppliers &amp; Vendor Matrix</h2>
+          <p class="text-slate-400 text-xs">1,280 Verified Vendors across India, GCC, Southeast Asia &amp; Europe with Live SLA Auditing.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="switchTab('chat'); runSimulatedQuery('Compare supplier SLA between Tata Steel and Emirates Steel');" class="px-3.5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md hover:bg-cyan-400 transition-all">
+            <span class="material-symbols-outlined text-[16px]">smart_toy</span>
+            <span>AI Vendor Audit</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick KPI Row -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <span class="text-xs text-slate-400">Total Active Vendors</span>
+          <div class="text-2xl font-bold font-mono text-white mt-1">1,280</div>
+          <span class="text-[11px] text-emerald-400 font-mono">100% ISO-8000 Certified</span>
+        </div>
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <span class="text-xs text-slate-400">Mean Lead Time Adherence</span>
+          <div class="text-2xl font-bold font-mono text-cyan-300 mt-1">92.4%</div>
+          <span class="text-[11px] text-cyan-400 font-mono">±1.8 days deviation</span>
+        </div>
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <span class="text-xs text-slate-400">At-Risk Suppliers (&lt;80% SLA)</span>
+          <div class="text-2xl font-bold font-mono text-amber-400 mt-1">14</div>
+          <span class="text-[11px] text-amber-400 font-mono">Buffer dispatch recommended</span>
+        </div>
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <span class="text-xs text-slate-400">Consensus OTIF Rating</span>
+          <div class="text-2xl font-bold font-mono text-emerald-400 mt-1">94.8%</div>
+          <span class="text-[11px] text-emerald-400 font-mono">Zero Semantic Drift</span>
+        </div>
+      </div>
+
+      <!-- Supplier Table -->
+      <div class="rounded-2xl border border-cyan-500/30 bg-[#030914] overflow-hidden">
+        <div class="px-5 py-3 border-b border-cyan-900/40 bg-[#040E1C] flex items-center justify-between">
+          <span class="font-mono text-xs font-bold text-white uppercase">Supplier Performance Index</span>
+          <span class="font-mono text-xs text-cyan-400">Filtered: Top 6 Strategic Partners</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-[#020712] text-slate-400 border-b border-cyan-900/40">
+              <tr>
+                <th class="p-3">Vendor Name</th>
+                <th class="p-3">Region / Hub</th>
+                <th class="p-3">Category</th>
+                <th class="p-3">SLA Adherence</th>
+                <th class="p-3">Lead Time (EMA)</th>
+                <th class="p-3">Risk Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-cyan-900/30 text-slate-300">
+              <tr class="hover:bg-cyan-500/5">
+                <td class="p-3 font-bold text-white">Tata Steel Logistics</td>
+                <td class="p-3">🇮🇳 JNPT / Mumbai</td>
+                <td class="p-3">Raw Materials</td>
+                <td class="p-3 text-emerald-400 font-bold">96.4%</td>
+                <td class="p-3">4.2 days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Optimal</span></td>
+              </tr>
+              <tr class="hover:bg-cyan-500/5">
+                <td class="p-3 font-bold text-white">Emirates Global Aluminium</td>
+                <td class="p-3">🇦🇪 Jebel Ali / Dubai</td>
+                <td class="p-3">Fabrication</td>
+                <td class="p-3 text-emerald-400 font-bold">95.1%</td>
+                <td class="p-3">5.0 days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Optimal</span></td>
+              </tr>
+              <tr class="hover:bg-cyan-500/5">
+                <td class="p-3 font-bold text-white">Saudi Aramco Base Oils</td>
+                <td class="p-3">🇸🇦 Dammam / Jeddah</td>
+                <td class="p-3">Petrochemicals</td>
+                <td class="p-3 text-emerald-400 font-bold">93.8%</td>
+                <td class="p-3">6.1 days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Optimal</span></td>
+              </tr>
+              <tr class="hover:bg-cyan-500/5">
+                <td class="p-3 font-bold text-white">Rotterdam Polymer Mart</td>
+                <td class="p-3">🇳🇱 Port of Rotterdam</td>
+                <td class="p-3">Polymers</td>
+                <td class="p-3 text-cyan-300 font-bold">91.2%</td>
+                <td class="p-3">12.4 days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">Normal</span></td>
+              </tr>
+              <tr class="hover:bg-cyan-500/5">
+                <td class="p-3 font-bold text-white">Foxconn Semiconductor Packaging</td>
+                <td class="p-3">🇹🇼 Taipei / Kaohsiung</td>
+                <td class="p-3">Electronics</td>
+                <td class="p-3 text-amber-400 font-bold">78.6%</td>
+                <td class="p-3">18.2 days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Lead Time Risk</span></td>
+              </tr>
+              <tr class="hover:bg-cyan-500/5">
+                <td class="p-3 font-bold text-white">Bharat Forge Precision</td>
+                <td class="p-3">🇮🇳 Pune / Mundra</td>
+                <td class="p-3">Heavy Mechanical</td>
+                <td class="p-3 text-emerald-400 font-bold">94.7%</td>
+                <td class="p-3">4.8 days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Optimal</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: INVENTORY VIEW -->
+    <div id="tab-inventory" class="tab-pane hidden p-gutter space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="font-mono text-xs text-emerald-400 font-bold uppercase tracking-wider">Multi-Echelon Stock Optimization</span>
+          </div>
+          <h2 class="text-2xl font-black text-white">Live Inventory &amp; Stock Health</h2>
+          <p class="text-slate-400 text-xs">Real-time telemetry across Central Nagpur, East Kolkata, Jebel Ali Hub &amp; Dammam Facility.</p>
+        </div>
+        <button onclick="switchTab('chat'); runSimulatedQuery('Which SKUs are at risk of stockout within 14 days?');" class="px-3.5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md hover:bg-cyan-400 transition-all">
+          <span class="material-symbols-outlined text-[16px]">psychology</span>
+          <span>Forecast Stockouts</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-5 rounded-2xl bg-[#040E1C] border border-cyan-500/30 flex flex-col justify-between">
+          <span class="text-xs text-slate-400">Total Active SKUs</span>
+          <div class="text-3xl font-black font-mono text-white my-2">4,520</div>
+          <div class="text-xs text-slate-400">98.2% Active in Snowflake Semantic Layer</div>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#040E1C] border border-amber-500/30 flex flex-col justify-between">
+          <span class="text-xs text-slate-400">Critical Stockout Warnings (&lt; 14 Days)</span>
+          <div class="text-3xl font-black font-mono text-amber-400 my-2">18 SKUs</div>
+          <div class="text-xs text-amber-300">Expedite Purchase Orders recommended</div>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#040E1C] border border-emerald-500/30 flex flex-col justify-between">
+          <span class="text-xs text-slate-400">Aggregate Safety Stock Value</span>
+          <div class="text-3xl font-black font-mono text-emerald-400 my-2">$42.8M</div>
+          <div class="text-xs text-emerald-300">RL Policy optimization saves $12,400 daily</div>
+        </div>
+      </div>
+
+      <!-- Inventory Matrix Table -->
+      <div class="rounded-2xl border border-cyan-500/30 bg-[#030914] overflow-hidden">
+        <div class="px-5 py-3 border-b border-cyan-900/40 bg-[#040E1C] flex items-center justify-between">
+          <span class="font-mono text-xs font-bold text-white uppercase">Critical SKU Stock Register</span>
+          <span class="font-mono text-xs text-slate-400">Live Medallion Gold View</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-[#020712] text-slate-400 border-b border-cyan-900/40">
+              <tr>
+                <th class="p-3">SKU Identifier</th>
+                <th class="p-3">Component Description</th>
+                <th class="p-3">Facility Location</th>
+                <th class="p-3">On-Hand Stock</th>
+                <th class="p-3">Days of Supply</th>
+                <th class="p-3">Action Prescribed</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-cyan-900/30 text-slate-300">
+              <tr class="hover:bg-cyan-500/5">
+                <td class="p-3 font-bold text-cyan-300">SKU-7721-IC</td>
+                <td class="p-3">Automotive Microcontroller QFN-64</td>
+                <td class="p-3">🇮🇳 Nagpur Central Plant</td>
+                <td class="p-3 text-amber-400 font-bold">420 units</td>
+                <td class="p-3 text-amber-400">6.2 days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Expedite Air Freight</span></td>
+              </tr>
+              <tr class="hover:bg-cyan-500/5">
+                <td class="p-3 font-bold text-cyan-300">SKU-9904-AL</td>
+                <td class="p-3">Aerospace Grade Structural Ingot 7075</td>
+                <td class="p-3">🇦🇪 Jebel Ali DC</td>
+                <td class="p-3 text-white font-bold">1,850 MT</td>
+                <td class="p-3 text-emerald-400">28.4 days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Stable Buffer</span></td>
+              </tr>
+              <tr class="hover:bg-cyan-500/5">
+                <td class="p-3 font-bold text-cyan-300">SKU-3312-PM</td>
+                <td class="p-3">High-Density Polymer Resin Pellets</td>
+                <td class="p-3">🇮🇳 East Kolkata DC</td>
+                <td class="p-3 text-amber-400 font-bold">640 bags</td>
+                <td class="p-3 text-amber-400">9.1 days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Trigger PO Re-order</span></td>
+              </tr>
+              <tr class="hover:bg-cyan-500/5">
+                <td class="p-3 font-bold text-cyan-300">SKU-4401-VL</td>
+                <td class="p-3">Hydraulic Cryogenic Pressure Valves</td>
+                <td class="p-3">🇸🇦 Dammam Marine Terminal</td>
+                <td class="p-3 text-white font-bold">120 units</td>
+                <td class="p-3 text-emerald-400">34.0 days</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Optimal</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: ORDERS VIEW -->
+    <div id="tab-orders" class="tab-pane hidden p-gutter space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+            <span class="font-mono text-xs text-cyan-400 font-bold uppercase tracking-wider">Purchase &amp; Sales Ledger</span>
+          </div>
+          <h2 class="text-2xl font-black text-white">Order Execution &amp; Line Items</h2>
+          <p class="text-slate-400 text-xs">99,140 Purchase Orders tracked across Snowflake Medallion Silver &amp; Gold semantic views.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <span class="text-xs text-slate-400">Active POs</span>
+          <div class="text-2xl font-bold font-mono text-white mt-1">99,140</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <span class="text-xs text-slate-400">Dispatched Orders</span>
+          <div class="text-2xl font-bold font-mono text-cyan-300 mt-1">74,230</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <span class="text-xs text-slate-400">In Transit Across Ocean</span>
+          <div class="text-2xl font-bold font-mono text-emerald-400 mt-1">18,400</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <span class="text-xs text-slate-400">Pending Customs Clearance</span>
+          <div class="text-2xl font-bold font-mono text-purple-400 mt-1">6,510</div>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-[#040E1C] border border-cyan-500/30">
+        <h4 class="text-sm font-bold text-white mb-3">Live Order Stream (Snowflake GCC Cortex Connector)</h4>
+        <div class="space-y-2 font-mono text-xs text-slate-300">
+          <div class="p-3 rounded-lg bg-[#020712] border border-cyan-900/30 flex items-center justify-between">
+            <span class="text-cyan-300 font-bold">PO-99214-IN</span>
+            <span>Supplier: Tata Steel ⇄ Delivery: Jebel Ali</span>
+            <span class="text-emerald-400">Released (100% In-Full)</span>
+            <span class="text-slate-400">$184,000 USD</span>
+          </div>
+          <div class="p-3 rounded-lg bg-[#020712] border border-cyan-900/30 flex items-center justify-between">
+            <span class="text-cyan-300 font-bold">PO-99215-AE</span>
+            <span>Supplier: EGA ⇄ Delivery: Nhava Sheva</span>
+            <span class="text-cyan-300">In Transit (ETA: 48h)</span>
+            <span class="text-slate-400">$320,500 USD</span>
+          </div>
+          <div class="p-3 rounded-lg bg-[#020712] border border-cyan-900/30 flex items-center justify-between">
+            <span class="text-cyan-300 font-bold">PO-99216-SA</span>
+            <span>Supplier: Saudi Aramco ⇄ Delivery: Mundra Port</span>
+            <span class="text-emerald-400">Customs Cleared</span>
+            <span class="text-slate-400">$94,200 USD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: SHIPMENTS VIEW -->
+    <div id="tab-shipments" class="tab-pane hidden p-gutter space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span class="font-mono text-xs text-cyan-300 font-bold uppercase tracking-wider">TMS Geodesic Telemetry</span>
+          </div>
+          <h2 class="text-2xl font-black text-white">25,000 Verified TMS Shipments</h2>
+          <p class="text-slate-400 text-xs">Carrier transit reliability benchmarked across Blue Dart, Delhivery, DHL, and XpressBees.</p>
+        </div>
+        <button onclick="switchTab('chat'); runSimulatedQuery('Which carrier partner has the highest delivery delay risk?');" class="px-3.5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md hover:bg-cyan-400 transition-all">
+          <span class="material-symbols-outlined text-[16px]">local_shipping</span>
+          <span>Carrier SLA Analysis</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <div class="text-xs text-slate-400">Delhivery SLA</div>
+          <div class="text-2xl font-bold font-mono text-emerald-400 mt-1">94.2%</div>
+          <div class="text-[11px] text-slate-400">Fastest transit adherence</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <div class="text-xs text-slate-400">Blue Dart SLA</div>
+          <div class="text-2xl font-bold font-mono text-emerald-400 mt-1">93.8%</div>
+          <div class="text-[11px] text-slate-400">Reliable express carrier</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-cyan-500/30">
+          <div class="text-xs text-slate-400">DHL Global SLA</div>
+          <div class="text-2xl font-bold font-mono text-cyan-300 mt-1">91.4%</div>
+          <div class="text-[11px] text-slate-400">Primary maritime forwarder</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[#040E1C] border border-amber-500/30">
+          <div class="text-xs text-slate-400">XpressBees SLA</div>
+          <div class="text-2xl font-bold font-mono text-amber-400 mt-1">71.7%</div>
+          <div class="text-[11px] text-amber-400">Primary bottleneck (+28.3% delays)</div>
+        </div>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-[#040E1C] border border-cyan-500/30">
+        <h3 class="font-bold text-white text-sm mb-3">Pre-Dispatch Disruption Predictor (PyTorch DeepRiskNet)</h3>
+        <p class="text-slate-400 text-xs mb-4">
+          Trained on 25,000 historical TMS movements with weather and geopolitical inputs. Achieves <strong>89.58% Accuracy</strong> and <strong>0.9664 ROC-AUC</strong> for pre-dispatch disruption interception.
+        </p>
+        <button onclick="switchTab('overview'); highlightSection('disruptions-table');" class="px-4 py-2 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 text-xs font-bold hover:bg-cyan-500 hover:text-slate-950 transition-all">
+          Inspect Active Delay Predictions &rarr;
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB: WAREHOUSES VIEW -->
+    <div id="tab-warehouses" class="tab-pane hidden p-gutter space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+            <span class="font-mono text-xs text-purple-400 font-bold uppercase tracking-wider">Storage &amp; Fulfillment Nodes</span>
+          </div>
+          <h2 class="text-2xl font-black text-white">Warehouses &amp; Fulfillment Centers</h2>
+          <p class="text-slate-400 text-xs">18 Primary Distribution Hubs across India, UAE, and Saudi Arabia.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-5 rounded-2xl bg-[#040E1C] border border-cyan-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-base">🇮🇳 Nagpur Central Logistics Hub</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-xs font-mono">92% Capacity</span>
+          </div>
+          <p class="text-xs text-slate-400">Primary multimodal cross-dock facility connecting North and South India corridors.</p>
+          <div class="text-xs font-mono text-cyan-300">Throughput: 8,400 TEU / week</div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#040E1C] border border-cyan-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-base">🇦🇪 Jebel Ali Free Zone (JAFZA)</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-xs font-mono">84% Capacity</span>
+          </div>
+          <p class="text-xs text-slate-400">GCC mega-hub with deepwater berth integration and zero-duty bonded staging.</p>
+          <div class="text-xs font-mono text-cyan-300">Throughput: 14,200 TEU / week</div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#040E1C] border border-cyan-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-white text-base">🇸🇦 King Abdulaziz Port Dammam</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-xs font-mono">76% Capacity</span>
+          </div>
+          <p class="text-xs text-slate-400">Saudi Arabian Gulf gateway for heavy industrial machinery and chemicals.</p>
+          <div class="text-xs font-mono text-cyan-300">Throughput: 6,800 TEU / week</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: RISK & ALERTS VIEW -->
+    <div id="tab-risk" class="tab-pane hidden p-gutter space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-400 animate-ping"></span>
+            <span class="font-mono text-xs text-red-400 font-bold uppercase tracking-wider">Active Disruption Monitor</span>
+          </div>
+          <h2 class="text-2xl font-black text-white">Risk Engine &amp; Anomaly Signals</h2>
+          <p class="text-slate-400 text-xs">4 Critical Alerts flagged across Arabian Sea shipping lanes and rail corridors.</p>
+        </div>
+        <button onclick="switchTab('chat'); runSimulatedQuery('What mitigation action does the RL policy recommend?');" class="px-3.5 py-2 rounded-xl bg-red-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-md hover:bg-red-400 transition-all">
+          <span class="material-symbols-outlined text-[16px]">warning</span>
+          <span>RL Mitigation Action</span>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <div class="p-4 rounded-xl bg-red-950/30 border border-red-500/40 flex items-start justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-red-500 text-slate-950 font-bold font-mono text-[10px]">CRITICAL</span>
+              <h4 class="font-bold text-white text-sm">Monsoon Congestion Delay Risk: JNPT Mumbai &rarr; Mundra</h4>
+            </div>
+            <p class="text-slate-300 text-xs">High delay probability (&gt;74%) detected by Snowpark ML due to adverse maritime swell.</p>
+          </div>
+          <span class="text-xs font-mono text-red-400 font-bold shrink-0">-$12,400 SLA Breach Risk</span>
+        </div>
+
+        <div class="p-4 rounded-xl bg-amber-950/30 border border-amber-500/40 flex items-start justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-amber-500 text-slate-950 font-bold font-mono text-[10px]">WARNING</span>
+              <h4 class="font-bold text-white text-sm">Strait of Hormuz Tanker Transit Speed Restriction</h4>
+            </div>
+            <p class="text-slate-300 text-xs">Maritime traffic slowed by 3.2 knots; arrival ETA pushed by 18 hours at Jebel Ali.</p>
+          </div>
+          <span class="text-xs font-mono text-amber-400 font-bold shrink-0">Buffer Activated</span>
+        </div>
+
+        <div class="p-4 rounded-xl bg-amber-950/30 border border-amber-500/40 flex items-start justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-amber-500 text-slate-950 font-bold font-mono text-[10px]">WARNING</span>
+              <h4 class="font-bold text-white text-sm">East Kolkata Polymer Stock Depletion</h4>
+            </div>
+            <p class="text-slate-300 text-xs">Remaining stock: 9.1 days. Re-order threshold reached.</p>
+          </div>
+          <span class="text-xs font-mono text-amber-400 font-bold shrink-0">PO Triggered</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: DATA GOVERNANCE VIEW -->
+    <div id="tab-governance" class="tab-pane hidden p-gutter space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <span class="font-mono text-xs text-emerald-400 font-bold uppercase tracking-wider">Security &amp; Compliance Hub</span>
+          </div>
+          <h2 class="text-2xl font-black text-white">Data Governance &amp; RBAC Framework</h2>
+          <p class="text-slate-400 text-xs">Zero-drift ontological guarantees, cryptographic SHA-256 integrity, and SOC 2 Type II compliance.</p>
+        </div>
+        <button onclick="openModal('governance')" class="px-3.5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md hover:bg-emerald-400 transition-all">
+          <span class="material-symbols-outlined text-[16px]">verified</span>
+          <span>View Cryptographic Certificate</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-5 rounded-2xl bg-[#040E1C] border border-cyan-500/30">
+          <span class="text-xs text-slate-400">Canonical Ontological Standard</span>
+          <div class="text-xl font-bold font-mono text-cyan-300 my-2">W3C OWL / RDF v2.4</div>
+          <p class="text-xs text-slate-400">14 Canonical Core Classes mapping ERP, TMS, and WMS definitions into immutable semantic views.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#040E1C] border border-emerald-500/30">
+          <span class="text-xs text-slate-400">Metric Reconciliation</span>
+          <div class="text-xl font-bold font-mono text-emerald-400 my-2">100% Zero Drift</div>
+          <p class="text-xs text-slate-400">Reconciles conflicting calculations across Planning (22.9%), Procurement (50.4%), and Logistics (73.3%).</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-[#040E1C] border border-purple-500/30">
+          <span class="text-xs text-slate-400">Fine-Grained RBAC</span>
+          <div class="text-xl font-bold font-mono text-purple-400 my-2">Enterprise Security</div>
+          <p class="text-xs text-slate-400">Row-level security policies (RLS) ensuring strict cross-departmental data sovereignty.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: DATA LINEAGE VIEW -->
+    <div id="tab-lineage" class="tab-pane hidden p-gutter space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+            <span class="font-mono text-xs text-cyan-400 font-bold uppercase tracking-wider">End-to-End Pipeline Provenance</span>
+          </div>
+          <h2 class="text-2xl font-black text-white">Medallion Data Lineage</h2>
+          <p class="text-slate-400 text-xs">Tracing RAW events &rarr; SILVER Conformed Ontologies &rarr; GOLD Semantic Views &rarr; Cortex AI.</p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-cyan-500/30 bg-[#030914] p-6 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono">
+          <div class="p-4 rounded-xl bg-[#040E1C] border border-slate-700 space-y-2">
+            <div class="text-cyan-400 font-bold">1. RAW LAKEHOUSE</div>
+            <p class="text-slate-400 text-[11px]">Kafka event streams, SAP IDocs, Manhattan TMS feeds ingested into Snowflake Bronze stage.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#040E1C] border border-slate-700 space-y-2">
+            <div class="text-sky-300 font-bold">2. SILVER CONFORMED</div>
+            <p class="text-slate-400 text-[11px]">OWL-mapped semantic harmonization resolving disparate keys, UOMs, and timestamps.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#040E1C] border border-emerald-500/40 space-y-2">
+            <div class="text-emerald-400 font-bold">3. GOLD SEMANTIC</div>
+            <p class="text-slate-400 text-[11px]">Governed analytical marts (V_CANONICAL_OTIF, V_SUPPLIER_RISK) with zero semantic drift.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#040E1C] border border-purple-500/40 space-y-2">
+            <div class="text-purple-400 font-bold">4. CORTEX AI &amp; VOICE</div>
+            <p class="text-slate-400 text-[11px]">Snowflake Cortex Analyst, PyTorch models, and Indian regional voice synthesis models.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: AUDIT LOGS VIEW -->
+    <div id="tab-audit" class="tab-pane hidden p-gutter space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <span class="font-mono text-xs text-emerald-400 font-bold uppercase tracking-wider">Cryptographic Attestation</span>
+          </div>
+          <h2 class="text-2xl font-black text-white">Governance &amp; Query Audit Trail</h2>
+          <p class="text-slate-400 text-xs">Immutable chronological log of all Cortex AI analytical executions and data access events.</p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-cyan-500/30 bg-[#030914] overflow-hidden">
+        <div class="px-5 py-3 border-b border-cyan-900/40 bg-[#040E1C] flex items-center justify-between font-mono text-xs">
+          <span class="font-bold text-white uppercase">System Audit Log</span>
+          <span class="text-emerald-400 font-bold">Cryptographically Attested (SHA-256)</span>
+        </div>
+        <div class="divide-y divide-cyan-900/30 font-mono text-xs text-slate-300">
+          <div class="p-3.5 hover:bg-cyan-500/5 flex items-center justify-between">
+            <div>
+              <span class="text-cyan-400 font-bold">[13:01:42]</span>
+              <span class="ml-2 font-semibold text-white">Elena Rostova</span>
+              <span class="text-slate-400 ml-1">queried V_CANONICAL_OTIF via Cortex AI</span>
+            </div>
+            <span class="text-emerald-400 text-[11px]">Passed (184ms)</span>
+          </div>
+          <div class="p-3.5 hover:bg-cyan-500/5 flex items-center justify-between">
+            <div>
+              <span class="text-cyan-400 font-bold">[12:48:19]</span>
+              <span class="ml-2 font-semibold text-white">Marcus Vance</span>
+              <span class="text-slate-400 ml-1">authenticated via Corporate Okta SSO</span>
+            </div>
+            <span class="text-emerald-400 text-[11px]">Verified (2FA Hardware)</span>
+          </div>
+          <div class="p-3.5 hover:bg-cyan-500/5 flex items-center justify-between">
+            <div>
+              <span class="text-cyan-400 font-bold">[12:32:05]</span>
+              <span class="ml-2 font-semibold text-white">Amina Al-Mansoor</span>
+              <span class="text-slate-400 ml-1">exported Dammam Marine Transit Forecast</span>
+            </div>
+            <span class="text-emerald-400 text-[11px]">Audit Recorded</span>
+          </div>
+        </div>
+      </div>
     </div>
     
       </main>
@@ -6289,7 +6817,11 @@
     function switchTab(tabId) {
       playUISound('click');
       currentTab = tabId;
-      const tabs = ['overview', 'chat', 'ontology', 'graph'];
+      const tabs = [
+        'overview', 'chat', 'ontology', 'graph',
+        'suppliers', 'inventory', 'orders', 'shipments', 'warehouses',
+        'risk', 'governance', 'lineage', 'audit'
+      ];
       
       tabs.forEach(t => {
         const pane = document.getElementById('tab-' + t);
