@@ -153,6 +153,39 @@
     .animate-grid-pan {
       animation: gridMove 12s linear infinite;
     }
+
+    /* Collapsible Sidebar Smooth Transitions */
+    #dashboard-sidebar {
+      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #dashboard-main-viewport, #dashboard-header {
+      transition: padding-left 0.35s cubic-bezier(0.16, 1, 0.3, 1), left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sidebar-collapsed {
+      width: 4.5rem !important; /* w-18 (72px) */
+    }
+    .sidebar-collapsed .sidebar-text,
+    .sidebar-collapsed .sidebar-header-text,
+    .sidebar-collapsed .sidebar-section-title,
+    .sidebar-collapsed .sidebar-badge,
+    .sidebar-collapsed .sidebar-footer {
+      display: none !important;
+    }
+    .sidebar-collapsed .nav-item {
+      justify-content: center !important;
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
+    .sidebar-collapsed .nav-item div {
+      justify-content: center !important;
+      gap: 0 !important;
+    }
+    .main-collapsed {
+      padding-left: 4.5rem !important;
+    }
+    .header-collapsed {
+      left: 4.5rem !important;
+    }
     
   </style>
 
@@ -1524,118 +1557,125 @@
   <div id="view-app" class="hidden min-h-screen bg-background text-on-surface selection:bg-secondary selection:text-surface-dim">
     
     <!-- LEFT PERSISTENT SIDEBAR -->
-    <aside class="fixed left-0 top-0 h-screen w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)] border-r border-outline-variant/30">
+    <!-- LEFT PERSISTENT SIDEBAR -->
+    <aside id="dashboard-sidebar" class="fixed left-0 top-0 h-screen w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)] border-r border-outline-variant/30">
       <div class="flex flex-col flex-1 min-h-0">
         <!-- Brand Header -->
-        <div class="h-16 px-space-md flex items-center gap-space-sm bg-surface-container-low border-b border-outline-variant/20 cursor-pointer" onclick="showView('welcome')">
-          <img alt="SupplyChain IQ Logo" class="h-8 w-auto object-contain rounded-md" src="assets/favicon.png"/>
-          <div class="flex flex-col min-w-0">
-            <div class="flex items-center gap-space-xs">
-              <span class="font-headline-md text-headline-md text-on-surface tracking-tight truncate font-bold">SupplyChain IQ</span>
-              <span class="font-label-micro text-label-micro px-1 py-0.5 rounded bg-surface-container-highest text-secondary font-code-metric">v2.4</span>
+        <div class="h-16 px-space-md flex items-center justify-between bg-surface-container-low border-b border-outline-variant/20">
+          <div class="flex items-center gap-space-sm cursor-pointer min-w-0" onclick="showView('welcome')" title="Return to Home">
+            <img alt="SupplyChain IQ Logo" class="h-8 w-auto object-contain rounded-md shrink-0" src="assets/favicon.png"/>
+            <div class="sidebar-header-text flex flex-col min-w-0">
+              <div class="flex items-center gap-space-xs">
+                <span class="font-headline-md text-headline-md text-on-surface tracking-tight truncate font-bold">SupplyChain IQ</span>
+                <span class="font-label-micro text-label-micro px-1 py-0.5 rounded bg-surface-container-highest text-secondary font-code-metric">v2.4</span>
+              </div>
+              <span class="font-label-micro text-label-micro text-on-surface-variant truncate">Governed Ontology</span>
             </div>
-            <span class="font-label-micro text-label-micro text-on-surface-variant truncate">Governed Ontology Platform</span>
           </div>
+          <!-- Sidebar Toggle Collapse Button -->
+          <button id="sidebar-toggle-btn" onclick="toggleDashboardSidebar()" title="Collapse / Expand Sidebar" class="w-7 h-7 rounded-md flex items-center justify-center text-outline hover:text-secondary hover:bg-surface-container-high transition-colors shrink-0">
+            <span id="sidebar-toggle-icon" class="material-symbols-outlined text-[18px] transition-transform duration-300">chevron_left</span>
+          </button>
         </div>
 
         <!-- Scrollable Navigation Items -->
         <div class="flex-1 overflow-y-auto px-space-sm py-space-sm space-y-space-md">
           <!-- Section 1 -->
           <nav class="space-y-space-xs">
-            <div class="px-space-sm py-1 font-label-caps text-label-caps text-outline uppercase tracking-wider">Analytics &amp; Insights</div>
-            <a id="nav-overview" href="javascript:void(0)" onclick="switchTab('overview')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded transition-all bg-surface-container-high text-secondary font-title-sm shadow-[inset_0_1px_0_0_rgba(76,215,246,0.3)]">
+            <div class="sidebar-section-title px-space-sm py-1 font-label-caps text-label-caps text-outline uppercase tracking-wider">Analytics &amp; Insights</div>
+            <a id="nav-overview" href="javascript:void(0)" onclick="switchTab('overview')" title="Overview Dashboard" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded transition-all bg-surface-container-high text-secondary font-title-sm shadow-[inset_0_1px_0_0_rgba(76,215,246,0.3)]">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">grid_view</span>
-                <span class="font-body-sm text-body-sm font-medium">Overview</span>
+                <span class="sidebar-text font-body-sm text-body-sm font-medium">Overview</span>
               </div>
             </a>
-            <a id="nav-chat" href="javascript:void(0)" onclick="switchTab('chat')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-chat" href="javascript:void(0)" onclick="switchTab('chat')" title="Conversational Analytics AI" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px] text-secondary">auto_awesome</span>
-                <span class="font-body-sm text-body-sm">Conversational Analytics</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Conversational Analytics</span>
               </div>
-              <span class="font-label-micro text-label-micro px-1.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-semibold font-code-metric">AI</span>
+              <span class="sidebar-badge font-label-micro text-label-micro px-1.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-semibold font-code-metric">AI</span>
             </a>
           </nav>
 
           <!-- Section 2 -->
           <nav class="space-y-space-xs">
-            <div class="px-space-sm py-1 font-label-caps text-label-caps text-outline uppercase tracking-wider">Semantic Layer &amp; Ontology</div>
-            <a id="nav-ontology" href="javascript:void(0)" onclick="switchTab('ontology')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <div class="sidebar-section-title px-space-sm py-1 font-label-caps text-label-caps text-outline uppercase tracking-wider">Semantic Layer &amp; Ontology</div>
+            <a id="nav-ontology" href="javascript:void(0)" onclick="switchTab('ontology')" title="Supply Chain Ontology" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">account_tree</span>
-                <span class="font-body-sm text-body-sm">Supply Chain Ontology</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Supply Chain Ontology</span>
               </div>
             </a>
-            <a id="nav-graph" href="javascript:void(0)" onclick="switchTab('graph')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-graph" href="javascript:void(0)" onclick="switchTab('graph')" title="Knowledge Graph" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">hub</span>
-                <span class="font-body-sm text-body-sm">Knowledge Graph</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Knowledge Graph</span>
               </div>
             </a>
           </nav>
 
           <!-- Section 3 -->
           <nav class="space-y-space-xs">
-            <div class="px-space-sm py-1 font-label-caps text-label-caps text-outline uppercase tracking-wider">Supply Chain Operations</div>
-            <a id="nav-suppliers" href="javascript:void(0)" onclick="switchTab('suppliers')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <div class="sidebar-section-title px-space-sm py-1 font-label-caps text-label-caps text-outline uppercase tracking-wider">Supply Chain Operations</div>
+            <a id="nav-suppliers" href="javascript:void(0)" onclick="switchTab('suppliers')" title="Suppliers Directory" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">domain</span>
-                <span class="font-body-sm text-body-sm">Suppliers</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Suppliers</span>
               </div>
             </a>
-            <a id="nav-inventory" href="javascript:void(0)" onclick="switchTab('inventory')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-inventory" href="javascript:void(0)" onclick="switchTab('inventory')" title="Inventory & Stock Levels" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">inventory_2</span>
-                <span class="font-body-sm text-body-sm">Inventory</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Inventory</span>
               </div>
             </a>
-            <a id="nav-orders" href="javascript:void(0)" onclick="switchTab('orders')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-orders" href="javascript:void(0)" onclick="switchTab('orders')" title="Orders & Fulfillment" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
-                <span class="font-body-sm text-body-sm">Orders</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Orders</span>
               </div>
             </a>
-            <a id="nav-shipments" href="javascript:void(0)" onclick="switchTab('shipments')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-shipments" href="javascript:void(0)" onclick="switchTab('shipments')" title="Shipments & In-Transit" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">local_shipping</span>
-                <span class="font-body-sm text-body-sm">Shipments</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Shipments</span>
               </div>
             </a>
-            <a id="nav-warehouses" href="javascript:void(0)" onclick="switchTab('warehouses')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-warehouses" href="javascript:void(0)" onclick="switchTab('warehouses')" title="Warehouses & Hubs" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">warehouse</span>
-                <span class="font-body-sm text-body-sm">Warehouses</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Warehouses</span>
               </div>
             </a>
           </nav>
 
           <!-- Section 4 -->
           <nav class="space-y-space-xs">
-            <div class="px-space-sm py-1 font-label-caps text-label-caps text-outline uppercase tracking-wider">Risk &amp; Governance</div>
-            <a id="nav-risk" href="javascript:void(0)" onclick="switchTab('risk')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <div class="sidebar-section-title px-space-sm py-1 font-label-caps text-label-caps text-outline uppercase tracking-wider">Risk &amp; Governance</div>
+            <a id="nav-risk" href="javascript:void(0)" onclick="switchTab('risk')" title="Risk & Alerts" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px] text-error">warning</span>
-                <span class="font-body-sm text-body-sm">Risk &amp; Alerts</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Risk &amp; Alerts</span>
               </div>
-              <span class="font-label-micro text-label-micro px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-semibold">4 Critical</span>
+              <span class="sidebar-badge font-label-micro text-label-micro px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-semibold">4 Critical</span>
             </a>
-            <a id="nav-governance" href="javascript:void(0)" onclick="switchTab('governance')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-governance" href="javascript:void(0)" onclick="switchTab('governance')" title="Data Governance" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px] text-tertiary">verified_user</span>
-                <span class="font-body-sm text-body-sm">Data Governance</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Data Governance</span>
               </div>
             </a>
-            <a id="nav-lineage" href="javascript:void(0)" onclick="switchTab('lineage')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-lineage" href="javascript:void(0)" onclick="switchTab('lineage')" title="Data Lineage" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">alt_route</span>
-                <span class="font-body-sm text-body-sm">Data Lineage</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Data Lineage</span>
               </div>
             </a>
-            <a id="nav-audit" href="javascript:void(0)" onclick="switchTab('audit')" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
+            <a id="nav-audit" href="javascript:void(0)" onclick="switchTab('audit')" title="Audit Logs" class="nav-item group flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all">
               <div class="flex items-center gap-space-sm">
                 <span class="material-symbols-outlined text-[18px]">description</span>
-                <span class="font-body-sm text-body-sm">Audit Logs</span>
+                <span class="sidebar-text font-body-sm text-body-sm">Audit Logs</span>
               </div>
             </a>
           </nav>
@@ -1643,7 +1683,7 @@
       </div>
 
       <!-- Bottom Sync & Fabric Status -->
-      <div class="p-space-sm bg-surface-container-low space-y-space-xs border-t border-outline-variant/20">
+      <div class="sidebar-footer p-space-sm bg-surface-container-low space-y-space-xs border-t border-outline-variant/20">
         <div class="flex items-center justify-between text-on-surface-variant">
           <div class="flex items-center gap-space-xs">
             <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
@@ -1659,11 +1699,14 @@
     </aside>
 
     <!-- MAIN VIEWPORT (LEFT PADDED FOR SIDEBAR) -->
-    <div class="pl-72">
+    <div id="dashboard-main-viewport" class="pl-72">
       <!-- TOP GLOBAL HEADER -->
-      <header class="fixed top-0 left-72 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)] border-b border-outline-variant/30 z-40 flex items-center justify-between px-gutter gap-space-md">
-        <!-- Layer Selector -->
+      <header id="dashboard-header" class="fixed top-0 left-72 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)] border-b border-outline-variant/30 z-40 flex items-center justify-between px-gutter gap-space-md">
+        <!-- Layer Selector & Nav Toggle -->
         <div class="flex items-center gap-space-sm min-w-0">
+          <button onclick="toggleDashboardSidebar()" title="Toggle Sidebar" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-outline hover:text-secondary border border-outline-variant/30 transition-all shrink-0">
+            <span class="material-symbols-outlined text-[20px]">menu</span>
+          </button>
           <div class="flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-surface-container-high hover:bg-surface-bright cursor-pointer transition-colors">
             <span class="material-symbols-outlined text-[16px] text-secondary">layers</span>
             <span class="font-body-sm text-body-sm text-on-surface font-medium truncate max-w-[200px]">Global Supply Network</span>
@@ -9571,6 +9614,7 @@
       initThreeHeroGlobe();
       initThreeBgNebula();
       initThreeStudioSimulation();
+      initDashboardSidebar();
 
       // Restore stored language preference if exists
       const savedLang = localStorage.getItem('sciq_language') || 'en';
