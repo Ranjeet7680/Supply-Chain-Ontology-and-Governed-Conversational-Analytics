@@ -535,23 +535,57 @@
           <div class="flex items-center gap-2.5 flex-wrap">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
             <span class="font-mono text-xs text-cyan-300 uppercase font-bold tracking-wider whitespace-nowrap">
-              3D Digital Twin: India &amp; GCC Corridor Telemetry
+              3D Digital Twin: Global Earth &amp; Trade Corridors
             </span>
             <span class="px-2 py-0.5 rounded-full bg-cyan-500/15 border border-cyan-400/40 text-cyan-300 font-mono text-[10px] whitespace-nowrap">
-              Three.js WebGL
+              All Countries &bull; Three.js WebGL
             </span>
           </div>
-          <div class="flex items-center gap-3 sm:gap-4 text-xs font-mono text-slate-300 flex-wrap">
-            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#22d3ee]"></span> India Nodes (JNPT, Mundra, Delhi, Chennai)</span>
-            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]"></span> GCC Nodes (Jebel Ali, Dammam, Riyadh, Doha)</span>
+
+          <!-- Region Quick Focus Buttons -->
+          <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
+            <button onclick="focusGlobeRegion('indiagcc')" class="globe-region-btn px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 hover:bg-cyan-500 hover:text-slate-950 transition-all font-bold">
+              🇮🇳 India &amp; GCC
+            </button>
+            <button onclick="focusGlobeRegion('global')" class="globe-region-btn px-2.5 py-1 rounded-lg bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-white transition-all">
+              🌍 Global View
+            </button>
+            <button onclick="focusGlobeRegion('europe')" class="globe-region-btn px-2.5 py-1 rounded-lg bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-white transition-all">
+              🇪🇺 Europe
+            </button>
+            <button onclick="focusGlobeRegion('americas')" class="globe-region-btn px-2.5 py-1 rounded-lg bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-white transition-all">
+              🇺🇸 Americas
+            </button>
+            <button onclick="focusGlobeRegion('apac')" class="globe-region-btn px-2.5 py-1 rounded-lg bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-white transition-all">
+              🌏 Asia-Pacific
+            </button>
           </div>
         </div>
+
         <div id="three-hero-globe" class="w-full h-80 sm:h-96 rounded-b-2xl border-x border-b border-cyan-500/30 bg-gradient-to-b from-[#020b17] via-[#030e20] to-[#01060f] relative overflow-hidden shadow-[0_0_50px_rgba(76,215,246,0.25)] flex items-center justify-center">
           <canvas id="three-globe-canvas" class="w-full h-full block cursor-grab active:cursor-grabbing"></canvas>
-          <div class="absolute bottom-3 left-3 sm:left-4 text-[10px] sm:text-[11px] font-mono text-slate-300 pointer-events-none bg-[#040e1c]/85 px-3 py-1.5 rounded-xl border border-cyan-500/30 shadow-md flex items-center gap-2">
-            <span class="text-cyan-400">✦</span> Drag to orbit • Scroll to zoom • Traveling pulses represent active freight dispatches
+
+          <!-- Floating Interactive Node Telemetry HUD -->
+          <div id="globe-node-hud" class="absolute top-3 right-3 sm:right-4 bg-[#040e1c]/95 border border-cyan-400/40 rounded-xl p-3 shadow-2xl backdrop-blur-xl text-xs font-mono text-slate-200 hidden pointer-events-none z-20 max-w-xs transition-opacity duration-200">
+            <div class="flex items-center gap-2 mb-1.5 border-b border-cyan-900/40 pb-1">
+              <span id="hud-flag" class="text-base">🇮🇳</span>
+              <span id="hud-title" class="font-bold text-cyan-300">Mumbai / JNPT Port</span>
+            </div>
+            <div class="space-y-1 text-[11px] text-slate-300">
+              <div class="flex justify-between gap-3"><span>Country:</span> <strong id="hud-country" class="text-white">India</strong></div>
+              <div class="flex justify-between gap-3"><span>Status:</span> <strong id="hud-status" class="text-emerald-400">ONLINE (94.2% OTIF)</strong></div>
+              <div class="flex justify-between gap-3"><span>Active Freight:</span> <strong id="hud-freight" class="text-cyan-300">1,840 TEU</strong></div>
+            </div>
           </div>
+
+          <div class="absolute bottom-3 left-3 sm:left-4 text-[10px] sm:text-[11px] font-mono text-slate-300 pointer-events-none bg-[#040e1c]/85 px-3 py-1.5 rounded-xl border border-cyan-500/30 shadow-md flex items-center gap-2">
+            <span class="text-cyan-400">✦</span> Drag to orbit all continents • Scroll to zoom • Hover hubs for live telemetry
+          </div>
+
           <div class="absolute bottom-3 right-3 sm:right-4 flex items-center gap-2">
+            <button onclick="toggleGlobeOrbit()" id="globe-orbit-btn" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-600 font-mono text-[10px] flex items-center gap-1 transition-all shadow-sm hover:border-cyan-400">
+              <span id="globe-orbit-icon">⏸️</span> <span>Orbit</span>
+            </button>
             <button onclick="resetGlobeView()" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-600 font-mono text-[10px] flex items-center gap-1 transition-all shadow-sm hover:border-cyan-400">
               <span>🔄 Reset View</span>
             </button>
@@ -6446,18 +6480,25 @@
     });
 
     // =========================================================================
-    // 3D THREE.JS CYBERNETIC GLOBE & DIGITAL TWIN ENGINE (v3.2 UPGRADED)
+    // 3D THREE.JS GLOBAL EARTH DIGITAL TWIN (ALL COUNTRIES & CONTINENTS)
     // =========================================================================
     let threeScene, threeCamera, threeRenderer, threeGlobeGroup;
     let isGlobeDragging = false;
+    let autoOrbitEnabled = true;
+    let targetRotation = { x: 0.35, y: 1.35 };
     let previousMousePosition = { x: 0, y: 0 };
     let particleArcs = [];
     let beaconHalos = [];
+    let interactiveHubMeshes = [];
     let globeInitialized = false;
     let globeResizeObserver = null;
+    let raycaster, mouseVec;
 
+    // Reset View to India & GCC Primary Trade Corridor
     function resetGlobeView() {
       if (threeGlobeGroup && threeCamera) {
+        targetRotation.y = 1.35;
+        targetRotation.x = 0.35;
         threeGlobeGroup.rotation.y = 1.35;
         threeGlobeGroup.rotation.x = 0.35;
         threeCamera.position.set(0, 20, 215);
@@ -6465,6 +6506,235 @@
       }
     }
     window.resetGlobeView = resetGlobeView;
+
+    // Toggle Auto-Orbit
+    function toggleGlobeOrbit() {
+      autoOrbitEnabled = !autoOrbitEnabled;
+      const icon = document.getElementById('globe-orbit-icon');
+      if (icon) icon.textContent = autoOrbitEnabled ? '⏸️' : '▶️';
+      playUISound('click');
+    }
+    window.toggleGlobeOrbit = toggleGlobeOrbit;
+
+    // Smooth Region Focusing Controls
+    function focusGlobeRegion(region) {
+      playUISound('click');
+      const btns = document.querySelectorAll('.globe-region-btn');
+      btns.forEach(b => {
+        b.className = 'globe-region-btn px-2.5 py-1 rounded-lg bg-slate-800/80 text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-white transition-all';
+      });
+      if (event && event.currentTarget) {
+        event.currentTarget.className = 'globe-region-btn px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 font-bold';
+      }
+
+      if (region === 'indiagcc') {
+        targetRotation = { x: 0.35, y: 1.35 };
+      } else if (region === 'global') {
+        targetRotation = { x: 0.20, y: 2.30 };
+      } else if (region === 'europe') {
+        targetRotation = { x: 0.70, y: 0.15 };
+      } else if (region === 'americas') {
+        targetRotation = { x: 0.50, y: -1.65 };
+      } else if (region === 'apac') {
+        targetRotation = { x: 0.05, y: 2.85 };
+      }
+    }
+    window.focusGlobeRegion = focusGlobeRegion;
+
+    // Procedural High-Definition Equirectangular World Map Texture Generator
+    function generateWorldTexture() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 2048;
+      canvas.height = 1024;
+      const ctx = canvas.getContext('2d');
+
+      // 1. Deep Oceanic Abyss Base
+      ctx.fillStyle = '#020B1A';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 2. High-Tech Cyber Graticule (Latitude & Longitude Grid)
+      ctx.strokeStyle = 'rgba(14, 165, 233, 0.12)';
+      ctx.lineWidth = 1;
+      // Longitude meridians
+      for (let lon = -180; lon <= 180; lon += 15) {
+        const x = ((lon + 180) / 360) * canvas.width;
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      // Latitude parallels
+      for (let lat = -90; lat <= 90; lat += 15) {
+        const y = ((90 - lat) / 180) * canvas.height;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      // 3. Highlighted Equator, Tropics & Prime Meridian
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.32)';
+      ctx.lineWidth = 1.8;
+      // Equator
+      const eqY = (90 / 180) * canvas.height;
+      ctx.beginPath();
+      ctx.moveTo(0, eqY);
+      ctx.lineTo(canvas.width, eqY);
+      ctx.stroke();
+      // Tropic of Cancer (23.5° N) & Capricorn (23.5° S)
+      const tCancerY = ((90 - 23.5) / 180) * canvas.height;
+      const tCapY = ((90 + 23.5) / 180) * canvas.height;
+      ctx.setLineDash([6, 6]);
+      ctx.beginPath();
+      ctx.moveTo(0, tCancerY);
+      ctx.lineTo(canvas.width, tCancerY);
+      ctx.moveTo(0, tCapY);
+      ctx.lineTo(canvas.width, tCapY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // 4. Detailed Continental Polygons (Equirectangular Projection)
+      const continents = [
+        // North America (USA, Canada, Mexico, Alaska)
+        [[-168, 65], [-160, 71], [-140, 70], [-125, 70], [-100, 70], [-80, 72], [-65, 60],
+         [-60, 50], [-65, 44], [-75, 38], [-80, 30], [-82, 25], [-80, 25], [-88, 30],
+         [-97, 26], [-97, 20], [-88, 16], [-83, 10], [-77, 8], [-83, 9], [-90, 14],
+         [-105, 20], [-110, 24], [-117, 32], [-124, 40], [-125, 48], [-130, 54], [-140, 59],
+         [-150, 60], [-160, 58], [-168, 65]],
+
+        // South America (Brazil, Argentina, Chile, Colombia, Peru)
+        [[-77, 8], [-72, 11], [-60, 10], [-50, 0], [-35, -5], [-35, -10], [-39, -15],
+         [-42, -22], [-50, -30], [-55, -35], [-65, -45], [-68, -55], [-75, -50], [-73, -40],
+         [-72, -30], [-70, -20], [-75, -15], [-81, -5], [-80, 2], [-77, 8]],
+
+        // Europe (UK, France, Germany, Spain, Italy, Scandinavia)
+        [[-10, 36], [-8, 43], [-1, 46], [-5, 48], [2, 51], [8, 54], [10, 58], [5, 62],
+         [15, 68], [28, 71], [40, 68], [50, 65], [60, 60], [55, 50], [45, 45], [35, 45],
+         [28, 41], [23, 38], [15, 38], [10, 37], [0, 38], [-5, 36], [-10, 36]],
+
+        // Africa (Egypt, South Africa, Nigeria, Kenya, Morocco, Ethiopia)
+        [[-5, 36], [10, 37], [11, 33], [25, 32], [32, 31], [35, 28], [43, 12], [51, 11],
+         [46, 5], [41, -3], [40, -11], [35, -24], [32, -29], [28, -33], [19, -34], [18, -30],
+         [12, -18], [11, -10], [9, 1], [3, 6], [-10, 5], [-17, 15], [-17, 21], [-13, 28],
+         [-5, 36]],
+
+        // Asia & Russia (Russia, China, Central Asia, Southeast Asia)
+        [[60, 60], [70, 72], [90, 75], [110, 76], [140, 73], [170, 66], [180, 65], [165, 60],
+         [155, 55], [140, 48], [130, 42], [125, 38], [120, 32], [118, 25], [108, 20], [105, 10],
+         [100, 3], [98, 10], [90, 22], [80, 16], [75, 8], [72, 20], [68, 25], [58, 25],
+         [50, 26], [45, 14], [35, 28], [35, 35], [30, 40], [40, 45], [50, 50], [60, 60]],
+
+        // Detailed India Subcontinent
+        [[68, 24], [70, 22], [72, 20], [73.5, 16], [75, 12], [77, 8], [79, 10], [80, 13],
+         [82, 16], [85, 20], [88, 22], [91, 23], [94, 26], [96, 28], [92, 27], [88, 26],
+         [85, 27], [80, 29], [77, 31], [74, 33], [72, 31], [70, 27], [68, 24]],
+
+        // Arabian Peninsula / GCC (Saudi Arabia, UAE, Qatar, Oman, Kuwait)
+        [[35, 28], [40, 28], [46, 29], [50, 26], [55, 25], [58, 24], [60, 22], [58, 20],
+         [54, 17], [48, 14], [44, 12], [42, 16], [38, 22], [35, 28]],
+
+        // Australia & New Zealand
+        [[114, -22], [125, -15], [136, -12], [142, -11], [145, -15], [153, -28], [150, -37],
+         [140, -38], [130, -32], [115, -34], [114, -22]],
+
+        // Scandinavia
+        [[5, 58], [10, 58], [15, 62], [20, 64], [25, 70], [28, 71], [20, 68], [12, 63], [5, 58]],
+
+        // Japan Archipelago
+        [[130, 32], [135, 34], [140, 36], [142, 43], [140, 40], [132, 34], [130, 32]],
+
+        // United Kingdom & Ireland
+        [[-10, 52], [-6, 54], [-2, 58], [1.5, 51], [-5, 50], [-10, 52]],
+
+        // Maritime Southeast Asia (Indonesia & Malaysia)
+        [[95, 5], [105, -5], [115, -8], [120, -8], [115, -2], [105, 2], [95, 5]],
+
+        // Madagascar
+        [[44, -12], [50, -15], [47, -25], [44, -25], [44, -12]]
+      ];
+
+      function toScreen(lon, lat) {
+        const x = ((lon + 180) / 360) * canvas.width;
+        const y = ((90 - lat) / 180) * canvas.height;
+        return [x, y];
+      }
+
+      // Draw and Fill all Continent Polygons
+      continents.forEach(poly => {
+        if (poly.length < 3) return;
+        ctx.beginPath();
+        const [startX, startY] = toScreen(poly[0][0], poly[0][1]);
+        ctx.moveTo(startX, startY);
+        for (let i = 1; i < poly.length; i++) {
+          const [px, py] = toScreen(poly[i][0], poly[i][1]);
+          ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+
+        // High-tech deep sapphire landmass fill
+        ctx.fillStyle = 'rgba(7, 27, 56, 0.94)';
+        ctx.fill();
+
+        // Luminous cyber cyan coastline glow
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.85)';
+        ctx.lineWidth = 2.0;
+        ctx.stroke();
+      });
+
+      // 5. High-Density Global Landmass Dot Matrix Overlay
+      ctx.fillStyle = 'rgba(76, 215, 246, 0.45)';
+      for (let lat = -60; lat <= 70; lat += 2.5) {
+        for (let lon = -180; lon <= 180; lon += 2.5) {
+          // Check if coordinate is inside continent bounds
+          const [sx, sy] = toScreen(lon, lat);
+          // Check pixel alpha or sample context
+          if (ctx.isPointInPath) {
+            // Sample visually:
+            const pixel = ctx.getImageData(Math.floor(sx), Math.floor(sy), 1, 1).data;
+            if (pixel[2] > 40) { // On Landmass
+              ctx.beginPath();
+              ctx.arc(sx, sy, 1.2, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+      }
+
+      // 6. Prominent Country & Regional Identifier Typography
+      const countryLabels = [
+        { name: "INDIA", lon: 78.9, lat: 21.0, color: "#38bdf8", size: "18px" },
+        { name: "UAE", lon: 54.5, lat: 24.2, color: "#34d399", size: "14px" },
+        { name: "SAUDI ARABIA", lon: 45.0, lat: 24.0, color: "#fbbf24", size: "14px" },
+        { name: "QATAR", lon: 51.2, lat: 25.3, color: "#c084fc", size: "11px" },
+        { name: "OMAN", lon: 57.0, lat: 21.0, color: "#34d399", size: "12px" },
+        { name: "USA", lon: -98.5, lat: 39.0, color: "#e2e8f0", size: "18px" },
+        { name: "CANADA", lon: -106.0, lat: 56.0, color: "#cbd5e1", size: "16px" },
+        { name: "BRAZIL", lon: -53.0, lat: -10.0, color: "#a7f3d0", size: "16px" },
+        { name: "GERMANY", lon: 10.4, lat: 51.1, color: "#38bdf8", size: "13px" },
+        { name: "UK", lon: -2.0, lat: 54.0, color: "#93c5fd", size: "13px" },
+        { name: "FRANCE", lon: 2.2, lat: 46.6, color: "#93c5fd", size: "13px" },
+        { name: "CHINA", lon: 104.0, lat: 35.8, color: "#f87171", size: "18px" },
+        { name: "JAPAN", lon: 138.0, lat: 36.2, color: "#fca5a5", size: "13px" },
+        { name: "AUSTRALIA", lon: 134.0, lat: -25.0, color: "#fef08a", size: "16px" },
+        { name: "SINGAPORE", lon: 103.8, lat: 1.3, color: "#38bdf8", size: "11px" },
+        { name: "SOUTH AFRICA", lon: 25.0, lat: -29.0, color: "#fed7aa", size: "14px" },
+        { name: "RUSSIA", lon: 95.0, lat: 60.0, color: "#cbd5e1", size: "18px" },
+        { name: "EGYPT", lon: 30.8, lat: 26.8, color: "#fdba74", size: "14px" }
+      ];
+
+      countryLabels.forEach(c => {
+        const [x, y] = toScreen(c.lon, c.lat);
+        ctx.fillStyle = c.color;
+        ctx.font = `bold ${c.size} 'JetBrains Mono', monospace`;
+        ctx.textAlign = 'center';
+        ctx.fillText(c.name, x, y);
+      });
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.ClampToEdgeWrapping;
+      return texture;
+    }
 
     function initThreeHeroGlobe() {
       const canvas = document.getElementById('three-globe-canvas');
@@ -6515,45 +6785,45 @@
       threeGlobeGroup = new THREE.Group();
       threeScene.add(threeGlobeGroup);
 
-      // 1. Core Cybernetic Dark Solid Sphere
-      const coreGeo = new THREE.SphereGeometry(69, 36, 36);
-      const coreMat = new THREE.MeshBasicMaterial({
-        color: 0x030c1c,
-        transparent: true,
-        opacity: 0.96
+      // 1. Full High-Definition Textured Earth Globe (All Countries & Continents)
+      const worldTexture = generateWorldTexture();
+      const earthGeo = new THREE.SphereGeometry(70, 64, 64);
+      const earthMat = new THREE.MeshBasicMaterial({
+        map: worldTexture,
+        transparent: false
       });
-      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      threeGlobeGroup.add(coreMesh);
+      const earthMesh = new THREE.Mesh(earthGeo, earthMat);
+      threeGlobeGroup.add(earthMesh);
 
       // 2. High-Tech Cyan Wireframe Latitude/Longitude Cage
-      const wireGeo = new THREE.SphereGeometry(70, 32, 24);
+      const wireGeo = new THREE.SphereGeometry(70.8, 36, 24);
       const wireMat = new THREE.MeshBasicMaterial({
         color: 0x0284c7,
         wireframe: true,
         transparent: true,
-        opacity: 0.38
+        opacity: 0.28
       });
       const wireMesh = new THREE.Mesh(wireGeo, wireMat);
       threeGlobeGroup.add(wireMesh);
 
       // 3. Glowing Atmospheric Halo Shell
-      const atmoGeo = new THREE.SphereGeometry(73.5, 36, 36);
+      const atmoGeo = new THREE.SphereGeometry(74.5, 48, 48);
       const atmoMat = new THREE.MeshBasicMaterial({
         color: 0x00f2fe,
         side: THREE.BackSide,
         transparent: true,
-        opacity: 0.12
+        opacity: 0.16
       });
       const atmoMesh = new THREE.Mesh(atmoGeo, atmoMat);
       threeGlobeGroup.add(atmoMesh);
 
       // 4. Rotating Coordinate Equator & Tropic Rings
-      const equatorGeo = new THREE.RingGeometry(71.5, 72.8, 64);
+      const equatorGeo = new THREE.RingGeometry(71.8, 73.2, 64);
       const equatorMat = new THREE.MeshBasicMaterial({
         color: 0x38bdf8,
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.45
+        opacity: 0.40
       });
       const equatorRing = new THREE.Mesh(equatorGeo, equatorMat);
       equatorRing.rotation.x = Math.PI / 2;
@@ -6569,45 +6839,46 @@
         return new THREE.Vector3(x, y, z);
       }
 
-      // 6. Geographic Landmass Dots (India, Arabian Sea, GCC, Red Sea corridor)
-      const landDots = [
-        // India Subcontinent
-        [19.0, 73.0], [18.5, 74.0], [20.0, 78.0], [22.0, 72.0], [23.0, 70.0], [24.0, 80.0],
-        [28.6, 77.2], [26.0, 80.0], [13.0, 80.0], [12.9, 77.5], [17.3, 78.4], [10.0, 76.2],
-        [8.5, 77.0], [21.1, 79.1], [22.5, 88.3], [26.8, 80.9], [30.7, 76.7], [23.2, 77.4],
-        // Arabian Peninsula & GCC
-        [25.2, 55.3], [24.7, 46.7], [26.4, 50.1], [25.3, 51.5], [29.3, 47.9], [23.6, 58.5],
-        [21.5, 39.1], [24.4, 39.6], [24.4, 54.3], [25.4, 55.5], [17.0, 54.0], [15.3, 44.2]
-      ];
+      // 6. Global Country Hubs & Logistical Ports (Representing All Key Global Continents)
+      const globalNodes = [
+        // India Corridor
+        { name: "Mumbai / JNPT Port", country: "India", flag: "🇮🇳", lat: 18.95, lon: 72.95, color: 0x00f2fe, size: 2.8, status: "ONLINE (94.2% OTIF)", freight: "1,840 TEU" },
+        { name: "Mundra Port", country: "India", flag: "🇮🇳", lat: 22.84, lon: 69.70, color: 0x38bdf8, size: 2.6, status: "ONLINE (91.8% OTIF)", freight: "1,220 TEU" },
+        { name: "Delhi Mega Logistics Hub", country: "India", flag: "🇮🇳", lat: 28.61, lon: 77.20, color: 0x38bdf8, size: 2.7, status: "ONLINE (95.0% OTIF)", freight: "2,100 TEU" },
+        { name: "Chennai Port", country: "India", flag: "🇮🇳", lat: 13.08, lon: 80.27, color: 0x00f2fe, size: 2.5, status: "ONLINE (92.5% OTIF)", freight: "950 TEU" },
+        
+        // GCC & Middle East Hubs
+        { name: "Jebel Ali / Dubai Port", country: "UAE", flag: "🇦🇪", lat: 25.01, lon: 55.06, color: 0x34d399, size: 3.0, status: "OPTIMAL (98.4% OTIF)", freight: "3,400 TEU" },
+        { name: "King Abdulaziz Port", country: "Saudi Arabia", flag: "🇸🇦", lat: 26.43, lon: 50.10, color: 0x10b981, size: 2.7, status: "OPTIMAL (96.2% OTIF)", freight: "1,600 TEU" },
+        { name: "Riyadh Dry Port Hub", country: "Saudi Arabia", flag: "🇸🇦", lat: 24.71, lon: 46.67, color: 0xfbbf24, size: 2.6, status: "OPTIMAL (93.1% OTIF)", freight: "850 TEU" },
+        { name: "Hamad Port, Doha", country: "Qatar", flag: "🇶🇦", lat: 25.28, lon: 51.53, color: 0xa855f7, size: 2.5, status: "ONLINE (94.0% OTIF)", freight: "780 TEU" },
+        { name: "Port of Salalah", country: "Oman", flag: "🇴🇲", lat: 16.94, lon: 54.00, color: 0x34d399, size: 2.4, status: "CLEAR (95.4% OTIF)", freight: "620 TEU" },
 
-      const dotGroup = new THREE.Group();
-      const dotGeo = new THREE.SphereGeometry(0.9, 6, 6);
-      const dotMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.65 });
-      landDots.forEach(([lat, lon]) => {
-        const p = latLonToVector3(lat, lon, 70.5);
-        const d = new THREE.Mesh(dotGeo, dotMat);
-        d.position.copy(p);
-        dotGroup.add(d);
-      });
-      threeGlobeGroup.add(dotGroup);
+        // Europe Hubs
+        { name: "Rotterdam Gateway Port", country: "Netherlands", flag: "🇳🇱", lat: 51.92, lon: 4.47, color: 0x38bdf8, size: 2.7, status: "ONLINE (96.0% OTIF)", freight: "2,800 TEU" },
+        { name: "Hamburg Air & Rail Hub", country: "Germany", flag: "🇩🇪", lat: 53.55, lon: 9.99, color: 0x60a5fa, size: 2.6, status: "ONLINE (94.8% OTIF)", freight: "1,450 TEU" },
+        { name: "Felixstowe / London Port", country: "United Kingdom", flag: "🇬🇧", lat: 51.95, lon: 1.35, color: 0x93c5fd, size: 2.5, status: "ONLINE (92.1% OTIF)", freight: "1,120 TEU" },
+        { name: "Port Said / Suez Canal", country: "Egypt", flag: "🇪🇬", lat: 31.26, lon: 32.30, color: 0xfbbf24, size: 2.6, status: "TRANSIT CHOKEPOINT (MONITORED)", freight: "4,200 TEU" },
 
-      // 7. Key Trade Corridor Ports & Logistical Hubs
-      const nodes = [
-        { name: "JNPT / Mumbai Port", lat: 18.95, lon: 72.95, color: 0x00f2fe, size: 2.8, hub: "India" },
-        { name: "Mundra Port, Gujarat", lat: 22.84, lon: 69.70, color: 0x38bdf8, size: 2.5, hub: "India" },
-        { name: "Delhi Mega Logistics Hub", lat: 28.61, lon: 77.20, color: 0x38bdf8, size: 2.6, hub: "India" },
-        { name: "Chennai Port", lat: 13.08, lon: 80.27, color: 0x00f2fe, size: 2.5, hub: "India" },
-        { name: "Jebel Ali / Dubai Port", lat: 25.01, lon: 55.06, color: 0x34d399, size: 3.0, hub: "GCC" },
-        { name: "King Abdulaziz Port, Dammam", lat: 26.43, lon: 50.10, color: 0x10b981, size: 2.7, hub: "GCC" },
-        { name: "Riyadh Logistics Dry Port", lat: 24.71, lon: 46.67, color: 0xfbbf24, size: 2.6, hub: "GCC" },
-        { name: "Hamad Port, Doha", lat: 25.28, lon: 51.53, color: 0xa855f7, size: 2.5, hub: "GCC" }
+        // Americas Hubs
+        { name: "Port of Los Angeles", country: "USA", flag: "🇺🇸", lat: 33.74, lon: -118.26, color: 0x38bdf8, size: 2.9, status: "ACTIVE (91.4% OTIF)", freight: "3,800 TEU" },
+        { name: "New York / Newark Port", country: "USA", flag: "🇺🇸", lat: 40.68, lon: -74.14, color: 0x60a5fa, size: 2.8, status: "ACTIVE (93.0% OTIF)", freight: "2,600 TEU" },
+        { name: "Santos / São Paulo Port", country: "Brazil", flag: "🇧🇷", lat: -23.96, lon: -46.33, color: 0x34d399, size: 2.6, status: "ACTIVE (89.5% OTIF)", freight: "1,340 TEU" },
+
+        // Asia-Pacific & Africa Hubs
+        { name: "PSA Singapore Transshipment", country: "Singapore", flag: "🇸🇬", lat: 1.29, lon: 103.85, color: 0x00f2fe, size: 2.9, status: "MAX CAPACITY (98.9% OTIF)", freight: "4,600 TEU" },
+        { name: "Shanghai Port (Yangshan)", country: "China", flag: "🇨🇳", lat: 31.23, lon: 121.47, color: 0xf87171, size: 3.0, status: "ACTIVE (95.7% OTIF)", freight: "5,200 TEU" },
+        { name: "Tokyo / Yokohama Hub", country: "Japan", flag: "🇯🇵", lat: 35.44, lon: 139.64, color: 0xfca5a5, size: 2.6, status: "OPTIMAL (97.5% OTIF)", freight: "1,780 TEU" },
+        { name: "Sydney Port Botany", country: "Australia", flag: "🇦🇺", lat: -33.97, lon: 151.22, color: 0xfef08a, size: 2.6, status: "OPTIMAL (94.6% OTIF)", freight: "1,150 TEU" },
+        { name: "Durban Gateway Port", country: "South Africa", flag: "🇿🇦", lat: -29.86, lon: 31.02, color: 0xfbbf24, size: 2.5, status: "CLEAR (90.2% OTIF)", freight: "890 TEU" }
       ];
 
       const nodePositions = {};
       beaconHalos = [];
+      interactiveHubMeshes = [];
 
-      nodes.forEach(n => {
-        const pos = latLonToVector3(n.lat, n.lon, 71.2);
+      globalNodes.forEach(n => {
+        const pos = latLonToVector3(n.lat, n.lon, 71.4);
         nodePositions[n.name] = pos;
 
         // Hub Core Solid Sphere
@@ -6615,10 +6886,12 @@
         const nodeMat = new THREE.MeshBasicMaterial({ color: n.color });
         const nodeMesh = new THREE.Mesh(nodeGeo, nodeMat);
         nodeMesh.position.copy(pos);
+        nodeMesh.userData = n;
         threeGlobeGroup.add(nodeMesh);
+        interactiveHubMeshes.push(nodeMesh);
 
         // Animated Beacon Halo Ring
-        const haloGeo = new THREE.RingGeometry(n.size * 1.2, n.size * 1.9, 24);
+        const haloGeo = new THREE.RingGeometry(n.size * 1.2, n.size * 2.0, 24);
         const haloMat = new THREE.MeshBasicMaterial({
           color: n.color,
           side: THREE.DoubleSide,
@@ -6633,25 +6906,41 @@
         beaconHalos.push({ mesh: haloMesh, baseScale: 1.0, currentScale: 1.0 + Math.random() * 0.8 });
       });
 
-      // 8. 3D Geodesic Corridor Arcs with Parabolic Lift
-      const routes = [
-        ["JNPT / Mumbai Port", "Jebel Ali / Dubai Port", 0x00f2fe, 26],     // Primary Arabian Sea Mainline
-        ["Mundra Port, Gujarat", "King Abdulaziz Port, Dammam", 0x10b981, 24], // Petrochemical & Container route
-        ["Delhi Mega Logistics Hub", "Riyadh Logistics Dry Port", 0xfbbf24, 28], // Air cargo express
-        ["Chennai Port", "Hamad Port, Doha", 0xa855f7, 26],                 // Cold chain & pharmaceutical
-        ["Delhi Mega Logistics Hub", "JNPT / Mumbai Port", 0x38bdf8, 16],    // Dedicated Freight Corridor (DFC)
-        ["JNPT / Mumbai Port", "Chennai Port", 0x38bdf8, 16],               // Domestic peninsular rail
-        ["Jebel Ali / Dubai Port", "Riyadh Logistics Dry Port", 0x34d399, 14] // GCC overland highway
+      // 7. Global Trade Corridors & Geodesic Laser Arcs
+      const globalRoutes = [
+        // India <-> GCC Primary Mainline
+        ["Mumbai / JNPT Port", "Jebel Ali / Dubai Port", 0x00f2fe, 26],
+        ["Mundra Port", "King Abdulaziz Port", 0x10b981, 24],
+        ["Delhi Mega Logistics Hub", "Riyadh Dry Port Hub", 0xfbbf24, 28],
+        ["Chennai Port", "Hamad Port, Doha", 0xa855f7, 26],
+        ["Jebel Ali / Dubai Port", "Port of Salalah", 0x34d399, 14],
+
+        // India <-> East Asia & Pacific
+        ["Chennai Port", "PSA Singapore Transshipment", 0x00f2fe, 28],
+        ["PSA Singapore Transshipment", "Shanghai Port (Yangshan)", 0xf87171, 30],
+        ["Shanghai Port (Yangshan)", "Tokyo / Yokohama Hub", 0xfca5a5, 22],
+        ["PSA Singapore Transshipment", "Sydney Port Botany", 0xfef08a, 34],
+
+        // GCC / India <-> Europe (via Suez Canal)
+        ["Jebel Ali / Dubai Port", "Port Said / Suez Canal", 0xfbbf24, 28],
+        ["Port Said / Suez Canal", "Rotterdam Gateway Port", 0x38bdf8, 30],
+        ["Rotterdam Gateway Port", "Hamburg Air & Rail Hub", 0x60a5fa, 12],
+        ["Rotterdam Gateway Port", "Felixstowe / London Port", 0x93c5fd, 10],
+
+        // Trans-Atlantic & Trans-Pacific Global Arcs
+        ["Rotterdam Gateway Port", "New York / Newark Port", 0x60a5fa, 38],
+        ["Shanghai Port (Yangshan)", "Port of Los Angeles", 0x38bdf8, 45],
+        ["New York / Newark Port", "Santos / São Paulo Port", 0x34d399, 40],
+        ["Jebel Ali / Dubai Port", "Durban Gateway Port", 0xfbbf24, 35]
       ];
 
       particleArcs = [];
 
-      routes.forEach(([from, to, color, lift]) => {
+      globalRoutes.forEach(([from, to, color, lift]) => {
         const vFrom = nodePositions[from];
         const vTo = nodePositions[to];
         if (!vFrom || !vTo) return;
 
-        // Quadratic Bezier Arc lifted gracefully above the spherical surface
         const vMid = vFrom.clone().add(vTo).multiplyScalar(0.5);
         const midLen = vMid.length();
         vMid.normalize().multiplyScalar(midLen + lift);
@@ -6662,7 +6951,7 @@
         const curveMat = new THREE.LineBasicMaterial({
           color: color,
           transparent: true,
-          opacity: 0.78,
+          opacity: 0.76,
           linewidth: 2
         });
         const arcLine = new THREE.Line(curveGeo, curveMat);
@@ -6678,25 +6967,68 @@
         }
       });
 
-      // 9. Initial Camera Angle: Focused on the India-GCC corridor
+      // 8. Initial Camera & Orientation: Focusing on the India-GCC epicenter
       threeGlobeGroup.rotation.y = 1.35;
       threeGlobeGroup.rotation.x = 0.35;
 
-      // 10. Interactive Mouse Drag Controls
+      // 9. Interactive Mouse Drag Controls
       canvas.addEventListener('mousedown', (e) => {
         isGlobeDragging = true;
         previousMousePosition = { x: e.clientX, y: e.clientY };
       });
       window.addEventListener('mousemove', (e) => {
-        if (!isGlobeDragging) return;
+        if (!isGlobeDragging) {
+          // Raycaster check for node hover HUD
+          checkNodeHover(e);
+          return;
+        }
         const deltaX = e.clientX - previousMousePosition.x;
         const deltaY = e.clientY - previousMousePosition.y;
         threeGlobeGroup.rotation.y += deltaX * 0.007;
         threeGlobeGroup.rotation.x += deltaY * 0.007;
         threeGlobeGroup.rotation.x = Math.max(-1.1, Math.min(1.1, threeGlobeGroup.rotation.x));
+        targetRotation.y = threeGlobeGroup.rotation.y;
+        targetRotation.x = threeGlobeGroup.rotation.x;
         previousMousePosition = { x: e.clientX, y: e.clientY };
       });
       window.addEventListener('mouseup', () => { isGlobeDragging = false; });
+
+      // 10. Interactive Node Raycaster Hover Tooltip
+      raycaster = new THREE.Raycaster();
+      mouseVec = new THREE.Vector2();
+
+      function checkNodeHover(e) {
+        const hud = document.getElementById('globe-node-hud');
+        if (!hud || !threeCamera || !threeRenderer) return;
+
+        const rect = canvas.getBoundingClientRect();
+        mouseVec.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouseVec.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouseVec, threeCamera);
+        const intersects = raycaster.intersectObjects(interactiveHubMeshes);
+
+        if (intersects.length > 0) {
+          const data = intersects[0].object.userData;
+          const flagEl = document.getElementById('hud-flag');
+          const titleEl = document.getElementById('hud-title');
+          const countryEl = document.getElementById('hud-country');
+          const statusEl = document.getElementById('hud-status');
+          const freightEl = document.getElementById('hud-freight');
+
+          if (flagEl) flagEl.textContent = data.flag || "🌐";
+          if (titleEl) titleEl.textContent = data.name;
+          if (countryEl) countryEl.textContent = data.country;
+          if (statusEl) statusEl.textContent = data.status;
+          if (freightEl) freightEl.textContent = data.freight;
+
+          hud.classList.remove('hidden');
+          canvas.style.cursor = 'pointer';
+        } else {
+          hud.classList.add('hidden');
+          canvas.style.cursor = 'grab';
+        }
+      }
 
       // 11. Touch Drag Controls for Mobile / Tablets
       canvas.addEventListener('touchstart', (e) => {
@@ -6711,6 +7043,8 @@
         const deltaY = e.touches[0].clientY - previousMousePosition.y;
         threeGlobeGroup.rotation.y += deltaX * 0.007;
         threeGlobeGroup.rotation.x += deltaY * 0.007;
+        targetRotation.y = threeGlobeGroup.rotation.y;
+        targetRotation.x = threeGlobeGroup.rotation.x;
         previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       }, { passive: true });
       canvas.addEventListener('touchend', () => { isGlobeDragging = false; });
@@ -6719,7 +7053,7 @@
       canvas.addEventListener('wheel', (e) => {
         e.preventDefault();
         threeCamera.position.z += e.deltaY * 0.12;
-        threeCamera.position.z = Math.max(140, Math.min(320, threeCamera.position.z));
+        threeCamera.position.z = Math.max(130, Math.min(320, threeCamera.position.z));
       }, { passive: false });
 
       // 13. Dynamic ResizeObserver on container
@@ -6745,8 +7079,14 @@
         requestAnimationFrame(animateGlobe);
 
         // Smooth Auto-Orbit when idle
+        if (!isGlobeDragging && autoOrbitEnabled) {
+          threeGlobeGroup.rotation.y += 0.0014;
+        }
+
+        // Smooth Interpolation towards Target Rotation when region button clicked
         if (!isGlobeDragging) {
-          threeGlobeGroup.rotation.y += 0.0016;
+          threeGlobeGroup.rotation.y += (targetRotation.y - threeGlobeGroup.rotation.y) * 0.04;
+          threeGlobeGroup.rotation.x += (targetRotation.x - threeGlobeGroup.rotation.x) * 0.04;
         }
 
         // Animate Pulsing Beacon Halos
