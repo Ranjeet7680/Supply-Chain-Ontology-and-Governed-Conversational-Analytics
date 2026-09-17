@@ -408,6 +408,10 @@
           <a href="#section-silo" class="hover:text-cyan-300 transition-colors">The Silo Dilemma</a>
           <a href="#section-pillars" class="hover:text-cyan-300 transition-colors">Core Pillars</a>
           <a href="#section-architecture" class="hover:text-cyan-300 transition-colors">Medallion Architecture</a>
+          <a href="#section-gallery" class="hover:text-cyan-300 transition-colors text-cyan-300 font-bold flex items-center gap-1">
+            <span>🎬</span>
+            <span>Visual Gallery</span>
+          </a>
           <a href="#section-personas" class="hover:text-cyan-300 transition-colors">Live Personas</a>
           <a href="#section-security" class="hover:text-cyan-300 transition-colors">Governance</a>
         </div>
@@ -916,6 +920,160 @@
             <div class="font-body-sm text-[11px] text-on-surface-variant mt-2">MCP Agent Tools, Rerouting, PO Expedite &amp; Alerts</div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION: ANIMATED ARCHITECTURE & TELEMETRY VISUAL GALLERY ================= -->
+    <section id="section-gallery" class="py-20 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto w-full border-t border-cyan-900/40">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#081E3B]/90 border border-cyan-400/40 mb-4 shadow-[0_0_20px_rgba(76,215,246,0.2)]">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span class="font-mono text-xs text-cyan-300 uppercase tracking-wider font-bold">
+            ✦ Official Hackathon Animated Visual Gallery
+          </span>
+        </div>
+        <h2 class="font-extrabold text-2xl sm:text-4xl tracking-tight mb-4 bg-gradient-to-r from-white via-slate-100 to-sky-300 bg-clip-text text-transparent">
+          Live Animated Architecture &amp; Telemetry Gallery
+        </h2>
+        <p class="font-body-md text-slate-300/90 text-sm sm:text-base leading-relaxed">
+          Interactive real-time vector graphics illustrating multi-echelon telemetry broadcasting, circuit dataflow, quantified SLA lift, and the India &harr; GCC geodesic radar.
+        </p>
+
+        <!-- Interactive Category Filter Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-6">
+          <button onclick="filterGallery('all')" class="gallery-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono transition-all bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)]" data-filter="all">
+            All 4 Visuals
+          </button>
+          <button onclick="filterGallery('telemetry')" class="gallery-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono transition-all bg-[#081E3B] text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-white" data-filter="telemetry">
+            📡 1. Telemetry Collision
+          </button>
+          <button onclick="filterGallery('circuit')" class="gallery-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono transition-all bg-[#081E3B] text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-white" data-filter="circuit">
+            ⚡ 2. Circuit Architecture
+          </button>
+          <button onclick="filterGallery('impact')" class="gallery-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono transition-all bg-[#081E3B] text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-white" data-filter="impact">
+            📊 3. Quantified Impact
+          </button>
+          <button onclick="filterGallery('radar')" class="gallery-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono transition-all bg-[#081E3B] text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-white" data-filter="radar">
+            🚢 4. Trade Corridor Radar
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Visual Cards Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="gallery-cards-container">
+        
+        <!-- CARD 1: Telemetry Broadcasting -->
+        <div class="gallery-card group rounded-2xl bg-[#061426]/90 border border-cyan-500/30 overflow-hidden shadow-2xl transition-all hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(76,215,246,0.25)] flex flex-col" data-cat="telemetry">
+          <div class="p-4 sm:p-5 border-b border-cyan-900/40 bg-[#040E1C]/90 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+              <div>
+                <span class="text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-widest block">Criterion 1 · Problem Brief</span>
+                <h3 class="font-bold text-sm sm:text-base text-white">Telemetry Broadcasting &amp; Reconciliation</h3>
+              </div>
+            </div>
+            <button onclick="openVisualLightbox('assets/problem_brief_wifi_animation.svg', '1. Telemetry Broadcasting &amp; Cross-Persona Reconciliation')" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-cyan-500 hover:text-slate-950 text-slate-300 border border-slate-700 text-xs font-mono font-bold transition-all flex items-center gap-1">
+              <span>🔍 Zoom HD</span>
+            </button>
+          </div>
+          <div class="p-4 sm:p-6 bg-[#030914] flex items-center justify-center relative overflow-hidden">
+            <img src="assets/problem_brief_wifi_animation.svg" alt="Problem Brief Telemetry Broadcasting Animation" class="w-full h-auto rounded-xl border border-cyan-500/20 shadow-xl cursor-pointer transition-transform duration-300 group-hover:scale-[1.01]" onclick="openVisualLightbox('assets/problem_brief_wifi_animation.svg', '1. Telemetry Broadcasting &amp; Cross-Persona Reconciliation')"/>
+          </div>
+          <div class="p-4 sm:p-5 border-t border-cyan-900/40 bg-[#040E1C]/80 mt-auto text-xs text-slate-300 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-cyan-300 font-bold">Consensus Grounding:</span>
+              <span class="font-mono text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">Canonical OTIF: 22.91%</span>
+            </div>
+            <p class="text-slate-400 leading-relaxed text-[11px]">
+              Visualizes the 3 conflicting silo metrics (Logistics 73.32%, Procurement 50.36%, Planning 22.91%) reconciled into certified ground truth with Wi-Fi radar telemetry broadcasting.
+            </p>
+          </div>
+        </div>
+
+        <!-- CARD 2: Circuit Architecture -->
+        <div class="gallery-card group rounded-2xl bg-[#061426]/90 border border-cyan-500/30 overflow-hidden shadow-2xl transition-all hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(76,215,246,0.25)] flex flex-col" data-cat="circuit">
+          <div class="p-4 sm:p-5 border-b border-cyan-900/40 bg-[#040E1C]/90 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
+              <div>
+                <span class="text-[10px] font-mono font-bold text-sky-400 uppercase tracking-widest block">Criterion 2 · System Architecture</span>
+                <h3 class="font-bold text-sm sm:text-base text-white">Circuit Dataflow &amp; CoCo Skill Loop</h3>
+              </div>
+            </div>
+            <button onclick="openVisualLightbox('assets/architecture_animated_circuit.svg', '2. System Architecture: Circuit Dataflow &amp; CoCo Skill Loop')" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-cyan-500 hover:text-slate-950 text-slate-300 border border-slate-700 text-xs font-mono font-bold transition-all flex items-center gap-1">
+              <span>🔍 Zoom HD</span>
+            </button>
+          </div>
+          <div class="p-4 sm:p-6 bg-[#030914] flex items-center justify-center relative overflow-hidden">
+            <img src="assets/architecture_animated_circuit.svg" alt="Circuit Dataflow Architecture Animation" class="w-full h-auto rounded-xl border border-cyan-500/20 shadow-xl cursor-pointer transition-transform duration-300 group-hover:scale-[1.01]" onclick="openVisualLightbox('assets/architecture_animated_circuit.svg', '2. System Architecture: Circuit Dataflow &amp; CoCo Skill Loop')"/>
+          </div>
+          <div class="p-4 sm:p-5 border-t border-cyan-900/40 bg-[#040E1C]/80 mt-auto text-xs text-slate-300 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-sky-300 font-bold">Pipeline Progression:</span>
+              <span class="font-mono text-cyan-400 font-bold bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/30">5 Real-Time Circuit Stages</span>
+            </div>
+            <p class="text-slate-400 leading-relaxed text-[11px]">
+              Continuous micro-packet animation displaying ingestion &rarr; Medallion Silver ontology &rarr; PyTorch Spatial GNN &amp; RL &rarr; MCP Agent tools &rarr; 3D Digital Twin &amp; voice AI.
+            </p>
+          </div>
+        </div>
+
+        <!-- CARD 3: Quantified Impact -->
+        <div class="gallery-card group rounded-2xl bg-[#061426]/90 border border-cyan-500/30 overflow-hidden shadow-2xl transition-all hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(76,215,246,0.25)] flex flex-col" data-cat="impact">
+          <div class="p-4 sm:p-5 border-b border-cyan-900/40 bg-[#040E1C]/90 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <div>
+                <span class="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-widest block">Criterion 3 · Business Impact</span>
+                <h3 class="font-bold text-sm sm:text-base text-white">Quantified Impact &amp; Accuracy Metrics</h3>
+              </div>
+            </div>
+            <button onclick="openVisualLightbox('assets/impact_metrics_animated.svg', '3. Quantified Impact: +28.4% OTIF &amp; -$12,400 Penalties')" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-cyan-500 hover:text-slate-950 text-slate-300 border border-slate-700 text-xs font-mono font-bold transition-all flex items-center gap-1">
+              <span>🔍 Zoom HD</span>
+            </button>
+          </div>
+          <div class="p-4 sm:p-6 bg-[#030914] flex items-center justify-center relative overflow-hidden">
+            <img src="assets/impact_metrics_animated.svg" alt="Quantified Impact Metrics Animation" class="w-full h-auto rounded-xl border border-cyan-500/20 shadow-xl cursor-pointer transition-transform duration-300 group-hover:scale-[1.01]" onclick="openVisualLightbox('assets/impact_metrics_animated.svg', '3. Quantified Impact: +28.4% OTIF &amp; -$12,400 Penalties')"/>
+          </div>
+          <div class="p-4 sm:p-5 border-t border-cyan-900/40 bg-[#040E1C]/80 mt-auto text-xs text-slate-300 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-emerald-300 font-bold">Verified Production Lift:</span>
+              <span class="font-mono text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">+28.4% OTIF Lift · -$12,400</span>
+            </div>
+            <p class="text-slate-400 leading-relaxed text-[11px]">
+              Dynamic animating progress indicators demonstrating 89.58% ML classification accuracy, 0.9664 ROC-AUC, and sub-1.8ms query execution latency.
+            </p>
+          </div>
+        </div>
+
+        <!-- CARD 4: Trade Corridor Radar -->
+        <div class="gallery-card group rounded-2xl bg-[#061426]/90 border border-cyan-500/30 overflow-hidden shadow-2xl transition-all hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(76,215,246,0.25)] flex flex-col" data-cat="radar">
+          <div class="p-4 sm:p-5 border-b border-cyan-900/40 bg-[#040E1C]/90 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse"></span>
+              <div>
+                <span class="text-[10px] font-mono font-bold text-purple-400 uppercase tracking-widest block">Criterion 4 · Global Logistics</span>
+                <h3 class="font-bold text-sm sm:text-base text-white">Trade Corridor Geodesic Radar</h3>
+              </div>
+            </div>
+            <button onclick="openVisualLightbox('assets/trade_corridor_radar_animated.svg', '4. Trade Corridor Intelligence: India ⇄ GCC Geodesic Radar')" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-cyan-500 hover:text-slate-950 text-slate-300 border border-slate-700 text-xs font-mono font-bold transition-all flex items-center gap-1">
+              <span>🔍 Zoom HD</span>
+            </button>
+          </div>
+          <div class="p-4 sm:p-6 bg-[#030914] flex items-center justify-center relative overflow-hidden">
+            <img src="assets/trade_corridor_radar_animated.svg" alt="Trade Corridor Radar Animation" class="w-full h-auto rounded-xl border border-cyan-500/20 shadow-xl cursor-pointer transition-transform duration-300 group-hover:scale-[1.01]" onclick="openVisualLightbox('assets/trade_corridor_radar_animated.svg', '4. Trade Corridor Intelligence: India ⇄ GCC Geodesic Radar')"/>
+          </div>
+          <div class="p-4 sm:p-5 border-t border-cyan-900/40 bg-[#040E1C]/80 mt-auto text-xs text-slate-300 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-purple-300 font-bold">Maritime Geodesic Tracking:</span>
+              <span class="font-mono text-cyan-400 font-bold bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/30">Active Vessel Tracking</span>
+            </div>
+            <p class="text-slate-400 leading-relaxed text-[11px]">
+              Rotating concentric radar beam tracking maritime vessel dispatches, choke points (Strait of Hormuz), and multi-tier ETA confidence across India and GCC hubs.
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -6223,6 +6381,47 @@
       }
     }
 
+    // =========================================================================
+    // ANIMATED VISUAL GALLERY CONTROLLERS
+    // =========================================================================
+    function filterGallery(category) {
+      playUISound('click');
+      const cards = document.querySelectorAll('.gallery-card');
+      const btns = document.querySelectorAll('.gallery-tab-btn');
+      btns.forEach(b => {
+        if (b.getAttribute('data-filter') === category) {
+          b.className = 'gallery-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono transition-all bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.4)]';
+        } else {
+          b.className = 'gallery-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono transition-all bg-[#081E3B] text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-white';
+        }
+      });
+      cards.forEach(c => {
+        if (category === 'all' || c.getAttribute('data-cat') === category) {
+          c.style.display = 'flex';
+        } else {
+          c.style.display = 'none';
+        }
+      });
+    }
+
+    function openVisualLightbox(src, title) {
+      playUISound('click');
+      const modal = document.getElementById('modal-visual-lightbox');
+      const img = document.getElementById('lightbox-img');
+      const titleEl = document.getElementById('lightbox-title');
+      if (modal && img && titleEl) {
+        img.src = src;
+        titleEl.textContent = title;
+        modal.classList.remove('hidden');
+      }
+    }
+
+    function closeVisualLightbox() {
+      playUISound('click');
+      const modal = document.getElementById('modal-visual-lightbox');
+      if (modal) modal.classList.add('hidden');
+    }
+
     // Keyboard Shortcuts
     document.addEventListener('keydown', (e) => {
       // ⌘K or Ctrl+K for Global Search
@@ -6239,6 +6438,8 @@
       if (e.key === 'Escape') {
         closeModal('search');
         closeModal('governance');
+        closeModal('team');
+        closeVisualLightbox();
         const dropdown = document.getElementById('profile-dropdown');
         if (dropdown) dropdown.classList.add('hidden');
       }
@@ -7981,6 +8182,28 @@
       <option value="mr">मराठी (Marathi)</option>
       <option value="bn">বাংলা (Bengali)</option>
     </select>
+  </div>
+
+  <!-- ================= VISUAL GALLERY LIGHTBOX MODAL ================= -->
+  <div id="modal-visual-lightbox" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-6" onclick="if(event.target === this) closeVisualLightbox();">
+    <div class="bg-[#040D1A] border border-cyan-500/40 rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden shadow-[0_0_60px_rgba(76,215,246,0.35)]">
+      <div class="flex items-center justify-between px-5 py-3.5 border-b border-cyan-900/40 bg-[#061426]">
+        <div class="flex items-center gap-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+          <h3 id="lightbox-title" class="font-bold text-sm sm:text-base text-white font-mono truncate max-w-xl"></h3>
+        </div>
+        <button onclick="closeVisualLightbox()" class="w-8 h-8 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 flex items-center justify-center border border-slate-700 transition-colors">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+      <div class="p-4 sm:p-6 overflow-auto flex items-center justify-center bg-[#020710] min-h-[300px]">
+        <img id="lightbox-img" src="" alt="Expanded Diagram" class="w-full h-auto max-h-[72vh] object-contain rounded-lg border border-cyan-500/20 shadow-2xl"/>
+      </div>
+      <div class="px-5 py-3 bg-[#061426] border-t border-cyan-900/40 flex items-center justify-between text-xs font-mono text-slate-400">
+        <span class="flex items-center gap-1.5"><span class="text-cyan-400">✦</span> Live Vector SVG Animation • High Resolution</span>
+        <button onclick="closeVisualLightbox()" class="px-3.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-all shadow-md">Close Viewer</button>
+      </div>
+    </div>
   </div>
 
   <!-- ================= TEAM NEXORA MODAL ================= -->
