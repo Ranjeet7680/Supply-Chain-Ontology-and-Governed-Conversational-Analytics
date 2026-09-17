@@ -1866,7 +1866,7 @@
 
 </div>
 
-<button class="flex items-center gap-1.5 px-space-md py-1.5 rounded bg-surface-container-high text-on-surface hover:bg-surface-bright transition-all shadow-sm">
+<button onclick="triggerPlaybook()" class="flex items-center gap-1.5 px-space-md py-1.5 rounded bg-surface-container-high text-on-surface hover:bg-surface-bright transition-all shadow-sm">
 
 <span class="material-symbols-outlined text-[18px] text-secondary">play_arrow</span>
 
@@ -1874,7 +1874,7 @@
 
 </button>
 
-<button class="flex items-center gap-1.5 px-space-md py-1.5 rounded bg-primary-container text-on-primary-container hover:bg-primary-container/90 transition-all shadow-md">
+<button onclick="exportExecutiveBrief()" class="flex items-center gap-1.5 px-space-md py-1.5 rounded bg-primary-container text-on-primary-container hover:bg-primary-container/90 transition-all shadow-md">
 
 <span class="material-symbols-outlined text-[18px]">download</span>
 
@@ -2148,19 +2148,19 @@
 
 <div class="flex items-center gap-1 p-1 rounded-lg bg-surface-container">
 
-<button class="px-space-sm py-1.5 rounded font-body-sm text-body-sm bg-surface-container-high text-secondary font-medium shadow-sm transition-all">
+<button onclick="switchChartMetric('OTIF & Delivery Reliability', this)" class="px-space-sm py-1.5 rounded font-body-sm text-body-sm bg-surface-container-high text-secondary font-medium shadow-sm transition-all">
 
               OTIF &amp; Delivery Reliability
 
             </button>
 
-<button class="px-space-sm py-1.5 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-all">
+<button onclick="switchChartMetric('Inventory vs Buffer Stock', this)" class="px-space-sm py-1.5 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-all">
 
               Inventory vs Buffer Stock
 
             </button>
 
-<button class="px-space-sm py-1.5 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-all">
+<button onclick="switchChartMetric('Network Transit Times', this)" class="px-space-sm py-1.5 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-all">
 
               Network Transit Times
 
@@ -2174,13 +2174,13 @@
 
 <div class="flex items-center gap-1 px-1 rounded bg-surface-container">
 
-<button class="px-2 py-0.5 rounded font-label-micro text-label-micro text-outline hover:text-on-surface">7D</button>
+<button onclick="switchChartTimeframe('7D', this)" class="px-2 py-0.5 rounded font-label-micro text-label-micro text-outline hover:text-on-surface">7D</button>
 
-<button class="px-2 py-0.5 rounded font-label-micro text-label-micro bg-surface-container-high text-secondary font-semibold">30D</button>
+<button onclick="switchChartTimeframe('30D', this)" class="px-2 py-0.5 rounded font-label-micro text-label-micro bg-surface-container-high text-secondary font-semibold">30D</button>
 
-<button class="px-2 py-0.5 rounded font-label-micro text-label-micro text-outline hover:text-on-surface">90D</button>
+<button onclick="switchChartTimeframe('90D', this)" class="px-2 py-0.5 rounded font-label-micro text-label-micro text-outline hover:text-on-surface">90D</button>
 
-<button class="px-2 py-0.5 rounded font-label-micro text-label-micro text-outline hover:text-on-surface">YTD</button>
+<button onclick="switchChartTimeframe('YTD', this)" class="px-2 py-0.5 rounded font-label-micro text-label-micro text-outline hover:text-on-surface">YTD</button>
 
 </div>
 
@@ -2478,7 +2478,7 @@
 
 <span class="font-label-micro text-label-micro text-outline">Impact: Tier 1 Fabrication</span>
 
-<button class="px-space-sm py-1 rounded bg-secondary-container/30 hover:bg-secondary-container/50 text-secondary font-body-sm text-body-sm font-medium transition-colors">
+<button onclick="triggerSupplierMitigation('Apex Logistics')" class="px-space-sm py-1 rounded bg-secondary-container/30 hover:bg-secondary-container/50 text-secondary font-body-sm text-body-sm font-medium transition-colors">
 
                   Run Supplier Mitigation
 
@@ -2510,7 +2510,7 @@
 
 <span class="font-label-micro text-label-micro text-outline">Depots: FRA • ANR</span>
 
-<button class="px-space-sm py-1 rounded bg-primary-container text-on-primary-container hover:bg-primary-container/80 font-body-sm text-body-sm font-medium transition-colors">
+<button onclick="triggerReallocation('Frankfurt & Antwerp')" class="px-space-sm py-1 rounded bg-primary-container text-on-primary-container hover:bg-primary-container/80 font-body-sm text-body-sm font-medium transition-colors">
 
                   Trigger Re-allocation
 
@@ -2668,7 +2668,7 @@
 
 <td class="py-2.5 px-3 text-right">
 
-<button class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-secondary font-label-micro text-label-micro transition-colors">Audit</button>
+<button onclick="auditSupplierRow('Acme Components', '84.2%', '24d')" class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-secondary font-label-micro text-label-micro transition-colors">Audit</button>
 
 </td>
 
@@ -2702,7 +2702,7 @@
 
 <td class="py-2.5 px-3 text-right">
 
-<button class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-secondary font-label-micro text-label-micro transition-colors">Audit</button>
+<button onclick="auditSupplierRow('Global Parts Ltd', '79.1%', '19d')" class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-secondary font-label-micro text-label-micro transition-colors">Audit</button>
 
 </td>
 
@@ -2736,7 +2736,7 @@
 
 <td class="py-2.5 px-3 text-right">
 
-<button class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant font-label-micro text-label-micro transition-colors">Review</button>
+<button onclick="auditSupplierRow('Nova Industrial', '81.0%', '16d')" class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant font-label-micro text-label-micro transition-colors">Review</button>
 
 </td>
 
@@ -2770,7 +2770,7 @@
 
 <td class="py-2.5 px-3 text-right">
 
-<button class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant font-label-micro text-label-micro transition-colors">Details</button>
+<button onclick="auditSupplierRow('Synapse Electronics', '96.4%', '9d')" class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant font-label-micro text-label-micro transition-colors">Details</button>
 
 </td>
 
@@ -2804,7 +2804,7 @@
 
 <td class="py-2.5 px-3 text-right">
 
-<button class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant font-label-micro text-label-micro transition-colors">Details</button>
+<button onclick="auditSupplierRow('Nordic Logistics', '98.1%', '5d')" class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant font-label-micro text-label-micro transition-colors">Details</button>
 
 </td>
 
@@ -3106,7 +3106,7 @@
 
         </span>
 
-<button class="px-space-md py-1.5 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm font-medium transition-colors">
+<button onclick="switchTab('lineage')" class="px-space-md py-1.5 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm font-medium transition-colors">
 
           Inspect Graph Lineage
 
@@ -3154,13 +3154,13 @@
 
 <div class="flex flex-col gap-1">
 
-<button class="text-left p-1.5 rounded bg-surface-container hover:bg-surface-bright font-label-micro text-label-micro text-on-surface-variant transition-colors truncate">
+<button onclick="runSimulatedQuery('Simulate 5-day port shutdown at Rotterdam on European assembly line')" class="text-left p-1.5 rounded bg-surface-container hover:bg-surface-bright font-label-micro text-label-micro text-on-surface-variant transition-colors truncate">
 
           &gt; "Simulate 5-day port shutdown at Rotterdam on European assembly line"
 
         </button>
 
-<button class="text-left p-1.5 rounded bg-surface-container hover:bg-surface-bright font-label-micro text-label-micro text-on-surface-variant transition-colors truncate">
+<button onclick="runSimulatedQuery('Identify alternate Tier-2 suppliers for 14 high-risk microcontrollers')" class="text-left p-1.5 rounded bg-surface-container hover:bg-surface-bright font-label-micro text-label-micro text-on-surface-variant transition-colors truncate">
 
           &gt; "Identify alternate Tier-2 suppliers for 14 high-risk microcontrollers"
 
@@ -3174,9 +3174,9 @@
 
 <div class="relative flex items-center">
 
-<input class="w-full pl-3 pr-9 py-1.5 rounded bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none" placeholder="Ask governed query across ontology..." type="text"/>
+<input id="floating-query-input" onkeydown="if(event.key === 'Enter'){ runSimulatedQuery(this.value); this.value=''; }" class="w-full pl-3 pr-9 py-1.5 rounded bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none" placeholder="Ask governed query across ontology..." type="text"/>
 
-<button class="absolute right-2 text-secondary hover:text-primary transition-colors">
+<button onclick="const q = document.getElementById('floating-query-input')?.value; if(q){ runSimulatedQuery(q); document.getElementById('floating-query-input').value=''; }" class="absolute right-2 text-secondary hover:text-primary transition-colors">
 
 <span class="material-symbols-outlined text-[18px]">arrow_upward</span>
 
@@ -3293,7 +3293,7 @@
 
 <div class="flex items-center gap-space-xs self-start lg:self-auto bg-surface-container-low p-1 rounded-lg">
 
-<button class="px-space-md py-1.5 rounded bg-surface-container-high text-secondary font-title-sm text-title-sm flex items-center gap-1.5 shadow-sm">
+<button onclick="showToast('Active analysis session synchronized with Cortex.', 'info')" class="px-space-md py-1.5 rounded bg-surface-container-high text-secondary font-title-sm text-title-sm flex items-center gap-1.5 shadow-sm">
 
 <span class="material-symbols-outlined text-[16px]">chat</span>
 
@@ -3301,7 +3301,7 @@
 
 </button>
 
-<button class="px-space-md py-1.5 rounded text-on-surface-variant hover:text-on-surface font-title-sm text-title-sm flex items-center gap-1.5 transition-colors">
+<button onclick="switchTab('ontology')" class="px-space-md py-1.5 rounded text-on-surface-variant hover:text-on-surface font-title-sm text-title-sm flex items-center gap-1.5 transition-colors">
 
 <span class="material-symbols-outlined text-[16px]">schema</span>
 
@@ -3309,7 +3309,7 @@
 
 </button>
 
-<button class="px-space-md py-1.5 rounded text-on-surface-variant hover:text-on-surface font-title-sm text-title-sm flex items-center gap-1.5 transition-colors">
+<button onclick="switchTab('audit')" class="px-space-md py-1.5 rounded text-on-surface-variant hover:text-on-surface font-title-sm text-title-sm flex items-center gap-1.5 transition-colors">
 
 <span class="material-symbols-outlined text-[16px]">history</span>
 
@@ -3478,7 +3478,7 @@
 
 <div class="flex items-center gap-space-xs">
 
-<button class="flex items-center gap-1 px-space-xs py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface text-label-micro font-label-micro transition-colors">
+<button onclick="showActionDialog({ title: 'Active Semantic Constraints (4)', subtitle: 'Ontology Policy Enforcement Engine', icon: 'tune', contentHtml: '<div class=\'p-3 bg-slate-900 rounded space-y-1.5 text-slate-300\'><div>&bull; ACL Level: Restricted Tier-2 PO Access</div><div>&bull; Max Query Latency: 500ms</div><div>&bull; Temporal Filter: Q3 2024 Locked</div><div>&bull; Isolation: Zero Cross-Tenant Bleed</div></div>' })" class="flex items-center gap-1 px-space-xs py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface text-label-micro font-label-micro transition-colors">
 
 <span class="material-symbols-outlined text-[14px]">tune</span>
 
@@ -3486,7 +3486,7 @@
 
             </button>
 
-<button class="flex items-center gap-1 px-space-xs py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface text-label-micro font-label-micro transition-colors">
+<button onclick="showActionDialog({ title: 'Raw SPARQL Semantic Translation', subtitle: 'W3C SPARQL 1.1 Conformed Graph Query', icon: 'terminal', contentHtml: '<pre class=\'p-3 bg-slate-900 text-cyan-400 rounded overflow-x-auto text-[11px]\'>PREFIX sc: &lt;http://supplychain.org/ontology#&gt;\nSELECT ?supplier ?delayHours ?otif WHERE {\n  ?supplier a sc:Supplier ;\n            sc:hasShipment ?shipment .\n  ?shipment sc:delayHours ?delayHours ;\n            sc:deliveryQuarter &quot;2024-Q3&quot; .\n  FILTER (?delayHours &gt; 0)\n} ORDER BY DESC(?delayHours)</pre>' })" class="flex items-center gap-1 px-space-xs py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface text-label-micro font-label-micro transition-colors">
 
 <span class="material-symbols-outlined text-[14px]">terminal</span>
 
@@ -3568,7 +3568,7 @@
 
 <div class="flex items-center gap-space-xs">
 
-<button class="flex items-center gap-1 px-space-md py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-title-sm text-title-sm">
+<button onclick="showToast('Semantic parameters unlocked for fine-tuning.', 'info')" class="flex items-center gap-1 px-space-md py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-title-sm text-title-sm">
 
 <span class="material-symbols-outlined text-[16px]">tune</span>
 
@@ -3576,7 +3576,7 @@
 
               </button>
 
-<button class="flex items-center gap-1 px-space-md py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-title-sm text-title-sm">
+<button onclick="showToast('Query bookmarked as Governed View #GV-204!', 'success')" class="flex items-center gap-1 px-space-md py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-title-sm text-title-sm">
 
 <span class="material-symbols-outlined text-[16px]">bookmark_add</span>
 
@@ -3584,7 +3584,7 @@
 
               </button>
 
-<button class="flex items-center gap-1 px-space-md py-1.5 rounded bg-primary text-on-primary hover:bg-primary-fixed transition-all font-title-sm text-title-sm shadow-md">
+<button onclick="executeLiveQuery()" class="flex items-center gap-1 px-space-md py-1.5 rounded bg-primary text-on-primary hover:bg-primary-fixed transition-all font-title-sm text-title-sm shadow-md">
 
 <span class="material-symbols-outlined text-[16px]">refresh</span>
 
@@ -3784,7 +3784,7 @@
 
 <div class="flex items-center gap-space-xs shrink-0 self-end md:self-auto">
 
-<button class="px-space-sm py-1.5 rounded bg-surface-container-high text-on-surface font-title-sm text-title-sm hover:bg-surface-bright flex items-center gap-1 transition-colors">
+<button onclick="copyToClipboard('Executive Summary: Apex Logistics accounted for 42.1% of Q3 supplier delays due to Port of Long Beach congestion. Recommending shifting 35% load to secondary carrier.', 'Executive Brief copied to clipboard!')" class="px-space-sm py-1.5 rounded bg-surface-container-high text-on-surface font-title-sm text-title-sm hover:bg-surface-bright flex items-center gap-1 transition-colors">
 
 <span class="material-symbols-outlined text-[16px]">content_copy</span>
 
@@ -3792,7 +3792,7 @@
 
           </button>
 
-<button class="px-space-sm py-1.5 rounded bg-surface-container-high text-on-surface font-title-sm text-title-sm hover:bg-surface-bright flex items-center gap-1 transition-colors">
+<button onclick="if(navigator.share){ navigator.share({ title: 'SupplyChain IQ Brief', text: 'Q3 Supplier Delay Summary' }); } else { copyToClipboard(window.location.href, 'Dashboard link copied for sharing!'); }" class="px-space-sm py-1.5 rounded bg-surface-container-high text-on-surface font-title-sm text-title-sm hover:bg-surface-bright flex items-center gap-1 transition-colors">
 
 <span class="material-symbols-outlined text-[16px]">share</span>
 
@@ -4110,13 +4110,13 @@
 
 <div class="flex items-center gap-2">
 
-<button class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container-high text-on-surface-variant hover:text-on-surface text-label-micro font-label-micro transition-colors">
+<button onclick="showToast('Filtering active: Top 4 delay contributors displayed.', 'info')" class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container-high text-on-surface-variant hover:text-on-surface text-label-micro font-label-micro transition-colors">
 
 <span class="material-symbols-outlined text-[14px]">filter_list</span> Filter
 
               </button>
 
-<button class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container-high text-on-surface-variant hover:text-on-surface text-label-micro font-label-micro transition-colors">
+<button onclick="copyToClipboard('Supplier,Delayed Shipments,Avg Delay (hrs),Avg Lead Time,OTIF Score\nApex Logistics,142,34.2,28.4,73.3%\nAcme Components,89,22.1,24.0,84.2%\nGlobal Parts Ltd,74,18.5,19.2,79.1%\nNova Industrial,61,14.8,16.5,81.0%', 'Exported CSV table to clipboard!')" class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container-high text-on-surface-variant hover:text-on-surface text-label-micro font-label-micro transition-colors">
 
 <span class="material-symbols-outlined text-[14px]">file_download</span> Export
 
@@ -4440,7 +4440,7 @@
 
 </button>
 
-<button class="flex items-center gap-1.5 px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-title-sm text-title-sm transition-all shadow-sm">
+<button onclick="showActionDialog({ title: 'Underlying Lakehouse Sources', subtitle: 'Connected Data Fabric: SAP ERP + Manhattan TMS', icon: 'table_view', contentHtml: '<div class=\'p-3 bg-slate-900 rounded space-y-2 text-slate-300\'><div>&bull; Table 1: <span class=\'text-cyan-400\'>RAW_ERP.EKBE</span> (PO History, 142,000 rows)</div><div>&bull; Table 2: <span class=\'text-cyan-400\'>TMS_STAGE.SHIP_STATUS</span> (Real-Time GPS &amp; Port Dwell, 25,000 rows)</div><div>&bull; Refresh Rate: <span class=\'text-emerald-400\'>Continuous Streaming (Snowpipe Streaming)</span></div></div>' })" class="flex items-center gap-1.5 px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-title-sm text-title-sm transition-all shadow-sm">
 
 <span class="material-symbols-outlined text-[18px]">table_view</span>
 
@@ -4448,7 +4448,7 @@
 
 </button>
 
-<a class="flex items-center gap-1.5 px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-bright text-secondary font-title-sm text-title-sm transition-all shadow-sm" data-path="data-lineage" href="#">
+<a onclick="switchTab('lineage')" class="flex items-center gap-1.5 px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-bright text-secondary font-title-sm text-title-sm transition-all shadow-sm cursor-pointer" data-path="data-lineage" href="javascript:void(0)">
 
 <span class="material-symbols-outlined text-[18px]">alt_route</span>
 
@@ -4456,7 +4456,7 @@
 
 </a>
 
-<button class="flex items-center gap-1.5 px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-bright text-tertiary font-title-sm text-title-sm transition-all shadow-sm ml-auto">
+<button onclick="showToast('Exporting cryptographically signed Audit PDF...', 'info'); setTimeout(() => showToast('Audit PDF exported: Audit_Attestation_SHA256.pdf', 'success'), 900);" class="flex items-center gap-1.5 px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-bright text-tertiary font-title-sm text-title-sm transition-all shadow-sm ml-auto">
 
 <span class="material-symbols-outlined text-[18px]">download_for_offline</span>
 
@@ -4484,9 +4484,9 @@
 
 <div class="flex items-center gap-1 bg-surface-container p-0.5 rounded">
 
-<button class="px-2 py-0.5 rounded bg-surface-container-high text-secondary font-label-micro text-label-micro font-code-metric">SQL</button>
+<button onclick="showToast('Viewing SQL execution plan.', 'info')" class="px-2 py-0.5 rounded bg-surface-container-high text-secondary font-label-micro text-label-micro font-code-metric">SQL</button>
 
-<button class="px-2 py-0.5 rounded text-outline hover:text-on-surface font-label-micro text-label-micro font-code-metric">SPARQL</button>
+<button onclick="showToast('Viewing SPARQL query graph.', 'info')" class="px-2 py-0.5 rounded text-outline hover:text-on-surface font-label-micro text-label-micro font-code-metric">SPARQL</button>
 
 </div>
 
@@ -4532,7 +4532,7 @@
 
 <span>Hash: e87c04ff2b9a764... • Signed by Auth Engine • Execution tier 1: Zero cross-tenant data bleed</span>
 
-<span class="text-secondary cursor-pointer hover:underline">Copy full query</span>
+<span onclick="copyToClipboard('SELECT s.supplier_id, s.supplier_name, COUNT(sh.shipment_id) AS delayed_shipment_count FROM ontology.Supplier s JOIN ontology.Shipment sh ON s.supplier_id=sh.vendor_id WHERE sh.delay_hours > 0 GROUP BY s.supplier_id, s.supplier_name;', 'SQL query copied!')" class="text-secondary cursor-pointer hover:underline">Copy full query</span>
 
 </div>
 
@@ -4562,7 +4562,7 @@
 
 <!-- Card 1 -->
 
-<button class="p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all text-left flex flex-col justify-between gap-space-sm group shadow-sm">
+<button onclick="runSimulatedQuery('Why did OTIF decline this month?')" class="p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all text-left flex flex-col justify-between gap-space-sm group shadow-sm">
 
 <div class="space-y-1">
 
@@ -4600,7 +4600,7 @@
 
 <!-- Card 2 -->
 
-<button class="p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all text-left flex flex-col justify-between gap-space-sm group shadow-sm">
+<button onclick="runSimulatedQuery('Which SKUs are at stockout risk across Frankfurt and Antwerp?')" class="p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all text-left flex flex-col justify-between gap-space-sm group shadow-sm">
 
 <div class="space-y-1">
 
@@ -4638,7 +4638,7 @@
 
 <!-- Card 3 -->
 
-<button class="p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all text-left flex flex-col justify-between gap-space-sm group shadow-sm">
+<button onclick="runSimulatedQuery('Show supplier risk by region across India and GCC corridors')" class="p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all text-left flex flex-col justify-between gap-space-sm group shadow-sm">
 
 <div class="space-y-1">
 
@@ -4676,7 +4676,7 @@
 
 <!-- Card 4 -->
 
-<button class="p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all text-left flex flex-col justify-between gap-space-sm group shadow-sm">
+<button onclick="runSimulatedQuery('Identify bottlenecks at Port of Rotterdam affecting inbound transfers to Frankfurt DC')" class="p-space-md rounded-lg bg-surface-container hover:bg-surface-container-high transition-all text-left flex flex-col justify-between gap-space-sm group shadow-sm">
 
 <div class="space-y-1">
 
@@ -4746,7 +4746,20 @@
 
       toggleExplainBtn.addEventListener('click', function() {
 
-        alert('Reasoning Path:\n1. Parsed natural text into entity tokens (Supplier, Metric: Delivery_Delay, Date: 2024-Q3).\n2. Bound to ontology properties defined in ISO-8000.\n3. Verified requester ACL (Tier 2 PO access authorized).\n4. Distributed query dispatched to Snowflake cluster (warehouse: ANALYTICS_PROD).\n5. Evaluated 1,284 purchase records.');
+        showActionDialog({
+          title: 'Semantic Reasoning & Execution Trace',
+          subtitle: 'Multi-hop Deductive Inference Path (temp=0.0)',
+          icon: 'psychology',
+          contentHtml: `
+            <div class="space-y-2.5 p-3 bg-slate-900 rounded-lg text-slate-300">
+              <div class="flex items-start gap-2"><span class="text-cyan-400 font-bold">1.</span> <span>Natural Language Tokenization: Resolved &lt;Supplier&gt;, &lt;Delivery_Delay_Hours&gt;, and &lt;Timeframe: 2024-Q3&gt;.</span></div>
+              <div class="flex items-start gap-2"><span class="text-cyan-400 font-bold">2.</span> <span>Ontology Property Binding: Bound tokens strictly to canonical ISO-8000 attributes.</span></div>
+              <div class="flex items-start gap-2"><span class="text-cyan-400 font-bold">3.</span> <span>RBAC Attestation: Verified user session permissions for PO &amp; TMS Lakehouse views.</span></div>
+              <div class="flex items-start gap-2"><span class="text-cyan-400 font-bold">4.</span> <span>Snowflake Cortex Execution: Dispatched governed query to cluster (warehouse: ANALYTICS_PROD).</span></div>
+              <div class="flex items-start gap-2"><span class="text-cyan-400 font-bold">5.</span> <span>Evaluation: Reconciled 1,284 purchase records with zero semantic drift.</span></div>
+            </div>
+          `
+        });
 
       });
 
@@ -4893,7 +4906,7 @@
 
 <div class="flex items-center rounded bg-surface-container p-0.5 shadow-inner">
 
-<button class="flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-surface-bright text-secondary font-title-sm text-[13px] font-medium transition-all shadow-sm" id="layoutToggleBtn">
+<button onclick="showToast('Graph physics layout: Force-Directed Mode active.', 'info')" class="flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-surface-bright text-secondary font-title-sm text-[13px] font-medium transition-all shadow-sm" id="layoutToggleBtn">
 
 <span class="material-symbols-outlined text-[16px]">account_tree</span>
 
@@ -4901,7 +4914,7 @@
 
 </button>
 
-<button class="flex items-center gap-1.5 px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface font-title-sm text-[13px] font-medium transition-all">
+<button onclick="showToast('Graph layout switched to Hierarchical DAG tree.', 'info')" class="flex items-center gap-1.5 px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface font-title-sm text-[13px] font-medium transition-all">
 
 <span class="material-symbols-outlined text-[16px]">schema</span>
 
@@ -4911,7 +4924,7 @@
 
 </div>
 
-<button class="flex items-center gap-1.5 px-space-md py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm font-medium transition-colors shadow-sm">
+<button onclick="showActionDialog({ title: 'Ontology Version Diff: v2.3 vs v2.4', subtitle: 'W3C Semantic Drift Detection', icon: 'difference', contentHtml: '<div class=\'p-3 bg-slate-900 rounded space-y-1.5 text-slate-300\'><div>&bull; Added Entity: <span class=\'text-cyan-400\'>DelayReason</span> (OWL Class)</div><div>&bull; Added Relation: <span class=\'text-emerald-400\'>hasRootCause</span> (ObjectProperty)</div><div>&bull; Modified Attribute: <span class=\'text-sky-300\'>lead_time_days</span> (DataType: xsd:integer)</div><div>&bull; Zero Breaking Changes Detected</div></div>' })" class="flex items-center gap-1.5 px-space-md py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm font-medium transition-colors shadow-sm">
 
 <span class="material-symbols-outlined text-[17px] text-outline">difference</span>
 
@@ -4919,7 +4932,7 @@
 
 </button>
 
-<button class="flex items-center gap-1.5 px-space-md py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm font-medium transition-colors shadow-sm">
+<button onclick="copyToClipboard('@prefix sc: <http://supplychain.org/ontology#> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\nsc:Supplier a owl:Class ; rdfs:label &quot;Supplier Entity&quot; .', 'Exported OWL/RDF Schema to clipboard!')" class="flex items-center gap-1.5 px-space-md py-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm font-medium transition-colors shadow-sm">
 
 <span class="material-symbols-outlined text-[17px] text-secondary">file_download</span>
 
@@ -4927,7 +4940,7 @@
 
 </button>
 
-<button class="flex items-center gap-1.5 px-space-md py-2 rounded bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary transition-all shadow-md">
+<button onclick="showActionDialog({ title: 'Add Canonical Entity Type', subtitle: 'Define New Ontology Vertex', icon: 'add_circle', confirmText: 'Create Entity Type', contentHtml: '<div class=\'p-3 bg-slate-900 rounded space-y-2 text-slate-300\'><div><label class=\'text-slate-400 text-xs\'>Entity Name:</label><input class=\'w-full bg-slate-800 text-white rounded p-1 text-xs border border-slate-700 outline-none mt-1\' value=\'CustomsBroker\' /></div><div><label class=\'text-slate-400 text-xs\'>Parent Class:</label><input class=\'w-full bg-slate-800 text-white rounded p-1 text-xs border border-slate-700 outline-none mt-1\' value=\'CommercialEntity\' /></div></div>', onConfirm: () => showToast('New Entity Type [CustomsBroker] registered in Ontology v2.4!', 'success') })" class="flex items-center gap-1.5 px-space-md py-2 rounded bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary transition-all shadow-md">
 
 <span class="material-symbols-outlined text-[18px]">add_circle</span>
 
@@ -4959,25 +4972,25 @@
 
 <span class="font-label-caps text-label-caps text-outline px-2 py-1 uppercase">Filter Layers:</span>
 
-<button class="px-2.5 py-1 rounded bg-secondary/15 text-secondary font-label-micro text-label-micro font-code-metric flex items-center gap-1.5 shadow-sm">
+<button onclick="showToast('Layer filter toggled: Commercial Entities.', 'info')" class="px-2.5 py-1 rounded bg-secondary/15 text-secondary font-label-micro text-label-micro font-code-metric flex items-center gap-1.5 shadow-sm">
 
 <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Commercial Entities
 
           </button>
 
-<button class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-label-micro text-label-micro font-code-metric flex items-center gap-1.5">
+<button onclick="showToast('Layer filter toggled: Physical Assets.', 'info')" class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-label-micro text-label-micro font-code-metric flex items-center gap-1.5">
 
 <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Physical Assets
 
           </button>
 
-<button class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-label-micro text-label-micro font-code-metric flex items-center gap-1.5">
+<button onclick="showToast('Layer filter toggled: Transactions.', 'info')" class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-label-micro text-label-micro font-code-metric flex items-center gap-1.5">
 
 <span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Transactions
 
           </button>
 
-<button class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-label-micro text-label-micro font-code-metric flex items-center gap-1.5">
+<button onclick="showToast('Layer filter toggled: Risk & Metrics.', 'info')" class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-label-micro text-label-micro font-code-metric flex items-center gap-1.5">
 
 <span class="w-1.5 h-1.5 rounded-full bg-error"></span> Risk &amp; Metrics
 
@@ -5673,7 +5686,7 @@
 
 </div>
 
-<button class="font-label-micro text-label-micro text-secondary hover:underline font-code-metric">+ Add Attribute</button>
+<button onclick="showToast('Opened schema editor to append attribute to Supplier vertex.', 'info')" class="font-label-micro text-label-micro text-secondary hover:underline font-code-metric">+ Add Attribute</button>
 
 </div>
 
@@ -6023,7 +6036,7 @@
 
 <div class="grid grid-cols-2 gap-2">
 
-<button class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-sm text-[13px] font-medium transition-colors shadow-sm">
+<button onclick="switchTab('suppliers')" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-sm text-[13px] font-medium transition-colors shadow-sm">
 
 <span class="material-symbols-outlined text-[16px] text-secondary">view_list</span>
 
@@ -6031,7 +6044,7 @@
 
 </button>
 
-<button class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-sm text-[13px] font-medium transition-colors shadow-sm">
+<button onclick="showToast('Semantic ontology editor unlocked for entity: Supplier.', 'info')" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-sm text-[13px] font-medium transition-colors shadow-sm">
 
 <span class="material-symbols-outlined text-[16px] text-outline">edit_note</span>
 
@@ -6041,7 +6054,7 @@
 
 </div>
 
-<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded bg-secondary-container text-on-secondary-container hover:bg-secondary transition-all font-title-sm text-[13px] font-semibold shadow-md">
+<button onclick="runSimulatedQuery('Show all supplier entities, delayed shipments count, and OTIF scores across India and GCC')" class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded bg-secondary-container text-on-secondary-container hover:bg-secondary transition-all font-title-sm text-[13px] font-semibold shadow-md">
 
 <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
 
@@ -6801,6 +6814,40 @@
       </div>
     </div>
 
+    <!-- UNIVERSAL HIGH-FIDELITY ACTION MODAL -->
+    <div id="modal-action-dialog" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4" onclick="if(event.target === this) closeActionDialog();">
+      <div class="w-full max-w-xl bg-[#030914] border border-cyan-500/50 rounded-2xl shadow-[0_0_50px_rgba(76,215,246,0.25)] p-6 relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <div class="absolute -right-20 -top-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="flex items-center justify-between pb-4 border-b border-cyan-900/40 mb-4">
+          <div class="flex items-center gap-2.5">
+            <span id="action-dialog-icon" class="material-symbols-outlined text-cyan-400 text-[24px]">verified</span>
+            <div>
+              <h3 id="action-dialog-title" class="font-headline-md text-base font-bold text-white">System Operation</h3>
+              <p id="action-dialog-subtitle" class="text-[11px] font-mono text-cyan-400/80">Snowflake Cortex Lakehouse Executable</p>
+            </div>
+          </div>
+          <button onclick="closeActionDialog()" class="w-8 h-8 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+        <div id="action-dialog-content" class="space-y-4 text-xs text-slate-300 leading-relaxed font-mono">
+          <!-- Dynamic Content -->
+        </div>
+        <div class="mt-6 pt-4 border-t border-cyan-900/30 flex items-center justify-between">
+          <span id="action-dialog-status" class="text-[10px] font-mono text-emerald-400 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> 100% Governed
+          </span>
+          <div class="flex items-center gap-2">
+            <button onclick="closeActionDialog()" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition-colors">Dismiss</button>
+            <button id="action-dialog-confirm-btn" onclick="confirmActionDialog()" class="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-slate-950 text-xs font-bold shadow-md transition-all">Confirm Execution</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOATING TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed top-20 right-6 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+
   </div>
 
   <!-- ================= CLIENT JAVASCRIPT CONTROLLERS ================= -->
@@ -6969,26 +7016,207 @@
       });
     }
 
+    // Interactive Toast Notification Engine
+    function showToast(message, type = 'success', duration = 3200) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      playUISound(type === 'error' ? 'click' : 'chime');
+      const toast = document.createElement('div');
+      toast.className = 'pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl shadow-2xl border text-xs font-mono backdrop-blur-xl transition-all duration-300 transform translate-y-2 opacity-0';
+      
+      if (type === 'success') {
+        toast.className += ' bg-[#051829]/95 border-emerald-500/50 text-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.25)]';
+        toast.innerHTML = `<span class="material-symbols-outlined text-emerald-400 text-[18px]">check_circle</span><span>${message}</span>`;
+      } else if (type === 'info') {
+        toast.className += ' bg-[#031024]/95 border-cyan-500/50 text-cyan-300 shadow-[0_0_25px_rgba(6,182,212,0.25)]';
+        toast.innerHTML = `<span class="material-symbols-outlined text-cyan-400 text-[18px]">info</span><span>${message}</span>`;
+      } else {
+        toast.className += ' bg-[#1c080e]/95 border-rose-500/50 text-rose-300 shadow-[0_0_25px_rgba(244,63,94,0.25)]';
+        toast.innerHTML = `<span class="material-symbols-outlined text-rose-400 text-[18px]">warning</span><span>${message}</span>`;
+      }
+
+      container.appendChild(toast);
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-x-4');
+        setTimeout(() => toast.remove(), 300);
+      }, duration);
+    }
+
+    // High-Fidelity Universal Action Dialog System
+    let currentActionCallback = null;
+
+    function showActionDialog({ title, subtitle, icon = 'verified', contentHtml, confirmText = 'Confirm Execution', onConfirm }) {
+      playUISound('click');
+      const modal = document.getElementById('modal-action-dialog');
+      const titleEl = document.getElementById('action-dialog-title');
+      const subEl = document.getElementById('action-dialog-subtitle');
+      const iconEl = document.getElementById('action-dialog-icon');
+      const contentEl = document.getElementById('action-dialog-content');
+      const confirmBtn = document.getElementById('action-dialog-confirm-btn');
+
+      if (!modal) return;
+      if (titleEl) titleEl.textContent = title;
+      if (subEl) subEl.textContent = subtitle || 'Snowflake Cortex Lakehouse Executable';
+      if (iconEl) iconEl.textContent = icon;
+      if (contentEl) contentEl.innerHTML = contentHtml;
+      if (confirmBtn) confirmBtn.textContent = confirmText;
+
+      currentActionCallback = onConfirm;
+      modal.classList.remove('hidden');
+    }
+
+    function closeActionDialog() {
+      playUISound('click');
+      const modal = document.getElementById('modal-action-dialog');
+      if (modal) modal.classList.add('hidden');
+      currentActionCallback = null;
+    }
+
+    function confirmActionDialog() {
+      if (typeof currentActionCallback === 'function') {
+        currentActionCallback();
+      } else {
+        showToast('Operation executed successfully across connected fabric.', 'success');
+      }
+      closeActionDialog();
+    }
+
+    // Specific Domain Button Handlers
+    function triggerPlaybook() {
+      showActionDialog({
+        title: 'Execute Automated Mitigation Playbook',
+        subtitle: 'Playbook: PB-704 (Port Congestion & Buffer Re-route)',
+        icon: 'play_arrow',
+        confirmText: 'Dispatch Playbook Orders',
+        contentHtml: `
+          <div class="p-3 bg-slate-900/80 rounded-lg border border-cyan-900/40 space-y-2">
+            <div class="flex justify-between text-slate-400"><span>Target Corridors:</span> <span class="text-cyan-300 font-bold">Shenzhen &rarr; Antwerp &bull; FRA Hub</span></div>
+            <div class="flex justify-between text-slate-400"><span>Actions:</span> <span class="text-white">Auto re-route 14 container loads via Rotterdam Rail</span></div>
+            <div class="flex justify-between text-slate-400"><span>Est. SLA Savings:</span> <span class="text-emerald-400 font-bold">+18.4 hrs turnaround</span></div>
+            <div class="flex justify-between text-slate-400"><span>Cortex Verification:</span> <span class="text-emerald-400 font-bold">100% Policy Compliant</span></div>
+          </div>
+        `,
+        onConfirm: () => {
+          showToast('Mitigation Playbook PB-704 successfully dispatched to WMS/TMS!', 'success');
+        }
+      });
+    }
+
+    function exportExecutiveBrief() {
+      showToast('Generating Executive Briefing PDF (Signed SHA-256 hash)...', 'info');
+      setTimeout(() => {
+        showToast('Executive Brief downloaded: SupplyChain_IQ_Executive_Q3.pdf', 'success');
+      }, 900);
+    }
+
+    function triggerSupplierMitigation(supplierName = 'Apex Logistics') {
+      showActionDialog({
+        title: `Supplier Mitigation: ${supplierName}`,
+        subtitle: 'Automated Carrier Capacity Re-allocation',
+        icon: 'domain_verification',
+        confirmText: 'Authorize Capacity Shift',
+        contentHtml: `
+          <div class="p-3 bg-slate-900/80 rounded-lg border border-cyan-900/40 space-y-2">
+            <div class="flex justify-between text-slate-400"><span>Supplier:</span> <span class="text-cyan-300 font-bold">${supplierName}</span></div>
+            <div class="flex justify-between text-slate-400"><span>Current OTIF:</span> <span class="text-rose-400 font-bold">73.3% (Disrupted)</span></div>
+            <div class="flex justify-between text-slate-400"><span>Mitigation Action:</span> <span class="text-white">Shift 35% freight load to DHL Global Forwarding</span></div>
+            <div class="flex justify-between text-slate-400"><span>Projected Recovery:</span> <span class="text-emerald-400 font-bold">92.4% OTIF within 48h</span></div>
+          </div>
+        `,
+        onConfirm: () => {
+          showToast(`Mitigation orders transmitted for ${supplierName}. 35% load shifted to secondary carrier.`, 'success');
+        }
+      });
+    }
+
+    function triggerReallocation(depot = 'Frankfurt & Antwerp') {
+      showActionDialog({
+        title: `Dynamic Buffer Re-allocation: ${depot}`,
+        subtitle: 'Inventory Balancing Algorithm v3.2',
+        icon: 'inventory_2',
+        confirmText: 'Commit Stock Transfer',
+        contentHtml: `
+          <div class="p-3 bg-slate-900/80 rounded-lg border border-cyan-900/40 space-y-2">
+            <div class="flex justify-between text-slate-400"><span>Affected Hubs:</span> <span class="text-cyan-300 font-bold">${depot}</span></div>
+            <div class="flex justify-between text-slate-400"><span>SKUs Protected:</span> <span class="text-white font-bold">14 Micro-controllers &amp; Chassis</span></div>
+            <div class="flex justify-between text-slate-400"><span>Transfer Source:</span> <span class="text-sky-300">Munich Central Depot (Surplus: 1,420 units)</span></div>
+            <div class="flex justify-between text-slate-400"><span>Prevented Loss:</span> <span class="text-emerald-400 font-bold">$1.8M Stockout Impact</span></div>
+          </div>
+        `,
+        onConfirm: () => {
+          showToast(`Buffer re-allocation committed! Stock transfers dispatched to Munich & ${depot}.`, 'success');
+        }
+      });
+    }
+
+    function auditSupplierRow(supplierName, otif, leadTime) {
+      showActionDialog({
+        title: `Supplier Compliance Audit: ${supplierName}`,
+        subtitle: 'Medallion Audit Trail (SILVER &rarr; GOLD Marts)',
+        icon: 'security',
+        confirmText: 'Export Audit Certificate',
+        contentHtml: `
+          <div class="p-3 bg-slate-900/80 rounded-lg border border-cyan-900/40 space-y-2">
+            <div class="flex justify-between text-slate-400"><span>Entity:</span> <span class="text-cyan-300 font-bold">${supplierName}</span></div>
+            <div class="flex justify-between text-slate-400"><span>Historical OTIF:</span> <span class="text-white">${otif}</span></div>
+            <div class="flex justify-between text-slate-400"><span>Avg Lead Time:</span> <span class="text-white">${leadTime}</span></div>
+            <div class="flex justify-between text-slate-400"><span>SLA Breach Events:</span> <span class="text-rose-400 font-bold">3 Incurred (Q3)</span></div>
+            <div class="flex justify-between text-slate-400"><span>Cortex Verification:</span> <span class="text-emerald-400 font-bold">Cryptographically Attested (SHA-256)</span></div>
+          </div>
+        `,
+        onConfirm: () => {
+          showToast(`Audit certificate generated for ${supplierName}. Hash: 7b3f...e829`, 'success');
+        }
+      });
+    }
+
+    function switchChartMetric(metricName, btn) {
+      playUISound('click');
+      const parent = btn?.parentElement;
+      if (parent) {
+        parent.querySelectorAll('button').forEach(b => {
+          b.className = 'px-space-sm py-1.5 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-all';
+        });
+        btn.className = 'px-space-sm py-1.5 rounded font-body-sm text-body-sm bg-surface-container-high text-secondary font-medium shadow-sm transition-all';
+      }
+      showToast(`Analytical view switched to: ${metricName}`, 'info');
+    }
+
+    function switchChartTimeframe(tf, btn) {
+      playUISound('click');
+      const parent = btn?.parentElement;
+      if (parent) {
+        parent.querySelectorAll('button').forEach(b => {
+          b.className = 'px-2 py-0.5 rounded font-label-micro text-label-micro text-outline hover:text-on-surface';
+        });
+        btn.className = 'px-2 py-0.5 rounded font-label-micro text-label-micro bg-surface-container-high text-secondary font-semibold';
+      }
+      showToast(`Chart window filtered to ${tf}`, 'info');
+    }
+
+    function copyToClipboard(text, msg = 'Copied to clipboard!') {
+      playUISound('click');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast(msg, 'success')).catch(() => showToast(msg, 'success'));
+      } else {
+        showToast(msg, 'success');
+      }
+    }
+
     // Simulated Conversational AI Query
     function runSimulatedQuery(queryText) {
       showView('dashboard');
       switchTab('chat');
       
-      const promptInput = document.querySelector('#tab-chat input') || document.querySelector('#tab-chat [contenteditable]');
+      const promptInput = document.getElementById('live-chat-input');
       if (promptInput) {
-        if (promptInput.tagName === 'INPUT') promptInput.value = queryText;
-        else promptInput.innerText = queryText;
-      }
-
-      // Step animation for 6-stage workflow bar
-      const stagePills = document.querySelectorAll('#tab-chat nav span, #tab-chat .rounded-full');
-      // Visual feedback
-      const responseContainer = document.querySelector('#tab-chat article') || document.querySelector('#tab-chat section');
-      if (responseContainer) {
-        responseContainer.classList.add('opacity-80');
-        setTimeout(() => {
-          responseContainer.classList.remove('opacity-80');
-        }, 400);
+        promptInput.value = queryText;
+        executeLiveQuery();
       }
     }
 
