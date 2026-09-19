@@ -62,6 +62,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include Enterprise CRUD & Analytical API Routes
+from backend.api_routes import router as enterprise_router
+app.include_router(enterprise_router, prefix="/api")
+
 # Global Engine Instances
 cortex_engine = GovernedCortexEngine()
 persona_reconciler = PersonaReconciler()

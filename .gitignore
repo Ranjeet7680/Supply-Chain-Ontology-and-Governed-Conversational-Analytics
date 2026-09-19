@@ -22,3 +22,7 @@ Thumbs.db
 .vercel_python_packages/
 scratch/
 scratch_wiki/
+*.db
+*.sqlite
+*.sqlite3
+supplychain_iq.db

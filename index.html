@@ -6201,6 +6201,8 @@
           </div>
         </div>
       </div>
+    </div>
+
     <!-- TAB: SUPPLIERS VIEW -->
     <div id="tab-suppliers" class="tab-pane hidden p-gutter space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -6213,6 +6215,10 @@
           <p class="text-slate-400 text-xs">1,280 Verified Vendors across India, GCC, Southeast Asia &amp; Europe with Live SLA Auditing.</p>
         </div>
         <div class="flex items-center gap-2">
+          <button onclick="exportDataCSV('suppliers')" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center gap-1.5 border border-cyan-500/30 shadow-md transition-all">
+            <span class="material-symbols-outlined text-[16px] text-cyan-400">download</span>
+            <span>Export CSV</span>
+          </button>
           <button onclick="switchTab('chat'); runSimulatedQuery('Compare supplier SLA between Tata Steel and Emirates Steel');" class="px-3.5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md hover:bg-cyan-400 transition-all">
             <span class="material-symbols-outlined text-[16px]">smart_toy</span>
             <span>AI Vendor Audit</span>
@@ -6260,6 +6266,7 @@
                 <th class="p-3">SLA Adherence</th>
                 <th class="p-3">Lead Time (EMA)</th>
                 <th class="p-3">Risk Status</th>
+                <th class="p-3 text-right">Actions</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-cyan-900/30 text-slate-300">
@@ -6270,6 +6277,9 @@
                 <td class="p-3 text-emerald-400 font-bold">96.4%</td>
                 <td class="p-3">4.2 days</td>
                 <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Optimal</span></td>
+                <td class="p-3 text-right">
+                  <button onclick="auditSupplierRow('Tata Steel Logistics', '96.4%', '4.2 days')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 text-[10px] font-bold transition-all">Audit</button>
+                </td>
               </tr>
               <tr class="hover:bg-cyan-500/5">
                 <td class="p-3 font-bold text-white">Emirates Global Aluminium</td>
@@ -6278,6 +6288,9 @@
                 <td class="p-3 text-emerald-400 font-bold">95.1%</td>
                 <td class="p-3">5.0 days</td>
                 <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Optimal</span></td>
+                <td class="p-3 text-right">
+                  <button onclick="auditSupplierRow('Emirates Global Aluminium', '95.1%', '5.0 days')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 text-[10px] font-bold transition-all">Audit</button>
+                </td>
               </tr>
               <tr class="hover:bg-cyan-500/5">
                 <td class="p-3 font-bold text-white">Saudi Aramco Base Oils</td>
@@ -6286,6 +6299,9 @@
                 <td class="p-3 text-emerald-400 font-bold">93.8%</td>
                 <td class="p-3">6.1 days</td>
                 <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Optimal</span></td>
+                <td class="p-3 text-right">
+                  <button onclick="auditSupplierRow('Saudi Aramco Base Oils', '93.8%', '6.1 days')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 text-[10px] font-bold transition-all">Audit</button>
+                </td>
               </tr>
               <tr class="hover:bg-cyan-500/5">
                 <td class="p-3 font-bold text-white">Rotterdam Polymer Mart</td>
@@ -6294,6 +6310,9 @@
                 <td class="p-3 text-cyan-300 font-bold">91.2%</td>
                 <td class="p-3">12.4 days</td>
                 <td class="p-3"><span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">Normal</span></td>
+                <td class="p-3 text-right">
+                  <button onclick="auditSupplierRow('Rotterdam Polymer Mart', '91.2%', '12.4 days')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 text-[10px] font-bold transition-all">Audit</button>
+                </td>
               </tr>
               <tr class="hover:bg-cyan-500/5">
                 <td class="p-3 font-bold text-white">Foxconn Semiconductor Packaging</td>
@@ -6302,6 +6321,10 @@
                 <td class="p-3 text-amber-400 font-bold">78.6%</td>
                 <td class="p-3">18.2 days</td>
                 <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Lead Time Risk</span></td>
+                <td class="p-3 text-right flex items-center justify-end gap-1.5">
+                  <button onclick="triggerSupplierMitigation('Foxconn Semiconductor Packaging')" class="px-2 py-1 rounded bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-[10px] font-bold transition-all">Mitigate</button>
+                  <button onclick="auditSupplierRow('Foxconn Semiconductor Packaging', '78.6%', '18.2 days')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 text-[10px] font-bold transition-all">Audit</button>
+                </td>
               </tr>
               <tr class="hover:bg-cyan-500/5">
                 <td class="p-3 font-bold text-white">Bharat Forge Precision</td>
@@ -6310,6 +6333,9 @@
                 <td class="p-3 text-emerald-400 font-bold">94.7%</td>
                 <td class="p-3">4.8 days</td>
                 <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Optimal</span></td>
+                <td class="p-3 text-right">
+                  <button onclick="auditSupplierRow('Bharat Forge Precision', '94.7%', '4.8 days')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 text-[10px] font-bold transition-all">Audit</button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -6328,10 +6354,16 @@
           <h2 class="text-2xl font-black text-white">Live Inventory &amp; Stock Health</h2>
           <p class="text-slate-400 text-xs">Real-time telemetry across Central Nagpur, East Kolkata, Jebel Ali Hub &amp; Dammam Facility.</p>
         </div>
-        <button onclick="switchTab('chat'); runSimulatedQuery('Which SKUs are at risk of stockout within 14 days?');" class="px-3.5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md hover:bg-cyan-400 transition-all">
-          <span class="material-symbols-outlined text-[16px]">psychology</span>
-          <span>Forecast Stockouts</span>
-        </button>
+        <div class="flex items-center gap-2">
+          <button onclick="exportDataCSV('inventory')" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center gap-1.5 border border-cyan-500/30 shadow-md transition-all">
+            <span class="material-symbols-outlined text-[16px] text-cyan-400">download</span>
+            <span>Export SKUs CSV</span>
+          </button>
+          <button onclick="switchTab('chat'); runSimulatedQuery('Which SKUs are at risk of stockout within 14 days?');" class="px-3.5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md hover:bg-cyan-400 transition-all">
+            <span class="material-symbols-outlined text-[16px]">psychology</span>
+            <span>Forecast Stockouts</span>
+          </button>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -6368,6 +6400,7 @@
                 <th class="p-3">On-Hand Stock</th>
                 <th class="p-3">Days of Supply</th>
                 <th class="p-3">Action Prescribed</th>
+                <th class="p-3 text-right">Execute</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-cyan-900/30 text-slate-300">
@@ -6378,6 +6411,9 @@
                 <td class="p-3 text-amber-400 font-bold">420 units</td>
                 <td class="p-3 text-amber-400">6.2 days</td>
                 <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Expedite Air Freight</span></td>
+                <td class="p-3 text-right">
+                  <button onclick="triggerReallocation('Nagpur Central Plant')" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-[10px] font-bold transition-all">Transfer</button>
+                </td>
               </tr>
               <tr class="hover:bg-cyan-500/5">
                 <td class="p-3 font-bold text-cyan-300">SKU-9904-AL</td>
@@ -6386,6 +6422,9 @@
                 <td class="p-3 text-white font-bold">1,850 MT</td>
                 <td class="p-3 text-emerald-400">28.4 days</td>
                 <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Stable Buffer</span></td>
+                <td class="p-3 text-right">
+                  <button onclick="showToast('Buffer status for SKU-9904-AL is healthy.', 'success')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] font-bold transition-all">Details</button>
+                </td>
               </tr>
               <tr class="hover:bg-cyan-500/5">
                 <td class="p-3 font-bold text-cyan-300">SKU-3312-PM</td>
@@ -6394,6 +6433,9 @@
                 <td class="p-3 text-amber-400 font-bold">640 bags</td>
                 <td class="p-3 text-amber-400">9.1 days</td>
                 <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Trigger PO Re-order</span></td>
+                <td class="p-3 text-right">
+                  <button onclick="showActionDialog({ title: 'Automatic PO Generation', subtitle: 'SKU-3312-PM (Polymer Resin)', icon: 'shopping_cart', confirmText: 'Dispatch PO', contentHtml: '<div class=\'p-3 bg-slate-900 rounded space-y-2 text-slate-300\'><div>&bull; Target Vendor: <span class=\'text-cyan-300 font-bold\'>Rotterdam Polymer Mart</span></div><div>&bull; Quantity: <span class=\'text-white\'>1,200 Bags</span></div><div>&bull; Total Value: <span class=\'text-emerald-400 font-bold\'>$84,000 USD</span></div><div>&bull; Auto Approved by Procurement Policy</div></div>', onConfirm: () => showToast('PO for SKU-3312-PM dispatched to vendor!', 'success') })" class="px-2.5 py-1 rounded bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 text-[10px] font-bold transition-all">Re-order</button>
+                </td>
               </tr>
               <tr class="hover:bg-cyan-500/5">
                 <td class="p-3 font-bold text-cyan-300">SKU-4401-VL</td>
@@ -6402,6 +6444,9 @@
                 <td class="p-3 text-white font-bold">120 units</td>
                 <td class="p-3 text-emerald-400">34.0 days</td>
                 <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Optimal</span></td>
+                <td class="p-3 text-right">
+                  <button onclick="showToast('Buffer status for SKU-4401-VL is healthy.', 'success')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] font-bold transition-all">Details</button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -6419,6 +6464,12 @@
           </div>
           <h2 class="text-2xl font-black text-white">Order Execution &amp; Line Items</h2>
           <p class="text-slate-400 text-xs">99,140 Purchase Orders tracked across Snowflake Medallion Silver &amp; Gold semantic views.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="exportDataCSV('orders')" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center gap-1.5 border border-cyan-500/30 shadow-md transition-all">
+            <span class="material-symbols-outlined text-[16px] text-cyan-400">download</span>
+            <span>Export Orders CSV</span>
+          </button>
         </div>
       </div>
 
@@ -6571,9 +6622,9 @@
           <h2 class="text-2xl font-black text-white">Risk Engine &amp; Anomaly Signals</h2>
           <p class="text-slate-400 text-xs">4 Critical Alerts flagged across Arabian Sea shipping lanes and rail corridors.</p>
         </div>
-        <button onclick="switchTab('chat'); runSimulatedQuery('What mitigation action does the RL policy recommend?');" class="px-3.5 py-2 rounded-xl bg-red-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-md hover:bg-red-400 transition-all">
-          <span class="material-symbols-outlined text-[16px]">warning</span>
-          <span>RL Mitigation Action</span>
+        <button onclick="triggerScenarioSimulation('Port Shutdown & Swell Shock', 5)" class="px-3.5 py-2 rounded-xl bg-red-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-md hover:bg-red-400 transition-all">
+          <span class="material-symbols-outlined text-[16px]">radar</span>
+          <span>Run Scenario Simulation</span>
         </button>
       </div>
 
@@ -9851,6 +9902,9 @@
       }
     });
   </script>
+
+  <!-- Enterprise REST API & Real Data Connector -->
+  <script src="assets/enterprise_api_client.js"></script>
 
   <!-- ================= FLOATING REGIONAL LANGUAGE SWITCHER WIDGET ================= -->
   <div class="fixed bottom-5 right-5 z-50 flex items-center gap-2 bg-[#020d1a]/95 backdrop-blur-2xl border border-secondary/40 px-4 py-2 rounded-full shadow-[0_0_30px_rgba(76,215,246,0.35)] transition-all hover:scale-105">
