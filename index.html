@@ -6346,26 +6346,179 @@
           </div>
         </div>
 
-        <div class="h-[650px] w-full rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center justify-center relative overflow-hidden">
-          <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#4cd7f6 1px, transparent 1px); background-size: 28px 28px;"></div>
-          
-          <!-- Interactive Central Topology Map -->
-          <div class="relative z-10 text-center max-w-lg">
-            <div class="w-24 h-24 rounded-full bg-secondary/15 border-2 border-secondary/60 flex items-center justify-center mx-auto mb-4 animate-pulse shadow-[0_0_30px_rgba(76,215,246,0.3)]">
-              <span class="material-symbols-outlined text-[42px] text-secondary">hub</span>
+        <!-- Interactive Multi-Tier Force/Topology Knowledge Graph Canvas -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          <!-- Graph SVG Visualizer (3 Cols) -->
+          <div class="lg:col-span-3 h-[680px] rounded-xl bg-[#020914] border border-cyan-500/30 relative overflow-hidden flex flex-col shadow-inner">
+            <!-- Top Controls Bar -->
+            <div class="p-3 bg-[#040e1c]/90 border-b border-cyan-900/40 flex flex-wrap items-center justify-between gap-2 z-10">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="text-xs font-mono text-cyan-300 font-bold">14 CANONICAL ENTITIES &bull; 113,000+ EDGES</span>
+              </div>
+              <!-- Filter Buttons -->
+              <div class="flex items-center gap-1.5 text-[11px] font-mono">
+                <button onclick="filterGraphNodes('ALL', this)" class="graph-filter-btn px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 font-bold">ALL</button>
+                <button onclick="filterGraphNodes('Supplier', this)" class="graph-filter-btn px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white border border-slate-700">Suppliers</button>
+                <button onclick="filterGraphNodes('Plant', this)" class="graph-filter-btn px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white border border-slate-700">Plants</button>
+                <button onclick="filterGraphNodes('Warehouse', this)" class="graph-filter-btn px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white border border-slate-700">Warehouses</button>
+                <button onclick="filterGraphNodes('Shipment', this)" class="graph-filter-btn px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white border border-slate-700">Shipments</button>
+              </div>
             </div>
-            <h4 class="font-headline-md text-base font-bold text-on-surface mb-2">Connected Supply Chain Fabric</h4>
-            <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-6">
-              Suppliers (1,280) &bull; Parts (4,520) &bull; Plants (18) &bull; Purchase Orders (99,140) &bull; TMS Shipments (25,000) &bull; Customers (8,400)
-            </p>
-            <div class="flex items-center justify-center gap-3">
-              <button onclick="switchTab('ontology')" class="px-4 py-2 rounded-lg bg-gradient-to-r from-secondary-container to-primary-container text-on-primary-container font-body-sm text-xs font-bold flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px]">insights</span>
-                <span>Inspect Radial Entities</span>
+
+            <!-- SVG Topology Display -->
+            <div class="relative flex-1 w-full h-full overflow-hidden flex items-center justify-center">
+              <svg id="ontology-graph-svg" class="w-full h-full cursor-grab active:cursor-grabbing" viewBox="0 0 900 600">
+                <defs>
+                  <!-- Glow filter -->
+                  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                  <linearGradient id="linkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#4edea3" stop-opacity="0.6"/>
+                  </linearGradient>
+                </defs>
+
+                <!-- Grid Background lines -->
+                <g opacity="0.15">
+                  <line x1="0" y1="150" x2="900" y2="150" stroke="#4cd7f6" stroke-width="1" stroke-dasharray="4,4"/>
+                  <line x1="0" y1="300" x2="900" y2="300" stroke="#4cd7f6" stroke-width="1" stroke-dasharray="4,4"/>
+                  <line x1="0" y1="450" x2="900" y2="450" stroke="#4cd7f6" stroke-width="1" stroke-dasharray="4,4"/>
+                  <line x1="225" y1="0" x2="225" y2="600" stroke="#4cd7f6" stroke-width="1" stroke-dasharray="4,4"/>
+                  <line x1="450" y1="0" x2="450" y2="600" stroke="#4cd7f6" stroke-width="1" stroke-dasharray="4,4"/>
+                  <line x1="675" y1="0" x2="675" y2="600" stroke="#4cd7f6" stroke-width="1" stroke-dasharray="4,4"/>
+                </g>
+
+                <!-- Connecting Edge Lines -->
+                <g id="graph-edges" stroke="url(#linkGrad)" stroke-width="2">
+                  <!-- Supplier to Part -->
+                  <line x1="150" y1="180" x2="300" y2="220" stroke-opacity="0.7"/>
+                  <line x1="150" y1="300" x2="300" y2="220" stroke-opacity="0.7"/>
+                  <line x1="150" y1="420" x2="300" y2="380" stroke-opacity="0.7"/>
+                  <!-- Part to Plant -->
+                  <line x1="300" y1="220" x2="450" y2="300" stroke-opacity="0.9" stroke-width="2.5"/>
+                  <line x1="300" y1="380" x2="450" y2="300" stroke-opacity="0.9" stroke-width="2.5"/>
+                  <!-- Plant to Warehouse -->
+                  <line x1="450" y1="300" x2="600" y2="200" stroke-opacity="0.8"/>
+                  <line x1="450" y1="300" x2="600" y2="400" stroke-opacity="0.8"/>
+                  <!-- Warehouse to Carrier / Shipment -->
+                  <line x1="600" y1="200" x2="750" y2="220" stroke-opacity="0.7"/>
+                  <line x1="600" y1="400" x2="750" y2="380" stroke-opacity="0.7"/>
+                  <!-- Shipment to Customer Hub -->
+                  <line x1="750" y1="220" x2="840" y2="300" stroke-opacity="0.85" stroke-dasharray="5,3"/>
+                  <line x1="750" y1="380" x2="840" y2="300" stroke-opacity="0.85" stroke-dasharray="5,3"/>
+                </g>
+
+                <!-- Graph Nodes Group -->
+                <g id="graph-nodes">
+                  <!-- Supplier Nodes -->
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('Tata Electronics', 'Supplier', 'Tier-1 Semiconductor Supplier', { OTIF: '96.2%', Region: 'Hosur, India', Spend: '$4.2M' })" transform="translate(150, 180)">
+                    <circle r="22" fill="#041226" stroke="#4cd7f6" stroke-width="2.5" filter="url(#glow)"/>
+                    <text y="5" text-anchor="middle" fill="#4cd7f6" font-size="11" font-weight="bold" font-family="monospace">SUP</text>
+                    <text y="36" text-anchor="middle" fill="#e2e8f0" font-size="10" font-family="sans-serif">Tata Electronics</text>
+                  </g>
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('Bharat Forge', 'Supplier', 'Chassis & Machined Components', { OTIF: '91.8%', Region: 'Pune, India', Spend: '$3.1M' })" transform="translate(150, 300)">
+                    <circle r="22" fill="#041226" stroke="#4cd7f6" stroke-width="2.5" filter="url(#glow)"/>
+                    <text y="5" text-anchor="middle" fill="#4cd7f6" font-size="11" font-weight="bold" font-family="monospace">SUP</text>
+                    <text y="36" text-anchor="middle" fill="#e2e8f0" font-size="10" font-family="sans-serif">Bharat Forge</text>
+                  </g>
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('Emirates Global Aluminium', 'Supplier', 'Extruded Alloy Ingots', { OTIF: '94.5%', Region: 'Dubai, UAE', Spend: '$5.8M' })" transform="translate(150, 420)">
+                    <circle r="22" fill="#041226" stroke="#4cd7f6" stroke-width="2.5" filter="url(#glow)"/>
+                    <text y="5" text-anchor="middle" fill="#4cd7f6" font-size="11" font-weight="bold" font-family="monospace">SUP</text>
+                    <text y="36" text-anchor="middle" fill="#e2e8f0" font-size="10" font-family="sans-serif">Emirates Aluminium</text>
+                  </g>
+
+                  <!-- Part / SKU Nodes -->
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('MCU-32X Microcontroller', 'Part', 'Canonical Product Model', { UnitCost: '$18.50', Stock: '14,200', Buffer: '12d' })" transform="translate(300, 220)">
+                    <circle r="19" fill="#0a1e36" stroke="#38bdf8" stroke-width="2"/>
+                    <text y="4" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold" font-family="monospace">SKU</text>
+                    <text y="32" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="sans-serif">MCU-32X Module</text>
+                  </g>
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('High-Torque Actuator', 'Part', 'Hydraulic Powertrain SKU', { UnitCost: '$142.00', Stock: '3,100', Buffer: '8d' })" transform="translate(300, 380)">
+                    <circle r="19" fill="#0a1e36" stroke="#38bdf8" stroke-width="2"/>
+                    <text y="4" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold" font-family="monospace">SKU</text>
+                    <text y="32" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="sans-serif">Actuator Assembly</text>
+                  </g>
+
+                  <!-- Plant Node (Center Hub) -->
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('Nagpur Primary Assembly Hub', 'Plant', 'Manufacturing Central Facility', { Capacity: '94%', Yield: '99.2%', Shifts: '3 Active' })" transform="translate(450, 300)">
+                    <circle r="32" fill="#051c36" stroke="#4edea3" stroke-width="3.5" filter="url(#glow)"/>
+                    <circle r="42" fill="none" stroke="#4edea3" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+                    <text y="5" text-anchor="middle" fill="#4edea3" font-size="12" font-weight="bold" font-family="monospace">PLANT</text>
+                    <text y="48" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold" font-family="sans-serif">Nagpur Mega Facility</text>
+                  </g>
+
+                  <!-- Warehouses -->
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('JNPT Mumbai Gateway Terminal', 'Warehouse', 'Deepwater Export Hub', { Utilization: '87%', Storage: '120k sqft', Customs: 'Green Channel' })" transform="translate(600, 200)">
+                    <circle r="20" fill="#061c28" stroke="#06b6d4" stroke-width="2"/>
+                    <text y="4" text-anchor="middle" fill="#06b6d4" font-size="10" font-weight="bold" font-family="monospace">WH</text>
+                    <text y="32" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="sans-serif">JNPT Mumbai DC</text>
+                  </g>
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('Jebel Ali Logistics Freezone', 'Warehouse', 'GCC Regional Inbound Hub', { Utilization: '79%', Storage: '280k sqft', Status: 'Nominal' })" transform="translate(600, 400)">
+                    <circle r="20" fill="#061c28" stroke="#06b6d4" stroke-width="2"/>
+                    <text y="4" text-anchor="middle" fill="#06b6d4" font-size="10" font-weight="bold" font-family="monospace">WH</text>
+                    <text y="32" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="sans-serif">Jebel Ali Hub Dubai</text>
+                  </g>
+
+                  <!-- Shipments / Carriers -->
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('SHP-GCC-9902 (Maersk Ocean)', 'Shipment', 'Maritime Corridor Consignment', { Mode: 'Ocean', Speed: '21.4 kts', SLA: 'On Schedule' })" transform="translate(750, 220)">
+                    <circle r="20" fill="#1e1035" stroke="#a855f7" stroke-width="2"/>
+                    <text y="4" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="bold" font-family="monospace">SHP</text>
+                    <text y="32" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="sans-serif">Maersk Ocean 9902</text>
+                  </g>
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('SHP-AIR-4410 (Emirates SkyCargo)', 'Shipment', 'Air Freight Priority Express', { Mode: 'Air Cargo', Speed: '890 km/h', ETA: 'Today' })" transform="translate(750, 380)">
+                    <circle r="20" fill="#1e1035" stroke="#a855f7" stroke-width="2"/>
+                    <text y="4" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="bold" font-family="monospace">SHP</text>
+                    <text y="32" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="sans-serif">Emirates Cargo 4410</text>
+                  </g>
+
+                  <!-- Strategic Customer Destination -->
+                  <g class="graph-node cursor-pointer" onclick="selectGraphEntity('Emirates Strategic Manufacturing', 'Customer', 'Tier-1 Automotive OEM', { Contract: 'Multi-Year Master', SLA: '99.5% OTIF', Value: '$28M ARR' })" transform="translate(840, 300)">
+                    <circle r="22" fill="#1a1402" stroke="#f59e0b" stroke-width="2.5" filter="url(#glow)"/>
+                    <text y="5" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="bold" font-family="monospace">CUS</text>
+                    <text y="36" text-anchor="middle" fill="#fde68a" font-size="9" font-bold font-family="sans-serif">OEM Dubai</text>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Entity Detail Inspector Panel (1 Col) -->
+          <div id="graph-inspector-panel" class="rounded-xl bg-[#030d1a] border border-cyan-500/30 p-5 flex flex-col justify-between shadow-xl">
+            <div>
+              <div class="flex items-center justify-between pb-3 mb-4 border-b border-cyan-900/40">
+                <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">Entity Inspector</span>
+                <span id="inspector-entity-type" class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-bold font-mono">Plant</span>
+              </div>
+              <h4 id="inspector-entity-name" class="text-base font-bold text-white mb-1">Nagpur Primary Assembly Hub</h4>
+              <p id="inspector-entity-desc" class="text-xs text-slate-400 mb-4">Central manufacturing facility synchronizing incoming tier-1 automotive components.</p>
+              
+              <div class="space-y-2.5" id="inspector-attributes">
+                <div class="p-2.5 rounded-lg bg-[#05162a] border border-cyan-500/20 flex justify-between items-center text-xs">
+                  <span class="text-slate-400">Capacity Utilization</span>
+                  <span class="text-emerald-400 font-mono font-bold">94.2%</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-[#05162a] border border-cyan-500/20 flex justify-between items-center text-xs">
+                  <span class="text-slate-400">Manufacturing Yield</span>
+                  <span class="text-cyan-300 font-mono font-bold">99.2%</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-[#05162a] border border-cyan-500/20 flex justify-between items-center text-xs">
+                  <span class="text-slate-400">Active Shifts</span>
+                  <span class="text-slate-200 font-mono">3 Continuous</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-2 pt-4 border-t border-cyan-900/40">
+              <button onclick="switchTab('chat'); runSimulatedQuery('Explain dependency chain for ' + document.getElementById('inspector-entity-name').textContent);" class="w-full py-2.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(76,215,246,0.4)] transition-all">
+                <span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                <span>Analyze In AI Copilot</span>
               </button>
-              <button onclick="switchTab('chat'); runSimulatedQuery('Find all Tier-2 suppliers dependent on Taiwan semiconductors');" class="px-4 py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-xs font-semibold flex items-center gap-2 border border-outline-variant/60">
-                <span class="material-symbols-outlined text-[16px] text-secondary">chat</span>
-                <span>Query Dependencies</span>
+              <button onclick="switchTab('ontology')" class="w-full py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 border border-slate-700 transition-colors">
+                <span class="material-symbols-outlined text-[15px] text-cyan-400">account_tree</span>
+                <span>View Ontology Model</span>
               </button>
             </div>
           </div>
@@ -9391,7 +9544,7 @@
       const t = fullAppTranslations[lang] || fullAppTranslations['en'];
 
       // Synchronize all dropdowns
-      ['global-lang-select', 'app-lang-select', 'floating-lang-select'].forEach(id => {
+      ['global-lang-select', 'app-lang-select'].forEach(id => {
         const el = document.getElementById(id);
         if (el && el.value !== lang) el.value = lang;
       });
@@ -10437,7 +10590,7 @@
       const t = websiteTranslations[lang] || websiteTranslations['en'];
 
       // 1. Sync all language dropdown selectors
-      const selectors = ['global-lang-select', 'app-lang-select', 'floating-lang-select'];
+      const selectors = ['global-lang-select', 'app-lang-select'];
       selectors.forEach(id => {
         const el = document.getElementById(id);
         if (el && el.value !== lang) el.value = lang;
@@ -10601,6 +10754,77 @@
     function changeGlobalLanguage(lang) {
       applyComprehensiveTranslation(lang);
     }
+
+    // =========================================================================
+    // INTERACTIVE ONTOLOGY KNOWLEDGE GRAPH HANDLERS
+    // =========================================================================
+    function selectGraphEntity(name, type, desc, attributes) {
+      playUISound('click');
+      const nameEl = document.getElementById('inspector-entity-name');
+      const typeEl = document.getElementById('inspector-entity-type');
+      const descEl = document.getElementById('inspector-entity-desc');
+      const attrsEl = document.getElementById('inspector-attributes');
+      
+      if (nameEl) nameEl.textContent = name;
+      if (typeEl) {
+        typeEl.textContent = type;
+        const colorMap = {
+          'Supplier': 'bg-cyan-500/20 text-cyan-300',
+          'Part': 'bg-sky-500/20 text-sky-300',
+          'Plant': 'bg-emerald-500/20 text-emerald-300',
+          'Warehouse': 'bg-teal-500/20 text-teal-300',
+          'Shipment': 'bg-purple-500/20 text-purple-300',
+          'Customer': 'bg-amber-500/20 text-amber-300'
+        };
+        typeEl.className = 'px-2 py-0.5 rounded text-[10px] font-bold font-mono ' + (colorMap[type] || 'bg-cyan-500/20 text-cyan-300');
+      }
+      if (descEl) descEl.textContent = desc;
+      
+      if (attrsEl && attributes) {
+        attrsEl.innerHTML = Object.entries(attributes).map(([k, v]) => `
+          <div class="p-2.5 rounded-lg bg-[#05162a] border border-cyan-500/20 flex justify-between items-center text-xs">
+            <span class="text-slate-400 font-medium">${k}</span>
+            <span class="text-cyan-300 font-mono font-bold">${v}</span>
+          </div>
+        `).join('');
+      }
+    }
+    window.selectGraphEntity = selectGraphEntity;
+
+    function filterGraphNodes(type, btn) {
+      playUISound('click');
+      const btns = document.querySelectorAll('.graph-filter-btn');
+      btns.forEach(b => {
+        b.className = 'graph-filter-btn px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white border border-slate-700';
+      });
+      if (btn) {
+        btn.className = 'graph-filter-btn px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 font-bold';
+      }
+
+      const nodes = document.querySelectorAll('#graph-nodes > g');
+      nodes.forEach(node => {
+        const textTag = node.querySelector('text')?.textContent;
+        if (type === 'ALL') {
+          node.style.opacity = '1';
+          node.style.transition = 'opacity 0.3s ease';
+        } else {
+          const typeCodeMap = {
+            'Supplier': 'SUP',
+            'Plant': 'PLANT',
+            'Warehouse': 'WH',
+            'Shipment': 'SHP',
+            'Part': 'SKU'
+          };
+          const matchCode = typeCodeMap[type];
+          if (textTag === matchCode) {
+            node.style.opacity = '1';
+          } else {
+            node.style.opacity = '0.15';
+          }
+        }
+      });
+    }
+    window.filterGraphNodes = filterGraphNodes;
 
     window.addEventListener('DOMContentLoaded', () => {
       initLoadingScreen();

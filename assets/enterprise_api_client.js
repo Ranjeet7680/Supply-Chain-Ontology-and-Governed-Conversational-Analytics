@@ -604,7 +604,24 @@ window.exportDataCSV = function(entityType) {
   window.open(API_BASE + '/export/csv/' + entityType, '_blank');
 };
 
-// 13. Expand tab hooks
+// 13. Fetch & Populate Live Knowledge Graph from Ontology Endpoints
+async function fetchKnowledgeGraph() {
+  try {
+    const resEnt = await fetch(API_BASE + '/ontology/entities');
+    const resRel = await fetch(API_BASE + '/ontology/relationships');
+    if (resEnt.ok && resRel.ok) {
+      const dataEnt = await resEnt.json();
+      const dataRel = await resRel.json();
+      window.SupplyChainData.ontologyEntities = dataEnt.entities;
+      window.SupplyChainData.ontologyRelationships = dataRel.relationships;
+      console.log('Knowledge Graph loaded:', dataEnt.total, 'entities,', dataRel.total, 'relationships');
+    }
+  } catch (e) {
+    console.warn('Knowledge graph load notice:', e);
+  }
+}
+
+// 14. Expand tab hooks
 const oldTabHook = window.switchTab;
 window.switchTab = function(tabId) {
   if (typeof oldTabHook === 'function') {
@@ -614,5 +631,7 @@ window.switchTab = function(tabId) {
     fetchShipments();
   } else if (tabId === 'warehouses') {
     fetchWarehouses();
+  } else if (tabId === 'graph') {
+    fetchKnowledgeGraph();
   }
 };
