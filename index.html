@@ -8810,6 +8810,550 @@
       if (navSelect && navSelect.value !== lang) navSelect.value = lang;
     }
 
+    
+    // =========================================================================
+    // COMPLETE WEBSITE & DASHBOARD i18n TRANSLATION ENGINE (7 Indian Regional Languages)
+    // =========================================================================
+    const fullAppTranslations = {
+      "en": {
+        // Sidebar
+        sidebar_overview: "Overview",
+        sidebar_chat: "Conversational Analytics",
+        sidebar_ontology: "Supply Chain Ontology",
+        sidebar_graph: "Knowledge Graph",
+        sidebar_suppliers: "Suppliers",
+        sidebar_inventory: "Inventory",
+        sidebar_orders: "Orders",
+        sidebar_shipments: "Shipments",
+        sidebar_warehouses: "Warehouses",
+        sidebar_risk: "Risk & Alerts",
+        sidebar_governance: "Data Governance",
+        sidebar_lineage: "Data Lineage",
+        sidebar_audit: "Audit Logs",
+        app_copilot_btn: "Ask SupplyChain IQ",
+
+        // Suppliers Tab
+        suppliers_title: "Global Suppliers & Vendor Matrix",
+        suppliers_subtitle: "1,280 Verified Vendors across India, GCC, Southeast Asia & Europe with Live SLA Auditing.",
+        suppliers_kpi_active: "Total Active Vendors",
+        suppliers_kpi_lead: "Mean Lead Time Adherence",
+        suppliers_kpi_risk: "At-Risk Suppliers (<80% SLA)",
+        suppliers_kpi_consensus: "Consensus OTIF Rating",
+        suppliers_table_header: "Supplier Performance Index",
+
+        // Inventory Tab
+        inventory_title: "Live Inventory & Stock Health",
+        inventory_subtitle: "Real-time telemetry across Central Nagpur, East Kolkata, Jebel Ali Hub & Dammam Facility.",
+        inventory_kpi_skus: "Total Active SKUs",
+        inventory_kpi_warnings: "Critical Stockout Warnings (< 14 Days)",
+        inventory_kpi_safety: "Aggregate Safety Stock Value",
+
+        // Orders Tab
+        orders_title: "Order Execution & Line Items",
+        orders_subtitle: "99,140 Purchase Orders tracked across Snowflake Medallion Silver & Gold semantic views.",
+        orders_kpi_active: "Active POs",
+        orders_kpi_dispatched: "Dispatched Orders",
+        orders_kpi_ocean: "In Transit Across Ocean",
+        orders_kpi_customs: "Pending Customs Clearance",
+
+        // Shipments Tab
+        shipments_title: "25,000 Verified TMS Shipments",
+        shipments_subtitle: "Carrier transit reliability benchmarked across Blue Dart, Delhivery, DHL, and XpressBees.",
+
+        // Warehouses Tab
+        warehouses_title: "Warehouses & Fulfillment Centers",
+        warehouses_subtitle: "18 Primary Distribution Hubs across India, UAE, and Saudi Arabia.",
+
+        // Risk Tab
+        risk_title: "Risk Engine & Anomaly Signals",
+        risk_subtitle: "Critical Alerts flagged across Arabian Sea shipping lanes and rail corridors.",
+
+        // Governance Tab
+        gov_tab_title: "Data Governance & RBAC Framework",
+        gov_tab_subtitle: "Zero-drift ontological guarantees, cryptographic SHA-256 integrity, and SOC 2 Type II compliance.",
+
+        // Search & Modals
+        search_placeholder: "Search SKUs, suppliers, ontology nodes, shipments, or query...",
+        chat_title: "Ask your Supply Chain",
+        chat_subtitle: "Governed conversational intelligence grounded in enterprise ontology, verified semantic models, and multi-system data lineage.",
+        chat_input_placeholder: "Ask in English, Hindi, Tamil, Telugu, Gujarati (e.g. Which carrier partner has the highest delivery delays?)"
+      },
+      "ta": {
+        // Sidebar
+        sidebar_overview: "கண்ணோட்டம்",
+        sidebar_chat: "உரையாடல் பகுப்பாய்வு",
+        sidebar_ontology: "விநியோக சங்கிலி ஆண்டாலஜி",
+        sidebar_graph: "அறிவு வரைபடம்",
+        sidebar_suppliers: "விற்பனையாளர்கள் / சப்ளையர்கள்",
+        sidebar_inventory: "சரக்கு இருப்பு",
+        sidebar_orders: "கொள்முதல் ஆணைகள்",
+        sidebar_shipments: "சரக்கு ஏற்றுமதிகள்",
+        sidebar_warehouses: "கிடங்குகள் & மையங்கள்",
+        sidebar_risk: "இடர் & எச்சரிக்கைகள்",
+        sidebar_governance: "தரவு நிர்வாகம்",
+        sidebar_lineage: "தரவு பரம்பரை",
+        sidebar_audit: "தணிக்கை பதிவுகள்",
+        app_copilot_btn: "விநியோக சங்கிலியிடம் கேட்கவும்",
+
+        // Suppliers Tab
+        suppliers_title: "உலகளாவிய சப்ளையர்கள் & விற்பனையாளர் அட்டவணை",
+        suppliers_subtitle: "இந்தியா, GCC மற்றும் தென்கிழக்கு ஆசியாவில் சரிபார்க்கப்பட்ட விற்பனையாளர்கள் நேரலை SLA தணிக்கையுடன்.",
+        suppliers_kpi_active: "மொத்த செயலில் உள்ள விற்பனையாளர்கள்",
+        suppliers_kpi_lead: "முன்னணி நேர பின்பற்றுதல்",
+        suppliers_kpi_risk: "ஆபத்தில் உள்ள சப்ளையர்கள் (<80% SLA)",
+        suppliers_kpi_consensus: "ஒருமித்த OTIF மதிப்பீடு",
+        suppliers_table_header: "சப்ளையர் செயல்திறன் குறியீடு",
+
+        // Inventory Tab
+        inventory_title: "நேரலை சரக்கு & பங்கு ஆரோக்கியம்",
+        inventory_subtitle: "மத்திய நாக்பூர், கிழக்கு கொல்கத்தா, ஜெபல் அலி மற்றும் தம்மாம் கிடங்குகளின் நிகழ்நேர தரவு.",
+        inventory_kpi_skus: "மொத்த செயலில் உள்ள SKU-க்கள்",
+        inventory_kpi_warnings: "முக்கிய இருப்பு எச்சரிக்கைகள் (< 14 நாட்கள்)",
+        inventory_kpi_safety: "மொத்த பாதுகாப்பு இருப்பு மதிப்பு",
+
+        // Orders Tab
+        orders_title: "ஆணை செயல்படுத்தல் & வரிசை விவரங்கள்",
+        orders_subtitle: "ஸ்னோஃபிளேக் மெடாலியன் சில்வர் & கோல்ட் மூலம் கண்காணிக்கப்படும் கொள்முதல் ஆணைகள்.",
+        orders_kpi_active: "செயலில் உள்ள ஆணைகள் (POs)",
+        orders_kpi_dispatched: "அனுப்பப்பட்ட ஆணைகள்",
+        orders_kpi_ocean: "கடல் வழியில் உள்ள சரக்குகள்",
+        orders_kpi_customs: "சுங்க அனுமதி நிலுவை",
+
+        // Shipments Tab
+        shipments_title: "25,000 சரிபார்க்கப்பட்ட TMS ஏற்றுமதிகள்",
+        shipments_subtitle: "Blue Dart, Delhivery, DHL மற்றும் XpressBees கேரியர்களின் நேரலை நம்பகத்தன்மை.",
+
+        // Warehouses Tab
+        warehouses_title: "கிடங்குகள் & விநியோக மையங்கள்",
+        warehouses_subtitle: "இந்தியா, ஐக்கிய அரபு எமிரேட்ஸ் மற்றும் சவுதி அரேபியாவில் உள்ள 18 முதன்மை விநியோக மையங்கள்.",
+
+        // Risk Tab
+        risk_title: "இடர் எஞ்சின் & முரண்பாட்டு சமிக்ஞைகள்",
+        risk_subtitle: "அரபிக்கடல் கப்பல் பாதைகள் மற்றும் ரயில் வழித்தடங்களில் கண்டறியப்பட்ட தீவிர எச்சரிக்கைகள்.",
+
+        // Governance Tab
+        gov_tab_title: "தரவு நிர்வாகம் & RBAC கட்டமைப்பு",
+        gov_tab_subtitle: "பூஜ்ஜிய மெட்ரிக் விலகல், SHA-256 கிரிப்டோகிராஃபிக் ஒருமைப்பாடு மற்றும் SOC 2 இணக்கம்.",
+
+        // Search & Modals
+        search_placeholder: "SKU, சப்ளையர்கள், ஆண்டாலஜி முனையங்கள், ஏற்றுமதிகளைத் தேடுங்கள்...",
+        chat_title: "உங்கள் விநியோக சங்கிலியிடம் கேளுங்கள்",
+        chat_subtitle: "நிறுவன ஆண்டாலஜி மற்றும் சரிபார்க்கப்பட்ட செமாண்டிக் மாடல்களில் அடிப்படையிலான உரையாடல் நுண்ணறிவு.",
+        chat_input_placeholder: "தமிழில் கேட்கவும் (உ.ம்: எந்த கேரியர் அதிக தாமதத்தை ஏற்படுத்துகிறது?)"
+      },
+      "hi": {
+        sidebar_overview: "अवलोकन",
+        sidebar_chat: "संवादात्मक विश्लेषण",
+        sidebar_ontology: "सप्लाई चेन ऑन्टोलॉजी",
+        sidebar_graph: "ज्ञान ग्राफ",
+        sidebar_suppliers: "आपूर्तिकर्ता (Suppliers)",
+        sidebar_inventory: "इन्वेंटरी व स्टॉक",
+        sidebar_orders: "खरीद आदेश (POs)",
+        sidebar_shipments: "शिपमेंट व पारगमन",
+        sidebar_warehouses: "गोदाम व पूर्ति केंद्र",
+        sidebar_risk: "जोखिम व अलर्ट",
+        sidebar_governance: "डेटा प्रशासन",
+        sidebar_lineage: "डेटा वंशावली",
+        sidebar_audit: "ऑडिट लॉग्स",
+        app_copilot_btn: "सप्लाई चेन से पूछें",
+
+        suppliers_title: "वैश्विक आपूर्तिकर्ता एवं वेंडर मैट्रिक्स",
+        suppliers_subtitle: "भारत, जीसीसी और यूरोप भर में 1,280 सत्यापित आपूर्तिकर्ता लाइव एसएलए ऑडिटिंग के साथ।",
+        suppliers_kpi_active: "कुल सक्रिय वेंडर",
+        suppliers_kpi_lead: "औसत लीड टाइम पालन",
+        suppliers_kpi_risk: "जोखिम वाले आपूर्तिकर्ता (<80% SLA)",
+        suppliers_kpi_consensus: "सर्वसम्मति OTIF रेटिंग",
+        suppliers_table_header: "आपूर्तिकर्ता प्रदर्शन सूचकांक",
+
+        inventory_title: "लाइव इन्वेंटरी एवं स्टॉक स्वास्थ्य",
+        inventory_subtitle: "नागपुर, कोलकाता, जेबेल अली और दम्मम केंद्रों पर वास्तविक समय टेलीमेट्री।",
+        inventory_kpi_skus: "कुल सक्रिय SKUs",
+        inventory_kpi_warnings: "गंभीर स्टॉकआउट चेतावनियां (< 14 दिन)",
+        inventory_kpi_safety: "कुल सुरक्षा स्टॉक मूल्य",
+
+        orders_title: "आदेश निष्पादन एवं लाइन आइटम",
+        orders_subtitle: "स्नोफ्लेक सिल्वर और गोल्ड सिमेंटिक व्यूज में 99,140 खरीद आदेश ट्रैक किए गए।",
+        orders_kpi_active: "सक्रिय खरीद आदेश (POs)",
+        orders_kpi_dispatched: "प्रेषित आदेश",
+        orders_kpi_ocean: "समुद्री मार्ग पारगमन में",
+        orders_kpi_customs: "सीमा शुल्क निकासी लंबित",
+
+        shipments_title: "25,000 सत्यापित टीएमएस शिपमेंट",
+        shipments_subtitle: "Blue Dart, Delhivery, DHL और XpressBees में डिलीवरी प्रदर्शन बेंचमार्किंग।",
+
+        warehouses_title: "गोदाम एवं पूर्ति केंद्र",
+        warehouses_subtitle: "भारत, यूएई और सऊदी अरब में 18 प्राथमिक वितरण केंद्र।",
+
+        risk_title: "जोखिम इंजन एवं विसंगति सिग्नल",
+        risk_subtitle: "अरब सागर शिपिंग लेन और रेल गलियारों में 4 गंभीर अलर्ट चिह्नित।",
+
+        gov_tab_title: "डेटा प्रशासन एवं आरबीएसी ढांचा",
+        gov_tab_subtitle: "शून्य मीट्रिक बहाव, क्रिप्टोग्राफिक SHA-256 अखंडता और एसओसी 2 अनुपालन।",
+
+        search_placeholder: "SKU, आपूर्तिकर्ता, ऑन्टोलॉजी नोड, शिपमेंट खोजें...",
+        chat_title: "अपनी आपूर्ति श्रृंखला से बात करें",
+        chat_subtitle: "एंटरप्राइज ऑन्टोलॉजी, सत्यापित सिमेंटिक मॉडल और बहु-प्रणाली डेटा वंशावली में आधारित संवादात्मक बुद्धिमत्ता।",
+        chat_input_placeholder: "हिन्दी में पूछें (जैसे: कौन सा कैरियर सबसे ज्यादा लेट कर रहा है?)"
+      },
+      "te": {
+        sidebar_overview: "అవలోకనం",
+        sidebar_chat: "సంభాషణ విశ్లేషణ",
+        sidebar_ontology: "సరఫరా గొలుసు అంటాలజీ",
+        sidebar_graph: "నాలెడ్జ్ గ్రాఫ్",
+        sidebar_suppliers: "సరఫరాదారులు",
+        sidebar_inventory: "ఇన్వెంటరీ నిల్వలు",
+        sidebar_orders: "కొనుగోలు ఆర్డర్లు",
+        sidebar_shipments: "రవాణా షిప్‌మెంట్లు",
+        sidebar_warehouses: "గిడ్డంగులు",
+        sidebar_risk: "ప్రమాదం & హెచ్చరికలు",
+        sidebar_governance: "డేటా గవర్నెన్స్",
+        sidebar_lineage: "డేటా లీనియేజ్",
+        sidebar_audit: "ఆడిట్ లాగ్స్",
+        app_copilot_btn: "సరఫరా గొలుసును అడగండి",
+
+        suppliers_title: "గ్లోబల్ సరఫరాదారులు & వెండర్ మ్యాట్రిక్స్",
+        suppliers_subtitle: "భారతదేశం, గల్ఫ్ దేశాలలో లైవ్ SLA ఆడిటింగ్‌తో ధృవీకరించబడిన విక్రేతలు.",
+        suppliers_kpi_active: "మొత్తం యాక్టివ్ వెండర్లు",
+        suppliers_kpi_lead: "లీడ్ టైమ్ కట్టుబాటు",
+        suppliers_kpi_risk: "రిస్క్ సరఫరాదారులు (<80% SLA)",
+        suppliers_kpi_consensus: "ఏకాభిప్రాయ OTIF రేటింగ్",
+        suppliers_table_header: "సరఫరాదారు పనితీరు సూచిక",
+
+        inventory_title: "లైవ్ ఇన్వెంటరీ & స్టాక్ స్థితి",
+        inventory_subtitle: "నాగ్‌పూర్, కోల్‌కతా, జెబెల్ అలీ హబ్‌లలో రియల్ టైమ్ టెలిమెట్రీ.",
+        inventory_kpi_skus: "మొత్తం యాక్టివ్ SKUలు",
+        inventory_kpi_warnings: "స్టాక్ కొరత హెచ్చరికలు (< 14 రోజులు)",
+        inventory_kpi_safety: "మొత్తం భద్రతా స్టాక్ విలువ",
+
+        orders_title: "ఆర్డర్ అమలు & లైన్ అంశాలు",
+        orders_subtitle: "స్నోఫ్లేక్ మెడల్లియన్ ద్వారా పర్యవేక్షించబడే కొనుగోలు ఆర్డర్లు.",
+        orders_kpi_active: "యాక్టివ్ ఆర్డర్లు (POs)",
+        orders_kpi_dispatched: "రవాణా చేయబడిన ఆర్డర్లు",
+        orders_kpi_ocean: "సముద్ర రవాణాలో ఉన్నాయి",
+        orders_kpi_customs: "కస్టమ్స్ క్లియరెన్స్ పెండింగ్",
+
+        shipments_title: "25,000 ధృవీకరించబడిన TMS షిప్‌మెంట్లు",
+        shipments_subtitle: "Blue Dart, Delhivery, DHL మరియు XpressBees క్యారియర్ సమయపాలన పనితీరు.",
+
+        warehouses_title: "గిడ్డంగులు & పంపిణీ కేంద్రాలు",
+        warehouses_subtitle: "భారత్, యూఏఈ, సౌదీ అరేబియాలోని 18 ప్రాథమిక పంపిణీ కేంద్రాలు.",
+
+        risk_title: "రిస్క్ ఇంజిన్ & వ్యత్యాస సంకేతాలు",
+        risk_subtitle: "అరేబియా సముద్ర షిప్పింగ్ మార్గాలలో గుర్తించబడిన అత్యవసర హెచ్చరికలు.",
+
+        gov_tab_title: "డేటా గవర్నెన్స్ & RBAC ఫ్రేమ్‌వర్క్",
+        gov_tab_subtitle: "జీరో మెట్రిక్ డ్రిఫ్ట్, క్రిప్టోగ్రాఫిక్ సమగ్రత మరియు కఠినమైన భద్రత.",
+
+        search_placeholder: "SKUలు, సరఫరాదారులు, అంటాలజీ నోడ్లు, షిప్‌మెంట్‌లను శోధించండి...",
+        chat_title: "మీ సరఫరా గొలుసుతో మాట్లాడండి",
+        chat_subtitle: "సంస్థాగత అంటాలజీ ఆధారిత సహజ భాషా విశ్లేషణ.",
+        chat_input_placeholder: "తెలుగులో అడగండి (ఉదా: ఏ క్యారియర్ అత్యధిక డెలివరీ ఆలస్యం చేస్తోంది?)"
+      },
+      "gu": {
+        sidebar_overview: "અવલોકન",
+        sidebar_chat: "વાર્તાલાપ એનાલિટિક્સ",
+        sidebar_ontology: "સપ્લાય ચેઇન ઓન્ટોલોજી",
+        sidebar_graph: "નોલેજ ગ્રાફ",
+        sidebar_suppliers: "સપ્લાયર્સ",
+        sidebar_inventory: "ઇન્વેન્ટરી સ્ટોક",
+        sidebar_orders: "ઓર્ડર્સ (POs)",
+        sidebar_shipments: "શિપમેન્ટ્સ",
+        sidebar_warehouses: "વેરહાઉસ",
+        sidebar_risk: "જોખમ અને ચેતવણીઓ",
+        sidebar_governance: "ડેટા ગવર્નન્સ",
+        sidebar_lineage: "ડેટા લિનેજ",
+        sidebar_audit: "ઓડિટ લૉગ્સ",
+        app_copilot_btn: "સપ્લાય ચેઇનને પૂછો",
+
+        suppliers_title: "ગ્લોબલ સપ્લાયર્સ અને વેન્ડર મેટ્રિક્સ",
+        suppliers_subtitle: "ભારત અને જીસીસીમાં લાઇવ SLA ઓડિટિંગ સાથે ચકાસાયેલ વેન્ડર્સ.",
+        suppliers_kpi_active: "કુલ સક્રિય વેન્ડર્સ",
+        suppliers_kpi_lead: "લીડ ટાઇમ પાલન",
+        suppliers_kpi_risk: "જોખમી સપ્લાયર્સ (<80% SLA)",
+        suppliers_kpi_consensus: "સર્વસંમતિ OTIF રેટિંગ",
+        suppliers_table_header: "સપ્લાયર પ્રદર્શન સૂચકાંક",
+
+        inventory_title: "લાઇવ ઇન્વેન્ટરી અને સ્ટોક હેલ્થ",
+        inventory_subtitle: "નાગપુર, કોલકાતા, જેબેલ અલી અને દમ્મામ કેન્દ્રોની રીઅલ-ટાઇમ ટેલિમેટ્રી.",
+        inventory_kpi_skus: "કુલ સક્રિય SKUs",
+        inventory_kpi_warnings: "સ્ટોકઆઉટ ચેતવણીઓ (< 14 દિવસ)",
+        inventory_kpi_safety: "કુલ સલામતી સ્ટોક મૂલ્ય",
+
+        orders_title: "ઓર્ડર એક્ઝિક્યુશન અને લાઇન આઇટમ્સ",
+        orders_subtitle: "સ્નોફ્લેક સેમેન્ટિક વ્યુઝમાં ટ્રેક કરાયેલા 99,140 ખરીદ ઓર્ડર.",
+        orders_kpi_active: "સક્રિય ખરીદ ઓર્ડર (POs)",
+        orders_kpi_dispatched: "મોકલાયેલા ઓર્ડર્સ",
+        orders_kpi_ocean: "દરિયાઈ માર્ગે પરિવહનમાં",
+        orders_kpi_customs: "કસ્ટમ્સ ક્લિયરન્સ બાકી",
+
+        shipments_title: "25,000 ચકાસાયેલ TMS શિપમેન્ટ્સ",
+        shipments_subtitle: "Blue Dart, Delhivery, DHL અને XpressBees સમયસર ડિલિવરી કાર્યક્ષમતા.",
+
+        warehouses_title: "વેરહાઉસ અને પરિપૂર્ણતા કેન્દ્રો",
+        warehouses_subtitle: "ભારત, યુએઈ અને સાઉદી અરેબિયામાં 18 પ્રાથમિક વિતરણ કેન્દ્રો.",
+
+        risk_title: "જોખમ એન્જિન અને વિસંગતતા સિગ્નલ્સ",
+        risk_subtitle: "અરબી સમુદ્ર શિપિંગ રૂટ પર ચિહ્નિત થયેલ ગંભીર ચેતવણીઓ.",
+
+        gov_tab_title: "ડેટા ગવર્નન્સ અને RBAC ફ્રેમવર્ક",
+        gov_tab_subtitle: "શૂન્ય મેટ્રિક ડ્રિફ્ટ અને ક્રિપ્ટોગ્રાફિક SHA-256 અખંડિતતા.",
+
+        search_placeholder: "SKU, સપ્લાયર્સ, ઓન્ટોલોજી નોડ્સ, શિપમેન્ટ્સ શોધો...",
+        chat_title: "તમારી સપ્લાય ચેઇનને પ્રશ્ન પૂછો",
+        chat_subtitle: "એન્ટરપ્રાઇઝ ઓન્ટોલોજી પર આધારિત વાર્તાલાપ બુદ્ધિમત્તા.",
+        chat_input_placeholder: "ગુજરાતીમાં પૂછો (દા.ત. કયો કેરિયર સૌથી વધુ ડિલિવરી વિલંબ કરે છે?)"
+      },
+      "mr": {
+        sidebar_overview: "आढावा",
+        sidebar_chat: "संभाषण विश्लेषण",
+        sidebar_ontology: "पुरवठा साखळी ऑन्टोलॉजी",
+        sidebar_graph: "ज्ञान आलेख",
+        sidebar_suppliers: "पुरवठादार (Suppliers)",
+        sidebar_inventory: "इन्व्हेंटरी साठा",
+        sidebar_orders: "खरेदी आदेश (POs)",
+        sidebar_shipments: "मालवाहतूक (Shipments)",
+        sidebar_warehouses: "गोदामे (Warehouses)",
+        sidebar_risk: "धोका आणि सूचना",
+        sidebar_governance: "डेटा प्रशासन",
+        sidebar_lineage: "डेटा वंशावळ",
+        sidebar_audit: "ऑडिट नोंदी",
+        app_copilot_btn: "पुरवठा साखळीला विचारा",
+
+        suppliers_title: "जागतिक पुरवठादार आणि विक्रेता मॅट्रिक्स",
+        suppliers_subtitle: "भारत, जीसीसी आणि युरोपमधील प्रमाणित विक्रेते थेट SLA ऑडिटिंगसह.",
+        suppliers_kpi_active: "एकूण सक्रिय विक्रेते",
+        suppliers_kpi_lead: "सरासरी लीड वेळ पालन",
+        suppliers_kpi_risk: "धोक्यात असलेले पुरवठादार (<80% SLA)",
+        suppliers_kpi_consensus: "सर्वसंमती OTIF रेटिंग",
+        suppliers_table_header: "पुरवठादार कामगिरी निर्देशांक",
+
+        inventory_title: "थेट इन्व्हेंटरी आणि साठा आरोग्य",
+        inventory_subtitle: "नागपूर, कोलकाता, जेबेल अली आणि दम्माम केंद्रांची रिअल-टाइम टेलिमेट्री.",
+        inventory_kpi_skus: "एकूण सक्रिय SKUs",
+        inventory_kpi_warnings: "गंभीर साठा कमतरता सूचना (< 14 दिवस)",
+        inventory_kpi_safety: "एकूण सुरक्षा साठा मूल्य",
+
+        orders_title: "आदेश अंमलबजावणी आणि तपशील",
+        orders_subtitle: "स्नोफ्लेक सिमेंटिक व्ह्यूजमध्ये 99,140 खरेदी आदेश ट्रॅक केले गेले.",
+        orders_kpi_active: "सक्रिय खरेदी आदेश (POs)",
+        orders_kpi_dispatched: "पाठवलेले आदेश",
+        orders_kpi_ocean: "सागरी मार्गाने वाहतुकीत",
+        orders_kpi_customs: "कस्टम्स क्लिअरन्स प्रलंबित",
+
+        shipments_title: "25,000 प्रमाणित टीएमएस मालवाहतूक",
+        shipments_subtitle: "Blue Dart, Delhivery, DHL आणि XpressBees वेळेवर पोहोचवण्याची अचूकता.",
+
+        warehouses_title: "गोदामे आणि वितरण केंद्रे",
+        warehouses_subtitle: "भारत, यूएई आणि सौदी अरेबियामधील 18 प्राथमिक वितरण केंद्रे.",
+
+        risk_title: "धोका इंजिन आणि विसंगती सिग्नल",
+        risk_subtitle: "अरबी समुद्र शिपिंग मार्गांवर 4 गंभीर इशारे चिन्हांकित.",
+
+        gov_tab_title: "डेटा प्रशासन आणि सुरक्षा",
+        gov_tab_subtitle: "शून्य मेट्रिक फरक आणि क्रिप्टोग्राफिक सुरक्षितता.",
+
+        search_placeholder: "SKU, पुरवठादार, ऑन्टोलॉजी नोड्स, शिपमेंट शोधा...",
+        chat_title: "तुमच्या पुरवठा साखळीशी संवाद साधा",
+        chat_subtitle: "उद्योग ऑन्टोलॉजी आणि प्रमाणित सिमेंटिक मॉडेल्सवर आधारित बुद्धिमत्ता.",
+        chat_input_placeholder: "मराठीत विचारा (उदा. कोणता वाहतूकदार सर्वात जास्त उशीर करत आहे?)"
+      },
+      "bn": {
+        sidebar_overview: "সংক্ষিপ্ত বিবরণ",
+        sidebar_chat: "কথোপকথন বিশ্লেষণ",
+        sidebar_ontology: "সরবরাহ শৃঙ্খল ওন্টোলজি",
+        sidebar_graph: "জ্ঞান গ্রাফ",
+        sidebar_suppliers: "সরবরাহকারী (Suppliers)",
+        sidebar_inventory: "ইনভেন্টরি স্টক",
+        sidebar_orders: "ক্রয় আদেশ (POs)",
+        sidebar_shipments: "চালান ও পরিবহন",
+        sidebar_warehouses: "গুদাম ও বিতরণ কেন্দ্র",
+        sidebar_risk: "ঝুঁকি ও সতর্কতা",
+        sidebar_governance: "তথ্য শাসন",
+        sidebar_lineage: "তথ্য বংশধারা",
+        sidebar_audit: "অডিট লগ",
+        app_copilot_btn: "সাপ্লাই চেইনকে জিজ্ঞাসা করুন",
+
+        suppliers_title: "বৈশ্বিক সরবরাহকারী এবং ভেন্ডর ম্যাট্রিক্স",
+        suppliers_subtitle: "ভারত এবং জিসিসিতে লাইভ SLA অডিটিং সহ যাচাইকৃত সরবরাহকারী।",
+        suppliers_kpi_active: "মোট সক্রিয় সরবরাহকারী",
+        suppliers_kpi_lead: "লিড টাইম অনুসরণ",
+        suppliers_kpi_risk: "ঝুঁকিপূর্ণ সরবরাহকারী (<80% SLA)",
+        suppliers_kpi_consensus: "ঐকমত্য OTIF রেটিং",
+        suppliers_table_header: "সরবরাহকারী কর্মক্ষমতা সূচক",
+
+        inventory_title: "লাইভ ইনভেন্টরি ও স্টক স্বাস্থ্য",
+        inventory_subtitle: "নাগপুর, কলকাতা, জেবেল আলী এবং দাম্মাম সুবিধার রিয়েল-টাইম টেলিমেট্রি।",
+        inventory_kpi_skus: "মোট সক্রিয় SKUs",
+        inventory_kpi_warnings: "স্টক শেষ হওয়ার সতর্কতা (< 14 দিন)",
+        inventory_kpi_safety: "মোট নিরাপত্তা স্টক মান",
+
+        orders_title: "অর্ডার এক্সিকিউশন ও লাইন আইটেম",
+        orders_subtitle: "স্নোফ্লেক সিম্যান্টিক ভিউতে ট্র্যাক করা ক্রয় আদেশ।",
+        orders_kpi_active: "সক্রিয় ক্রয় আদেশ (POs)",
+        orders_kpi_dispatched: "প্রেরিত অর্ডার",
+        orders_kpi_ocean: "সমুদ্র পথে পরিবহনে আছে",
+        orders_kpi_customs: "কাস্টমস ক্লিয়ারেন্স বাকি",
+
+        shipments_title: "25,000 যাচাইকৃত TMS চালান",
+        shipments_subtitle: "Blue Dart, Delhivery, DHL এবং XpressBees সময়ানুবর্তিতা ট্র্যাকিং।",
+
+        warehouses_title: "গুদাম ও বিতরণ কেন্দ্রসমূহ",
+        warehouses_subtitle: "ভারত, সংযুক্ত আরব আমিরাত এবং সৌদি আরবের ১৮টি প্রাথমিক বিতরণ কেন্দ্র।",
+
+        risk_title: "ঝুঁকি ইঞ্জিন ও অসঙ্গতি সংকেত",
+        risk_subtitle: "আরব সাগর শিপিং লেনে চিহ্নিত জরুরি সতর্কতা।",
+
+        gov_tab_title: "তথ্য শাসন ও নিরাপত্তা পরিকাঠামো",
+        gov_tab_subtitle: "শূন্য মেট্রিক বিচ্যুতি এবং ক্রিপ্টোগ্রাফিক ডেটা অখণ্ডতা।",
+
+        search_placeholder: "SKU, সরবরাহকারী, ওন্টোলজি নোড, চালান অনুসন্ধান করুন...",
+        chat_title: "আপনার সরবরাহ শৃঙ্খলকে জিজ্ঞাসা করুন",
+        chat_subtitle: "এন্টারপ্রাইজ ওন্টোলজি ভিত্তিক বুদ্ধিমত্তা।",
+        chat_input_placeholder: "বাংলায় জিজ্ঞাসা করুন (যেমন: কোন ক্যারিয়ার পার্টনার সবচেয়ে বেশি দেরি করছে?)"
+      }
+    };
+
+
+    function applyComprehensiveTranslation(lang) {
+      // First apply website standard translations
+      applyFullWebsiteTranslation(lang);
+
+      const t = fullAppTranslations[lang] || fullAppTranslations['en'];
+
+      // Synchronize all dropdowns
+      ['global-lang-select', 'app-lang-select', 'floating-lang-select'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.value !== lang) el.value = lang;
+      });
+
+      // 1. Translate All Sidebar Items
+      const setSidebarText = (id, text) => {
+        const el = document.getElementById(id)?.querySelector('.sidebar-text');
+        if (el && text) el.textContent = text;
+      };
+
+      setSidebarText('nav-overview', t.sidebar_overview);
+      setSidebarText('nav-chat', t.sidebar_chat);
+      setSidebarText('nav-ontology', t.sidebar_ontology);
+      setSidebarText('nav-graph', t.sidebar_graph);
+      setSidebarText('nav-suppliers', t.sidebar_suppliers);
+      setSidebarText('nav-inventory', t.sidebar_inventory);
+      setSidebarText('nav-orders', t.sidebar_orders);
+      setSidebarText('nav-shipments', t.sidebar_shipments);
+      setSidebarText('nav-warehouses', t.sidebar_warehouses);
+      setSidebarText('nav-risk', t.sidebar_risk);
+      setSidebarText('nav-governance', t.sidebar_governance);
+      setSidebarText('nav-lineage', t.sidebar_lineage);
+      setSidebarText('nav-audit', t.sidebar_audit);
+
+      // 2. Translate Top Navigation & Buttons
+      const copilotBtn = document.getElementById('app-copilot-btn-text');
+      if (copilotBtn && t.app_copilot_btn) copilotBtn.textContent = t.app_copilot_btn;
+
+      const searchInputs = document.querySelectorAll('input[placeholder*="Search"], input[placeholder*="தேடு"], input[placeholder*="खोजें"], input[placeholder*="శోధించండి"], input[placeholder*="શોધો"], input[placeholder*="अनुসন্ধান"]');
+      searchInputs.forEach(input => {
+        if (t.search_placeholder) input.placeholder = t.search_placeholder;
+      });
+
+      // 3. Translate Suppliers Tab Elements
+      const supTab = document.getElementById('tab-suppliers');
+      if (supTab) {
+        const h2 = supTab.querySelector('h2');
+        if (h2 && t.suppliers_title) h2.textContent = t.suppliers_title;
+        const p = supTab.querySelector('h2 + p');
+        if (p && t.suppliers_subtitle) p.textContent = t.suppliers_subtitle;
+        
+        const kpiCards = supTab.querySelectorAll('.grid > div');
+        if (kpiCards.length >= 4) {
+          if (t.suppliers_kpi_active) kpiCards[0].querySelector('.text-slate-400').textContent = t.suppliers_kpi_active;
+          if (t.suppliers_kpi_lead) kpiCards[1].querySelector('.text-slate-400').textContent = t.suppliers_kpi_lead;
+          if (t.suppliers_kpi_risk) kpiCards[2].querySelector('.text-slate-400').textContent = t.suppliers_kpi_risk;
+          if (t.suppliers_kpi_consensus) kpiCards[3].querySelector('.text-slate-400').textContent = t.suppliers_kpi_consensus;
+        }
+
+        const tableHeader = supTab.querySelector('.border-b.bg-\\[\\#040E1C\\] span:first-child');
+        if (tableHeader && t.suppliers_table_header) tableHeader.textContent = t.suppliers_table_header;
+      }
+
+      // 4. Translate Inventory Tab Elements
+      const invTab = document.getElementById('tab-inventory');
+      if (invTab) {
+        const h2 = invTab.querySelector('h2');
+        if (h2 && t.inventory_title) h2.textContent = t.inventory_title;
+        const p = invTab.querySelector('h2 + p');
+        if (p && t.inventory_subtitle) p.textContent = t.inventory_subtitle;
+
+        const kpiCards = invTab.querySelectorAll('.grid > div');
+        if (kpiCards.length >= 3) {
+          if (t.inventory_kpi_skus) kpiCards[0].querySelector('.text-slate-400').textContent = t.inventory_kpi_skus;
+          if (t.inventory_kpi_warnings) kpiCards[1].querySelector('.text-slate-400').textContent = t.inventory_kpi_warnings;
+          if (t.inventory_kpi_safety) kpiCards[2].querySelector('.text-slate-400').textContent = t.inventory_kpi_safety;
+        }
+      }
+
+      // 5. Translate Orders Tab Elements
+      const ordTab = document.getElementById('tab-orders');
+      if (ordTab) {
+        const h2 = ordTab.querySelector('h2');
+        if (h2 && t.orders_title) h2.textContent = t.orders_title;
+        const p = ordTab.querySelector('h2 + p');
+        if (p && t.orders_subtitle) p.textContent = t.orders_subtitle;
+
+        const kpiCards = ordTab.querySelectorAll('.grid > div');
+        if (kpiCards.length >= 4) {
+          if (t.orders_kpi_active) kpiCards[0].querySelector('.text-slate-400').textContent = t.orders_kpi_active;
+          if (t.orders_kpi_dispatched) kpiCards[1].querySelector('.text-slate-400').textContent = t.orders_kpi_dispatched;
+          if (t.orders_kpi_ocean) kpiCards[2].querySelector('.text-slate-400').textContent = t.orders_kpi_ocean;
+          if (t.orders_kpi_customs) kpiCards[3].querySelector('.text-slate-400').textContent = t.orders_kpi_customs;
+        }
+      }
+
+      // 6. Translate Shipments Tab Elements
+      const shpTab = document.getElementById('tab-shipments');
+      if (shpTab) {
+        const h2 = shpTab.querySelector('h2');
+        if (h2 && t.shipments_title) h2.textContent = t.shipments_title;
+        const p = shpTab.querySelector('h2 + p');
+        if (p && t.shipments_subtitle) p.textContent = t.shipments_subtitle;
+      }
+
+      // 7. Translate Warehouses Tab Elements
+      const whTab = document.getElementById('tab-warehouses');
+      if (whTab) {
+        const h2 = whTab.querySelector('h2');
+        if (h2 && t.warehouses_title) h2.textContent = t.warehouses_title;
+        const p = whTab.querySelector('h2 + p');
+        if (p && t.warehouses_subtitle) p.textContent = t.warehouses_subtitle;
+      }
+
+      // 8. Translate Risk Tab Elements
+      const rskTab = document.getElementById('tab-risk');
+      if (rskTab) {
+        const h2 = rskTab.querySelector('h2');
+        if (h2 && t.risk_title) h2.textContent = t.risk_title;
+        const p = rskTab.querySelector('h2 + p');
+        if (p && t.risk_subtitle) p.textContent = t.risk_subtitle;
+      }
+
+      // 9. Translate Governance Tab Elements
+      const govTab = document.getElementById('tab-governance');
+      if (govTab) {
+        const h2 = govTab.querySelector('h2');
+        if (h2 && t.gov_tab_title) h2.textContent = t.gov_tab_title;
+        const p = govTab.querySelector('h2 + p');
+        if (p && t.gov_tab_subtitle) p.textContent = t.gov_tab_subtitle;
+      }
+
+      try {
+        localStorage.setItem('sciq_language', lang);
+      } catch (e) {}
+
+      // Keep voice engine in sync
+      if (typeof setChatLanguage === 'function') {
+        setChatLanguage(lang);
+      }
+    }
+
     function changeGlobalLanguage(lang) {
       setChatLanguage(lang);
     }
@@ -9885,7 +10429,7 @@
 
     // Global language change handler
     function changeGlobalLanguage(lang) {
-      applyFullWebsiteTranslation(lang);
+      applyComprehensiveTranslation(lang);
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -9898,7 +10442,7 @@
       // Restore stored language preference if exists
       const savedLang = localStorage.getItem('sciq_language') || 'en';
       if (savedLang !== 'en') {
-        applyFullWebsiteTranslation(savedLang);
+        applyComprehensiveTranslation(savedLang);
       }
     });
   </script>
