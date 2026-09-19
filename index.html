@@ -421,25 +421,38 @@
   <style>
     /* Multilingual Welcome Text Crossfade Animation */
     @keyframes welcomeFadeIn {
-      0% { opacity: 0; transform: translateY(8px) scale(0.95); filter: blur(4px); }
+      0% { opacity: 0; transform: translateY(12px) scale(0.92); filter: blur(4px); }
       100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
     }
     @keyframes welcomeFadeOut {
       0% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-      100% { opacity: 0; transform: translateY(-8px) scale(0.95); filter: blur(4px); }
+      100% { opacity: 0; transform: translateY(-12px) scale(0.92); filter: blur(4px); }
     }
     @keyframes logoFadeOut {
       0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.6); }
+      100% { opacity: 0; transform: scale(0.65); filter: blur(4px); }
     }
     @keyframes welcomeZoneIn {
-      0% { opacity: 0; transform: scale(0.85); }
-      100% { opacity: 1; transform: scale(1); }
+      0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(10px);
+        filter: blur(8px);
+      }
+      60% {
+        opacity: 1;
+        transform: scale(1.08) translateY(-2px);
+        filter: blur(0);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+      }
     }
     @keyframes glowRipple {
-      0% { box-shadow: 0 0 0 0 rgba(76,215,246,0.5), inset 0 0 15px rgba(76,215,246,0.2); }
-      70% { box-shadow: 0 0 0 22px rgba(76,215,246,0), inset 0 0 25px rgba(76,215,246,0.4); }
-      100% { box-shadow: 0 0 0 0 rgba(76,215,246,0), inset 0 0 15px rgba(76,215,246,0.2); }
+      0% { box-shadow: 0 0 0 0 rgba(76,215,246,0.65), 0 0 45px rgba(76,215,246,0.4), inset 0 0 25px rgba(76,215,246,0.25); }
+      70% { box-shadow: 0 0 0 32px rgba(76,215,246,0), 0 0 60px rgba(76,215,246,0.5), inset 0 0 35px rgba(76,215,246,0.45); }
+      100% { box-shadow: 0 0 0 0 rgba(76,215,246,0), 0 0 45px rgba(76,215,246,0.4), inset 0 0 25px rgba(76,215,246,0.25); }
     }
     .welcome-text-active {
       animation: welcomeFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -448,13 +461,13 @@
       animation: welcomeFadeOut 0.35s cubic-bezier(0.7, 0, 0.84, 0) forwards;
     }
     .logo-fade-out {
-      animation: logoFadeOut 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation: logoFadeOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
     .welcome-zone-enter {
-      animation: welcomeZoneIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: welcomeZoneIn 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
     .glow-ripple {
-      animation: glowRipple 2.2s ease-out infinite;
+      animation: glowRipple 2.4s ease-out infinite;
     }
     #welcome-lang-label {
       transition: opacity 0.3s ease;
@@ -467,30 +480,32 @@
     <div class="absolute w-[300px] h-[300px] bg-tertiary/6 rounded-full blur-[100px] pointer-events-none top-1/3 left-1/2 -translate-x-1/2"></div>
     
     <!-- Cybernetic radar / orbital emblem -->
-    <div class="relative flex items-center justify-center mb-6" style="width: 220px; height: 220px;">
+    <div class="relative flex items-center justify-center mb-6" style="width: 280px; height: 280px;">
       <!-- Outer rotating orbital ring -->
-      <div class="absolute w-[220px] h-[220px] rounded-full border border-secondary/20 border-dashed animate-orbit"></div>
+      <div class="absolute w-[280px] h-[280px] rounded-full border border-secondary/20 border-dashed animate-orbit"></div>
       
       <!-- Middle rotating ring -->
-      <div class="absolute w-[180px] h-[180px] rounded-full border border-secondary/15 animate-orbit" style="animation-duration: 24s;"></div>
+      <div class="absolute w-[230px] h-[230px] rounded-full border border-secondary/15 animate-orbit" style="animation-duration: 24s;"></div>
       
       <!-- Inner counter-rotating ring with neon gradient accents -->
-      <div class="absolute w-[150px] h-[150px] rounded-full border-2 border-t-secondary border-r-transparent border-b-primary-container border-l-transparent animate-orbit-reverse"></div>
+      <div class="absolute w-[185px] h-[185px] rounded-full border-2 border-t-secondary border-r-transparent border-b-primary-container border-l-transparent animate-orbit-reverse"></div>
       
       <!-- Radar sweep circle -->
-      <div class="absolute w-[120px] h-[120px] rounded-full bg-gradient-to-tr from-secondary/15 via-transparent to-transparent animate-radar pointer-events-none"></div>
+      <div class="absolute w-[150px] h-[150px] rounded-full bg-gradient-to-tr from-secondary/15 via-transparent to-transparent animate-radar pointer-events-none"></div>
 
       <!-- Core Logo Emblem (will fade out smoothly after 2s) -->
-      <div id="splash-logo-container" class="absolute w-28 h-28 rounded-2xl bg-gradient-to-br from-[#0a1e36] to-[#040e1c] border border-secondary/40 flex items-center justify-center shadow-[0_0_45px_rgba(76,215,246,0.35)] backdrop-blur-2xl">
-        <img src="assets/favicon.png" alt="SupplyChain IQ" class="w-16 h-16 object-contain filter drop-shadow-[0_0_12px_rgba(76,215,246,0.8)]"/>
+      <div id="splash-logo-container" class="absolute w-32 h-32 rounded-3xl bg-gradient-to-br from-[#0a1e36] to-[#040e1c] border border-secondary/50 flex items-center justify-center shadow-[0_0_55px_rgba(76,215,246,0.45)] backdrop-blur-2xl transition-all">
+        <img src="assets/favicon.png" alt="SupplyChain IQ" class="w-20 h-20 object-contain filter drop-shadow-[0_0_16px_rgba(76,215,246,0.9)]"/>
       </div>
 
-      <!-- Multilingual Welcome Zone (hidden initially, appears smoothly after 2s) -->
+      <!-- Multilingual Welcome Zone (hidden initially, expands and scales up after 2s) -->
       <div id="welcome-multilingual-zone" class="absolute hidden flex-col items-center justify-center">
-        <div class="w-32 h-28 px-2 py-2 rounded-2xl bg-gradient-to-br from-[#0c2444]/95 via-[#08182b]/95 to-[#051120]/95 border-2 border-secondary/60 flex flex-col items-center justify-center shadow-[0_0_55px_rgba(76,215,246,0.5)] backdrop-blur-2xl glow-ripple">
-          <span id="welcome-lang-text" class="text-[14px] font-extrabold text-center leading-snug px-1" style="white-space: pre-line; background: linear-gradient(135deg, #FFFFFF, #E0F2FE, #38BDF8, #7DD3FC); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></span>
+        <!-- Extended card size with rich glowing neon gradients & deep cybernetic glass backdrop -->
+        <div class="w-48 sm:w-56 h-36 sm:h-40 px-4 py-3 rounded-3xl bg-gradient-to-br from-[#0c284a]/95 via-[#081b30]/95 to-[#04101e]/95 border-2 border-cyan-400/70 flex flex-col items-center justify-center shadow-[0_0_65px_rgba(76,215,246,0.6)] backdrop-blur-3xl glow-ripple transition-all">
+          <span id="welcome-lang-text" class="text-base sm:text-lg font-black text-center leading-snug px-2" style="white-space: pre-line; background: linear-gradient(135deg, #FFFFFF 10%, #E0F2FE 45%, #38BDF8 80%, #7DD3FC 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; drop-shadow(0 2px 12px rgba(76,215,246,0.4));"></span>
         </div>
-        <span id="welcome-lang-label" class="mt-2 text-[11px] font-extrabold text-secondary tracking-[2px] uppercase bg-secondary/15 px-2.5 py-0.5 rounded-full border border-secondary/30"></span>
+        <!-- Extended Regional Language Label Badge -->
+        <span id="welcome-lang-label" class="mt-3 text-[12px] sm:text-[13px] font-black text-cyan-300 tracking-[3px] uppercase bg-cyan-950/80 px-4 py-1 rounded-full border border-cyan-400/50 shadow-[0_0_15px_rgba(76,215,246,0.3)]"></span>
       </div>
     </div>
 
