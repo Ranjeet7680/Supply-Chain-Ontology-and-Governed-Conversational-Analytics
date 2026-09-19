@@ -1877,11 +1877,50 @@
           <button onclick="toggleDashboardSidebar()" title="Toggle Sidebar" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-outline hover:text-secondary border border-outline-variant/30 transition-all shrink-0">
             <span class="material-symbols-outlined text-[20px]">menu</span>
           </button>
-          <div class="flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-surface-container-high hover:bg-surface-bright cursor-pointer transition-colors">
-            <span class="material-symbols-outlined text-[16px] text-secondary">layers</span>
-            <span class="font-body-sm text-body-sm text-on-surface font-medium truncate max-w-[200px]">Global Supply Network</span>
-            <span class="font-label-micro text-label-micro px-1 py-0.5 rounded bg-surface-container-highest text-tertiary font-code-metric">Prod</span>
-            <span class="material-symbols-outlined text-[16px] text-outline">unfold_more</span>
+          <div class="relative">
+            <button id="env-selector-btn" onclick="toggleEnvMenu()" class="flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-surface-container-high hover:bg-surface-bright cursor-pointer transition-colors border border-outline-variant/30">
+              <span class="material-symbols-outlined text-[16px] text-secondary">layers</span>
+              <span id="current-env-name" class="font-body-sm text-body-sm text-on-surface font-medium truncate max-w-[200px]">Global Supply Network</span>
+              <span id="current-env-badge" class="font-label-micro text-label-micro px-1 py-0.5 rounded bg-surface-container-highest text-tertiary font-code-metric">Prod</span>
+              <span class="material-symbols-outlined text-[16px] text-outline">unfold_more</span>
+            </button>
+            <div id="env-dropdown" class="hidden absolute left-0 mt-2 w-72 bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+              <div class="px-3 py-2 border-b border-outline-variant/30 text-[10px] font-mono text-outline uppercase tracking-wider">
+                Select Connected Fabric / Lakehouse
+              </div>
+              <div class="py-1 space-y-1">
+                <button onclick="switchEnvironment('Global Supply Network', 'Prod', 'Snowflake AWS (us-east-1)', 'Primary Canonical Ontological Lakehouse')" class="w-full px-3 py-2 text-left rounded-lg hover:bg-surface-container flex items-start justify-between group transition-colors">
+                  <div>
+                    <div class="text-xs font-semibold text-on-surface group-hover:text-secondary flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                      <span>Global Supply Network</span>
+                    </div>
+                    <div class="text-[10px] text-outline font-mono mt-0.5">Snowflake AWS &bull; us-east-1</div>
+                  </div>
+                  <span class="font-label-micro text-label-micro px-1.5 py-0.5 rounded bg-surface-container-highest text-emerald-400 font-mono">PROD</span>
+                </button>
+                <button onclick="switchEnvironment('GCC Logistics Corridor', 'Stage', 'Snowflake Azure (UAE North)', 'Middle East Shipping & Customs Simulation')" class="w-full px-3 py-2 text-left rounded-lg hover:bg-surface-container flex items-start justify-between group transition-colors">
+                  <div>
+                    <div class="text-xs font-semibold text-on-surface group-hover:text-secondary flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                      <span>GCC Logistics Corridor</span>
+                    </div>
+                    <div class="text-[10px] text-outline font-mono mt-0.5">Snowflake Azure &bull; UAE North</div>
+                  </div>
+                  <span class="font-label-micro text-label-micro px-1.5 py-0.5 rounded bg-surface-container-highest text-cyan-300 font-mono">STAGE</span>
+                </button>
+                <button onclick="switchEnvironment('Asia-Pacific Manufacturing Hub', 'DR-Sync', 'Snowflake GCP (Singapore)', 'APAC Semiconductor & Fabrication Failover')" class="w-full px-3 py-2 text-left rounded-lg hover:bg-surface-container flex items-start justify-between group transition-colors">
+                  <div>
+                    <div class="text-xs font-semibold text-on-surface group-hover:text-secondary flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                      <span>Asia-Pacific Hub</span>
+                    </div>
+                    <div class="text-[10px] text-outline font-mono mt-0.5">Snowflake GCP &bull; Singapore</div>
+                  </div>
+                  <span class="font-label-micro text-label-micro px-1.5 py-0.5 rounded bg-surface-container-highest text-amber-300 font-mono">DR</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1916,24 +1955,93 @@
             <span id="app-copilot-btn-text" class="font-body-sm text-body-sm font-medium">Ask SupplyChain IQ</span>
           </button>
 
-          <!-- Date Filter -->
-          <div class="hidden xl:flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-surface-container text-on-surface-variant cursor-pointer hover:bg-surface-container-high transition-colors">
-            <span class="material-symbols-outlined text-[16px] text-outline">calendar_today</span>
-            <span class="font-body-sm text-body-sm">Last 30 Days</span>
-            <span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+          <!-- Date Filter with Interactive Range Switcher -->
+          <div class="relative hidden xl:block">
+            <button id="date-filter-btn" onclick="toggleDateMenu()" class="flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-surface-container text-on-surface-variant cursor-pointer hover:bg-surface-container-high border border-outline-variant/30 transition-colors">
+              <span class="material-symbols-outlined text-[16px] text-outline">calendar_today</span>
+              <span id="current-date-filter" class="font-body-sm text-body-sm font-medium text-on-surface">Last 30 Days</span>
+              <span class="material-symbols-outlined text-[16px] text-outline">expand_more</span>
+            </button>
+            <div id="date-dropdown" class="hidden absolute right-0 mt-2 w-52 bg-surface-container-lowest border border-outline-variant/50 rounded-xl shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+              <div class="px-3 py-1.5 border-b border-outline-variant/30 text-[10px] font-mono text-outline uppercase tracking-wider">
+                Telemetry Time Window
+              </div>
+              <div class="py-1 space-y-1">
+                <button onclick="applyDateFilter('Last 7 Days', 0.94, '$51.2M', 482)" class="w-full px-3 py-1.5 text-left text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg flex items-center justify-between">
+                  <span>Last 7 Days</span>
+                  <span class="text-[10px] font-mono text-tertiary">Realtime</span>
+                </button>
+                <button onclick="applyDateFilter('Last 30 Days', 0.918, '$48.6M', 1284)" class="w-full px-3 py-1.5 text-left text-xs font-semibold text-secondary hover:bg-surface-container rounded-lg flex items-center justify-between">
+                  <span>Last 30 Days</span>
+                  <span class="text-[10px] font-mono text-secondary">Default</span>
+                </button>
+                <button onclick="applyDateFilter('Last 90 Days', 0.894, '$44.1M', 3890)" class="w-full px-3 py-1.5 text-left text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg flex items-center justify-between">
+                  <span>Last 90 Days</span>
+                  <span class="text-[10px] font-mono text-outline">Quarterly</span>
+                </button>
+                <button onclick="applyDateFilter('Year to Date (YTD)', 0.925, '$46.8M', 14200)" class="w-full px-3 py-1.5 text-left text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg flex items-center justify-between">
+                  <span>Year to Date (YTD)</span>
+                  <span class="text-[10px] font-mono text-outline">Annual</span>
+                </button>
+              </div>
+            </div>
           </div>
 
-          <!-- Live Sync Indicator -->
-          <div class="flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-surface-container-low">
-            <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
-            <span class="font-label-micro text-label-micro text-tertiary font-code-metric">Live Sync &bull; 12m ago</span>
-          </div>
-
-          <!-- Notification Bell -->
-          <button onclick="switchTab('overview'); highlightSection('disruptions-table');" class="relative p-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors">
-            <span class="material-symbols-outlined text-[20px]">notifications</span>
-            <span class="absolute top-1 right-1 w-4 h-4 rounded-full bg-error-container text-on-error-container font-label-micro text-label-micro flex items-center justify-center font-bold">3</span>
+          <!-- Live Sync Indicator with 1-Click Interactive Telemetry Refresh -->
+          <button id="live-sync-btn" onclick="triggerManualSync()" title="Click to manually resync telemetry from SAP ERP & Snowflake Gold Views" class="flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/30 transition-all cursor-pointer group">
+            <span id="live-sync-spinner" class="w-2 h-2 rounded-full bg-tertiary animate-pulse group-hover:scale-125 transition-transform"></span>
+            <span id="live-sync-text" class="font-label-micro text-label-micro text-tertiary font-code-metric">Live Sync &bull; 12m ago</span>
+            <span class="material-symbols-outlined text-[14px] text-outline group-hover:text-secondary group-hover:rotate-180 transition-all">refresh</span>
           </button>
+
+          <!-- Notification Bell with Interactive Notification Center Drawer -->
+          <div class="relative">
+            <button id="notification-bell-btn" onclick="toggleNotificationCenter()" title="View Critical Disruption Signals" class="relative p-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors">
+              <span class="material-symbols-outlined text-[20px]">notifications</span>
+              <span id="notification-badge" class="absolute top-1 right-1 w-4 h-4 rounded-full bg-error-container text-on-error-container font-label-micro text-label-micro flex items-center justify-center font-bold">3</span>
+            </button>
+            <div id="notification-dropdown" class="hidden absolute right-0 mt-2 w-80 sm:w-96 bg-surface-container-lowest border border-outline-variant/50 rounded-2xl shadow-2xl p-4 z-50 animate-in fade-in zoom-in-95 duration-150">
+              <div class="flex items-center justify-between border-b border-outline-variant/30 pb-2.5 mb-3">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[18px] text-error">notification_important</span>
+                  <span class="text-xs font-bold text-on-surface font-mono">Disruption Notifications</span>
+                </div>
+                <button onclick="dismissAllNotifications()" class="text-[10px] text-outline hover:text-secondary font-mono">Mark all read</button>
+              </div>
+              <div id="notification-list" class="space-y-2.5 max-h-80 overflow-y-auto pr-1">
+                <div id="notif-1" class="p-2.5 rounded-xl bg-surface-container-low border border-error/30 hover:border-error/60 transition-all space-y-1.5">
+                  <div class="flex items-center justify-between">
+                    <span class="font-label-micro text-label-micro px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-bold">Rotterdam Bottleneck</span>
+                    <span class="text-[10px] text-outline font-mono">4m ago</span>
+                  </div>
+                  <p class="text-[11px] text-on-surface-variant leading-tight">Customs clearance queue extended by 3.2 days. 14 EU maritime shipments impacted.</p>
+                  <div class="flex justify-end gap-1.5 pt-1">
+                    <button onclick="resolveNotification('notif-1', 'Rotterdam Reroute Playbook executed via rail dispatch.')" class="px-2 py-0.5 rounded bg-secondary-container/20 text-secondary hover:bg-secondary-container/40 text-[10px] font-bold transition-all">Reroute Rail</button>
+                  </div>
+                </div>
+                <div id="notif-2" class="p-2.5 rounded-xl bg-surface-container-low border border-secondary/30 hover:border-secondary/60 transition-all space-y-1.5">
+                  <div class="flex items-center justify-between">
+                    <span class="font-label-micro text-label-micro px-1.5 py-0.5 rounded bg-secondary-container/20 text-secondary font-bold">APAC Semiconductor Cluster</span>
+                    <span class="text-[10px] text-outline font-mono">18m ago</span>
+                  </div>
+                  <p class="text-[11px] text-on-surface-variant leading-tight">Lead time expanded +4.2 days across 6 tier-1 nodes. Buffer alert triggered.</p>
+                  <div class="flex justify-end gap-1.5 pt-1">
+                    <button onclick="resolveNotification('notif-2', 'Automated PO buffer dispatched to secondary foundry.')" class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container text-[10px] font-bold transition-all">Auto Reorder</button>
+                  </div>
+                </div>
+                <div id="notif-3" class="p-2.5 rounded-xl bg-surface-container-low border border-tertiary/30 hover:border-tertiary/60 transition-all space-y-1.5">
+                  <div class="flex items-center justify-between">
+                    <span class="font-label-micro text-label-micro px-1.5 py-0.5 rounded bg-tertiary-container text-on-tertiary-container font-bold">Jebel Ali Marine Hub</span>
+                    <span class="text-[10px] text-outline font-mono">1h ago</span>
+                  </div>
+                  <p class="text-[11px] text-on-surface-variant leading-tight">Berth clearance scheduled for Maersk Arabia 04. 100% In-Full SLA achieved.</p>
+                  <div class="flex justify-end gap-1.5 pt-1">
+                    <button onclick="resolveNotification('notif-3', 'Acknowledged nominal vessel berthing.')" class="px-2 py-0.5 rounded bg-surface-container-high text-outline hover:text-on-surface text-[10px] transition-all">Dismiss</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- User Profile Dropdown -->
           <div class="relative">
@@ -7340,6 +7448,203 @@
     function submitAuth() {
       showView('dashboard');
     }
+
+
+    // =========================================================================
+    // TOP NAVIGATION INTERACTIVE CONTROLLER FEATURES
+    // =========================================================================
+
+    // 1. Sidebar Toggle Feature
+    function toggleDashboardSidebar() {
+      playUISound('click');
+      const sidebar = document.getElementById('dashboard-sidebar');
+      const viewport = document.getElementById('dashboard-main-viewport');
+      const header = document.getElementById('dashboard-header');
+      const toggleIcon = document.getElementById('sidebar-toggle-icon');
+
+      if (!sidebar || !viewport || !header) return;
+
+      const isCollapsed = sidebar.classList.contains('-translate-x-full') || sidebar.style.width === '0px' || viewport.classList.contains('pl-0');
+
+      if (isCollapsed) {
+        // Expand
+        sidebar.classList.remove('-translate-x-full');
+        sidebar.style.display = 'flex';
+        viewport.classList.remove('pl-0');
+        viewport.classList.add('pl-72');
+        header.classList.remove('left-0');
+        header.classList.add('left-72');
+        if (toggleIcon) toggleIcon.style.transform = 'rotate(0deg)';
+        showToast('Sidebar expanded', 'info', 1500);
+      } else {
+        // Collapse
+        sidebar.classList.add('-translate-x-full');
+        sidebar.style.display = 'none';
+        viewport.classList.remove('pl-72');
+        viewport.classList.add('pl-0');
+        header.classList.remove('left-72');
+        header.classList.add('left-0');
+        if (toggleIcon) toggleIcon.style.transform = 'rotate(180deg)';
+        showToast('Sidebar collapsed for widescreen view', 'info', 1500);
+      }
+    }
+    window.toggleDashboardSidebar = toggleDashboardSidebar;
+
+    // 2. Connected Fabric / Environment Switcher
+    function toggleEnvMenu() {
+      playUISound('click');
+      const dropdown = document.getElementById('env-dropdown');
+      if (dropdown) dropdown.classList.toggle('hidden');
+      closeOtherDropdowns('env-dropdown');
+    }
+    window.toggleEnvMenu = toggleEnvMenu;
+
+    function switchEnvironment(envName, badge, cloudLocation, description) {
+      playUISound('chime');
+      const nameEl = document.getElementById('current-env-name');
+      const badgeEl = document.getElementById('current-env-badge');
+      if (nameEl) nameEl.textContent = envName;
+      if (badgeEl) badgeEl.textContent = badge;
+
+      const dropdown = document.getElementById('env-dropdown');
+      if (dropdown) dropdown.classList.add('hidden');
+
+      showToast(`Switched connected lakehouse: ${envName} (${cloudLocation})`, 'success', 3500);
+      
+      // Update Telemetry Status in Command Center
+      const teleStatus = document.getElementById('overview-telemetry-status');
+      if (teleStatus) {
+        teleStatus.textContent = `Telemetry Synced: ${envName} • ${cloudLocation}`;
+      }
+    }
+    window.switchEnvironment = switchEnvironment;
+
+    // 3. Telemetry Time-Window Date Filter Switcher
+    function toggleDateMenu() {
+      playUISound('click');
+      const dropdown = document.getElementById('date-dropdown');
+      if (dropdown) dropdown.classList.toggle('hidden');
+      closeOtherDropdowns('date-dropdown');
+    }
+    window.toggleDateMenu = toggleDateMenu;
+
+    function applyDateFilter(label, otifRatio, invVal, poCount) {
+      playUISound('chime');
+      const filterEl = document.getElementById('current-date-filter');
+      if (filterEl) filterEl.textContent = label;
+
+      const dropdown = document.getElementById('date-dropdown');
+      if (dropdown) dropdown.classList.add('hidden');
+
+      // Update KPI cards dynamically with animation
+      const invEl = document.querySelector('#kpi-title-inv + div .font-headline-lg');
+      if (invEl) invEl.textContent = invVal;
+
+      const otifEl = document.querySelector('#kpi-title-otif + div .font-headline-lg');
+      if (otifEl) otifEl.textContent = (otifRatio * 100).toFixed(1) + '%';
+
+      const poEl = document.querySelector('#kpi-title-pos + div .font-headline-lg');
+      if (poEl) poEl.textContent = poCount.toLocaleString();
+
+      showToast(`Telemetry updated for window: ${label}`, 'info', 2500);
+    }
+    window.applyDateFilter = applyDateFilter;
+
+    // 4. Interactive Live Telemetry Resync Feature
+    function triggerManualSync() {
+      playUISound('click');
+      const spinner = document.getElementById('live-sync-spinner');
+      const syncText = document.getElementById('live-sync-text');
+      const btn = document.getElementById('live-sync-btn');
+
+      if (spinner) {
+        spinner.className = 'w-2 h-2 rounded-full bg-secondary animate-spin';
+      }
+      if (syncText) {
+        syncText.textContent = 'Syncing Snowflake...';
+        syncText.className = 'font-label-micro text-label-micro text-secondary font-code-metric';
+      }
+
+      showToast('Initiating handshake with SAP ERP, Manhattan TMS & Snowflake Gold views...', 'info', 2000);
+
+      setTimeout(() => {
+        if (spinner) {
+          spinner.className = 'w-2 h-2 rounded-full bg-tertiary animate-pulse';
+        }
+        if (syncText) {
+          syncText.textContent = 'Live Sync • Just now';
+          syncText.className = 'font-label-micro text-label-micro text-tertiary font-code-metric';
+        }
+        playUISound('chime');
+        showToast('✓ Telemetry synchronized with zero drift across 14 canonical entities!', 'success', 3500);
+      }, 1200);
+    }
+    window.triggerManualSync = triggerManualSync;
+
+    // 5. Notification Center Feature
+    function toggleNotificationCenter() {
+      playUISound('click');
+      const dropdown = document.getElementById('notification-dropdown');
+      if (dropdown) dropdown.classList.toggle('hidden');
+      closeOtherDropdowns('notification-dropdown');
+    }
+    window.toggleNotificationCenter = toggleNotificationCenter;
+
+    function resolveNotification(notifId, actionMessage) {
+      playUISound('chime');
+      const el = document.getElementById(notifId);
+      if (el) {
+        el.style.opacity = '0.3';
+        el.style.pointerEvents = 'none';
+        el.innerHTML = `<div class="text-[10px] text-emerald-400 font-mono flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">check_circle</span> ${actionMessage}</div>`;
+      }
+      updateNotificationCount();
+      showToast(actionMessage, 'success', 3000);
+    }
+    window.resolveNotification = resolveNotification;
+
+    function dismissAllNotifications() {
+      playUISound('click');
+      const list = document.getElementById('notification-list');
+      if (list) {
+        list.innerHTML = `<div class="text-center py-6 text-xs text-outline font-mono">✓ All critical disruptions cleared & acknowledged.</div>`;
+      }
+      const badge = document.getElementById('notification-badge');
+      if (badge) badge.classList.add('hidden');
+      showToast('All notifications marked as read', 'info', 2000);
+    }
+    window.dismissAllNotifications = dismissAllNotifications;
+
+    function updateNotificationCount() {
+      const active = document.querySelectorAll('#notification-list > div:not([style*="opacity: 0.3"])').length;
+      const badge = document.getElementById('notification-badge');
+      if (badge) {
+        if (active > 0) {
+          badge.textContent = active;
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      }
+    }
+
+    // Helper: Close other menus when one opens
+    function closeOtherDropdowns(exceptId) {
+      ['env-dropdown', 'date-dropdown', 'notification-dropdown', 'profile-dropdown'].forEach(id => {
+        if (id !== exceptId) {
+          const el = document.getElementById(id);
+          if (el) el.classList.add('hidden');
+        }
+      });
+    }
+
+    // Global click listener to close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      const isDropdownClick = e.target.closest('#env-selector-btn, #env-dropdown, #date-filter-btn, #date-dropdown, #notification-bell-btn, #notification-dropdown, #user-avatar, #profile-dropdown');
+      if (!isDropdownClick) {
+        closeOtherDropdowns('');
+      }
+    });
 
     function toggleProfileMenu() {
       const menu = document.getElementById('profile-dropdown');
