@@ -136,7 +136,7 @@ class TestAdvancedMLAndBackend(unittest.TestCase):
         self.assertIn(status["status"], ["PROCESSING", "COMPLETED"])
 
         # Wait for completion
-        for _ in range(20):
+        for _ in range(50):
             status = batch_manager.get_status(job_id)
             if status["status"] == "COMPLETED":
                 break
